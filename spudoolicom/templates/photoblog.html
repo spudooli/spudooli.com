@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Photoblog{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ post[1] }}</h1>
+          <a class="action" href="{{ url_for('post', id=post[0]) }}">Click</a>
+          <div class="about">by {{ post[0] }} </div>
+        </div>
+        
+      </header>
+      <p class="body">{{ post[2] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Spudooli</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Spudooli</h1>
+  <a href="/">Home</a> |  <a href="/house">The House</a> | <a href="/photoblog">Photoblog</a> | <a href="/pictures">Photo Album</a> | <a href="/about">About Us</a> | <a href="/contactus">Contact Us</a> | <a href="/search">Search</a> </center></div>
+ </nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
