@@ -1,10 +1,103 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}House{% endblock %}</h1>
-{% endblock %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}The Book of Spudooli{% endblock %}</h2>
+        <div class="title-un-icon"><ion-icon name="sunny-outline"></ion-icon></div>
+        <p class="title-un-des">This is our place on the internet. A place of experimentation, a place of data, photos,
+          information and maybe other things</p>
 
-{% block content %}
-Something goes here {{ data }}
+        {% endblock %}
+
+        {% block content %}
+
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp">
+                  <ion-icon name="camera-outline"></ion-icon>
+                  <div class="counter-number"> <a href="/photoblog">414</a> </div>
+                  <div class="counter-title"> <a href="/photoblog">Photos</a></div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <ion-icon name="logo-usd"></ion-icon>
+                  <div class="counter-number"> {{ bankbalance }} </div>
+                  <div class="counter-title"> Bank Balance </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <div class="counter-number"> {{ power }} </div>
+                  <div class="counter-title"> Power W/h</div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <div class="counter-number"> 27 </div>
+                  <div class="counter-title">Inside Temperature</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonials-container">
+          <div class="container">
+             <div class="row">
+                <div class="col-md-12 wow fadeInUp">
+                   <div class="title-un-icon"><i class="fa ion-quote"></i></div>
+                   <h3 class="title-un">WHAT PEOPLE SAY?</h3>
+                   <div id="owl-slide" class="testimonials owl-carousel">
+                      <div class="testimonial">
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut ullamcorper lacus, vel mattis nibh. Aliquam a enim rutrum, ultrices purus at, porta leo at pellentesque. </p>
+                         <div class="client">
+                            <div class="client-info">
+                               <div class="client-name">
+                                  John Doe, Lacus INC
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="testimonial">
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut ullamcorper lacus, vel mattis nibh. Aliquam a enim rutrum, ultrices purus at, porta leo at pellentesque. </p>
+                         <div class="client">
+                            <div class="client-info">
+                               <div class="client-name">
+                                  John Doe, Lacus INC
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                      <div class="testimonial">
+                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ut ullamcorper lacus, vel mattis nibh. Aliquam a enim rutrum, ultrices purus at, porta leo at pellentesque. </p>
+                         <div class="client">
+                            <div class="client-info">
+                               <div class="client-name">
+                                  John Doe, Lacus INC
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 {% endblock %}

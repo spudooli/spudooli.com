@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}House{% endblock %}</h1>
-{% endblock %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}The House of Spudooli{% endblock %}</h2>
+        <div class="title-un-icon"><ion-icon name="home-outline"></ion-icon></div>
+        <p class="title-un-des">The house, where we reveal our data</p>
 
-{% block content %}
-Something goes here {{ data }}
+        {% endblock %}
+
+        {% block content %}
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

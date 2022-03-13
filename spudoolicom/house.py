@@ -3,11 +3,12 @@ from flask import request, render_template
 
 @app.route('/house')
 def house():
+    # Catflap count
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT sum(count) FROM catflap")
     catflapCount = cur.fetchone()
     cur.close()
-
+    
     
     return render_template('house.html', catflapCount = catflapCount)
     

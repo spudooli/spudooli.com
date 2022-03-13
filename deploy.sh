@@ -8,6 +8,8 @@ cp /home/dave/Sites/spudooli.com/spudoolicom/*.py /var/www/spudooli/spudoolicom/
 echo "Deploying the static assets..."
 
 cp /home/dave/Sites/spudooli.com/spudoolicom/static/* /var/www/spudooli/spudoolicom/static/
+cp /home/dave/Sites/spudooli.com/spudoolicom/static/fonts/* /var/www/spudooli/spudoolicom/static/fonts/
+cp /home/dave/Sites/spudooli.com/spudoolicom/static/js/* /var/www/spudooli/spudoolicom/static/js/
 
 echo "Deploying the templates..."
 cp /home/dave/Sites/spudooli.com/spudoolicom/templates/* /var/www/spudooli/spudoolicom/templates/

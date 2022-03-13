@@ -1,16 +1,173 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - Spudooli</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Spudooli</h1>
-  <a href="/">Home</a> |  <a href="/house">The House</a> | <a href="/photoblog">Photoblog</a> | <a href="/pictures">Photo Album</a> | <a href="/about">About Us</a> | <a href="/contactus">Contact Us</a> | <a href="/search">Search</a> </center></div>
- </nav>
-<section class="content">
-  <header>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}{% endblock %} - Spudooli</title>
+  <!-- Google Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'>
+  <!-- ionicons Fonts for icons -->
+  <!-- <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet"> -->
+  <!-- bootstrap -->
+  <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
+  <!-- Styles CSS-->
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <!-- Animate CSS-->
+  <link href="{{ url_for('static', filename='animate.css') }}" rel="stylesheet">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+</head>
+
+<body class="box-layout">
+
+  <div class="inner-conterner">
+    <!-- inner-conterner -->
+    <header class="site-header">
+      <div class="header-inner">
+        <!-- navigation panel -->
+        <div class="container">
+          <div class="row">
+            <div class="header-table col-md-12">
+              <div class="brand">
+                <a href="/">
+                  <h1>Spudooli</h1>
+                </a>
+              </div>
+              <nav id="nav-wrap" class="main-nav">
+                <div id="mobnav-btn"> </div>
+                <ul class="sf-menu">
+                  <li class="current">
+                    <a href="/">Home</a>
+                  </li>
+                  <li>
+                    <a href="/photoblog">Photoblog</a>
+                  </li>
+                  <li>
+                    <a href="/house">The House </a>
+                  </li>
+                  <li>
+                    <a href="#">Pictures</a>
+                  </li>
+                  <li>
+                    <a href="#">About</a>
+                  </li>
+                  <li class="menu-search-bar">
+                    <a id="search-label"><i class="ion-search"></i></a>
+                    <form class="search-bar" id="searchform">
+                      <input type="text" placeholder="Search..." name="s">
+                    </form>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- End navigation panel -->
+        </div>
+      </div>
+    </header>
+
+
     {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
+
+    {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+    {% endfor %}
+    {% block content %}{% endblock %}
+
+
+
+
+    <!-- Footer area -->
+    <div class="footer-area-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="footer-widget">
+              <a href="index.html">
+                <h3>Spudooli</h3>
+              </a>
+              <p>Maybe they had something else for breakfast, who knows?</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="footer-widget widget_nav_menu">
+              <h4 class="footer-widget-title">Get In Touch</h4>
+              <p>Caecenas wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl.</p>
+              <div> <i class="ion-ios-location-outline"></i> Moonshine St. 14/05 Light City
+                <br>
+                <i class="ion-ios-telephone-outline"></i> 00 (123) 456 78 90
+                <br>
+                <i class="ion-paper-airplane"></i> <a href="first.last@email.com"> first.last@email.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="footer-widget widget_nav_menu">
+              <h4 class="footer-widget-title">LINKS</h4>
+              <ul>
+                <li class="menu-item"><a href="#"> Brand Creation </a></li>
+                <li class="menu-item"><a href="#"> Press inquiries</a></li>
+                <li class="menu-item"><a href="#"> Corporate Identity </a></li>
+                <li class="menu-item"><a href="#"> Company Analysis </a></li>
+                <li class="menu-item"><a href="#"> Creative homepage </a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="footer-widget">
+              <h4 class="footer-widget-title">Something</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Footer area -->
+    <!-- Footer -->
+    <div class="footer-holder">
+      <div class="container">
+        <footer class="site-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <p>© Copyright {{ now.year }} | <a href="http://www.spudooli.com" target="_blank">Spudooli Investments
+                  Ltd</a></p>
+            </div>
+            <div class="col-md-6">
+              <ul class="footer-nav">
+                <li><a href="#"></a></li>
+                <li><a href="#"> </a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End inner-conterner -->
+  <!-- ================================================== -->
+  <!-- Placed js files at the end of the document so the pages load faster -->
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/superfish.js"></script>
+  <script src="/static/js/jquery.easing.js"></script>
+  <script src="/static/js/wow.js"></script>
+  <script src="/static/js/jquery.isotope.min.js"></script>
+  <script src="/static/js/owl.carousel.min.js"></script>
+  <script src="/static/js/jquery.magnific-popup.js"></script>
+  <script src="/static/js/jquery.fitvids.js"></script>
+  <script src="/static/js/jquery.fractionslider.min.js"></script>
+  <script src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script src="/spudoolicom/s" type="text/javascript"></script>
+  <script src="/static/js/main.js"></script>
+  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+</body>
+
+</html>
