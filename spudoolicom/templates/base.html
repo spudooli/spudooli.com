@@ -1,3 +1,11 @@
+{% set navigation_bar = [
+('/', 'index', 'Home'),
+('/photoblog', 'photoblog', 'Photoblog'),
+('/house', 'house', 'The House'),
+('/pictures', 'pictures', 'Pictures')
+] -%}
+{% set active_page = active_page|default('index') -%}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,27 +50,16 @@
               <nav id="nav-wrap" class="main-nav">
                 <div id="mobnav-btn"> </div>
                 <ul class="sf-menu">
-                  <li class="current">
-                    <a href="/">Home</a>
-                  </li>
-                  <li>
-                    <a href="/photoblog">Photoblog</a>
-                  </li>
-                  <li>
-                    <a href="/house">The House </a>
-                  </li>
-                  <li>
-                    <a href="#">Pictures</a>
-                  </li>
-                  <li>
-                    <a href="#">About</a>
-                  </li>
-                  <li class="menu-search-bar">
-                    <a id="search-label"><i class="ion-search"></i></a>
-                    <form class="search-bar" id="searchform">
-                      <input type="text" placeholder="Search..." name="s">
-                    </form>
-                  </li>
+                  {% for href, id, caption in navigation_bar %}
+                  <li{% if id == active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
+                    </li>
+                    {% endfor %}
+                    <li class="menu-search-bar">
+                      <a id="search-label"><ion-icon name="search-outline" size="small"></ion-icon></a>
+                      <form class="search-bar" id="searchform">
+                        <input type="text" placeholder="Search..." name="s">
+                      </form>
+                    </li>
                 </ul>
               </nav>
             </div>
@@ -165,7 +162,6 @@
   <script src="/static/js/jquery.fitvids.js"></script>
   <script src="/static/js/jquery.fractionslider.min.js"></script>
   <script src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
-  <script src="/spudoolicom/s" type="text/javascript"></script>
   <script src="/static/js/main.js"></script>
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 </body>

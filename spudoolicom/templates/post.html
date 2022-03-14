@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% set active_page = "photoblog" %}
 
 {% block header %}
 <div class="container-page">
@@ -21,8 +22,7 @@
 
         <p><strong>Posted:</strong> {{ post[4] }}</p>
         <p><strong>Captured:</strong> {{ captured }}</p>
-        <hr>
-
+  
 
         {% autoescape false %}
 
@@ -36,6 +36,6 @@
         {% endfor %}
         {% endautoescape %}
 
-
+        <hr>
 
         {% endblock %}
