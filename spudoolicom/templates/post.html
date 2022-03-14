@@ -17,7 +17,7 @@
           <center><img id="photoblog-image" src="/static/photoblog/{{ post[2] }}"></center>
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
-        <p>{{ post[3] }}</p>
+        <p>{{ post[3] | replace('\n', '<br>') | replace('\\', '') }}</p>
         {% endautoescape %}
 
         <p><strong>Posted:</strong> {{ post[4] }}</p>
@@ -27,7 +27,7 @@
         {% autoescape false %}
 
         {% for comment in comments %}
-        {{ comment[3] }}<br>
+        {{ comment[3] | replace('\\', '') }}<br>
         {{ comment[4] }} @ {{ comment[2] }}
 
         {% if not loop.last %}
