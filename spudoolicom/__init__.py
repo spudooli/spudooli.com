@@ -13,4 +13,6 @@ import spudoolicom.track
 import spudoolicom.hook
 import spudoolicom.house
 import spudoolicom.photoblog
+import spudoolicom.charts
+
 

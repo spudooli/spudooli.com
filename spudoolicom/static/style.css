@@ -1399,6 +1399,16 @@ body {
     position: relative;
     opacity: .8;
   }
+
+  .image-nav-un-icon {
+    color: #8a8f6a;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    position: relative;
+    opacity: .8;
+  }
+  
   
   .title-un-icon:before {
     position: absolute;
@@ -7004,3 +7014,23 @@ body {
 ion-icon {
         font-size: 32px;
       }
+  #comments {
+    padding:10px;
+    background:#fff;
+    font-size:14px;
+    }
+#comments ul {
+        list-style-type:none;
+        margin:0px;
+        padding:10px;
+        }
+#comments li {
+        display:block;
+        margin:0px;
+        border-bottom: 1px dotted #444444;
+        padding-bottom: 10px;
+        color:#444;
+        text-decoration:none;
+        padding:3px;
+        }
+    

@@ -29,14 +29,42 @@ def post(id):
     cursor.close()
     f = open("/var/www/spudooli/spudoolicom/static/photoblog/" + imagename[1], 'rb')
     tags = exifread.process_file(f, details=False)
-    imagemodel = tags["Image Model"]
-    exposuretime = tags["EXIF ExposureTime"]
-    fstop = tags["EXIF FNumber"]
-    focallength = tags["EXIF FocalLength"]
+    if "EXIF ExposureTime" in tags:
+        exposuretime = tags["EXIF ExposureTime"]
+    else:
+        exposuretime = ""
+    if "Image Model" in tags:
+        imagemodel = tags["Image Model"]
+    else:
+        imagemodel = ""
+    if "EXIF FNumber" in tags:
+        fstop = tags["EXIF FNumber"]
+    else:
+        fstop = ""
+    if "EXIF FocalLength" in tags:
+        focallength = tags["EXIF FocalLength"]
+    else:
+        focallength = ""
+
     captured = tags["Image DateTime"]
     exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
     print(exifhtml)
 
+    # Get previous and next Ids
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT id FROM pixelpost_pixelpost where id < %s order by id DESC limit 1", (id,))
+    previousimage = cursor.fetchone()
+    cursor.close()
+
+    if id < "421":
+        cursor = db.mysql.connection.cursor()
+        cursor.execute("SELECT id FROM pixelpost_pixelpost where id > %s order by id LIMIT 1", (id,))
+        nextimage = cursor.fetchone()
+        print(nextimage)
+        cursor.close()
+    else:
+        nextimage = "421"
+  
 
     # Get the comments for the post
     cursor = db.mysql.connection.cursor()
@@ -46,5 +74,5 @@ def post(id):
 
 
 
-    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured)
+    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage)
 

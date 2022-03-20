@@ -6,8 +6,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h3 class="title-un">{% block title %}{{ post[1] }}{% endblock %}</h3>
-
+        <h3 class="title-un">{% block title %}{{ post[1] | replace('\\', '') }}{% endblock %}</h3>
+        <div class="image-nav-un-icon">
+        <a href="{{ url_for('post', id=previousimage) }}"><< Previous </a>  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog"> Browse archive </a>  -   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="{{ url_for('post', id=nextimage) }}"> Next >></a> 
+</div>
         {% endblock %}
 
         {% block content %}
@@ -17,25 +19,24 @@
           <center><img id="photoblog-image" src="/static/photoblog/{{ post[2] }}"></center>
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
-        <p>{{ post[3] | replace('\n', '<br>') | replace('\\', '') }}</p>
+        <p>{{ post[3] | replace('\n', '<br />') | replace('\\', '') }}</p>
         {% endautoescape %}
 
         <p><strong>Posted:</strong> {{ post[4] }}</p>
         <p><strong>Captured:</strong> {{ captured }}</p>
-  
+
 
         {% autoescape false %}
 
-        {% for comment in comments %}
-        {{ comment[3] | replace('\\', '') }}<br>
-        {{ comment[4] }} @ {{ comment[2] }}
+        <div id="comments"> <ul>
+          {% for comment in comments %}
+          <li>{{ comment[3] | replace('\\', '') }}<br>
+            {{ comment[4] }} @ {{ comment[2] }}
+            {% endfor %}
+            {% endautoescape %}
+          </li>
+          </ul>
+        </div>
 
-        {% if not loop.last %}
-        <hr>
-        {% endif %}
-        {% endfor %}
-        {% endautoescape %}
-
-        <hr>
 
         {% endblock %}

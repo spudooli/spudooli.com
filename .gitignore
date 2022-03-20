@@ -1,6 +1,7 @@
 spudoolicom/static/photoblog/
 
 spudoolicom/static/images/
+spudoolicom/static/charts/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

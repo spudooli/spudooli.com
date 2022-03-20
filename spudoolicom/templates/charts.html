@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}{{ pageHeading }}{% endblock %}</h2>
+        <div class="title-un-icon">
+          <ion-icon name="thermometer-outline"></ion-icon>
+        </div>
+        <p class="title-un-des"></p>
+
+        {% endblock %}
+
+        {% block content %}
+
+        {% for chart in charts %}
+          <img src="{{ chart | replace('spudoolicom', '') }}" />
+          <hr>
+        {% endfor %}
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

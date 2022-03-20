@@ -27,7 +27,7 @@
             </div>
             <div class="post-content">
               <h5><a href="{{ url_for('post', id=post[0]) }}">
-                  <h5>{{ post[1] }}
+                  <h5>{{ post[1] | replace('\\', '') }}
                 </a></h5>
               <div class="post-info"><span> {{ post[3] }}</span></div>
             </div>
