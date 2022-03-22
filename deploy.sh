@@ -18,4 +18,7 @@ cp /home/dave/Sites/spudooli.com/spudoolicom/templates/* /var/www/spudooli/spudo
 echo "Clearing the cache..."
 rm -rf /var/www/spudooli/spudoolicom/__pycache__
 
+echo "Restarting Gunicorn..."
+systemctl restart www.spudooli.com.service
+
 echo "Done"

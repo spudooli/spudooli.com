@@ -37,14 +37,49 @@
                 <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ mancaveTemperature | safe }} </div>
-                  <div class="counter-title"> <a href="/house/charts/mancave">Mancave Temperature</a></div>
+                  <div class="counter-title"> <a href="/house/charts/mancave">Man cave Temperature</a></div>
                 </div>
               </div>
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ shedtemp | safe }} </div>
-                  <div class="counter-title">Shed Temperature</div>
+                  <div class="counter-title">Garden Shed Temperature</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <div class="counter-number"> {{ centralheating | safe}} </div>
+                  <div class="counter-title"> <a href="/house/charts/heat">Central Heating Temperature</a></div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay="1s">
+                  <ion-icon name="fish-outline"></ion-icon>
+                  <div class="counter-number"> {{ centralheatinghumidity | safe }} </div>
+                  <div class="counter-title"><a href="/house/charts/heat">Central Heating Humidity</a> </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay="1.2s">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <div class="counter-number"> {{ kitchenTemperature | safe }} </div>
+                  <div class="counter-title"> <a href="/house/charts/kitchen">Kitchen Temperature</a></div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay="1.4s">
+                  <ion-icon name="fish-outline"></ion-icon>
+                  <div class="counter-number"> {{ kitchenhumidity | safe }} </div>
+                  <div class="counter-title">kitchen humidity</div>
                 </div>
               </div>
             </div>
@@ -52,6 +87,28 @@
         </div>
 
 
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <div class="counter-number"> {{ fridgeDoorCount }} </div>
+                  <div class="counter-title"> <a href="/house/charts/heat">Fridge Door</a></div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="counter-title"><a href="/house/charts/heat">total fridge Door Open Count</a> </div>
+                  <p>From sometime March 2005 to about March 2007 and then from August 2009 to about the end 
+                    of 2009 and then from March 2022 we tracked the fridge door being opened. For the days we 
+                    have data, the average number of times the frige door is opened is around 49.</p>
+                  <p>The fridge door has been opened {{ fridgedoortoday }} times today </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Close divs -->
       </div>

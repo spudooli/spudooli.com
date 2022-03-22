@@ -48,7 +48,6 @@ def post(id):
 
     captured = tags["Image DateTime"]
     exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
-    print(exifhtml)
 
     # Get previous and next Ids
     cursor = db.mysql.connection.cursor()

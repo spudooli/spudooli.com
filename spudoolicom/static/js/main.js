@@ -247,21 +247,6 @@
      })
 
 
-     /******** Flickr feed *******/
-
-     $('#cbox').jflickrfeed({
-       limit: 6,
-       qstrings: {
-         id: '23588458@N00'
-       },
-       itemTemplate: '<li>' +
-         '<a href="{{image_b}}" title="{{title}}">' +
-         '<img src="{{image_q}}" alt="{{title}}" />' +
-         '</a>' +
-         '</li>'
-     });
-
-
      /********  FitVids.js *******/
 
      // Target your .container, .wrapper, .post, etc.

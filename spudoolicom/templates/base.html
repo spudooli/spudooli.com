@@ -18,13 +18,14 @@
   <!-- Google Fonts -->
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'>
   <!-- ionicons Fonts for icons -->
-  <!-- <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet"> -->
+ <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
   <!-- bootstrap -->
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
   <!-- Styles CSS-->
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
   <!-- Animate CSS-->
   <link href="{{ url_for('static', filename='animate.css') }}" rel="stylesheet">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
 
@@ -80,7 +81,7 @@
     <div class="footer-area-container">
       <div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="footer-widget">
               <a href="index.html">
                 <h3>Spudooli</h3>
@@ -88,19 +89,19 @@
               <p>Maybe they had something else for breakfast, who knows?</p>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">Get In Touch</h4>
-              <p>Caecenas wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl.</p>
-              <div> <i class="ion-ios-location-outline"></i> Moonshine St. 14/05 Light City
+              <p></p>
+              <div> <i class="ion-ios-location-outline"></i> 
                 <br>
-                <i class="ion-ios-telephone-outline"></i> 00 (123) 456 78 90
+                <i class="ion-ios-telephone-outline"></i> 
                 <br>
                 <i class="ion-paper-airplane"></i> <a href="first.last@email.com"> first.last@email.com</a>
               </div>
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">LINKS</h4>
               <ul>
@@ -112,11 +113,7 @@
               </ul>
             </div>
           </div>
-          <div class="col-md-3">
-            <div class="footer-widget">
-              <h4 class="footer-widget-title">Something</h4>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -159,7 +156,8 @@
   <script src="/static/js/jquery.fractionslider.min.js"></script>
   <script src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
   <script src="/static/js/main.js"></script>
-  <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>

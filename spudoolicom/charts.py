@@ -9,37 +9,41 @@ def charts(where):
         pageHeading = "Indoor Temperatures"
         charts = sorted(glob.glob("spudoolicom/static/charts/inside*"))
     
-    if where == "outside":
+    elif where == "outside":
         pageHeading = "Outdoor Temperatures"
         charts = sorted(glob.glob("spudoolicom/static/charts/outside*"))
 
-    if where == "kitchen":
+    elif where == "kitchen":
         pageHeading = "Kitchen Temperatures"
         charts = sorted(glob.glob("spudoolicom/static/charts/kitchen*"))
 
-    if where == "barometer":
+    elif where == "barometer":
         pageHeading = "Indoor Barometer h/Pa "
         charts = sorted(glob.glob("spudoolicom/static/charts/barometer*"))
 
-    if where == "mancave":
+    elif where == "mancave":
         pageHeading = "Mancave Temperature "
         charts = sorted(glob.glob("spudoolicom/static/charts/mancave*"))
 
-    if where == "shed":
+    elif where == "shed":
         pageHeading = "Garden Shed Temperature "
         charts = sorted(glob.glob("spudoolicom/static/charts/shed*"))
 
-    if where == "power":
+    elif where == "power":
         pageHeading = "Electricity"
         charts = sorted(glob.glob("spudoolicom/static/charts/power*"))
 
-    if where == "heat":
+    elif where == "heat":
         pageHeading = "Central Heating Output Temperature"
         charts = sorted(glob.glob("spudoolicom/static/charts/heat*"))
 
-    if where == "traegar":
-        pageHeading = "Traegar Temperature"
-        charts = glob.glob("spudoolicom/static/charts/traegar*")
+    elif where == "traegar":
+        pageHeading = "Traeger Temperature"
+        charts = glob.glob("spudoolicom/static/charts/traeger*")
+    
+    else:
+        pageHeading = "Nope"
+        charts = ""
     
     return render_template('charts.html', charts = charts, pageHeading = pageHeading)
     

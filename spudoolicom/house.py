@@ -25,12 +25,18 @@ def house():
     outdoorLow = statusFile("outdoorLow") + "&deg;"
     shedtemp = statusFile("gardenshedTemperature") + "&deg;"
     mancaveTemperature = statusFile("mancaveTemperature") + "&deg;"
+    kitchenTemperature = statusFile("kitchenTemperature") + "&deg;"
+    kitchenhumidity = statusFile("kitchenHumidity") + "%"
+    centralheating = statusFile("heatTemperature") + "&deg;"
+    centralheatinghumidity = statusFile("heatHumidity") + "%"
+    fridgedoortoday = statusFile("fridgeDoorCounter")
 
     # Fridge door count
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT sum(open_count) FROM fridge_door")
     fridgeDoorCount = cur.fetchone()
+    fridgeDoorCount = "{:,}".format(fridgeDoorCount[0])
     cur.close()            
     
-    return render_template('house.html', catflapCount = catflapCount, shedtemp = shedtemp, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
+    return render_template('house.html', catflapCount = catflapCount, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
     
