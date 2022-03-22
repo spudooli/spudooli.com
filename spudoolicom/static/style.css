@@ -922,6 +922,7 @@ body {
   .main-nav .sf-menu a:hover,
   .main-nav .sf-menu .sub-menu .sfHover a {
     color: #8a8f6a;
+    text-decoration: underline;
   }
   
   .main-nav .sf-menu ul li {
@@ -955,6 +956,7 @@ body {
   
   .main-nav .sf-menu ul ul li a:hover {
     color: #8a8f6a !important;
+    text-decoration: underline;
   }
   
   
