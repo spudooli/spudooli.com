@@ -31,6 +31,7 @@ def house():
     centralheatinghumidity = statusFile("heatHumidity") + "%"
     fridgedoortoday = statusFile("fridgeDoorCounter")
 
+
     # Fridge door count
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT sum(open_count) FROM fridge_door")
