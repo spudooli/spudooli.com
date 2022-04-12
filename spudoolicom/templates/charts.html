@@ -17,7 +17,7 @@
         {% block content %}
 
         {% for chart in charts %}
-          <img src="{{ chart | replace('spudoolicom', '') }}" />
+          <img class="chartcenter" src="{{ chart | replace('spudoolicom', '') }}" />
           <hr>
         {% endfor %}
 

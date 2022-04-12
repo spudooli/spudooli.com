@@ -2368,7 +2368,7 @@ body {
   
   .story-container {
     height: 600px;
-    background: url(/static/images/story-bg.jpg);
+    background: url(/static/images/IMG_20180825_131700_2.jpg);
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
@@ -7035,3 +7035,9 @@ ion-icon {
         text-decoration:none;
         padding:3px;
         }
+
+.chartcenter {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+}

@@ -2,7 +2,7 @@
     clientID = "spudooliwebsite-" + parseInt(Math.random() * 100);
 
     // Fetch the hostname/IP address and port number from the form
-    host = "192.168.1.2"
+    host = "www.spudooi.com"
     port = "9001"
 
     // Initialize new Paho client connection

@@ -4,8 +4,7 @@ import paho.mqtt.client as paho
 
 broker = "192.168.1.2"
 port = 1883
-client1 = paho.Client("websiteHook")
-client1.connect(broker, port)
+
 
 def on_connect(client, userdata, flags, rc):
    print("Connected With Result Code "+rc)
@@ -18,6 +17,8 @@ def hook():
 
 @app.route("/hook/lights", methods=['POST'])
 def lights():
+    client1 = paho.Client("websiteHook")
+    client1.connect(broker, port)
     request_data = request.get_json()
     device = request_data['device']
     state = request_data['state']
@@ -55,6 +56,8 @@ def lights():
 
 @app.route("/hook/tv", methods=['POST'])
 def tv():
+    client1 = paho.Client("websiteHook")
+    client1.connect(broker, port)
     request_data = request.get_json()
     device = request_data['device']
     state = request_data['state']
@@ -68,6 +71,8 @@ def tv():
 
 @app.route("/hook/amp", methods=['POST'])
 def amp():
+    client1 = paho.Client("websiteHook")
+    client1.connect(broker, port)
     request_data = request.get_json()
     device = request_data['device']
     state = request_data['state']
