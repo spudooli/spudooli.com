@@ -1,4 +1,4 @@
-from spudoolicom import app
+from spudoolicom import app, db
 from flask import request
 import paho.mqtt.client as paho
 
@@ -22,9 +22,14 @@ def owntrackdave():
       lat = request_data['lat']
       lon = request_data['lon']
       # vel = request_data['vel']
-      # alt = request_data['alt']
+      alt = request_data['alt']
       latlon = str(lat) + ":" + str(lon)
       client1.publish("house/location/dave", latlon)
+
+      cur = db.mysql.connection.cursor()
+      cur.execute('''INSERT into track (who, latitude, longitude, altitude) VALUES (%s, %s, %s, %s)''', ("3", str(lat), str(lon), str(alt)))
+      db.mysql.connection.commit()
+      cur.close()
    
    return 'it works' 
 
@@ -41,6 +46,11 @@ def owntrackgabba():
       # alt = request_data['alt']
       latlon = str(lat) + ":" + str(lon) 
       client1.publish("house/location/gabba", latlon)
+
+      cursor = db.mysql.connection.cursor()
+      cursor.execute('''INSERT into track (who, latitude, longitude) VALUES (%s, %s, %s)''', ("4", str(lat), str(lon)))
+      db.mysql.connection.commit()
+      cursor.close()
 
    return 'it works'    
     
