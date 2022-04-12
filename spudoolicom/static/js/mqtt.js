@@ -6,7 +6,7 @@
     port = "9001"
 
     // Initialize new Paho client connection
-    client = new Paho.MQTT.Client(host, Number(port), clientID);
+    client = new Paho.MQTT.Client(host, Number(port), clientID,);
 
     // Set callback handlers
     client.onConnectionLost = onConnectionLost;

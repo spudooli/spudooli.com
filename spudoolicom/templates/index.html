@@ -6,14 +6,16 @@
     <div class="row">
       <div class="col-md-12">
         <h2 class="title-un">{% block title %}The Book of Spudooli{% endblock %}</h2>
-        <div class="title-un-icon"><ion-icon name="sunny-outline"></ion-icon></div>
+        <div class="title-un-icon">
+          <ion-icon name="sunny-outline"></ion-icon>
+        </div>
         <p class="title-un-des">This is our place on the internet. A place of experimentation, a place of data, photos,
           information and maybe other things</p>
 
         {% endblock %}
 
         {% block content %}
-        <script src="static/js/mqtt.js" type="text/javascript"></script>
+        
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
@@ -34,7 +36,9 @@
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
                   <ion-icon name="flash-outline"></ion-icon>
-                  <div class="counter-number"> <div id="current_power"></div> </div>
+                  <div class="counter-number">
+                    <div id="current_power"></div>
+                  </div>
                   <div class="counter-title"><a href="/house/charts/power"> Power W/h</a></div>
                 </div>
               </div>
@@ -52,26 +56,47 @@
         <!-- Story Section -->
         <div class="story-container">
           <div class="story-wrapper wow fadeInUp">
-             <div class="story-info ">
-                <div class="big-font-title">
-                   <h1>Spudooli Road Trips</h1>
-                </div>
-                <div class="story-bio">
-                   <p>Check out our <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Youtube Channel</a> or just play our latest video here</p>
-                </div>
-                <a href="https://www.youtube.com/watch?v=s6XC4k4pebQ" class="video-play-trigger"><i class="icon-play ion-ios-play"></i></a>
-             </div>
+            <div class="story-info ">
+              <div class="big-font-title">
+                <h1>Spudooli Road Trips</h1>
+              </div>
+              <div class="story-bio">
+                <p>Check out our <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Youtube Channel</a>
+                  or just play our latest video here</p>
+              </div>
+              <a href="https://www.youtube.com/watch?v=s6XC4k4pebQ" class="video-play-trigger"><i
+                  class="icon-play ion-ios-play"></i></a>
+            </div>
           </div>
-       </div>
-       <!-- End Story Section -->
-      
+        </div>
+        <!-- End Story Section -->
 
 
-<!-- This is the end -->
+
+        <!-- This is the end -->
       </div>
     </div>
   </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  function power() {
+    $.get('power', function (data) {
+      $('#current_power').text(data);
+    });
+  }
+
+  $(document).ready(function () {
+    setInterval(power, 6000);
+  });
+
+  function start() {
+    power();
+  }
+
+window.onload = start;
+</script>
 
 
 {% endblock %}

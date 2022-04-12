@@ -17,3 +17,11 @@ def main():
 
 
     return render_template('index.html', bankbalance = bankbalance, power = power)
+
+
+@app.route("/power")
+def power():
+    f = open("/var/www/scripts/power.txt", "r")    
+    power = f.read()
+    power = power.split(",")[0]
+    return power 
