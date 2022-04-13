@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="title-un">{% block title %}Where We Spend Our Money{% endblock %}</h2>
+                <div class="title-un-icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                </div>
+                <p class="title-un-des">How we've spent quite a lot of money since about 1996. Because we run our house
+                    out of a single bank account,
+                    and have done since about 1994, we have a very good history of how we spend our money. Below is some
+                    interesting stats.</p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <h2 class="title-un">Petrol</h2>
+                <div class="title-un-icon">
+                    <ion-icon name="car-outline"></ion-icon>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="car-outline"></ion-icon>
+                                    <div class="counter-number">{{ totalPetrolSpend | replace('-', '$') }}</div>
+                                    <div class="counter-title"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <div class="counter-title">Petrol</div>
+                                    <p>On first reflection, this seems like a huge amount of money, and it is of course,
+                                        but simplistically (not taking into account inflation etc) it's only about
+                                        <strong>$4,335</strong> a year or <strong>$360</strong> a month to run 2 cars.
+                                        Bring on EVs!
+                                    </p>
+                                    <p>Z should be sending us a Christmas card every year though</p>
+                                    <p>Note the fascinating spend gap for April 2020 when NZ went into lockdown the first time where our only purchase at a service station was a bottle of milk</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp">
+                                    <ion-icon name="car-outline"></ion-icon>
+                                    <div class="counter-number"> {{ shellZ | replace('-', '$')}} </div>
+                                    <div class="counter-title"> Shell / Z</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="car-outline"></ion-icon>
+                                    <div class="counter-number"> {{ caltex | replace('-', '$') }} </div>
+                                    <div class="counter-title">Caltex </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                                    <ion-icon name="car-outline"></ion-icon>
+                                    <div class="counter-number"> {{ bp | replace('-', '$') }} </div>
+                                    <div class="counter-title">BP</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                                    <ion-icon name="car-outline"></ion-icon>
+                                    <div class="counter-number"> {{ mobil | replace('-', '$') }} </div>
+                                    <div class="counter-title">Mobil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <canvas id="myChart" width="1000" height="400"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                <script>
+                    var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: {{ labels | safe}},
+                    datasets: [
+                        {
+                            label: "$",
+                            data: {{ values | safe }},
+                        }
+
+                    ]
+                    }
+                });
+                </script>
+
+
+                <h2 class="title-un">Supermarkets</h2>
+                <div class="title-un-icon">
+                    <ion-icon name="cart-outline"></ion-icon>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number">{{ totalSupermarketSpend | replace('-', '$') }}</div>
+                                    <div class="counter-title"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <div class="counter-title">Supermarkets suck our cash</div>
+                                    <p>Our total supermarket spend is not entirely accurate for various reasons, including for example, a chunk of time we paid for groceries with a cheque, 
+                                        but it's still interesting to compare where we spend the money. 
+                                    </p>
+                                    <p>Despite this data not including every time we've ever been to the supermarket, the total visits we do have is <strong>3,945</strong> times Gabba has
+                                    walked into a supermarket, or on average once every <strong>2.45</strong> days. If I was to guess, the average would be much closer to 1. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number"> {{ countdown | replace('-', '$')}} </div>
+                                    <div class="counter-title"> Woolworths / Foodtown / Countdown</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number"> {{ newworld | replace('-', '$') }} </div>
+                                    <div class="counter-title">New World </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number"> {{ paknsave | replace('-', '$') }} </div>
+                                    <div class="counter-title">Pak n Save</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number"> {{ farro | replace('-', '$') }} </div>
+                                    <div class="counter-title">Farro Fresh</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>              
+
+                <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

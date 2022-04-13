@@ -1,6 +1,5 @@
-from os import stat
 from spudoolicom import app, db
-from flask import request, render_template
+from flask import render_template
 import json
 
 def statusFile(thing):
