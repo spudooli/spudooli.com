@@ -82,4 +82,20 @@ def money():
     farro = "{:,}".format(farro[0])
     cur.close()
 
-    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, farro = farro, paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend)
+    # Get The Warehouse purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `party` LIKE '%thl%' or party like '%the warehouse%'")
+    totalWarehouseSpend = cur.fetchone()
+    totalWarehouseSpend = "{:,}".format(totalWarehouseSpend[0])
+    cur.close()
+
+    # Get all months spent on petrol
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) newdate, sum(amount) amount FROM `budget` WHERE 'party' LIKE '%the warehouse%' or party like '%twh%' GROUP BY newdate")
+    data = cur.fetchall()
+    warehouselabels = [row[0] for row in data]
+    warehousevalues = [str(row[1]).replace("-","") for row in data]
+    cur.close()  
+
+    
+    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend)

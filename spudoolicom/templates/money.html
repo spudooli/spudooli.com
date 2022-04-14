@@ -14,7 +14,8 @@
                 <p class="title-un-des">How we've spent quite a lot of money since about 1996. Because we run our house
                     out of a single bank account,
                     and have done since about 1994, we have a very good history of how we spend our money. Below is some
-                    interesting stats.</p>
+                    interesting (to us) stats.<br>
+                In the database is <strong>29,766</strong> transactions, starting <strong>12/2/1996</strong> and the latest <strong>13/3/2022</strong></p>
 
                 {% endblock %}
 
@@ -111,7 +112,7 @@
                 </div>
 
 
-  <!-- Page Containter header  -->
+                <!-- Page Containter header  -->
                 <div class="container-about">
                     <div class="container">
                         <div class="row">
@@ -121,8 +122,8 @@
                                     <ion-icon name="cart-outline"></ion-icon></i>
                                 </div>
                                 <p class="title-un-des"></p>
-<!-- End Page Containter header  -->
-<!-- Containter contents  -->
+                                <!-- End Page Containter header  -->
+                                <!-- Containter contents  -->
                                 <div class="container-counter-box">
                                     <div class="container">
                                         <div class="row">
@@ -131,7 +132,7 @@
                                                     <ion-icon name="cart-outline"></ion-icon>
                                                     <div class="counter-number">{{ totalSupermarketSpend | replace('-',
                                                         '$') }}</div>
-                                                    <div class="counter-title"></div>
+                                                    <div class="counter-title">Possibly only half our Supermarket spend</div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
@@ -147,7 +148,8 @@
                                                         <strong>3,945</strong> times Gabba has
                                                         walked into a supermarket, or on average once every
                                                         <strong>2.45</strong> days. If I was to guess, the average would
-                                                        be much closer to 1. </p>
+                                                        be much closer to 1.
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,15 +193,83 @@
                                         </div>
                                     </div>
                                 </div>
-<!-- End Containter Contents  -->
-<!-- End Page Containter  -->
+                                <!-- End Containter Contents  -->
+                                <!-- End Page Containter  -->
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- End Containter  -->
 
+                <!-- Page Containter header  -->
+                <div class="container-about">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="title-un">The Warehouse</h3>
+                                <div class="title-un-icon">
+                                    <ion-icon name="cart-outline"></ion-icon></i>
+                                </div>
+                                <p class="title-un-des"></p>
+                                <!-- End Page Containter header  -->
+                                <!-- Containter contents  -->
+                                <div class="container-counter-box">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                                    <ion-icon name="cart-outline"></ion-icon>
+                                                    <div class="counter-number">{{ totalWarehouseSpend | replace('-',
+                                                        '$') }}</div>
+                                                    <div class="counter-title">Total Spend at The Warehouse</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div>
+                                                    <div class="counter-title">The changing habits of our spend at The Warehouse</div>
+                                                    <p>At one point it seemed we were in The Warehouse almost every
+                                                        weekend and then suddenyly it occured to me
+                                                        that it was ages since I was last there. I asusme it's because we stopped buying stuff for the jids. 
+                                                        The chart below shows why.
+                                                    </p>
+                                                    <p>If I was to guess, our spend at McDonalds would possibly follow a
+                                                        similar track. One day I will find out.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div class="container-counter-box">
+                                    <div class="container">
 
+                                        <canvas id="myWarehouseChart" width="1000" height="400"></canvas>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                                        <script>
+                                            var ctx = document.getElementById("myWarehouseChart");
+                                            var myChart = new Chart(ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: {{ warehouselabels | safe }},
+                                            datasets: [
+                                                {
+                                                    label: "$ Spend at The Warehouse by Month",
+                                                    data: {{ warehousevalues | safe }},
+                                            }
+                    
+                                            ]
+                                        }
+                                    });
+                                        </script>
+                                    </div>
+                                </div>
+                                <!-- End Containter Contents  -->
+                                <!-- End Page Containter  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Containter  -->
 
 
 
