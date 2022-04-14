@@ -1,5 +1,13 @@
 from spudoolicom import app
 from flask import render_template
+import json
+
+
+def statusFile(thing):
+    jsonFile = open("/var/www/scripts/statusfile.json", "r")
+    data = json.load(jsonFile)
+    jsonFile.close()
+    return data[thing]
 
 
 @app.route('/')
@@ -15,8 +23,11 @@ def main():
     bankbalance = f.read()
     bankbalance = "$" + bankbalance.split(".")[0]
 
+    indoortemp = statusFile("indoorTemperature") + "&deg;"
 
-    return render_template('index.html', bankbalance = bankbalance, power = power)
+
+
+    return render_template('index.html', bankbalance = bankbalance, power = power, indoortemp = indoortemp)
 
 
 @app.route("/power")
