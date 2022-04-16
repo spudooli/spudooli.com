@@ -30,6 +30,12 @@ def house():
     centralheatinghumidity = statusFile("heatHumidity") + "%"
     fridgedoortoday = statusFile("fridgeDoorCounter")
 
+    jsonFile = open("/var/www/scripts/spa-temperature.json", "r")
+    data = json.load(jsonFile)
+    jsonFile.close()
+
+    waterTemp = round(data["WaterTemp"], 2)
+
 
     # Fridge door count
     cur = db.mysql.connection.cursor()
@@ -38,5 +44,5 @@ def house():
     fridgeDoorCount = "{:,}".format(fridgeDoorCount[0])
     cur.close()            
     
-    return render_template('house.html', catflapCount = catflapCount, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
+    return render_template('house.html', catflapCount = catflapCount, waterTemp = waterTemp, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
     
