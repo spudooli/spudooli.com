@@ -45,6 +45,10 @@ def charts(where):
         pageHeading = "Spa Pool"
         charts = glob.glob("spudoolicom/static/charts/spa*")
     
+    elif where == "shed":
+        pageHeading = "Garden Shed Temperatures"
+        charts = glob.glob("spudoolicom/static/charts/shed*")
+    
     else:
         pageHeading = "Nope"
         charts = ""

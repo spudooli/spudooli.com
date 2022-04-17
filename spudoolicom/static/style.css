@@ -437,7 +437,8 @@ body {
   
   a:hover,
   a:focus {
-    color: #5d5d5d;
+    color: #195ddd;
+    text-decoration: underline;
   }
   
   
