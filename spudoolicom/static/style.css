@@ -1,79 +1,4 @@
-/*------------------------------------------------------------------
 
-
-1 - BASE 
-2 - Header
-  - Brand logo
-  - Main Nav Menu
-3 - Page Header
-4 - Heading or Title
-5 - Buttons
-6 - Service box
-  - Service box Style 1
-  - Service box Style 2
-7 - Team
-8 - Progress Bar
-9 - Alert box
-10 - Pricing table 
-11 - Tabs
-12 - Overlay (for images hover)
-13 - Portfolio 
-  - Portfolio 
-  - Portfolio filter
-  - Classic Portfolio
-  - Single Portfolio
-  - Single porfolio images slider
-14 - Testimonials
-15 - Client 
-16 - Blockquote
-17 - Accordion
-18 - contact-form 
-19 - gmap 
-20 - Blog Posts
-   - Single Post
-   - Post Author
-   - Comments Box
-21 - pagination
-22 -  Share Box 
-23 - Shop
-   - Single Product
-   - Rating
-24 - Sidebar and widget
-   - Search widget
-   - Entries and categories widget
-   - Small Products list
-   - ui slider for price Search
-25 - 404 Error Page
-26 - flickr photostream
-27 - footer area 
-28 - Some CSS to make Responsive elements 
-29 - Isotope
-30 -  Owl Carousel
-31 - Colorbox Core Style
-32 - Fraction-slider
-33 - Extra CSS
-
-------------------------------------------------------------------*/
-
-
-/*------------------------------------------------------------------
-[Color codes]
-
-Background:    #ffffff (white)
-Font:          #7d7d7d  (Light black)
-Footer Area:   #393939 (black)
-Footer:        #3d3d3d (Light black)
-Big Title background : #f5f5f5 (Gray)
-Service Icon:  #a67c52 (brown)
-a (standard):  #393939 (dark black)
-a (visited):   #a67c52 (brown)
-a (active):    #a67c52 (brown)
--------------------------------------------------------------------*/
-
-
-/*=================================================
-1 - BASE 
-=================================================*/
 
 body {
     font-family: 'Raleway', sans-serif;
@@ -311,7 +236,7 @@ body {
     }
   }
   
-  .inner-conterner {
+  .inner-container {
     background-color: #fff;
   }
   

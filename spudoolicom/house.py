@@ -10,11 +10,6 @@ def statusFile(thing):
 
 @app.route('/house')
 def house():
-    # Catflap count
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT sum(count) FROM catflap")
-    catflapCount = cur.fetchone()
-    cur.close()
 
     indoortemp = statusFile("indoorTemperature") + "&deg;"
     outdoortemp = statusFile("outdoorTemperature") + "&deg;"
@@ -35,6 +30,8 @@ def house():
     jsonFile.close()
 
     waterTemp = round(data["WaterTemp"], 2)
+    if waterTemp == 0:
+        waterTemp = "-"
 
 
     # Fridge door count
@@ -44,5 +41,5 @@ def house():
     fridgeDoorCount = "{:,}".format(fridgeDoorCount[0])
     cur.close()            
     
-    return render_template('house.html', catflapCount = catflapCount, waterTemp = waterTemp, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
+    return render_template('house.html', waterTemp = waterTemp, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
     
