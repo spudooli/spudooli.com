@@ -326,12 +326,12 @@ body {
   h4 a:hover,
   h5 a:hover,
   h6 a:hover {
-    color: #8a8f6a;
+    color: #195ddd;
   }
   
   a,
   p a {
-    color: #393939;
+    color: #195ddd;
     text-decoration: none;
     cursor: pointer;
     -webkit-transition: all .15s linear;
