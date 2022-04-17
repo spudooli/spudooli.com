@@ -29,7 +29,7 @@
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
                   <ion-icon name="logo-usd"></ion-icon>
-                  <div class="counter-number"> {{ bankbalance }} </div>
+                  <div class="counter-number"> <a href="/money">{{ bankbalance }} </a></div>
                   <div class="counter-title"> <a href="/money">Bank Balance</a> </div>
                 </div>
               </div>
@@ -45,7 +45,7 @@
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
                   <ion-icon name="thermometer-outline"></ion-icon>
-                  <div class="counter-number"> {{indoortemp | safe}} </div>
+                  <div class="counter-number"> <a href="/house/charts/indoor">{{indoortemp | safe}}</a> </div>
                   <div class="counter-title"><a href="/house/charts/indoor">Inside Temperature</a></div>
                 </div>
               </div>

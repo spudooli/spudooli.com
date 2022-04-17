@@ -1,3 +1,7 @@
 pip3 install paho-mqtt
 sudo apt-get install libmysqlclient-dev
-pip3 install nlask_mysqldb
+pip3 install flask_mysqldb
+pip3 install mysql-connector-python
+pip3 install rrdtool
+pip3 install pyserial
+pip3 install exifread
