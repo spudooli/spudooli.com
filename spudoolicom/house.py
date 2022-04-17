@@ -38,7 +38,9 @@ def house():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT sum(open_count) FROM fridge_door")
     fridgeDoorCount = cur.fetchone()
-    fridgeDoorCount = "{:,}".format(fridgeDoorCount[0])
+    unformattedFridgeDoorCount = fridgeDoorCount[0]
+    fridgeDoorCount = int(unformattedFridgeDoorCount) + int(fridgedoortoday)
+    fridgeDoorCount = "{:,}".format(fridgeDoorCount)
     cur.close()            
     
     return render_template('house.html', waterTemp = waterTemp, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)

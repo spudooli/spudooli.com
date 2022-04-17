@@ -2,7 +2,7 @@
 ('/', 'index', 'Home'),
 ('/photoblog/421', 'photoblog', 'Photoblog'),
 ('/house', 'house', 'The House'),
-('/pictures', 'pictures', 'Pictures')
+('#', 'pictures', 'Pictures')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 
@@ -105,12 +105,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="col-md-4">
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">Look at these</h4>
-              <p></p>
-              <div> <i class="ion-social-twitter-outline"></i> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a>
-                <br>
-                <i class="ion-social-instagram-outline"></i> <a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a>  
-               
-              </div>
+                <ul>
+                  <li class="ion-social-twitter-outline"></i> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a>
+                  <li class="ion-social-instagram-outline"></i> <a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a>  
+                  <li class="ion-social-youtube-outline"></i> <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a>
+               </ul>
             </div>
           </div>
           <div class="col-md-4">
