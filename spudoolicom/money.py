@@ -1,5 +1,5 @@
-from spudoolicom import app, db
 from flask import render_template
+from spudoolicom import app, db
 
 @app.route('/money')
 def money():

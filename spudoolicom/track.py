@@ -27,7 +27,7 @@ def owntrackdave():
       client1.publish("house/location/dave", latlon)
 
       cur = db.mysql.connection.cursor()
-      cur.execute('''INSERT into track (who, latitude, longitude, altitude) VALUES (%s, %s, %s, %s)''', ("3", str(lat), str(lon), str(alt)))
+      cur.execute('''INSERT into track (who, latitude, longitude, altitude) VALUES (%s, %s, %s, %s)''', ("3", str(lat), str(lon)))
       db.mysql.connection.commit()
       cur.close()
    

@@ -16,3 +16,4 @@ import spudoolicom.photoblog
 import spudoolicom.charts
 import spudoolicom.money
 import spudoolicom.webcam
+import spudoolicom.location

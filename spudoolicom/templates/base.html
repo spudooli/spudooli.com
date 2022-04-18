@@ -61,7 +61,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div id="mobnav-btn"> </div>
                 <ul class="sf-menu">
                   {% for href, id, caption in navigation_bar %}
-                  <li{% if id == active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
+                  <li {% if id == active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
                     </li>
                     {% endfor %}
                     <li class="menu-search-bar">
@@ -87,9 +87,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% endfor %}
     {% block content %}{% endblock %}
 
-
-
-
     <!-- Footer area -->
     <div class="footer-area-container">
       <div class="container">
@@ -106,9 +103,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">Look at these</h4>
                 <ul>
-                  <li class="ion-social-twitter-outline"></i> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a>
-                  <li class="ion-social-instagram-outline"></i> <a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a>  
-                  <li class="ion-social-youtube-outline"></i> <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a>
+                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a></li>
+                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter</a></li>
+                  <li class="ion-social-instagram-outline"><a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a> </li> 
+                  <li class="ion-social-youtube-outline"><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
                </ul>
             </div>
           </div>

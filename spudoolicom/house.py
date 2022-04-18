@@ -1,5 +1,5 @@
-from spudoolicom import app, db
 from flask import render_template
+from spudoolicom import app, db
 import json
 
 def statusFile(thing):
@@ -28,7 +28,6 @@ def house():
     jsonFile = open("/var/www/scripts/spa-temperature.json", "r")
     data = json.load(jsonFile)
     jsonFile.close()
-
     waterTemp = round(data["WaterTemp"], 2)
     if waterTemp == 0:
         waterTemp = "-"
