@@ -3327,7 +3327,7 @@ body {
     display: block;
     margin-bottom: 20px;
     border: 1px solid #dfdfdf;
-    padding: 8px 15px;
+    padding: 8px 1px;
     font-family: inherit;
     letter-spacing: 1px;
     font-size: 12px;
@@ -6906,3 +6906,10 @@ ion-icon {
       margin-left: auto;
       margin-right: auto;
 }
+
+#add-comment {
+  width:100%;
+  padding:5px;
+  background:#f5f5f5;
+  font-size:12px;
+  }

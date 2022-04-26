@@ -1,7 +1,10 @@
-from email.mime import image
-from spudoolicom import app, db
-from flask import render_template
+from spudoolicom import app, db, forms
+from flask import render_template, request
 import exifread
+from datetime import datetime
+from flask_wtf.csrf import CSRFProtect, CSRFError
+
+csrf = CSRFProtect()
 
 @app.route('/photoblog')
 def photoblog():
@@ -14,7 +17,7 @@ def photoblog():
     return render_template('photoblog.html', posts = posts)
 
 
-@app.route('/photoblog/<id>')
+@app.route('/photoblog/<id>', methods=('GET', 'POST'))
 def post(id):
     # Get the post
     cursor = db.mysql.connection.cursor()
@@ -50,28 +53,47 @@ def post(id):
     exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
 
     # Get previous and next Ids
+    # TODO: fix the latest post
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id FROM pixelpost_pixelpost where id < %s order by id DESC limit 1", (id,))
     previousimage = cursor.fetchone()
     cursor.close()
 
-    if id < "421":
+    if id < "422":
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id FROM pixelpost_pixelpost where id > %s order by id LIMIT 1", (id,))
         nextimage = cursor.fetchone()
         print(nextimage)
         cursor.close()
     else:
-        nextimage = "421"
+        nextimage = "422"
   
-
     # Get the comments for the post
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, parent_id, datetime, message, name FROM pixelpost_comments where parent_id = %s order by id ASC", (id,))
+    cursor.execute("SELECT id, parent_id, datetime, message, name, url FROM pixelpost_comments where parent_id = %s and publish = 'yes' order by id ASC", (id,))
     comments = cursor.fetchall()
     cursor.close()
 
 
+    form = forms.photoblogComment()
+    if request.method == "POST":
+        if form.validate():
+            commentmessage = request.form["commentmessage"]
+            commentname = request.form["commentname"]
+            commenturl = request.form["commenturl"]
+            commentemail = request.form["commentemail"]
+            commentdate = datetime.now()
+            print(commentmessage)        
+            cur = db.mysql.connection.cursor()
+            cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
+            db.mysql.connection.commit()
+            cur.close()
 
-    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage)
 
+
+    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
+
+@app.errorhandler(CSRFError)
+def handle_csrf_error(e):
+    return render_template('404.html', reason=e.description), 400

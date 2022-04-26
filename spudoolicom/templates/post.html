@@ -8,34 +8,78 @@
       <div class="col-md-12">
         <h3 class="title-un">{% block title %}{{ post[1] | replace('\\', '') }}{% endblock %}</h3>
         <div class="image-nav-un-icon">
-        <a href="{{ url_for('post', id=previousimage) }}"><< Previous </a>  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog"> Browse archive </a>  -   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="{{ url_for('post', id=nextimage) }}"> Next >></a> 
-</div>
+          <a href="{{ url_for('post', id=previousimage) }}">
+            << Previous </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog"> Browse archive </a> - &nbsp
+              &nbsp &nbsp &nbsp &nbsp &nbsp <a href="{{ url_for('post', id=nextimage) }}"> Next >></a>
+        </div>
         {% endblock %}
 
         {% block content %}
 
         {% autoescape false %}
+        <script language='javascript' type='text/javascript'>
+          
+          function flip(rid)
+          {
+              current=(document.getElementById(rid).style.display == 'none') ? 'block' : 'none';
+              document.getElementById(rid).style.display = current;
+          }
+          
+          </script>
         <p>
           <center><img id="photoblog-image" src="/static/photoblog/{{ post[2] }}"></center>
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
-        <p>{{ post[3] | replace('\n', '<br />') | replace('\\', '') }}</p>
-        {% endautoescape %}
+        <div class="single-post">
 
-        <p><strong>Posted:</strong> {{ post[4] }}</p>
-        <p><strong>Captured:</strong> {{ captured }}</p>
+          <p>{{ post[3] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') }}</p>
+          {% endautoescape %}
 
 
-        {% autoescape false %}
+          <p><strong>Posted:</strong> {{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</p>
+          <p><strong>Captured:</strong> {{ captured }}</p>
 
-        <div id="comments"> <ul>
-          {% for comment in comments %}
-          <li>{{ comment[3] | replace('\\', '') }}<br>
-            {{ comment[4] }} @ {{ comment[2] }}
-            {% endfor %}
-            {% endautoescape %}
-          </li>
+          <p class="container-title"><a href='#addcomment' onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
+
+        </div>
+       
+        <div id="comments">
+          <ul>
+            {% for comment in comments %}
+            <li>{{ comment[3] | replace('\\', '') |replace('<br />', '') |replace('&#039;', '\'') |replace('&quot;', '"') }}<br>
+              {% if comment[5] != "" %}
+              <a href="{{ comment[5] }}">{{ comment[4] }}</a>
+              {% else %}
+              {{ comment[4] }}
+              {% endif %}
+              - {{ comment[2].strftime('%A, %-d %B, %Y %-H:%M') }}
+              {% endfor %}
+              
+            </li>
           </ul>
+        </div>
+
+        <div id="add-comment">
+          <script type='text/javascript'>
+              function gotocomments() {
+                document.location = '#addcomment';
+              }
+          </script>
+          <script language='javascript' type='text/javascript'>flip('add-comment');</script>
+          <a name="addcomment"></a>
+          <p>All commments are held for moderated before publication so your words will not appear until we are ready.</p>
+
+          <form method="POST" >
+
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            {{ form.commentmessage.label }} <div id="contact-form">{{ form.commentmessage }}</div>
+            {{ form.commentname.label }} <div id="contact-form">{{ form.commentname }}</div>
+            {{ form.commenturl.label }} <div id="contact-form">{{ form.commenturl }}</div>
+            {{ form.commentemail.label }} <div id="contact-form">{{ form.commentemail }}</div>
+            {{ form.commentsubmit() }}
+          </form>
+
+          </p>
         </div>
 
 
