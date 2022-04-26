@@ -76,6 +76,10 @@
             {{ form.commentname.label }} <div id="contact-form">{{ form.commentname }}</div>
             {{ form.commenturl.label }} <div id="contact-form">{{ form.commenturl }}</div>
             {{ form.commentemail.label }} <div id="contact-form">{{ form.commentemail }}</div>
+            {% for error in form.recaptcha.errors %}
+            {{ error }}
+            {% endfor %}
+            {{ form.recaptcha }} <br />
             {{ form.commentsubmit() }}
           </form>
 

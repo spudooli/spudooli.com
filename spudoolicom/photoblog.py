@@ -4,6 +4,7 @@ import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
+
 csrf = CSRFProtect()
 
 @app.route('/photoblog')
@@ -83,10 +84,9 @@ def post(id):
             commenturl = request.form["commenturl"]
             commentemail = request.form["commentemail"]
             commentdate = datetime.now()
-            print(commentmessage)        
             cur = db.mysql.connection.cursor()
-            cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                    (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
+            #cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    #(id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
             db.mysql.connection.commit()
             cur.close()
 
