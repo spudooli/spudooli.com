@@ -85,14 +85,14 @@ def post(id):
             commentemail = request.form["commentemail"]
             commentdate = datetime.now()
             cur = db.mysql.connection.cursor()
-            #cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                    #(id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
+            cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
             db.mysql.connection.commit()
             cur.close()
 
 
 
-    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
+    return render_template('post.html', post = post, comments = comments, id = id, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
