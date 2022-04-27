@@ -26,7 +26,7 @@
 
         </script>
         <p>
-          <center><img id="photoblog-image" src="/static/photoblog/{{ post[2] }}"></center>
+          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" class="chartcenter">
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
         <div class="single-post">
@@ -35,11 +35,33 @@
           {% endautoescape %}
 
 
-          <p><strong>Posted:</strong> {{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</p>
-          <p><strong>Captured:</strong> {{ captured }}</p>
 
-          <p class="container-title"><a href='#addcomment'
-              onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                    <div class="counter-number">{% if maprequest != "" %}
+                      {{maprequest | safe}}
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title"> Post Meta</div>
+                    <p> </p>
+                    <p><strong>Posted:</strong> {{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</p>
+                    <p><strong>Captured:</strong> {{ captured }}</p>
+                    <p class="container-title"><a href='#addcomment'
+                        onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
 
         </div>
 

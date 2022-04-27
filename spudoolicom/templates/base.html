@@ -33,7 +33,7 @@
   <!-- Styles CSS-->
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
   <!-- Animate CSS-->
-  <link href="{{ url_for('static', filename='animate.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
@@ -78,13 +78,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </header>
-
+    {% for message in get_flashed_messages() %}
+    <div class="animate__animated animate__bounce">{{ message }}</div>
+    {% endfor %}
 
     {% block header %}{% endblock %}
 
-    {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-    {% endfor %}
+
     {% block content %}{% endblock %}
 
     <!-- Footer area -->

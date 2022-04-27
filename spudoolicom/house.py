@@ -24,6 +24,8 @@ def house():
     centralheating = statusFile("heatTemperature") + "&deg;"
     centralheatinghumidity = statusFile("heatHumidity") + "%"
     fridgedoortoday = statusFile("fridgeDoorCounter")
+    barometer = statusFile("indoorPressure")
+    barometer = barometer[0:-2]
 
     jsonFile = open("/var/www/scripts/spa-temperature.json", "r")
     data = json.load(jsonFile)
@@ -42,5 +44,9 @@ def house():
     fridgeDoorCount = "{:,}".format(fridgeDoorCount)
     cur.close()            
     
-    return render_template('house.html', waterTemp = waterTemp, fridgedoortoday = fridgedoortoday, kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, outdoorLow = outdoorLow)
+    return render_template('house.html', waterTemp = waterTemp, barometer = barometer, fridgedoortoday = fridgedoortoday, 
+                          kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, 
+                          shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, 
+                          indoortemp = indoortemp, outdoortemp = outdoortemp, indoorHigh = indoorHigh, indoorLow = indoorLow, outdoorHigh = outdoorHigh, 
+                          outdoorLow = outdoorLow)
     

@@ -1,5 +1,5 @@
-from spudoolicom import app, db, forms
-from flask import render_template, request
+from spudoolicom import app, db, forms, config
+from flask import render_template, request, flash
 import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
@@ -22,7 +22,7 @@ def photoblog():
 def post(id):
     # Get the post
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, headline, image, body, datetime FROM pixelpost_pixelpost where id = %s", (id,))
+    cursor.execute("SELECT id, headline, image, body, datetime, googlemap FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
     cursor.close()
 
@@ -52,6 +52,15 @@ def post(id):
 
     captured = tags["Image DateTime"]
     exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
+
+    # If there is lat and lon in the database, display a map on the post
+    if post[5]:
+        latlon = post[5]
+        photolat = str(latlon.split(",")[0].replace("(", ""))
+        photolon = str(latlon.split(",")[1].replace(" ","").replace(")",""))
+        maprequest = "<a href='https://www.google.co.nz/maps/@" + photolat + "," + photolon + ",16.0z'><img src='https://maps.googleapis.com/maps/api/staticmap?center=" + photolat + "," + photolon + "&zoom=15&size=350x300&markers=color:0xD0E700%7Clabel:X%7C" + photolat + "," + photolon +  "&sensor=false&key=" + config.googlemapsapikey + "&visual_refresh=true&maptype=terrain'></a>"
+    else:
+        maprequest = ""
 
     # Get previous and next Ids
     # TODO: fix the latest post
@@ -90,9 +99,9 @@ def post(id):
             db.mysql.connection.commit()
             cur.close()
 
+            flash("We got your comment, we'll consider publishing it in due course")
 
-
-    return render_template('post.html', post = post, comments = comments, id = id, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
+    return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):

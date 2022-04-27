@@ -6913,3 +6913,9 @@ ion-icon {
   background:#f5f5f5;
   font-size:12px;
   }
+
+#flash {
+    margin-top: 20px;
+    border-color:rgba(0, 255, 38, 0.75);
+    border-width: 1px;
+  }
