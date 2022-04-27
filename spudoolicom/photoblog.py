@@ -3,6 +3,14 @@ from flask import render_template, request
 import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
+import math
+
+def deg2num(lat_deg, lon_deg, zoom):
+  lat_rad = math.radians(lat_deg)
+  n = 2.0 ** zoom
+  xtile = int((lon_deg + 180.0) / 360.0 * n)
+  ytile = int((1.0 - math.asinh(math.tan(lat_rad)) / math.pi) / 2.0 * n)
+  return (xtile, ytile)
 
 
 csrf = CSRFProtect()
@@ -22,7 +30,7 @@ def photoblog():
 def post(id):
     # Get the post
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, headline, image, body, datetime FROM pixelpost_pixelpost where id = %s", (id,))
+    cursor.execute("SELECT id, headline, image, body, datetime, latlon FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
     cursor.close()
 
@@ -52,6 +60,13 @@ def post(id):
 
     captured = tags["Image DateTime"]
     exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
+
+    if post["latlon"]:
+        latlon = post["latlon"]
+        maprequesttiles = deg2num(latlon.split(",")[0].split("(")[0], latlon.split(",")[1].split(")")[0], '10')
+        maprequest = "https://s.tile.openstreetmap.org/10/" + str(maprequesttiles[0]) + "/" + str(maprequesttiles[1]) + ".png" 
+    else:
+        maprequest = ""
 
     # Get previous and next Ids
     # TODO: fix the latest post
@@ -92,7 +107,7 @@ def post(id):
 
 
 
-    return render_template('post.html', post = post, comments = comments, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
+    return render_template('post.html', post = post, comments = comments, maprequest = maprequest, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):

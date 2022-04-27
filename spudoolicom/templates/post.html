@@ -18,16 +18,15 @@
 
         {% autoescape false %}
         <script language='javascript' type='text/javascript'>
-          
-          function flip(rid)
-          {
-              current=(document.getElementById(rid).style.display == 'none') ? 'block' : 'none';
-              document.getElementById(rid).style.display = current;
+
+          function flip(rid) {
+            current = (document.getElementById(rid).style.display == 'none') ? 'block' : 'none';
+            document.getElementById(rid).style.display = current;
           }
-          
-          </script>
+
+        </script>
         <p>
-          <center><img id="photoblog-image" src="/static/photoblog/{{ post[2] }}"></center>
+          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" class="chartcenter">
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
         <div class="single-post">
@@ -35,18 +34,23 @@
           <p>{{ post[3] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') }}</p>
           {% endautoescape %}
 
+          {% if maprequest != "" %}
+          <img src="{{maprequest}}" height="400" width="400">
+          {% endif %}
 
           <p><strong>Posted:</strong> {{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</p>
           <p><strong>Captured:</strong> {{ captured }}</p>
 
-          <p class="container-title"><a href='#addcomment' onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
+          <p class="container-title"><a href='#addcomment'
+              onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
 
         </div>
-       
+
         <div id="comments">
           <ul>
             {% for comment in comments %}
-            <li>{{ comment[3] | replace('\\', '') |replace('<br />', '') |replace('&#039;', '\'') |replace('&quot;', '"') }}<br>
+            <li>{{ comment[3] | replace('\\', '') |replace('<br />', '') |replace('&#039;', '\'') |replace('&quot;',
+              '"') }}<br>
               {% if comment[5] != "" %}
               <a href="{{ comment[5] }}">{{ comment[4] }}</a>
               {% else %}
@@ -54,22 +58,23 @@
               {% endif %}
               - {{ comment[2].strftime('%A, %-d %B, %Y %-H:%M') }}
               {% endfor %}
-              
+
             </li>
           </ul>
         </div>
 
         <div id="add-comment">
           <script type='text/javascript'>
-              function gotocomments() {
-                document.location = '#addcomment';
-              }
+            function gotocomments() {
+              document.location = '#addcomment';
+            }
           </script>
           <script language='javascript' type='text/javascript'>flip('add-comment');</script>
           <a name="addcomment"></a>
-          <p>All commments are held for moderated before publication so your words will not appear until we are ready.</p>
+          <p>All commments are held for moderated before publication so your words will not appear until we are ready.
+          </p>
 
-          <form method="POST" >
+          <form method="POST">
 
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             {{ form.commentmessage.label }} <div id="contact-form">{{ form.commentmessage }}</div>
