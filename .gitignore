@@ -4,6 +4,7 @@ spudoolicom/static/images/
 spudoolicom/static/charts/
 config.py
 spudoolicom/config.py
+bin/config.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
