@@ -1,4 +1,4 @@
-from spudoolicom import app
+from spudoolicom import app, db
 from flask import render_template
 import json
 
@@ -25,14 +25,23 @@ def main():
 
     indoortemp = statusFile("indoorTemperature") + "&deg;"
 
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM pixelpost_pixelpost")
+    imagecount = cursor.fetchone()
+    imagecount = imagecount[0]
+    cursor.close()
 
-
-    return render_template('index.html', bankbalance = bankbalance, power = power, indoortemp = indoortemp)
+    return render_template('index.html', imagecount = imagecount, bankbalance = bankbalance, power = power, indoortemp = indoortemp)
 
 
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 
 @app.route("/power")

@@ -4754,62 +4754,7 @@ body {
     background-position: 0 0;
   }
   
-  
-  /* For IE8 - See #6727 */
-  
-  .ui-slider.ui-state-disabled .ui-slider-handle,
-  .ui-slider.ui-state-disabled .ui-slider-range {
-    filter: inherit;
-  }
-  
-  .ui-slider-horizontal {
-    height: 3px;
-  }
-  
-  .ui-slider-horizontal .ui-slider-handle {
-    top: -6px;
-    margin-left: -.6em;
-  }
-  
-  .ui-slider-horizontal .ui-slider-range {
-    top: 0;
-    height: 100%;
-  }
-  
-  .ui-slider-horizontal .ui-slider-range-min {
-    left: 0;
-  }
-  
-  .ui-slider-horizontal .ui-slider-range-max {
-    right: 0;
-  }
-  
-  .ui-slider-vertical {
-    width: .8em;
-    height: 100px;
-  }
-  
-  .ui-slider-vertical .ui-slider-handle {
-    left: -.3em;
-    margin-left: 0;
-    margin-bottom: -.6em;
-  }
-  
-  .ui-slider-vertical .ui-slider-range {
-    left: 0;
-    width: 100%;
-  }
-  
-  .ui-slider-vertical .ui-slider-range-min {
-    bottom: 0;
-  }
-  
-  .ui-slider-vertical .ui-slider-range-max {
-    top: 0;
-  }
-  
-  
-  /* Component containers
+   /* Component containers
   ----------------------------------*/
   
   .price-range {
@@ -6868,6 +6813,7 @@ body {
     padding:5px;
     background:#fff;
     border:1px solid #444;
+    margin-top: 20px;
     }
 
 #iso-info {
@@ -6876,6 +6822,7 @@ body {
     background: #fff;
     font-size: 10px;
     text-align: right;
+    margin-bottom: 20px;
     }
 
 ion-icon {
@@ -6908,10 +6855,11 @@ ion-icon {
 }
 
 #add-comment {
-  width:100%;
   padding:5px;
   background:#f5f5f5;
-  font-size:12px;
+  font-size:16px;
+  margin-left: auto;
+  margin-right: auto;
   }
 
 #flash {
@@ -6919,3 +6867,11 @@ ion-icon {
     border-color:rgba(0, 255, 38, 0.75);
     border-width: 1px;
   }
+
+  #a500 {
+    padding: 5px;
+    background: #fff;
+    font-size: 200px;
+    text-align: right;
+    margin-bottom: 20px;
+    }

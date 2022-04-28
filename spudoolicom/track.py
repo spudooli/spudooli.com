@@ -14,16 +14,19 @@ def trackapi():
 
 @app.route("/track/owntrackdave", methods=['POST'])
 def owntrackdave():
-   client1 = paho.Client("websiteTrack")
-   client1.connect(broker, port)
+
    request_data = request.get_json()
+   fo = open("/tmp/dave.txt", "w")
+   fo.write(str(request_data))
+   fo.close()
+
    type = request_data['_type']
    if type == "location":
       lat = request_data['lat']
       lon = request_data['lon']
-      # vel = request_data['vel']
-      alt = request_data['alt']
       latlon = str(lat) + ":" + str(lon)
+      client1 = paho.Client("websiteTrack")
+      client1.connect(broker, port)
       client1.publish("house/location/dave", latlon)
 
       cur = db.mysql.connection.cursor()

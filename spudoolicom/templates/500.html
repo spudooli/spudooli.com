@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% set active_page = "index" %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %} You found a 500 Error {% endblock %}</h2>
+        <div class="title-un-icon">
+            <ion-icon name="close-circle-outline"></ion-icon>
+        </div>
+        <p class="title-un-des"></p>
+
+        {% endblock %}
+
+        {% block content %}
+
+        {{ reason }}
+
+        <div class="a500">500</div>
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

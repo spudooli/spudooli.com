@@ -69,14 +69,14 @@ def post(id):
     previousimage = cursor.fetchone()
     cursor.close()
 
-    if id < "422":
+    if id < "426":
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id FROM pixelpost_pixelpost where id > %s order by id LIMIT 1", (id,))
         nextimage = cursor.fetchone()
         print(nextimage)
         cursor.close()
     else:
-        nextimage = "422"
+        nextimage = "426"
   
     # Get the comments for the post
     cursor = db.mysql.connection.cursor()
