@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}Search - {{ searchquery }} {% endblock %}</h2>
+        <div class="title-un-icon">
+            <ion-icon name="search-outline"></ion-icon>
+        </div>
+        <p class="title-un-des"></p>
+
+        {% endblock %}
+
+        {% block content %}
+<hr>
+          {% for item in searchresults['hits'] %}
+
+          <a href="/photoblog/{{ item['document']['id'] }}">{{ item['document']['headline'] }}</a> - {{ item['highlights'] }}<br>
+            {% endfor %}
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

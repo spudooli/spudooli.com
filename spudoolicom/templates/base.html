@@ -66,8 +66,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     {% endfor %}
                     <li class="menu-search-bar">
                       <a id="search-label"><ion-icon name="search-outline" size="small"></ion-icon></a>
-                      <form class="search-bar" id="searchform">
-                        <input type="text" placeholder="Search..." name="s">
+                      <form class="search-bar" id="searchform" method="GET" action="/search">
+                        <input type="text" placeholder="Search..." name="q">
                       </form>
                     </li>
                 </ul>

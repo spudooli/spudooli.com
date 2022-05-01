@@ -25,5 +25,6 @@ import spudoolicom.webcam
 import spudoolicom.location
 import spudoolicom.admin
 import spudoolicom.forms
+import spudoolicom.search
 
 

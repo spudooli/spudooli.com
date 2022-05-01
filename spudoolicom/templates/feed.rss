@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>spudooli.com</title>
+        <link>http://www.spudpooli.com/</link>
+        <description>The Book of Dave (And Gabba)</description>
+            {% for post in posts %}
+                <item>
+                  <title>{{ post.title_en }}</title>
+                  <link>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</link>
+                  <guid>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</guid>
+                  <pubDate>{{ post[3].strftime('%a, %d %b %y %T') }} UTC</pubDate>
+                  <description><description><![CDATA[{{ post[2]|safe }}]]></description></description>
+                </item>
+            {% endfor %}
+    </channel>
+</rss> 

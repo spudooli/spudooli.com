@@ -33,6 +33,16 @@ def main():
 
     return render_template('index.html', imagecount = imagecount, bankbalance = bankbalance, power = power, indoortemp = indoortemp)
 
+@app.route('/rss')
+def rss():
+    # Get latest 10 posts for RSS feed 
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT id, headline, body, datetime FROM pixelpost_pixelpost ORDER BY id DESC LIMIT 10")
+    posts = cursor.fetchall()
+    cursor.close()
+    return render_template('feed.rss', posts = posts)
+
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -17,3 +17,10 @@ class photoblogComment(FlaskForm):
     commentemail =  StringField("Your email address (optional and never visible to anyone else)")
     recaptcha = RecaptchaField()  
     commentsubmit = SubmitField("Submit")
+
+
+class search(FlaskForm):  
+    csrf.init_app(app)
+
+    searchblog = TextAreaField("Search")  
+    searchsubmit = SubmitField("Submit")
