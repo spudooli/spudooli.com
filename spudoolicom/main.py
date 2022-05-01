@@ -1,5 +1,5 @@
 from spudoolicom import app, db
-from flask import render_template
+from flask import render_template, make_response
 import json
 
 
@@ -36,12 +36,14 @@ def main():
 @app.route('/rss')
 def rss():
     # Get latest 10 posts for RSS feed 
-
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, body, datetime FROM pixelpost_pixelpost ORDER BY id DESC LIMIT 10")
     posts = cursor.fetchall()
     cursor.close()
-    return render_template('feed.rss', posts = posts)
+    rss_xml = render_template('feed.rss', posts = posts)
+    response = make_response(rss_xml)
+    response.headers['Content-Type'] = 'application/rss+xml'
+    return response
 
 
 @app.errorhandler(404)

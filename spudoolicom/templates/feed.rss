@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>spudooli.com</title>
         <link>http://www.spudpooli.com/</link>
+        <atom:link href="https://www.spudooli.com/rss" rel="self" type="application/rss+xml" />
         <description>The Book of Dave (And Gabba)</description>
             {% for post in posts %}
                 <item>
-                  <title>{{ post.title_en }}</title>
+                  <title>{{ post[1] }}</title>
                   <link>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</link>
                   <guid>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</guid>
-                  <pubDate>{{ post[3].strftime('%a, %d %b %y %T') }} UTC</pubDate>
-                  <description><description><![CDATA[{{ post[2]|safe }}]]></description></description>
+                  <pubDate>{{ post[3].strftime('%a, %d %b %Y %T') }} GMT</pubDate>
+                  <description><![CDATA[{{ post[2] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') |safe }}]]></description>
                 </item>
             {% endfor %}
     </channel>

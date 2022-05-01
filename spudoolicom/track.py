@@ -15,45 +15,45 @@ def trackapi():
 @app.route("/track/owntrackdave", methods=['POST'])
 def owntrackdave():
 
-   request_data = request.get_json()
-   fo = open("/tmp/dave.txt", "w")
-   fo.write(str(request_data))
-   fo.close()
+   # request_data = request.get_json()
+   # fo = open("/tmp/dave.txt", "w")
+   # fo.write(str(request_data))
+   # fo.close()
 
-   type = request_data['_type']
-   if type == "location":
-      lat = request_data['lat']
-      lon = request_data['lon']
-      latlon = str(lat) + ":" + str(lon)
-      client1 = paho.Client("websiteTrack")
-      client1.connect(broker, port)
-      client1.publish("house/location/dave", latlon)
+   # type = request_data['_type']
+   # if type == "location":
+   #    lat = request_data['lat']
+   #    lon = request_data['lon']
+   #    latlon = str(lat) + ":" + str(lon)
+   #    client1 = paho.Client("websiteTrack")
+   #    client1.connect(broker, port)
+   #    client1.publish("house/location/dave", latlon)
 
-      cur = db.mysql.connection.cursor()
-      cur.execute('''INSERT into track (who, latitude, longitude) VALUES (%s, %s, %s)''', ("3", str(lat), str(lon)))
-      db.mysql.connection.commit()
-      cur.close()
+   #    cur = db.mysql.connection.cursor()
+   #    cur.execute('''INSERT into track (who, latitude, longitude) VALUES (%s, %s, %s)''', ("3", str(lat), str(lon)))
+   #    db.mysql.connection.commit()
+   #    cur.close()
    
    return 'it works' 
 
 @app.route("/track/owntrackgabba", methods=['POST'])
 def owntrackgabba():
-   client1 = paho.Client("websiteTrack")
-   client1.connect(broker, port)
-   request_data = request.get_json()
-   type = request_data['_type']
-   if type == "location":
-      lat = request_data['lat']
-      lon = request_data['lon']
-      # vel = request_data['vel']
-      # alt = request_data['alt']
-      latlon = str(lat) + ":" + str(lon) 
-      client1.publish("house/location/gabba", latlon)
+   # client1 = paho.Client("websiteTrack")
+   # client1.connect(broker, port)
+   # request_data = request.get_json()
+   # type = request_data['_type']
+   # if type == "location":
+   #    lat = request_data['lat']
+   #    lon = request_data['lon']
+   #    # vel = request_data['vel']
+   #    # alt = request_data['alt']
+   #    latlon = str(lat) + ":" + str(lon) 
+   #    client1.publish("house/location/gabba", latlon)
 
-      cursor = db.mysql.connection.cursor()
-      cursor.execute('''INSERT into track (who, latitude, longitude) VALUES (%s, %s, %s)''', ("4", str(lat), str(lon)))
-      db.mysql.connection.commit()
-      cursor.close()
+   #    cursor = db.mysql.connection.cursor()
+   #    cursor.execute('''INSERT into track (who, latitude, longitude) VALUES (%s, %s, %s)''', ("4", str(lat), str(lon)))
+   #    db.mysql.connection.commit()
+   #    cursor.close()
 
    return 'it works'    
     
