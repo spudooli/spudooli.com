@@ -6,9 +6,10 @@ from flask_wtf.csrf import CSRFProtect
 from flask_wtf.recaptcha import RecaptchaField
 
 
-csrf = CSRFProtect()
+
   
 class photoblogComment(FlaskForm):  
+    csrf = CSRFProtect()
     csrf.init_app(app)
 
     commentmessage = TextAreaField("Message",[validators.DataRequired("We really need your comment")])  
@@ -19,7 +20,8 @@ class photoblogComment(FlaskForm):
     commentsubmit = SubmitField("Submit")
 
 
-class search(FlaskForm):  
+class search(FlaskForm):
+    csrf = CSRFProtect()  
     csrf.init_app(app)
 
     searchblog = TextAreaField("Search")  

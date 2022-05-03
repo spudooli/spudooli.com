@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% set active_page = "index" %}
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}Status Spudooli{% endblock %}</h2>
+        <div class="title-un-icon">
+          <ion-icon name="home-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">Which of the services are up and good            </p>
+
+        {% endblock %}
+
+        {% block content %}
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+
+                {% for stat in statii %}
+
+              <div class="col-md-6">
+                {{ stat[0]}}
+                </div>
+                
+                <div class="col-md-6">
+                    {{ stat[1] }}
+                </div>
+             
+                {% endfor %}
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  function power() {
+    $.get('power', function (data) {
+      $('#current_power').text(data);
+    });
+  }
+
+  $(document).ready(function () {
+    setInterval(power, 6000);
+  });
+
+  function start() {
+    power();
+  }
+
+window.onload = start;
+</script>
+
+{% endblock %}

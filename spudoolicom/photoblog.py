@@ -4,8 +4,8 @@ import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
-
 csrf = CSRFProtect()
+csrf.init_app(app)
 
 @app.route('/photoblog')
 def photoblog():
@@ -20,6 +20,7 @@ def photoblog():
 
 @app.route('/photoblog/<id>', methods=('GET', 'POST'))
 def post(id):
+
     # Get the post
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body, datetime, googlemap FROM pixelpost_pixelpost where id = %s", (id,))
@@ -67,16 +68,17 @@ def post(id):
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id FROM pixelpost_pixelpost where id < %s order by id DESC limit 1", (id,))
     previousimage = cursor.fetchone()
+    previousimage = previousimage[0]
     cursor.close()
 
-    if id < "426":
+    if id < "428":
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id FROM pixelpost_pixelpost where id > %s order by id LIMIT 1", (id,))
         nextimage = cursor.fetchone()
-        print(nextimage)
+        nextimage = nextimage[0]
         cursor.close()
     else:
-        nextimage = "426"
+        nextimage = "428"
   
     # Get the comments for the post
     cursor = db.mysql.connection.cursor()

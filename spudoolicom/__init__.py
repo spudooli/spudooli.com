@@ -1,13 +1,10 @@
 from flask import Flask
 from datetime import datetime
-from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
 app.config.from_pyfile('config.py')
 
-csrf = CSRFProtect()
-csrf.init_app(app)
 
 @app.context_processor
 def inject_now():

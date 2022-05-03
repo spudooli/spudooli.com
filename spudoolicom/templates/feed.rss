@@ -11,7 +11,7 @@
                   <link>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</link>
                   <guid>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</guid>
                   <pubDate>{{ post[3].strftime('%a, %d %b %Y %T') }} GMT</pubDate>
-                  <description><![CDATA[{{ post[2] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') |safe }}]]></description>
+                  <description><![CDATA[<img src="https://www.spudooli.com/static/photoblog/{{ post[4] }}" id="rssfeed"><br><p>{{ post[2] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') |safe }}</p>]]></description>
                 </item>
             {% endfor %}
     </channel>

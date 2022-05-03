@@ -2,12 +2,11 @@ import typesense
 import mysql.connector
 import time
 import sys
-import config
 
 connection = mysql.connector.connect(
     host="192.168.1.2",
     user="sammy",
-    password=config.password,
+    password="bobthefish",
     database="spudooli",
 )
 
@@ -17,7 +16,7 @@ client = typesense.Client({
     'port': '8108',      # For Typesense Cloud use 443
     'protocol': 'http'   # For Typesense Cloud use https
   }],
-  'api_key': config.api_key,
+  'api_key': "NfIrs3e3cS8H6hctV0eGsAmFaCQc181QtlAwdMZHIiiMNt6I",
   'connection_timeout_seconds': 2
 })
 
