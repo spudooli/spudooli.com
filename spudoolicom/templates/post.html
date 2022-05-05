@@ -9,7 +9,7 @@
         <h3 class="title-un">{% block title %}{{ post[1] | replace('\\', '') }}{% endblock %}</h3>
         <div class="image-nav-un-icon">
           <a href="{{ url_for('post', id=previousimage) }}">
-            << Previous </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog"> Browse archive </a> - &nbsp
+            << Previous </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog/archive"> Browse archive </a> - &nbsp
               &nbsp &nbsp &nbsp &nbsp &nbsp <a href="{{ url_for('post', id=nextimage) }}"> Next >></a>
         </div>
         {% endblock %}

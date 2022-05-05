@@ -7,7 +7,7 @@ from flask_wtf.csrf import CSRFProtect, CSRFError
 csrf = CSRFProtect()
 csrf.init_app(app)
 
-@app.route('/photoblog')
+@app.route('/photoblog/archive')
 def photoblog():
     # Get all the posts
     # TODO pagination
@@ -17,18 +17,27 @@ def photoblog():
     cursor.close()
     return render_template('photoblog.html', posts = posts)
 
-
+@app.route('/photoblog', strict_slashes=False, defaults={'id': None} )
 @app.route('/photoblog/<id>', methods=('GET', 'POST'))
 def post(id):
+
+    if id is None:
+        cursor = db.mysql.connection.cursor()
+        cursor.execute("SELECT id FROM pixelpost_pixelpost order by id DESC LIMIT 1")
+        latestpost = cursor.fetchone()
+        id = latestpost[0]
 
     # Get the post
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body, datetime, googlemap FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
+    cursor.close()
 
     # Get Exif
+    cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, image FROM pixelpost_pixelpost where id = %s", (id,))
     imagename = cursor.fetchone()
+    cursor.close()
     f = open("/var/www/spudooli/spudoolicom/static/photoblog/" + imagename[1], 'rb')
     tags = exifread.process_file(f, details=False)
     if "EXIF ExposureTime" in tags:
@@ -81,6 +90,7 @@ def post(id):
         nextimage = latestpost
   
     # Get the comments for the post
+
     cursor.execute("SELECT id, parent_id, datetime, message, name, url FROM pixelpost_comments where parent_id = %s and publish = 'yes' order by id ASC", (id,))
     comments = cursor.fetchall()
     cursor.close()
