@@ -60,14 +60,14 @@ def rss():
 def spudoolistatus():
     # Get latest topics from the database for the status page 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT topic, statusdatetime FROM status ORDER BY topic ASC")
+    cursor.execute("SELECT topic, statusdatetime, downtime FROM status ORDER BY topic ASC")
     statii = cursor.fetchall()
     cursor.close()
     rightnow = datetime.now()
     topicstatus = []
     for topic in statii:
         upornot = (rightnow - topic[1]).seconds
-        if upornot < 240:
+        if upornot < topic[2]:
             upornot = "good"
         else:
             upornot = "-"
