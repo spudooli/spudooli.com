@@ -1,6 +1,7 @@
 from spudoolicom import app, db
 from flask import render_template, make_response, redirect, request
 import json
+from datetime import datetime
 
 
 def statusFile(thing):
@@ -33,7 +34,7 @@ def main():
 
     return render_template('index.html', imagecount = imagecount, bankbalance = bankbalance, power = power, indoortemp = indoortemp)
 
-# Handle old URLs
+# Handle old URLs - Make a redirect to the new place
 @app.route('/index.php')
 def redirectthings():
     args = request.args
@@ -62,7 +63,8 @@ def spudoolistatus():
     cursor.execute("SELECT topic, statusdatetime FROM status ORDER BY topic ASC")
     statii = cursor.fetchall()
     cursor.close()
-    return render_template('status.html', statii = statii)
+    rightnow = datetime.now()
+    return render_template('status.html', statii = statii, rightnow = rightnow)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -80,3 +82,5 @@ def power():
     power = f.read()
     power = power.split(",")[0]
     return power 
+
+

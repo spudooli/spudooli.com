@@ -1,5 +1,5 @@
 from spudoolicom import app, db, forms, config
-from flask import render_template, request, flash
+from flask import render_template, request, flash, redirect
 import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
@@ -25,13 +25,10 @@ def post(id):
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body, datetime, googlemap FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
-    cursor.close()
 
     # Get Exif
-    cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, image FROM pixelpost_pixelpost where id = %s", (id,))
     imagename = cursor.fetchone()
-    cursor.close()
     f = open("/var/www/spudooli/spudoolicom/static/photoblog/" + imagename[1], 'rb')
     tags = exifread.process_file(f, details=False)
     if "EXIF ExposureTime" in tags:
@@ -63,25 +60,27 @@ def post(id):
     else:
         maprequest = ""
 
-    # Get previous and next Ids
-    # TODO: fix the latest post
-    cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id FROM pixelpost_pixelpost where id < %s order by id DESC limit 1", (id,))
-    previousimage = cursor.fetchone()
-    previousimage = previousimage[0]
-    cursor.close()
-
-    if id < "428":
+    # Get previous and next and latest Ids
+    if id == "1":
+        previousimage = "1"
+    else:
         cursor = db.mysql.connection.cursor()
+        cursor.execute("SELECT id FROM pixelpost_pixelpost where id < %s order by id DESC limit 1", (id,))
+        previousimage = cursor.fetchone()
+        previousimage = previousimage[0]
+
+
+    cursor.execute("SELECT id FROM pixelpost_pixelpost order by id DESC LIMIT 1")
+    latestpost = cursor.fetchone()
+    latestpost = latestpost[0]
+    if int(id) < int(latestpost):
         cursor.execute("SELECT id FROM pixelpost_pixelpost where id > %s order by id LIMIT 1", (id,))
         nextimage = cursor.fetchone()
         nextimage = nextimage[0]
-        cursor.close()
     else:
-        nextimage = "428"
+        nextimage = latestpost
   
     # Get the comments for the post
-    cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, parent_id, datetime, message, name, url FROM pixelpost_comments where parent_id = %s and publish = 'yes' order by id ASC", (id,))
     comments = cursor.fetchall()
     cursor.close()

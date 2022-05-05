@@ -16,20 +16,26 @@
         {% endblock %}
 
         {% block content %}
+
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
 
                 {% for stat in statii %}
 
-              <div class="col-md-6">
+              <div class="col-md-4">
                 {{ stat[0]}}
                 </div>
                 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     {{ stat[1] }}
                 </div>
              
+                <div class="col-md-4">
+                    {{ rightnow - stat[1] }}
+
+                </div>
+
                 {% endfor %}
 
               </div>
@@ -43,23 +49,5 @@
   </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-<script>
-  function power() {
-    $.get('power', function (data) {
-      $('#current_power').text(data);
-    });
-  }
-
-  $(document).ready(function () {
-    setInterval(power, 6000);
-  });
-
-  function start() {
-    power();
-  }
-
-window.onload = start;
-</script>
 
 {% endblock %}

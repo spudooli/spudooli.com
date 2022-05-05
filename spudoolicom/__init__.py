@@ -10,6 +10,7 @@ app.config.from_pyfile('config.py')
 def inject_now():
     return {'now': datetime.utcnow()}
 
+
 import spudoolicom.main
 import spudoolicom.db
 import spudoolicom.track
