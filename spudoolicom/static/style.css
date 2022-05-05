@@ -2828,8 +2828,7 @@ body {
     margin: 0 !important;
   }
   
-  .classic-portfolio.col-3-portfolio.gallery-portfolio {}
-  
+ 
   .col-3-portfolio.gallery-portfolio .project-item {
     width: 33.3333333%;
     padding: 0.7% !important;
@@ -2855,8 +2854,7 @@ body {
     content: '';
   }
   
-  .project-item {}
-  
+ 
   .project-item:hover .overlay {
     background-color: rgba(255, 255, 255, 0.9);
   }
@@ -2937,8 +2935,7 @@ body {
     margin-bottom: 20px;
   }
   
-  .portfolio_single_info {}
-  
+ 
   .portfolio_single_info h4 {
     text-transform: uppercase;
     font-size: 13px;
@@ -3097,7 +3094,7 @@ body {
   
   .testimonials .testimonial .client .client-pic img {
     width: 75px;
-    height: 75px -webkit-border-radius: 50%;
+    height: 75px -webkit-border-radius 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     display: block;
@@ -3146,8 +3143,6 @@ body {
     padding: 30px 10px;
     position: relative;
   }
-  
-  .client-logo-list {}
   
   .client-logo-list .owl-item {
     text-align: center;
@@ -3268,8 +3263,6 @@ body {
   17 - Accordion
   =================================================*/
   
-  .accordion {}
-  
   .accordion .accordion-panel {
     margin-bottom: 11px;
     box-shadow: none;
@@ -3350,9 +3343,6 @@ body {
     width: inherit;
   }
   
-  input,
-  select,
-  textarea {}
   
   #contact-form .alert.alert-danger {
     margin-top: 20px;
@@ -3478,8 +3468,6 @@ body {
     font-weight: 500;
   }
   
-  .post-content .see-more {}
-  
   .blog-posts-g li .post-content .post-info {
     margin-bottom: 12px;
   }
@@ -3536,7 +3524,7 @@ body {
     margin-bottom: 0;
   }
   
-  .single-post {}
+
   
   .single-post .post-img {
     position: relative;
@@ -3545,7 +3533,7 @@ body {
     overflow: hidden;
   }
   
-  .single-post .post-info {}
+
   
   .single-post .post-info .post-title {
     text-transform: uppercase;
@@ -3559,9 +3547,7 @@ body {
   .single-post .post-info .post-title a {
     color: #5d5d5d;
   }
-  
-  .single-post .post-info .post-meta {}
-  
+   
   .single-post .post-info .post-meta span {
     padding: 0 8px 0 0;
     margin: 0 8px 0 0;
@@ -3908,7 +3894,6 @@ body {
     text-align: left;
   }
   
-  .nav-btn .all-post {}
   
   .nav-btn .next-post {
     text-align: right;
@@ -4013,7 +3998,6 @@ body {
     top: 3px;
     right: 15px;
     font-family: 'ionicons';
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
@@ -4174,10 +4158,7 @@ body {
     position: relative;
     display: block;
   }
-  
-  .single-product-images,
-  .single-product-des {}
-  
+
   .single-product-images {
     width: 40%;
     float: left;
@@ -4556,7 +4537,6 @@ body {
   24 - Sidebar and widget
   =================================================*/
   
-  .sidebar {}
   
   .widget {
     margin-bottom: 52px;
@@ -4572,8 +4552,7 @@ body {
     border-bottom: solid 2px #f4f4f4;
   }
   
-  .widget .btline-title:after {}
-  
+ 
   
   /****  Search widget ****/
   

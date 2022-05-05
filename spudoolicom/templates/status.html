@@ -9,9 +9,9 @@
       <div class="col-md-12">
         <h2 class="title-un">{% block title %}Status Spudooli{% endblock %}</h2>
         <div class="title-un-icon">
-          <ion-icon name="home-outline"></ion-icon>
+          <ion-icon name="pulse-outline"></ion-icon>
         </div>
-        <p class="title-un-des">Which of the services are up and good            </p>
+        <p class="title-un-des">Which services are up and good            </p>
 
         {% endblock %}
 
@@ -22,19 +22,21 @@
             <div class="row">
 
                 {% for topic in topicstatus %}
+                <div class="col-md-3"></div>
+                <div class="col-md-4">{{ topic[0] }}</div>
+              
+                <div class="col-md-4">
+                    {% if topic[1] == "good" %}
+                    <ion-icon name="checkmark-outline" size="small"></ion-icon>
+                    {% else %}
+                   &nbsp;
+                    {% endif %}
+                </div>
 
-              <div class="col-md-6">
-                {{ topic[0] }}
-                </div>
-                
-                <div class="col-md-6">
-                    {{ topic[1] }}
-                </div>
-             
 
                 {% endfor %}
 
-              </div>
+
             </div>
           </div>
         </div>

@@ -71,7 +71,7 @@ def spudoolistatus():
             upornot = "good"
         else:
             upornot = "-"
-        topicstatus.append([topic[0], upornot])
+        topicstatus.append([topic[0], upornot, topic[1]])
 
 
     return render_template('status.html', statii = statii, rightnow = rightnow, topicstatus = topicstatus)
