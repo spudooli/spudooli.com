@@ -21,20 +21,16 @@
           <div class="container">
             <div class="row">
 
-                {% for stat in statii %}
+                {% for topic in topicstatus %}
 
-              <div class="col-md-4">
-                {{ stat[0]}}
+              <div class="col-md-6">
+                {{ topic[0] }}
                 </div>
                 
-                <div class="col-md-4">
-                    {{ stat[1] }}
+                <div class="col-md-6">
+                    {{ topic[1] }}
                 </div>
              
-                <div class="col-md-4">
-                    {{ rightnow - stat[1] }}
-
-                </div>
 
                 {% endfor %}
 

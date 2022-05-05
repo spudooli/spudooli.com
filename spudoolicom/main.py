@@ -64,7 +64,17 @@ def spudoolistatus():
     statii = cursor.fetchall()
     cursor.close()
     rightnow = datetime.now()
-    return render_template('status.html', statii = statii, rightnow = rightnow)
+    topicstatus = []
+    for topic in statii:
+        upornot = (rightnow - topic[1]).seconds
+        if upornot < 240:
+            upornot = "good"
+        else:
+            upornot = "-"
+        topicstatus.append([topic[0], upornot])
+
+
+    return render_template('status.html', statii = statii, rightnow = rightnow, topicstatus = topicstatus)
 
 @app.errorhandler(404)
 def page_not_found(e):
