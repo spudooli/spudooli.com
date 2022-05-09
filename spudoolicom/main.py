@@ -1,7 +1,11 @@
+from turtle import down
 from spudoolicom import app, db
 from flask import render_template, make_response, redirect, request
 import json
 from datetime import datetime
+import redis
+
+r = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 
 
 def statusFile(thing):
@@ -14,7 +18,7 @@ def statusFile(thing):
 @app.route('/')
 def main():
 
-    #Return the number of photos
+    # Return the power usage
     f = open("/var/www/scripts/power.txt", "r")    
     power = f.read()
     power = power.split(",")[0]
@@ -24,7 +28,7 @@ def main():
     bankbalance = f.read()
     bankbalance = "$" + bankbalance.split(".")[0]
 
-    indoortemp = statusFile("indoorTemperature") + "&deg;"
+    indoortemp = r.get('indoorTemperature') + "&deg;"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) id FROM pixelpost_pixelpost")

@@ -1,6 +1,10 @@
 from flask import render_template
 from spudoolicom import app, db
 import json
+import redis
+
+r = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
+
 
 def statusFile(thing):
     jsonFile = open("/var/www/scripts/statusfile.json", "r")
@@ -11,20 +15,20 @@ def statusFile(thing):
 @app.route('/house')
 def house():
 
-    indoortemp = statusFile("indoorTemperature") + "&deg;"
-    outdoortemp = statusFile("outdoorTemperature") + "&deg;"
+    indoortemp = r.get('indoorTemperature') + "&deg;"
+    outdoortemp = r.get('outdoorTemperature') + "&deg;"
     indoorHigh = statusFile("indoorHigh") + "&deg;"
     indoorLow = statusFile("indoorLow") + "&deg;"
     outdoorHigh = statusFile("outdoorHigh") + "&deg;"
     outdoorLow = statusFile("outdoorLow") + "&deg;"
-    shedtemp = statusFile("gardenshedTemperature") + "&deg;"
-    mancaveTemperature = statusFile("mancaveTemperature") + "&deg;"
-    kitchenTemperature = statusFile("kitchenTemperature") + "&deg;"
-    kitchenhumidity = statusFile("kitchenHumidity") + "%"
-    centralheating = statusFile("heatTemperature") + "&deg;"
-    centralheatinghumidity = statusFile("heatHumidity") + "%"
+    shedtemp = r.get('gardenshedTemperature') + "&deg;"
+    mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
+    kitchenTemperature = r.get("kitchenTemperature") + "&deg;"
+    kitchenhumidity = r.get("kitchenHumidity") + "%"
+    centralheating = r.get("heatTemperature") + "&deg;"
+    centralheatinghumidity = r.get("heatHumidity") + "%"
     fridgedoortoday = statusFile("fridgeDoorCounter")
-    barometer = statusFile("indoorPressure")
+    barometer = r.get("indoorPressure")
     barometer = barometer[0:-2]
 
     jsonFile = open("/var/www/scripts/spa-temperature.json", "r")
