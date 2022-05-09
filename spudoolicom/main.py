@@ -19,9 +19,8 @@ def statusFile(thing):
 def main():
 
     # Return the power usage
-    f = open("/var/www/scripts/power.txt", "r")    
-    power = f.read()
-    power = power.split(",")[0]
+    power = r.get('power')
+
 
     # return the bank balance
     f = open("/var/www/scripts/otherbalance.txt", "r")    
@@ -92,9 +91,7 @@ def page_not_found(e):
 
 @app.route("/power")
 def power():
-    f = open("/var/www/scripts/power.txt", "r")    
-    power = f.read()
-    power = power.split(",")[0]
+    power = r.get('power')
     return power 
 
 
