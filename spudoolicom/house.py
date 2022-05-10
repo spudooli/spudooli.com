@@ -27,7 +27,7 @@ def house():
     kitchenhumidity = r.get("kitchenHumidity") + "%"
     centralheating = r.get("heatTemperature") + "&deg;"
     centralheatinghumidity = r.get("heatHumidity") + "%"
-    fridgedoortoday = statusFile("fridgeDoorCounter")
+    fridgedoortoday = r.get("fridgeDoorCounter")
     barometer = r.get("indoorPressure")
     barometer = barometer[0:-2]
 
