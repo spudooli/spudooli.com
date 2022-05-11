@@ -6,21 +6,11 @@ import redis
 r = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 
 
-def statusFile(thing):
-    jsonFile = open("/var/www/scripts/statusfile.json", "r")
-    data = json.load(jsonFile)
-    jsonFile.close()
-    return data[thing]
-
 @app.route('/house')
 def house():
 
     indoortemp = r.get('indoorTemperature') + "&deg;"
     outdoortemp = r.get('outdoorTemperature') + "&deg;"
-    indoorHigh = statusFile("indoorHigh") + "&deg;"
-    indoorLow = statusFile("indoorLow") + "&deg;"
-    outdoorHigh = statusFile("outdoorHigh") + "&deg;"
-    outdoorLow = statusFile("outdoorLow") + "&deg;"
     shedtemp = r.get('gardenshedTemperature') + "&deg;"
     mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
     kitchenTemperature = r.get("kitchenTemperature") + "&deg;"
@@ -31,10 +21,7 @@ def house():
     barometer = r.get("indoorPressure")
     barometer = barometer[0:-2]
 
-    jsonFile = open("/var/www/scripts/spa-temperature.json", "r")
-    data = json.load(jsonFile)
-    jsonFile.close()
-    waterTemp = round(data["WaterTemp"], 2)
+    waterTemp = r.get('spatemperature')
     if waterTemp == 0:
         waterTemp = "-"
 

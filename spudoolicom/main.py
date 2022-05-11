@@ -8,13 +8,6 @@ import redis
 r = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
 
 
-def statusFile(thing):
-    jsonFile = open("/var/www/scripts/statusfile.json", "r")
-    data = json.load(jsonFile)
-    jsonFile.close()
-    return data[thing]
-
-
 @app.route('/')
 def main():
 
@@ -23,8 +16,8 @@ def main():
 
 
     # return the bank balance
-    f = open("/var/www/scripts/otherbalance.txt", "r")    
-    bankbalance = f.read()
+ 
+    bankbalance = r.get('bankbalance')
     bankbalance = "$" + bankbalance.split(".")[0]
 
     indoortemp = r.get('indoorTemperature') + "&deg;"
