@@ -49,7 +49,14 @@ def post(id):
     else:
         imagemodel = ""
     if "EXIF FNumber" in tags:
-        fstop = tags["EXIF FNumber"]
+        fstopthing = str(tags["EXIF FNumber"])
+        print(fstopthing)
+        if "/" in fstopthing:
+            fstop1 = str(fstopthing.split("/")[0] )
+            fstop2 = str(fstopthing.split("/")[1])
+            fstop = int(fstop1) / int(fstop2)
+        else:
+            fstop = tags["EXIF FNumber"]
     else:
         fstop = ""
     if "EXIF FocalLength" in tags:
@@ -58,7 +65,8 @@ def post(id):
         focallength = ""
 
     captured = tags["Image DateTime"]
-    exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
+    #exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
+    exifhtml = f'{imagemodel} - {exposuretime} sec, f {fstop} at {focallength} mm'
 
     # If there is lat and lon in the database, display a map on the post
     if post[5]:
