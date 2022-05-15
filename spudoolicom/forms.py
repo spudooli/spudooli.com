@@ -5,8 +5,6 @@ from wtforms import StringField, TextAreaField, SubmitField
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf.recaptcha import RecaptchaField
 
-
-
   
 class photoblogComment(FlaskForm):  
     csrf = CSRFProtect()

@@ -64,9 +64,12 @@ def post(id):
     else:
         focallength = ""
 
-    captured = tags["Image DateTime"]
-    #exifhtml = str(imagemodel) + " - " + str(exposuretime) + "sec, f" + str(fstop) + " at " + str(focallength) + "mm"
-    exifhtml = f'{imagemodel} - {exposuretime} sec, f {fstop} at {focallength} mm'
+    if "Image DateTime" in tags:
+        captured = tags["Image DateTime"]
+    else:
+        captured = ""
+
+    exifhtml = f'{imagemodel} - {exposuretime} sec, f{fstop} at {focallength}mm'
 
     # If there is lat and lon in the database, display a map on the post
     if post[5]:

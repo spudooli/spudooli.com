@@ -7,22 +7,26 @@ from werkzeug.exceptions import abort
 from spudoolicom import app, db
 import os
 from werkzeug.utils import secure_filename
-from datetime import date
+from datetime import datetime
 
 
 @app.route("/admin/create", methods=("GET", "POST"))
 def create():
     if request.method == "POST":
         title = request.form["title"]
-        body = request.form["body"]
-        postdate = date.now()
+        body = request.form["body"].replace('\n', '<br>')
+        photollatlon = request.form["photolatlon"]
+        postdate = datetime.now()
+        ts = datetime.timestamp(postdate)
         alt_body = " "
         uploaded_file = request.files['file']
-        uploaded_file = request.files['file']
-        filename = secure_filename(uploaded_file.filename)
+        filename = str(ts) + secure_filename(uploaded_file.filename)
         if filename != '':
             uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
         error = None
+        
+        convertimage = "convert -define jpeg:size=600x180 \"" + app.config['UPLOAD_PATH'] + filename + "\" -auto-orient  -thumbnail 600x200   -unsharp 0x.5 \"" + app.config['UPLOAD_PATH'] + "/thumbs/thumb_\"" + filename
+        os.system(convertimage)
 
         if not title:
             error = "Title is required."
@@ -32,8 +36,8 @@ def create():
         else:
             cur = db.mysql.connection.cursor()
             cur.execute(
-                "INSERT INTO pixelpost_pixelpost (headline, body, image, alt_body, datetime) VALUES (%s, %s, %s, %s)",
-                (title, body, filename, alt_body, postdate))
+                "INSERT INTO pixelpost_pixelpost (headline, body, image, alt_body, datetime, googlemap) VALUES (%s, %s, %s, %s, %s, %s)",
+                (title, body, filename, alt_body, postdate, photollatlon))
             db.mysql.connection.commit()
             cur.close()
             return redirect(url_for("photoblog"))
@@ -65,3 +69,11 @@ def create():
 #             return redirect(url_for("photoblog.index"))
 
 #    return render_template("photoblog/update.html", post=post)
+
+@app.route('/admin/delete/<int:id>', methods=('POST',))
+def delete(id):
+    cur = db.mysql.connection.cursor()
+    cur.execute('DELETE FROM pixelpost_pixelpost WHERE id = ?', (id,))
+    db.mysql.connection.commit()
+    cur.close()
+    return redirect(url_for('photoblog'))

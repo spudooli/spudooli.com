@@ -2,17 +2,31 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Post{% endblock %}</h1>
+  <h3>{% block title %}New Post{% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
   <form method="post" enctype="multipart/form-data">
-    <label for="title">Title</label>
-    <input name="title" id="title" value="{{ request.form['title'] }}" required><br>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] }}</textarea><br>
-    <label for="title">image</label><br>
-    <p><input type="file" name="file"></p>
-    <input type="submit" value="Save">
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><label for="title" >Title</label></div>
+    <div class="col-md-6"><input name="title" id="title" value="{{ request.form['title'] }}" required></div>
+    
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><label for="body">Body</label></div>
+    <div class="col-md-6"><textarea name="body" id="body" style="width:97%;height:400px;" rows="" cols="">{{ request.form['body'] }}</textarea></div>
+
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><label for="image">Image</label></div>
+    <div class="col-md-6"><input type="file" name="file"></div>
+
+    <div class="col-md-3"></div>
+    <div class="col-md-3"><label for="photolatlon" >Photolatlon</label></div>
+    <div class="col-md-6"><input name="photolatlon" id="photolatlon" value="{{ request.form['photolatlon'] }}" required></div>
+
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+    <div class="col-md-6"><input type="submit" value="Save"></div>
+  </div>
   </form>
 {% endblock %}
