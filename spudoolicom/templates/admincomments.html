@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}Comments Admin{% endblock %}</h2>
+        <div class="title-un-icon">
+          <ion-icon name="pulse-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">What do you make of the comments?           </p>
+
+{% endblock %}
+
+{% block content %}
+<div id="comments">
+    <ul>
+      {% for admincomment in admincomments %}
+      <li>On Post <a href="/photoblog/{{ admincomment[1]}}">{{ admincomment[1]}}</a>  - {{ admincomment[3] | replace('\\', '') |replace('<br />', '') |replace('&#039;', '\'') |replace('&quot;',
+        '"') }}<br>
+        {% if admincomment[5] != "" %}
+        <a href="{{ admincomment[5] }}">{{ admincomment[4] }}</a>
+        {% else %}
+        {{ admincomment[4] }}
+        {% endif %}
+        - {{ admincomment[2].strftime('%A, %-d %B, %Y %-H:%M') }}
+        
+        <form action="{{ url_for('deletecomment', id=admincomment[0]) }}" method="post">
+            <input class="danger" type="submit" value="Delete">
+          </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+          <!-- Close divs -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+{% endblock %}
+
+

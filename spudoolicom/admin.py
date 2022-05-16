@@ -44,6 +44,29 @@ def create():
 
     return render_template("create.html")
 
+@app.route('/admin/comments')
+def admincomments():
+        cursor = db.mysql.connection.cursor()
+        cursor.execute("SELECT id, parent_id, datetime, message, name, url, publish FROM pixelpost_comments order by id DESC LIMIT 100")
+        admincomments = cursor.fetchall()
+
+
+        return render_template("admincomments.html", admincomments = admincomments)
+
+@app.route('/admin/comments/delete/<int:id>', methods=("GET", "POST"))
+def deletecomment(id):
+    if request.method == "POST":
+        cursor = db.mysql.connection.cursor()
+        deletestatement = "DELETE FROM pixelpost_comments where id = %s"
+        cursor.execute(deletestatement,  (id,))
+        db.mysql.connection.commit()
+
+        return redirect(url_for("admincomments"))
+
+
+
+
+
 
 # @app.route("/admin/<int:id>/update", methods=("GET", "POST"))
 # def update(id):
@@ -70,10 +93,10 @@ def create():
 
 #    return render_template("photoblog/update.html", post=post)
 
-@app.route('/admin/delete/<int:id>', methods=('POST',))
-def delete(id):
-    cur = db.mysql.connection.cursor()
-    cur.execute('DELETE FROM pixelpost_pixelpost WHERE id = ?', (id,))
-    db.mysql.connection.commit()
-    cur.close()
-    return redirect(url_for('photoblog'))
+# @app.route('/admin/delete/<int:id>', methods=('POST',))
+# def delete(id):
+#     cur = db.mysql.connection.cursor()
+#     cur.execute('DELETE FROM pixelpost_pixelpost WHERE id = ?', (id))
+#     db.mysql.connection.commit()
+#     cur.close()
+#     return redirect(url_for('photoblog'))
