@@ -41,7 +41,7 @@ def money():
 
     # Get all months spent on petrol
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) newdate, sum(amount) amount FROM `budget` WHERE `category` LIKE 'petrol' GROUP BY newdate")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'Petrol' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth")
     data = cur.fetchall()
     labels = [row[0] for row in data]
     values = [str(row[1]).replace("-","") for row in data]
@@ -84,14 +84,14 @@ def money():
 
     # Get The Warehouse purchases
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `party` LIKE '%thl%' or party like '%the warehouse%'")
+    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE category = 'The Warehouse'")
     totalWarehouseSpend = cur.fetchone()
     totalWarehouseSpend = "{:,}".format(totalWarehouseSpend[0])
     cur.close()
 
     # Get all months spend for The Warehouse
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when party LIKE '%the warehouse%' or party like '%twh%' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'The Warehouse' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth")
     data = cur.fetchall()
     warehouselabels = [row[0] for row in data]
     warehousevalues = [str(row[1]).replace("-","") for row in data]
