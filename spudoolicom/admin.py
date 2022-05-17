@@ -63,7 +63,15 @@ def deletecomment(id):
 
         return redirect(url_for("admincomments"))
 
+@app.route('/admin/comments/publish/<int:id>', methods=("GET", "POST"))
+def publishcomment(id):
+    if request.method == "POST":
+        cursor = db.mysql.connection.cursor()
+        publishstatement = "UPDATE pixelpost_comments SET publish = 'yes' where id = %s"
+        cursor.execute(publishstatement,  (id,))
+        db.mysql.connection.commit()
 
+        return redirect(url_for("admincomments"))
 
 
 

@@ -102,6 +102,8 @@
                         datasets: [
                             {
                                 label: "$ Spend on Petrol by Month",
+                                backgroundColor: '#000',
+                                borderColor: '#000',
                                 data: {{ values | safe }},
                         }
 
@@ -251,9 +253,12 @@
                                                 type: 'bar',
                                                 data: {
                                                     labels: {{ warehouselabels | safe }},
-                                            datasets: [
-                                                {
+                                                   
+                                                datasets: [
+                                                    {
                                                     label: "$ Spend at The Warehouse by Month",
+                                                    backgroundColor: '#000',
+                                                    borderColor: '#000',
                                                     data: {{ warehousevalues | safe }},
                                             }
                     

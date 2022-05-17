@@ -28,7 +28,11 @@
         - {{ admincomment[2].strftime('%A, %-d %B, %Y %-H:%M') }}
         
         <form action="{{ url_for('deletecomment', id=admincomment[0]) }}" method="post">
-            <input class="danger" type="submit" value="Delete">
+            <input class="danger" type="submit" value="Delete "  style="border: none; background: none; padding: 0;" >
+          </form>
+
+          <form action="{{ url_for('publishcomment', id=admincomment[0]) }}" method="post">
+            <input class="danger" type="submit" value="Publish" style="border: none; background: none; padding: 0;" />
           </form>
       </li>
       {% endfor %}
