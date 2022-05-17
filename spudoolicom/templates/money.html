@@ -12,9 +12,8 @@
                     <ion-icon name="home-outline"></ion-icon>
                 </div>
                 <p class="title-un-des">How we've spent quite a lot of money since about 1996. Because we run our house
-                    out of a single bank account,
-                    and have done since about 1994, we have a very good history of how we spend our money. Below is some
-                    interesting (to us) stats.<br>
+                    out of a single bank account, and have done since about 1994, we have a very good history of how we 
+                    spend our money. Below is some interesting (to us) stats.<br>
                 In the database is <strong>29,766</strong> transactions, starting <strong>12/2/1996</strong> and the latest <strong>13/3/2022</strong></p>
 
                 {% endblock %}
@@ -42,8 +41,7 @@
                                     <p>On first reflection, this seems like a huge amount of money, and it is of course,
                                         but simplistically (not taking into account inflation etc) it's only about
                                         <strong>$4,335</strong> a year or <strong>$360</strong> a month to run 2 cars.
-                                        Bring on EVs!
-                                    </p>
+                                        Bring on EVs!</p>
                                     <p>Z should be sending us a Christmas card every year though</p>
                                     <p>Note the fascinating spend gap for April 2020 when NZ went into lockdown the
                                         first time where our only purchase at a service station was a bottle of milk</p>
@@ -256,17 +254,13 @@
                                                 type: 'bar',
                                                 data: {
                                                     labels: {{ warehouselabels | safe }},
-                                                   
-                                                datasets: [
-                                                    {
+                                                datasets: [{
                                                     label: "$ Spend at The Warehouse by Month",
                                                     backgroundColor: '#000',
                                                     borderColor: '#000',
                                                     data: {{ warehousevalues | safe }},
-                                            }
-                    
-                                            ]
-                                        }
+                                                    }]
+                                                }
                                     });
                                         </script>
                                     </div>

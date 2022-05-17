@@ -42,16 +42,24 @@ def create():
             cur.close()
             return redirect(url_for("photoblog"))
 
-    return render_template("create.html")
+    return render_template("admin-create.html")
+
+@app.route('/admin/posts')
+def adminposts():
+        cursor = db.mysql.connection.cursor()
+        cursor.execute("SELECT id, headline, body, image, alt_body, datetime, FROM pixelpost_pixelpost order by id DESC LIMIT 100")
+        adminposts = cursor.fetchall()
+        cursor.close()
+        return render_template("admin-posts.html", adminposts = adminposts)
+
 
 @app.route('/admin/comments')
 def admincomments():
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id, parent_id, datetime, message, name, url, publish FROM pixelpost_comments order by id DESC LIMIT 100")
         admincomments = cursor.fetchall()
-
-
-        return render_template("admincomments.html", admincomments = admincomments)
+        cursor.close()
+        return render_template("admin-comments.html", admincomments = admincomments)
 
 @app.route('/admin/comments/delete/<int:id>', methods=("GET", "POST"))
 def deletecomment(id):
@@ -60,6 +68,7 @@ def deletecomment(id):
         deletestatement = "DELETE FROM pixelpost_comments where id = %s"
         cursor.execute(deletestatement,  (id,))
         db.mysql.connection.commit()
+        cursor.close()
 
         return redirect(url_for("admincomments"))
 
@@ -70,6 +79,7 @@ def publishcomment(id):
         publishstatement = "UPDATE pixelpost_comments SET publish = 'yes' where id = %s"
         cursor.execute(publishstatement,  (id,))
         db.mysql.connection.commit()
+        cursor.close()
 
         return redirect(url_for("admincomments"))
 

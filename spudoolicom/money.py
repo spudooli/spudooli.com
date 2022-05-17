@@ -118,6 +118,8 @@ def money():
     hardwarelabels = [row[0] for row in data]
     hardwarevalues = [str(row[1]).replace("-","") for row in data]
     cur.close() 
+
+    
     
     return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, 
                           totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, 
