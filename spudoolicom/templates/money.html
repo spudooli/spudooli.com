@@ -99,7 +99,7 @@
                             type: 'bar',
                             data: {
                                 labels: {{ labels | safe}},
-                        datasets: [
+                            datasets: [
                             {
                                 label: "$ Spend on Petrol by Month",
                                 backgroundColor: '#000',
@@ -232,7 +232,9 @@
                                                     <p>At one point it seemed we were in The Warehouse almost every
                                                         weekend and then suddenyly it occured to me
                                                         that it was bloody ages since I was last there. I assume it's because we stopped buying stuff for the kids. 
-                                                        The chart below shows our The Warehouse purchase history $ spend by month.
+                                                        The chart below shows our The Warehouse purchase history $ spend by month. Amusingly the last few years
+                                                        we are shopping at The Warehouse, again for the kids but this time buying stuff for them to move out 
+                                                        into places of their own.
                                                     </p>
                                                     <p>If I was to guess, our spend at McDonalds would possibly follow a
                                                         similar track. One day I will find out.</p>
@@ -270,6 +272,74 @@
                                 </div>
                                 <!-- End Containter Contents  -->
                                 <!-- End Page Containter  -->
+<!-- Page Containter header  -->
+<div class="container-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-un">The Hardware Stores</h3>
+                <div class="title-un-icon">
+                    <ion-icon name="cart-outline"></ion-icon></i>
+                </div>
+                <p class="title-un-des"></p>
+                <!-- End Page Containter header  -->
+                <!-- Containter contents  -->
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="cart-outline"></ion-icon>
+                                    <div class="counter-number">{{ hardware | replace('-', '$') }}</div>
+                                    <div class="counter-title">Total Spend at Hardware stores</div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <div class="counter-title">We bought a house to spend money at hardware stores</div>
+                                    <p>We bought our house in January 2010. Which is about exactly when the chart below shows a marked increase
+                                        in our spending at Hardware stores. Conveniently or not, we live only 800m from a Bunnings. We have 
+                                        been to Bunnings Constellation <strong>{{ bunningsconstellation }}</strong> times. 
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+
+                        <canvas id="myhardwareChart" width="1000" height="400"></canvas>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                        <script>
+                            var ctx = document.getElementById("myhardwareChart");
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: {{ hardwarelabels | safe }},
+                                   
+                                datasets: [
+                                    {
+                                    label: "$ Spend at all hardware stores by Month",
+                                    backgroundColor: '#000',
+                                    borderColor: '#000',
+                                    data: {{ hardwarevalues | safe }},
+                            }
+    
+                            ]
+                        }
+                    });
+                        </script>
+                    </div>
+                </div>
+                <!-- End Containter Contents  -->
+                <!-- End Page Containter  -->
+
+
+
+
                             </div>
                         </div>
                     </div>

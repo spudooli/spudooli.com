@@ -95,7 +95,34 @@ def money():
     data = cur.fetchall()
     warehouselabels = [row[0] for row in data]
     warehousevalues = [str(row[1]).replace("-","") for row in data]
-    cur.close()  
+    cur.close() 
 
+     # Get Hardwaretotal purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT SUM( amount ) amount FROM  `budget` WHERE  `category` LIKE  '%Hardware%'")
+    hardware = cur.fetchone()
+    hardware = "{:,}".format(hardware[0])
+    cur.close()
+
+         # Get Bunnings Censtellation purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) id FROM  `budget` WHERE  `party` LIKE  '%9470%'")
+    bunningsconstellation = cur.fetchone()
+    bunningsconstellation = "{:,}".format(bunningsconstellation[0])
+    cur.close()
+
+    # Get all months spend for Hardware
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category LIKE '%Hardware%' then amount else 0 end) as hardware FROM budget GROUP BY thismonth")
+    data = cur.fetchall()
+    hardwarelabels = [row[0] for row in data]
+    hardwarevalues = [str(row[1]).replace("-","") for row in data]
+    cur.close() 
     
-    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend)
+    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, 
+                          totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, 
+                          paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
+                          bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
+                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation)
+
+                          

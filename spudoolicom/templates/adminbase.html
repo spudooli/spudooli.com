@@ -1,0 +1,158 @@
+{% set navigation_bar = [
+('/', 'index', 'Website'),
+('/admin/create', 'create', 'New Post'),
+('/admin/comments', 'comments', 'Comments')
+] -%}
+{% set active_page = active_page|default('index') -%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed for spudooli.com" href="/rss" />
+
+  <title>{% block title %}{% endblock %} - Spudooli</title>
+
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'>
+  <!-- ionicons Fonts for icons -->
+ <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
+  <!-- bootstrap -->
+  <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
+  <!-- Styles CSS-->
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+  <!-- Animate CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+
+<body class="box-layout">
+
+
+  <div class="inner-container">
+    <!-- inner-container -->
+    <header class="site-header">
+      <div class="header-inner">
+        <!-- navigation panel -->
+        <div class="container">
+          <div class="row">
+            <div class="header-table col-md-12">
+              <div class="brand">
+                <a href="/">
+                  <h2>Spudooli Admin</h2>
+                </a>
+              </div>
+              <nav id="nav-wrap" class="main-nav">
+                <div id="mobnav-btn"> </div>
+                <ul class="sf-menu">
+                  {% for href, id, caption in navigation_bar %}
+                  <li {% if id == active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
+                    </li>
+                    {% endfor %}
+                    <li class="menu-search-bar">
+                      <a id="search-label"><ion-icon name="search-outline" size="small"></ion-icon></a>
+                      <form class="search-bar" id="searchform" method="GET" action="/search">
+                        <input type="text" placeholder="Search..." name="q">
+                      </form>
+                    </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- End navigation panel -->
+        </div>
+      </div>
+    </header>
+    {% for message in get_flashed_messages() %}
+    <div class="animate__animated animate__bounce">{{ message }}</div>
+    {% endfor %}
+
+    {% block header %}{% endblock %}
+
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer area -->
+    <div class="footer-area-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="footer-widget">
+              <a href="index.html">
+                <h3>Spudooli</h3>
+              </a>
+              <p>Maybe they had something else for breakfast, who knows?</p>
+              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-widget widget_nav_menu">
+              <h4 class="footer-widget-title">Look at these</h4>
+                <ul>
+                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a></li>
+                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter</a></li>
+                  <li class="ion-social-instagram-outline"><a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a> </li> 
+                  <li class="ion-social-youtube-outline"><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
+                  <li class="ion-social-rss-outline"><a href="/rss"> Spudooli on RSS</a></li>
+               </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-widget widget_nav_menu">
+              <h4 class="footer-widget-title">Metadata</h4>
+              <ul>
+                <li class="menu-item"><a href="#"> About Us </a></li>
+                <li class="menu-item"><a href="#"> Press inquiries</a></li>
+                <li class="menu-item"><a href="#"> Contact </a></li>
+                <li class="menu-item"><a href="/status"> Systems Status </a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Footer area -->
+    <!-- Footer -->
+    <div class="footer-holder">
+      <div class="container">
+        <footer class="site-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <p>© Copyright {{ now.year }} | <a href="http://www.spudooli.com" target="_blank">Spudooli Investments Ltd</a></p>
+              <p><small><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</small></p>
+            
+            </div>
+            <div class="col-md-6">
+              <ul class="footer-nav">
+                <li><a href="#"></a></li>
+                <li><a href="#"> </a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#"></a></li>
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- End Footer -->
+  </div>
+  <!-- End inner-container -->
+  <script src="/static/js/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/superfish.js"></script>
+  <script src="/static/js/jquery.easing.js"></script>
+  <script src="/static/js/wow.js"></script>
+  <script src="/static/js/jquery.magnific-popup.js"></script>
+  <script src="/static/js/jquery.fractionslider.min.js"></script>
+  <script src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
