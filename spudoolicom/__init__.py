@@ -1,7 +1,7 @@
 from flask import Flask
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 
 app.config.from_pyfile('config.py')
 

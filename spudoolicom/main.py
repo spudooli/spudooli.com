@@ -1,6 +1,6 @@
 from turtle import down
 from spudoolicom import app, db
-from flask import render_template, make_response, redirect, request
+from flask import render_template, make_response, redirect, request, send_from_directory
 import json
 from datetime import datetime
 import redis
@@ -77,6 +77,11 @@ def spudoolistatus():
 @app.route('/about')
 def about():
    return render_template('about.html')
+
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 @app.errorhandler(404)
 def page_not_found(e):
