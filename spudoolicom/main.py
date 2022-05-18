@@ -37,6 +37,8 @@ def redirectthings():
     thexarg = args.get('x')
     if thexarg == "rss":
         return redirect("/rss", code=301)
+    if thexarg == "browse":
+        return redirect("/photblog/archive", code=301)
 
     return redirect("/", code=301)
 
@@ -71,6 +73,10 @@ def spudoolistatus():
 
 
     return render_template('status.html', statii = statii, rightnow = rightnow, topicstatus = topicstatus)
+
+@app.route('/about')
+def about():
+   return render_template('about.html')
 
 @app.errorhandler(404)
 def page_not_found(e):
