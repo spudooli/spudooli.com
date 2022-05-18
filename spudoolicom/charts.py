@@ -53,6 +53,6 @@ def charts(where):
         pageHeading = "Nope"
         charts = ""
     
-    return render_template('charts.html', charts = charts, pageHeading = pageHeading)
+    return render_template('charts.html', charts = charts, pageHeading = pageHeading, where = where)
     
 

@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% set active_page = "house" %}
 
+{% block metadescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block ogtitle %}The House of Spudooli{% endblock %}
+{% block ogdescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('house') }}{% endblock %}
+
+
 {% block header %}
 
 <div class="container-page">
