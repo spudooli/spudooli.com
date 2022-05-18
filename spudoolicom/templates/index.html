@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 
+{% block metadescription %}This is our place on the internet. A place of experimentation, a place of data, photos, information and maybe other things{% endblock %}
+{% block ogtitle %}The Book of Spudooli{% endblock %}
+{% block ogdescription %}This is our place on the internet. A place of experimentation, a place of data, photos, information and maybe other things{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('main') }}{% endblock %}
+
 {% block header %}
 <div class="container-page">
   <div class="container">
@@ -15,13 +21,13 @@
         {% endblock %}
 
         {% block content %}
-        
+
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp">
-                  <ion-icon name="camera-outline"></ion-icon> 
+                  <ion-icon name="camera-outline"></ion-icon>
                   <div class="counter-number"> {{ imagecount }} </div>
                   <div class="counter-title"> <a href="/photoblog/">Photos</a></div>
                 </div>
@@ -55,42 +61,25 @@
 
         <!-- Story Section -->
         <div class="container-counter-box">
-        <div class="story-container">
-          <div class="story-wrapper wow fadeInUp">
-            <div class="story-info ">
-              <div class="big-font-title">
-                <h1>Spudooli Road Trips</h1>
+          <div class="story-container">
+            <div class="story-wrapper wow fadeInUp">
+              <div class="story-info ">
+                <div class="big-font-title">
+                  <h1>Spudooli Road Trips</h1>
+                </div>
+                <div class="story-bio">
+                  <p>Check out our <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Youtube
+                      Channel</a>
+                    or just play our latest video here</p>
+                </div>
+                <a href="https://www.youtube.com/watch?v=s6XC4k4pebQ" class="video-play-trigger"><i
+                    class="icon-play ion-ios-play"></i></a>
               </div>
-              <div class="story-bio">
-                <p>Check out our <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Youtube Channel</a>
-                  or just play our latest video here</p>
-              </div>
-              <a href="https://www.youtube.com/watch?v=s6XC4k4pebQ" class="video-play-trigger"><i
-                  class="icon-play ion-ios-play"></i></a>
             </div>
           </div>
-        </div>
         </div>
         <!-- End Story Section -->
         <hr>
-
-        <div class="container-counter-box">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                  <div class="counter-number"> <img src="/static/webcam1.jpg"> </div>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div>
-                  <div class="counter-title"> webcams</div>
-                  <p><a href="/webcam"> Check out our webcams!</a>  Updated in real time and you never know what you may be looking at.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
         <div class="container-counter-box">
@@ -104,7 +93,8 @@
               <div class="col-md-9">
                 <div>
                   <div class="counter-title"> Where are we</div>
-                  <p><a href="/location"> Where are Dave and Gabba?</a>  Where we are right now and where we have been this year.tc</p>
+                  <p><a href="/location"> Where are Dave and Gabba?</a> Where we are right now and where we have been
+                    this year.tc</p>
                 </div>
               </div>
             </div>
@@ -135,7 +125,7 @@
     power();
   }
 
-window.onload = start;
+  window.onload = start;
 </script>
 
 
