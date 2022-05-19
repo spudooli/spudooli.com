@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% set active_page = "photoblog" %}
 
-{% block metadescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block metadescription %}{{ post[3]|truncate(55)}}{% endblock %}
 {% block ogtitle %}{{ post[1] | replace('\\', '') }} - The Spudooli Photoblog{% endblock %}
-{% block ogdescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block ogdescription %}{{ post[3]|truncate(55)}}{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/photoblog/{{ post[2] }}{% endblock %}
 {% block ogurl %}{% if id %} https://www.spudooli.com{{ url_for('post', id=id) }}{% else %} https://www.spudooli.com/photoblog {% endif %}{% endblock %}
 
