@@ -6796,3 +6796,19 @@ ion-icon {
     text-align: right;
     margin-bottom: 20px;
     }
+
+.leftborderlastfm {
+  border-left-style: solid;
+  border-left-color: #b90000;
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+
+.leftborderswarm {
+  border-left-style: solid;
+  border-left-color: #ff9c31;
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}

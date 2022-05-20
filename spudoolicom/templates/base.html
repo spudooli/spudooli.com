@@ -2,7 +2,7 @@
 ('/', 'index', 'Home'),
 ('/photoblog/', 'photoblog', 'Photoblog'),
 ('/house', 'house', 'The House'),
-('#', 'pictures', 'Pictures')
+('/recently', 'recently', 'Recently...')
 ] -%}
 {% set active_page = active_page|default('index') -%}
 
@@ -33,15 +33,10 @@
 
   <title>{% block title %}{% endblock %} - Spudooli</title>
 
-  <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'>
-  <!-- ionicons Fonts for icons -->
- <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
-  <!-- bootstrap -->
+  <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
-  <!-- Styles CSS-->
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-  <!-- Animate CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 

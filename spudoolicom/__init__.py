@@ -24,5 +24,6 @@ import spudoolicom.location
 import spudoolicom.admin
 import spudoolicom.forms
 import spudoolicom.search
+import spudoolicom.recently
 
 

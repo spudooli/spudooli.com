@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% set active_page = "recently" %}
+
+{% block metadescription %}This is where we went, what we listened to, tweeted and spent on this day{% endblock %}
+{% block ogtitle %}Rcently...{% endblock %}
+{% block ogdescription %}This is where we went, what we listened to, tweeted and spent on this day{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('recently') }}{% endblock %}
+
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="title-un">{% block title %}On this day {{ recentlydate }} {% endblock %}</h2>
+        <div class="title-un-icon">
+            <ion-icon name="calendar-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">Recently...</p>
+
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                  <div class="counter-number">  </div>
+                  <div class="counter-title"> </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="counter-title">This is where we went, what we listened to, tweeted and spent on this day</div>
+                  
+                  {% for dat in data %}
+                    <div class="col-md-3">
+                        {{ dat[0].strftime('%-H:%M')}} 
+                    </div>
+                    <div class="col-md-9"> 
+                        {% if dat[2] == "LastFM" %}<div class="leftborderlastfm"><strong>{{ dat[1]}} </strong><br><small> <small>{{ dat[4] }} {{ dat[5] }}</small></small></div>
+                        {% elif dat[2] == "Swarm" %}<div class="leftborderswarm"><strong>{{ dat[1]}} </strong><br><small> <small>{{ dat[3]}}</small></small> </div>
+                        {% endif %} 
+                    </div>         
+                    {% endfor %}
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
