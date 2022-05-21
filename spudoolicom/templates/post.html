@@ -57,7 +57,7 @@
                   <div>
                     <div class="counter-title"> Post Meta</div>
                     <p> </p>
-                    <p><strong>Posted:</strong> {{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</p>
+                    <p><strong>Posted:</strong> <a href="/recently/{{ post[4].strftime('%Y-%-m-%-d') }}">{{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</a></p>
                     <p><strong>Captured:</strong> {{ captured }}</p>
                     <p class="container-title"><a href='#addcomment'
                         onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
