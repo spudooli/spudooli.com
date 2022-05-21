@@ -1,7 +1,8 @@
-from flask import render_template
+from flask import render_template, redirect
 from spudoolicom import app, db
 from datetime import date
 import datetime
+import re
 
 @app.route('/recently', strict_slashes=False, defaults={'recentlydate': None})
 @app.route('/recently/<recentlydate>')
@@ -10,6 +11,11 @@ def recently(recentlydate):
     if recentlydate is None:
         today = date.today()
         recentlydate = today.strftime("%Y-%m-%d")
+
+    #If something nefarious in the URL, redirect to today's date
+    x = re.search('[a-zA-Z]', recentlydate)
+    if x:
+        return redirect('/recently', code=301)
     
     year =  int(recentlydate.split("-")[0])
     month = int(recentlydate.split("-")[1])
@@ -24,11 +30,6 @@ def recently(recentlydate):
     print(f'prev {prevdate} , next {nextdate}')
     humandate = thedate.strftime("%B %d, %Y")
 
-
-    # prevdate = recentlydate - datetime.timedelta(days=1)
-    # print(prevdate)
-
-    #previous date to recently date
     cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
     dateend = f'{recentlydate} 23:59:59'

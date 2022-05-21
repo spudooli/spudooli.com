@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% set active_page = "recently" %}
 
-{% block metadescription %}This is where we went, what we listened to, tweeted and spent on this day{% endblock %}
+{% block metadescription %}This is where we went, what we listened to, tweeted and spent on {{ humandate }}{% endblock %}
 {% block ogtitle %}Rcently...{% endblock %}
-{% block ogdescription %}This is where we went, what we listened to, tweeted and spent on this day{% endblock %}
+{% block ogdescription %}This is where we went, what we listened to, tweeted and spent on {{ humandate }}{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
 {% block ogurl %}https://www.spudooli.com{{ url_for('recently') }}{% endblock %}
 
