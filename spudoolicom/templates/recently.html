@@ -40,7 +40,18 @@
               </div>
               <div class="col-md-9">
                 <div>
-                  
+                    {% if tweets %}
+                    {% for tweet in tweets %}
+                    <div class="col-md-3">
+                        {{ tweet[0].strftime('%-H:%M')}} 
+                    </div>
+                    <div class="col-md-9"> 
+                        <div class="leftbordertweets">{{ tweet[1]}} <br> <small><small><a href="https://twitter.com/Spudooli/status/{{ tweet[2] }}">@spudooli</a></small> </small></div>
+                       
+                    </div>         
+                    {% endfor %}
+                    </div> 
+                    {% endif %}   
                   {% for dat in data %}
                     <div class="col-md-3">
                         {{ dat[0].strftime('%-H:%M')}} 

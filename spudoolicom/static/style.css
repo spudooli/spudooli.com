@@ -6820,3 +6820,11 @@ ion-icon {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.leftbordertweets {
+  border-left-style: solid;
+  border-left-color: rgb(29, 155, 240);
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
