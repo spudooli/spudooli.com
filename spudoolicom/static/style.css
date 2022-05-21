@@ -6812,3 +6812,11 @@ ion-icon {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.leftborderbank {
+  border-left-style: solid;
+  border-left-color: #d5002b;
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}

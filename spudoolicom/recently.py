@@ -40,12 +40,12 @@ def recently(recentlydate):
     cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
     dateend = f'{recentlydate} 23:59:59'
-    cur.execute("SELECT event_date, name, type, address, artist, album FROM recently where event_date > %s and event_date < %s order by event_date ASC" , (datestart, dateend) )
-    data = cur.fetchall()
+    cur.execute("SELECT date, amount FROM bankbalance where date > %s and date < %s order by date ASC" , (datestart, dateend) )
+    bankbalance = cur.fetchone()
     cur.close() 
+   
+    print(bankbalance)
 
-    
-    
-    return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, humandate = humandate)
+    return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, humandate = humandate, bankbalance = bankbalance)
 
                           
