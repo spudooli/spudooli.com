@@ -6828,3 +6828,11 @@ ion-icon {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.leftborderblog {
+  border-left-style: solid;
+  border-left-color: rgb(0, 0, 0);
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}

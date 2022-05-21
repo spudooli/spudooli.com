@@ -2,7 +2,7 @@
 {% set active_page = "recently" %}
 
 {% block metadescription %}This is where we went, what we listened to, tweeted and spent on {{ humandate }}{% endblock %}
-{% block ogtitle %}Recently...{% endblock %}
+{% block ogtitle %}On this day... {{ humandate }} {% endblock %}
 {% block ogdescription %}This is where we went, what we listened to, tweeted and spent on {{ humandate }}{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
 {% block ogurl %}https://www.spudooli.com{{ url_for('recently') }}{% endblock %}
@@ -62,14 +62,25 @@
                         {% endif %} 
                     </div>         
                     {% endfor %}
+
+                    {% if blogpost %}
+                    <div class="col-md-3">
+                        {{ blogpost[0].strftime('%-H:%M')}} 
+                    </div>
+                    <div class="col-md-9"> 
+                        <div class="leftborderblog"><a href="/photoblog/{{ blogpost[2] }}">{{ blogpost[1]}} </a><br><small> <small></small></small> </div>
+                      
+                    </div>   
+                    {% endif %} 
                     {% if bankbalance %}
                     <div class="col-md-3">
                         {{ bankbalance[0].strftime('%-H:%M')}} 
                     </div>
                     <div class="col-md-9"> 
                         <div class="leftborderbank"><strong>${{ bankbalance[1]}} </strong><br><small> <small>End of day bank balance</small></small> </div>
-                        {% endif %} 
-                    </div>       
+                        
+                    </div>  
+                    {% endif %}      
                 </div>
               </div>
             </div>

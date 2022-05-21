@@ -28,7 +28,7 @@ def recently(recentlydate):
     if thedate == date.today():
         nextdate = thedate
     print(f'prev {prevdate} , next {nextdate}')
-    humandate = thedate.strftime("%B %d, %Y")
+    humandate = thedate.strftime("%A, %d %B %Y")
 
     cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
@@ -50,9 +50,17 @@ def recently(recentlydate):
     cur.execute("SELECT date, amount FROM bankbalance where date > %s and date < %s order by date ASC" , (datestart, dateend) )
     bankbalance = cur.fetchone()
     cur.close() 
+
+    cur = db.mysql.connection.cursor()
+    datestart = f'{recentlydate} 00:00:00'
+    dateend = f'{recentlydate} 23:59:59'
+    cur.execute("SELECT datetime, headline, id FROM pixelpost_pixelpost where datetime > %s and datetime < %s order by datetime ASC" , (datestart, dateend) )
+    blogpost = cur.fetchone()
+    cur.close() 
    
     print(bankbalance)
 
-    return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, humandate = humandate, bankbalance = bankbalance, tweets = tweets)
+    return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, 
+                          humandate = humandate, bankbalance = bankbalance, tweets = tweets, blogpost = blogpost)
 
                           
