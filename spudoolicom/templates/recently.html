@@ -14,12 +14,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h2 class="title-un">{% block title %}On this day {{ recentlydate }} {% endblock %}</h2>
+        <h2 class="title-un">{% block title %}On this day {{ humandate }} {% endblock %}</h2>
         <div class="title-un-icon">
             <ion-icon name="calendar-outline"></ion-icon>
         </div>
-        <p class="title-un-des">This is where we went, what we listened to, tweeted and spent on this day</p>
-
+        <p class="title-un-des">This is where we went, what we listened to, tweeted and spent on this day<br>
+            <a href="{{ url_for('recently', recentlydate=prevdate) }}">
+                <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious Day </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="/recently"> Today </a> &nbsp
+                &nbsp &nbsp &nbsp &nbsp &nbsp <a href="{{ url_for('recently', recentlydate=nextdate) }}"> Next Day&nbsp &nbsp<ion-icon name="return-down-forward-outline" size="small"></ion-icon></a>
+            </div></p>
+        
         {% endblock %}
 
         {% block content %}
