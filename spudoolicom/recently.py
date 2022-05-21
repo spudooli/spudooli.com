@@ -22,12 +22,10 @@ def recently(recentlydate):
     day = int(recentlydate.split("-")[2])
    
     thedate = date(year, month, day)
-    print(f'Recently {thedate}')
     prevdate = thedate - datetime.timedelta(days=1)
     nextdate = thedate + datetime.timedelta(days=1)
     if thedate == date.today():
         nextdate = thedate
-    print(f'prev {prevdate} , next {nextdate}')
     humandate = thedate.strftime("%A, %d %B %Y")
 
     cur = db.mysql.connection.cursor()
@@ -57,8 +55,6 @@ def recently(recentlydate):
     cur.execute("SELECT datetime, headline, id FROM pixelpost_pixelpost where datetime > %s and datetime < %s order by datetime ASC" , (datestart, dateend) )
     blogpost = cur.fetchone()
     cur.close() 
-   
-    print(bankbalance)
 
     return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, 
                           humandate = humandate, bankbalance = bankbalance, tweets = tweets, blogpost = blogpost)
