@@ -3,6 +3,7 @@ from flask import render_template, request, flash, redirect
 import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
+import re
 
 csrf = CSRFProtect()
 csrf.init_app(app)
@@ -26,6 +27,11 @@ def post(id):
         cursor.execute("SELECT id FROM pixelpost_pixelpost order by id DESC LIMIT 1")
         latestpost = cursor.fetchone()
         id = latestpost[0]
+
+    #If something nefarious in the URL, redirect to a page
+    x = re.search('[a-zA-Z]', str(id))
+    if x:
+        return redirect('/photoblog', code=301)
 
     # Get the post
     cursor = db.mysql.connection.cursor()
