@@ -40,25 +40,14 @@
               </div>
               <div class="col-md-9">
                 <div>
-                    {% if tweets %}
-                    {% for tweet in tweets %}
-                    <div class="col-md-3">
-                        {{ tweet[0].strftime('%-H:%M')}} 
-                    </div>
-                    <div class="col-md-9"> 
-                        <div class="leftbordertweets">{{ tweet[1]}} <br> <small><small><a href="https://twitter.com/Spudooli/status/{{ tweet[2] }}">@spudooli</a></small> </small></div>
-                       
-                    </div>         
-                    {% endfor %}
-                    </div> 
-                    {% endif %}   
                   {% for dat in data %}
                     <div class="col-md-3">
                         {{ dat[0].strftime('%-H:%M')}} 
                     </div>
                     <div class="col-md-9"> 
-                        {% if dat[2] == "LastFM" %}<div class="leftborderlastfm"><strong>{{ dat[1]}} </strong><br><small> <small>{{ dat[4] }} {{ dat[5] }}</small></small></div>
+                        {% if dat[2] == "LastFM" %}<div class="leftborderlastfm"><strong>{{ dat[1]}} </strong><br><small> <small>{{ dat[4] }} - {{ dat[5] }}</small></small></div>
                         {% elif dat[2] == "Swarm" %}<div class="leftborderswarm"><strong>{{ dat[1]}} </strong><br><small> <small>{{ dat[3]}}</small></small> </div>
+                        {% elif dat[2] == "Twitter" %}<div class="leftbordertweets">{{ dat[1]}} <br> <small><small><a href="https://twitter.com/Spudooli/status/{{ dat[6] }}">@spudooli</a></small> </small></div>
                         {% endif %} 
                     </div>         
                     {% endfor %}

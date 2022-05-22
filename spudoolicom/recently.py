@@ -31,14 +31,7 @@ def recently(recentlydate):
     cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
     dateend = f'{recentlydate} 23:59:59'
-    cur.execute("SELECT created_at, tweet, id FROM amt_tweets where created_at > %s and created_at < %s order by created_at ASC" , (datestart, dateend) )
-    tweets = cur.fetchall()
-    cur.close() 
-
-    cur = db.mysql.connection.cursor()
-    datestart = f'{recentlydate} 00:00:00'
-    dateend = f'{recentlydate} 23:59:59'
-    cur.execute("SELECT event_date, name, type, address, artist, album FROM recently where event_date > %s and event_date < %s order by event_date ASC" , (datestart, dateend) )
+    cur.execute("SELECT event_date, name, type, address, artist, album, external_id FROM recently where event_date > %s and event_date < %s order by event_date ASC" , (datestart, dateend) )
     data = cur.fetchall()
     cur.close() 
 
@@ -57,6 +50,6 @@ def recently(recentlydate):
     cur.close() 
 
     return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, 
-                          humandate = humandate, bankbalance = bankbalance, tweets = tweets, blogpost = blogpost)
+                          humandate = humandate, bankbalance = bankbalance,  blogpost = blogpost)
 
                           
