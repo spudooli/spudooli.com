@@ -23,6 +23,36 @@
         {% block content %}
 
         {% autoescape false %}
+        <script type="application/ld+json">
+          {
+          "@context": "http://schema.org",
+          "@type": "BlogPosting",
+          "mainEntityOfPage":{
+          "@type":"WebPage",
+          "@id":"https://www.spudooli.com/photoblog/{{ post[0] }}"
+          },
+          "headline": "{{ post[1] }}",
+          "image": {
+          "@type": "ImageObject",
+          "url": "https://www.spudooli.com/static/photoblog/{{ post[2] }}"
+          },
+          "datePublished": "{{ post[4] }}",
+          "author": {
+          "@type": "Person",
+          "name": "Dave Cooper"
+          },
+          "publisher": {
+          "@type": "Organization",
+          "name": "Spudooli Investments Ltd"
+          }
+          },
+          "description": "{{ post[3]|truncate(55)}}",
+          "articleBody": "{{ post[3] | replace('"', '\"')}}"
+          }
+          </script>
+
+
+
         <script language='javascript' type='text/javascript'>
 
           function flip(rid) {
