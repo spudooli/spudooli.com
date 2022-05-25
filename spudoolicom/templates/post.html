@@ -7,6 +7,9 @@
 {% block ogimage %}https://www.spudooli.com/static/photoblog/{{ post[2] }}{% endblock %}
 {% block ogurl %}{% if id %} https://www.spudooli.com{{ url_for('post', id=id) }}{% else %} https://www.spudooli.com/photoblog {% endif %}{% endblock %}
 
+{% block canonical %}{% if id %} <link rel="canonical" href="https://www.spudooli.com{{ url_for('post', id=id)}}" />
+    {% else %} <link rel="canonical" href="https://www.spudooli.com/photoblog" /> {% endif %}{% endblock %}
+
 {% block header %}
 <div class="container-page">
   <div class="container">
@@ -32,6 +35,7 @@
           "@id":"https://www.spudooli.com/photoblog/{{ post[0] }}"
           },
           "headline": "{{ post[1] }}",
+          "url": "https://www.spudooli.com/photoblog/{{ post[0] }}",
           "image": {
           "@type": "ImageObject",
           "url": "https://www.spudooli.com/static/photoblog/{{ post[2] }}"
@@ -43,16 +47,16 @@
           },
           "publisher": {
           "@type": "Organization",
-          "name": "Spudooli Investments Ltd"
-          }
+          "name": "The Book of Spudooli",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.spudooli.com/static/images/91334637_fdd4a5962f_q.jpg"
+          },
           },
           "description": "{{ post[3]|truncate(55)}}",
-          "articleBody": "{{ post[3] | replace('"', '\"')}}"
+          "articleBody": "{{ post[3] | replace('"', '\\"')}}"
           }
           </script>
-
-
-
         <script language='javascript' type='text/javascript'>
 
           function flip(rid) {

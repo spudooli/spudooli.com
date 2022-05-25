@@ -9,3 +9,6 @@ Disallow: /
 
 User-agent: Sogou inst spider
 Disallow: /
+
+User-agent: MegaIndex Crawler
+Disallow: /
