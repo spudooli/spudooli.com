@@ -408,7 +408,7 @@ body {
   }
   
   .header-scroll-fixed .navbar-fixed-inner-container {
-    width: 1170px;
+    width: 1270px;
     margin: 0 auto;
   }
   
@@ -2726,7 +2726,7 @@ body {
     margin-bottom: 20px;
   }
   
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1300px) {
     .projects-view .project-b-item .project-b-des,
     .projects-view .project-b-item .project-image {
       width: 100%;
@@ -4949,7 +4949,6 @@ body {
       border-top: none;
       width: 100% !important;
     }
-    .single-product-images {}
     .single-product-des {
       width: 50%;
       float: right;
@@ -5306,13 +5305,13 @@ body {
    */
   
   .owl-origin {
-    -webkit-perspective: 1200px;
+    -webkit-perspective: 1300;
     -webkit-perspective-origin-x: 50%;
     -webkit-perspective-origin-y: 50%;
-    -moz-perspective: 1200px;
+    -moz-perspective: 1300;
     -moz-perspective-origin-x: 50%;
     -moz-perspective-origin-y: 50%;
-    perspective: 1200px;
+    perspective: 1300;
   }
   
   
@@ -6223,14 +6222,14 @@ body {
     position: relative;
     overflow: visible;
     position: relative;
-    max-width: 1170px;
+    max-width: 1270px;
     width: 100%;
     /*  height:400px; when responsive, comment this out */
     margin: 0 auto;
   }
   
   .fr-slider-home2 {
-    max-width: 1140px;
+    max-width: 1270;
   }
   
   .fraction-slider {

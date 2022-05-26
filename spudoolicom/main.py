@@ -5,7 +5,8 @@ import json
 from datetime import datetime
 import redis
 
-r = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
+r = redis.StrictRedis('localhost', 6379, charset="utf-8",
+                      decode_responses=True)
 
 
 @app.route('/')
@@ -14,9 +15,8 @@ def main():
     # Return the power usage
     power = r.get('power')
 
-
     # return the bank balance
- 
+
     bankbalance = r.get('bankbalance')
     bankbalance = "$" + bankbalance.split(".")[0]
 
@@ -28,9 +28,11 @@ def main():
     imagecount = imagecount[0]
     cursor.close()
 
-    return render_template('index.html', imagecount = imagecount, bankbalance = bankbalance, power = power, indoortemp = indoortemp)
+    return render_template('index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp)
 
 # Handle old URLs - Make a redirect to the new place
+
+
 @app.route('/index.php')
 def redirectthings():
     args = request.args
@@ -42,23 +44,27 @@ def redirectthings():
 
     return redirect("/", code=301)
 
+
 @app.route('/rss')
 def rss():
-    # Get latest 10 posts for RSS feed 
+    # Get latest 10 posts for RSS feed
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, headline, body, datetime, image FROM pixelpost_pixelpost ORDER BY id DESC LIMIT 10")
+    cursor.execute(
+        "SELECT id, headline, body, datetime, image FROM pixelpost_pixelpost ORDER BY id DESC LIMIT 10")
     posts = cursor.fetchall()
     cursor.close()
-    rss_xml = render_template('feed.rss', posts = posts)
+    rss_xml = render_template('feed.rss', posts=posts)
     response = make_response(rss_xml)
     response.headers['Content-Type'] = 'application/rss+xml'
     return response
 
+
 @app.route('/status')
 def spudoolistatus():
-    # Get latest topics from the database for the status page 
+    # Get latest topics from the database for the status page
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT topic, statusdatetime, downtime FROM status ORDER BY topic ASC")
+    cursor.execute(
+        "SELECT topic, statusdatetime, downtime FROM status ORDER BY topic ASC")
     statii = cursor.fetchall()
     cursor.close()
     rightnow = datetime.now()
@@ -71,17 +77,25 @@ def spudoolistatus():
             upornot = "-"
         topicstatus.append([topic[0], upornot, topic[1]])
 
+    return render_template('status.html', statii=statii, rightnow=rightnow, topicstatus=topicstatus)
 
-    return render_template('status.html', statii = statii, rightnow = rightnow, topicstatus = topicstatus)
 
 @app.route('/about')
 def about():
-   return render_template('about.html')
+    return render_template('about.html')
+
+
+@app.route("/power")
+def power():
+    power = r.get('power')
+    return power
+
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -91,11 +105,3 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
-
-
-@app.route("/power")
-def power():
-    power = r.get('power')
-    return power 
-
-

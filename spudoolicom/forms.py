@@ -17,6 +17,16 @@ class photoblogComment(FlaskForm):
     recaptcha = RecaptchaField()  
     commentsubmit = SubmitField("Submit")
 
+class photoblogContactUs(FlaskForm):  
+    csrf = CSRFProtect()
+    csrf.init_app(app)
+
+    contactusmessage = TextAreaField("Message",[validators.DataRequired("make contact with a message")])  
+    contactusname = StringField("Name",[validators.DataRequired("Please enter your name.")])  
+    contactusemail =  StringField("Your email address (never visible to anyone else)")
+    contactusrecaptcha = RecaptchaField()  
+    contactussubmit = SubmitField("Submit")
+
 
 class search(FlaskForm):
     csrf = CSRFProtect()  
