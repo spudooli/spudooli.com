@@ -3468,11 +3468,18 @@ body {
     margin-bottom: 0;
   }
   
+  .single-photoblogpost {
+    margin-bottom: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
 
   
   .single-post .post-img {
     position: relative;
     margin-bottom: 25px;
+    margin-left: 10%;
+    margin-right: 10%;
     background: #8d8d8d;
     overflow: hidden;
   }
@@ -6737,11 +6744,11 @@ body {
     }
 
 #iso-info {
-    width: 650px;
+    width: 100%;
     padding: 5px;
     background: #fff;
     font-size: 10px;
-    text-align: right;
+    text-align: center;
     margin-bottom: 20px;
     }
 
@@ -6752,6 +6759,8 @@ ion-icon {
     padding:10px;
     background:#fff;
     font-size:14px;
+    margin-left: 10%;
+    margin-right: 10%;
     }
 #comments ul {
         list-style-type:none;
