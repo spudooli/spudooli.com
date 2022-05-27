@@ -12,3 +12,6 @@ Disallow: /
 
 User-agent: MegaIndex Crawler
 Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

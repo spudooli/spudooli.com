@@ -35,7 +35,7 @@ def post(id):
 
     # Get the post
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, headline, image, body, datetime, googlemap FROM pixelpost_pixelpost where id = %s", (id,))
+    cursor.execute("SELECT id, headline, image, body, datetime, googlemap, alt_text FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
     cursor.close()
 

@@ -16,6 +16,7 @@ def create():
         title = request.form["title"]
         body = request.form["body"].replace('\n', '<br>')
         photollatlon = request.form["photolatlon"]
+        alttext= request.form["alttext"]
         postdate = datetime.now()
         ts = datetime.timestamp(postdate)
         alt_body = " "
@@ -36,8 +37,8 @@ def create():
         else:
             cur = db.mysql.connection.cursor()
             cur.execute(
-                "INSERT INTO pixelpost_pixelpost (headline, body, image, alt_body, datetime, googlemap) VALUES (%s, %s, %s, %s, %s, %s)",
-                (title, body, filename, alt_body, postdate, photollatlon))
+                "INSERT INTO pixelpost_pixelpost (headline, body, image, alt_body, datetime, googlemap, alt_text) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (title, body, filename, alt_body, postdate, photollatlon, alttext))
             db.mysql.connection.commit()
             cur.close()
             return redirect(url_for("photoblog"))
