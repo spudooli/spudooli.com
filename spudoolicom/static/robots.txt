@@ -7,7 +7,7 @@ Disallow: /
 User-agent: Sogou web spider
 Disallow: /
 
-User-agent: Sogou inst spider
+User-agent: Sogou spider
 Disallow: /
 
 User-agent: MegaIndex Crawler
@@ -17,4 +17,10 @@ User-agent: MJ12bot
 Disallow: /
 
 User-agent: SeznamBot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: ZoominfoBot
 Disallow: /
