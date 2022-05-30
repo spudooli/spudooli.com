@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+
 echo "Copying the app..."
 
 cp /home/dave/Sites/spudooli.com/spudoolicom/*.py /var/www/spudooli/spudoolicom/

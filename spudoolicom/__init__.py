@@ -3,6 +3,9 @@ from datetime import datetime
 
 app = Flask(__name__, static_folder='static')
 
+from . import auth
+app.register_blueprint(auth.bp)
+
 app.config.from_pyfile('config.py')
 
 
@@ -25,5 +28,6 @@ import spudoolicom.admin
 import spudoolicom.forms
 import spudoolicom.search
 import spudoolicom.recently
+import spudoolicom.auth
 
 

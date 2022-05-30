@@ -8,9 +8,10 @@ from spudoolicom import app, db
 import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
-
+from spudoolicom.auth import login_required
 
 @app.route("/admin/create", methods=("GET", "POST"))
+@login_required
 def create():
     if request.method == "POST":
         title = request.form["title"]
@@ -46,6 +47,7 @@ def create():
     return render_template("admin-create.html")
 
 @app.route('/admin/posts')
+@login_required
 def adminposts():
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id, headline, body, image, alt_body, datetime, FROM pixelpost_pixelpost order by id DESC LIMIT 100")
@@ -55,6 +57,7 @@ def adminposts():
 
 
 @app.route('/admin/comments')
+@login_required
 def admincomments():
         cursor = db.mysql.connection.cursor()
         cursor.execute("SELECT id, parent_id, datetime, message, name, url, publish FROM pixelpost_comments order by id DESC LIMIT 100")
@@ -63,6 +66,7 @@ def admincomments():
         return render_template("admin-comments.html", admincomments = admincomments)
 
 @app.route('/admin/comments/delete/<int:id>', methods=("GET", "POST"))
+@login_required
 def deletecomment(id):
     if request.method == "POST":
         cursor = db.mysql.connection.cursor()
@@ -74,6 +78,7 @@ def deletecomment(id):
         return redirect(url_for("admincomments"))
 
 @app.route('/admin/comments/publish/<int:id>', methods=("GET", "POST"))
+@login_required
 def publishcomment(id):
     if request.method == "POST":
         cursor = db.mysql.connection.cursor()

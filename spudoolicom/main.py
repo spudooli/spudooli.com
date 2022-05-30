@@ -4,6 +4,8 @@ from flask import render_template, make_response, redirect, request, send_from_d
 import json
 from datetime import datetime
 import redis
+from werkzeug.security import check_password_hash
+from spudoolicom.auth import login_required
 
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
