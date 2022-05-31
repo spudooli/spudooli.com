@@ -28,7 +28,7 @@ def post(id):
         latestpost = cursor.fetchone()
         id = latestpost[0]
 
-    #If something nefarious in the URL, redirect to a page
+    # If something nefarious in the URL, redirect to a page 
     x = re.search('[a-zA-Z]', str(id))
     if x:
         return redirect('/photoblog', code=301)
@@ -105,7 +105,7 @@ def post(id):
         nextimage = cursor.fetchone()
         nextimage = nextimage[0]
     else:
-        nextimage = latestpost
+        nextimage = "nopost"
   
     # Get the comments for the post
 
@@ -130,7 +130,9 @@ def post(id):
 
             flash("We got your comment, we'll consider publishing it in due course")
 
-    return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, exifhtml = exifhtml, captured = captured, previousimage = previousimage, nextimage = nextimage, form = form)
+    return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
+                            exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
+                            nextimage = nextimage, form = form)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
