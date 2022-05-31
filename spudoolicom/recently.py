@@ -25,7 +25,7 @@ def recently(recentlydate):
     prevdate = thedate - datetime.timedelta(days=1)
     nextdate = thedate + datetime.timedelta(days=1)
     if thedate == date.today():
-        nextdate = thedate
+        nextdate = "today"
     if thedate == "1996-12-01":
         prevdate = thedate
     humandate = thedate.strftime("%A, %d %B %Y")
