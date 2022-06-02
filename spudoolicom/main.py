@@ -1,11 +1,12 @@
 from turtle import down
-from spudoolicom import app, db
-from flask import render_template, make_response, redirect, request, send_from_directory
+from spudoolicom import app, db, forms
+from flask import render_template, make_response, redirect, request, send_from_directory, flash
 import json
 from datetime import datetime
 import redis
 from werkzeug.security import check_password_hash
 from spudoolicom.auth import login_required
+from flask_wtf.csrf import CSRFProtect, CSRFError
 
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
@@ -30,7 +31,7 @@ def main():
     imagecount = imagecount[0]
     cursor.close()
 
-    return render_template('index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp)
+    return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp)
 
 # Handle old URLs - Make a redirect to the new place
 
@@ -86,6 +87,26 @@ def spudoolistatus():
 def about():
     return render_template('about.html')
 
+@app.route('/contactus', methods=['GET', 'POST'])
+def contactus():
+    contactform = forms.contact_us()
+    if request.method == "POST":
+        if contactform.validate():
+            contactusmessage = request.form["contactusmessage"]
+            contactusname = request.form["contactusname"]
+            contactusemail = request.form["contactusemail"]
+            contactusdate = datetime.now()
+            cur = db.mysql.connection.cursor()
+            cur.execute("INSERT INTO contactus (contactusmessage, contactusname, contactusemail, contactdate) VALUES (%s, %s, %s, %s)",
+                       (contactusmessage, contactusname, contactusemail, contactusdate))
+            db.mysql.connection.commit()
+            cur.close()
+
+            flash("We got your message, we'll carefully consider our reply.", "success")
+
+            return redirect("/contactus")
+
+    return render_template('contactus.html', contactform=contactform)
 
 @app.route("/power")
 def power():

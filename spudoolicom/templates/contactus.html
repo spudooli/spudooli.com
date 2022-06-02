@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block metadescription %}Make contact with us{% endblock %}
+{% block ogtitle %}Contact Us{% endblock %}
+{% block ogdescription %}Contact us{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('contactus') }}{% endblock %}
+
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}Contact Us{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="megaphone-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">Every website needs a contact us, this is that.</p>
+
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                  <div class="counter-number">  </div>
+                  <div class="counter-title"> </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="counter-title">So you want to make contact about something? Complete the form</div>
+                  <br>
+                  <form method="POST" action="/contactus">
+
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    {{ contactform.contactusmessage.label }} <div id="contact-form">{{ contactform.contactusmessage }}</div>
+                    {{ contactform.contactusname.label }} <div id="contact-form">{{ contactform.contactusname }}</div>
+                    {{ contactform.contactusemail.label }} <div id="contact-form">{{ contactform.contactusemail }}</div>
+                    {% for error in contactform.contactusrecaptcha.errors %}
+                    {{ error }}
+                    {% endfor %}
+                    {{ contactform.contactusrecaptcha }} <br />
+                    {{ contactform.contactussubmit() }}
+                  </form>
+        
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -9,7 +9,6 @@ from flask_wtf.recaptcha import RecaptchaField
 class photoblogComment(FlaskForm):  
     csrf = CSRFProtect()
     csrf.init_app(app)
-
     commentmessage = TextAreaField("Message",[validators.DataRequired("We really need your comment")])  
     commentname = StringField("Name",[validators.DataRequired("Please enter your name.")])  
     commenturl = StringField("Your website URL (optional)")    
@@ -17,10 +16,9 @@ class photoblogComment(FlaskForm):
     recaptcha = RecaptchaField()  
     commentsubmit = SubmitField("Submit")
 
-class photoblogContactUs(FlaskForm):  
+class contact_us(FlaskForm):  
     csrf = CSRFProtect()
     csrf.init_app(app)
-
     contactusmessage = TextAreaField("Message",[validators.DataRequired("make contact with a message")])  
     contactusname = StringField("Name",[validators.DataRequired("Please enter your name.")])  
     contactusemail =  StringField("Your email address (never visible to anyone else)")
@@ -31,6 +29,5 @@ class photoblogContactUs(FlaskForm):
 class search(FlaskForm):
     csrf = CSRFProtect()  
     csrf.init_app(app)
-
     searchblog = TextAreaField("Search")  
     searchsubmit = SubmitField("Submit")
