@@ -29,9 +29,16 @@ def main():
     cursor.execute("SELECT count(id) id FROM pixelpost_pixelpost")
     imagecount = cursor.fetchone()
     imagecount = imagecount[0]
+
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT id, headline, image, body FROM pixelpost_pixelpost order by id DESC LIMIT 1")
+    latestpost = cursor.fetchone()
+
     cursor.close()
 
-    return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp)
+    return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp,
+                            latestpost=latestpost) 
 
 # Handle old URLs - Make a redirect to the new place
 
@@ -43,7 +50,7 @@ def redirectthings():
     if thexarg == "rss":
         return redirect("/rss", code=301)
     if thexarg == "browse":
-        return redirect("/photblog/archive", code=301)
+        return redirect("/photoblog/archive", code=301)
 
     return redirect("/", code=301)
 

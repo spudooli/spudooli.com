@@ -29,7 +29,7 @@
                 <div class="counter-box wow fadeInUp">
                   <ion-icon name="camera-outline"></ion-icon>
                   <div class="counter-number"> {{ imagecount }} </div>
-                  <div class="counter-title"> <a href="/photoblog/">Photos</a></div>
+                  <div class="counter-title"> <a href="/photoblog/">Photoblog Posts</a></div>
                 </div>
               </div>
               <div class="col-md-3">
@@ -61,27 +61,24 @@
 
         <!-- Story Section -->
         <div class="container-counter-box">
-          <div class="story-container">
-            <div class="story-wrapper wow fadeInUp">
-              <div class="story-info ">
-                <div class="big-font-title">
-                  <h1>Spudooli Road Trips</h1>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                  <div class="counter-number"> <img src="/static/photoblog/thumbs/thumb_{{ latestpost[2] }}"> </div>
                 </div>
-                <div class="story-bio">
-                  <p>Check out our <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Youtube
-                      Channel</a>
-                    or just play our latest video here</p>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="counter-title">Latest photoblog post</div>
+                  <p><a href="/photoblog/{{ latestpost[0] }}"> {{ latestpost[1] }}</a></p>
+                  <p>{{ latestpost[3] | truncate(100) }}</p>
                 </div>
-                <a href="https://www.youtube.com/watch?v=s6XC4k4pebQ" class="video-play-trigger"><i
-                    class="icon-play ion-ios-play"></i></a>
               </div>
             </div>
           </div>
         </div>
-        <!-- End Story Section -->
         <hr>
-
-
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
@@ -100,7 +97,25 @@
             </div>
           </div>
         </div>
-
+<hr>
+<div class="container-counter-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+          <div class="counter-number">  </div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <div class="counter-title">Youtube Channel</div>
+          <p>Check out our Youtube channel, <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Spudooli Road Trips</a>, 
+            for some great slow TV</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- This is the end -->
       </div>
     </div>
