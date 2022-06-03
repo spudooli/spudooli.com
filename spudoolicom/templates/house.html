@@ -34,21 +34,21 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ outdoortemp | safe }} </div>
                   <div class="counter-title"><a href="/house/charts/outside">Outdoor temperature</a> </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ mancaveTemperature | safe }} </div>
                   <div class="counter-title"> <a href="/house/charts/mancave">Man cave Temperature</a></div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ shedtemp | safe }} </div>
                   <div class="counter-title"><a href="/house/charts/shed">Garden Shed Temperature</a></div>
@@ -69,21 +69,21 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
                   <ion-icon name="fish-outline"></ion-icon>
                   <div class="counter-number"> {{ centralheatinghumidity | safe }} </div>
                   <div class="counter-title"><a href="/house/charts/heat">Central Heating Humidity</a> </div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ kitchenTemperature | safe }} </div>
                   <div class="counter-title"> <a href="/house/charts/kitchen">Kitchen Temperature</a></div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay="1s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".7s">
                   <ion-icon name="fish-outline"></ion-icon>
                   <div class="counter-number"> {{ kitchenhumidity | safe }} </div>
                   <div class="counter-title">kitchen humidity</div>
@@ -98,20 +98,26 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ waterTemp | safe}} </div>
                   <div class="counter-title"> <a href="/house/charts/spa">Spa Pool Temperature</a></div>
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".9s">
                   <ion-icon name="speedometer-outline"></ion-icon>
                   <div class="counter-number"> {{ barometer | safe }} </div>
                   <div class="counter-title"><a href="/house/charts/barometer">Barometer h/Pa</a> </div>
                 </div>
               </div>
-
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay="1s">
+                  <ion-icon name="fish-outline"></ion-icon>
+                  <div class="counter-number"> {{ outdoorhumidity | safe }} </div>
+                  <div class="counter-title">Outdoor humidity </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -120,7 +126,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
                   <ion-icon name="flash-outline"></ion-icon>
                   <div class="counter-number"><div id="current_power"></div> </div>
                   <div class="counter-title"><a href="/house/charts/power">Power W/h</a></div>
@@ -143,7 +149,7 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{ fridgeDoorCount }} </div>
                   <div class="counter-title"> Fridge Door</div>

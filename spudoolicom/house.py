@@ -11,6 +11,7 @@ def house():
 
     indoortemp = r.get('indoorTemperature') + "&deg;"
     outdoortemp = r.get('outdoorTemperature') + "&deg;"
+    outdoorhumidity = r.get('outsideHumidity') + "%"
     shedtemp = r.get('gardenshedTemperature') + "&deg;"
     mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
     kitchenTemperature = r.get("kitchenTemperature") + "&deg;"
@@ -38,5 +39,5 @@ def house():
     return render_template('house.html', waterTemp = waterTemp, barometer = barometer, fridgedoortoday = fridgedoortoday, 
                           kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, 
                           shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, 
-                          indoortemp = indoortemp, outdoortemp = outdoortemp)
+                          indoortemp = indoortemp, outdoortemp = outdoortemp, outdoorhumidity = outdoorhumidity)
     
