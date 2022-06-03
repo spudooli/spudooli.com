@@ -7,26 +7,26 @@
 
    $(window).load(function() {
 
-     /******** Page loader *******/
-     $(".page-loader div").fadeOut();
-     $(".page-loader").delay(200).fadeOut("slow");
+    //  /******** Page loader *******/
+    //  $(".page-loader div").fadeOut();
+    //  $(".page-loader").delay(200).fadeOut("slow");
 
 
      /******** fractionSlider *******/
 
-     $('.fr-slider').fractionSlider({
-       'fullWidth': true,
-       'slideTransition': 'fade',
-       'slideTransitionSpeed': 650,
-       'slideEndAnimation': false,
-       'controls': false,
-       'pager': true,
-       'speedOut': 2600,
-       'timeout': 6000,
-       'responsive': true,
-       'increase': true,
-       'dimensions': '1170 , 600',
-     });
+    //  $('.fr-slider').fractionSlider({
+    //    'fullWidth': true,
+    //    'slideTransition': 'fade',
+    //    'slideTransitionSpeed': 650,
+    //    'slideEndAnimation': false,
+    //    'controls': false,
+    //    'pager': true,
+    //    'speedOut': 2600,
+    //    'timeout': 6000,
+    //    'responsive': true,
+    //    'increase': true,
+    //    'dimensions': '1170 , 600',
+    //  });
 
      var viewportWidth = $(window).width();
      var colWidth = $(".fraction-slider").width();
@@ -40,15 +40,15 @@
        "margin-left": "-" + marginslidebg + "px",
      });
 
-     $(window).resize(function() {
-       /******** fractionSlider bg image resize *******/
-       $(".slide-bg").css({
-         "width": viewportWidth,
-         "max-width": viewportWidth,
-         "margin-left": "-" + marginslidebg + "px",
-       });
+    //  $(window).resize(function() {
+    //    /******** fractionSlider bg image resize *******/
+    //    $(".slide-bg").css({
+    //      "width": viewportWidth,
+    //      "max-width": viewportWidth,
+    //      "margin-left": "-" + marginslidebg + "px",
+    //    });
 
-     });
+    //  });
 
      
     
@@ -94,42 +94,6 @@
        $(".menu-content-wrap").css('height', height);
 
      });
-
-
-
-    
-     $('.popup-gallery').magnificPopup({
-       delegate: 'a',
-       type: 'image',
-       tLoading: 'Loading image #%curr%...',
-       mainClass: 'mfp-with-fade mfp-img-mobile',
-       gallery: {
-         enabled: true,
-         navigateByImgClick: true,
-         preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
-       },
-       image: {
-         tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-         titleSrc: function(item) {
-           return item.el.attr('title') + '<small>by Marsel Van Oosten</small>';
-         }
-       }
-     });
-
-     // For video popup (PLAY VIDEO TRIGGER)
-     if ($('.video-play-trigger').length) {
-       $('.video-play-trigger').magnificPopup({
-         disableOn: 700,
-         type: 'iframe',
-         mainClass: 'mfp-with-fade',
-         removalDelay: 160,
-         preloader: false,
-         fixedContentPos: false
-       });
-     };
-
-
-
    });
 
 
