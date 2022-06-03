@@ -70,9 +70,9 @@ def post(id):
     else:
         focallength = ""
 
-    if "Image DateTimeOriginal" in tags:
+    if "EXIF DateTimeOriginal" in tags:
         # TODO: fix this date to be a human friendly date
-        captured = tags["Image DateTimeOriginal"]
+        captured = tags["EXIF DateTimeOriginal"]
     else:
         captured = ""
 
