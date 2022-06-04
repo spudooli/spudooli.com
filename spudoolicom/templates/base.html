@@ -5,18 +5,18 @@
 ('/recently', 'recently', 'Recently...')
 ] -%}
 {% set active_page = active_page|default('index') -%}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-N9D9PV8');</script>
-  <!-- End Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-N9D9PV8');</script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,14 +39,13 @@
   <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='animate.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/> -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
 
 <body class="box-layout">
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9D9PV8"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N9D9PV8" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="inner-container">
     <!-- inner-container -->
@@ -58,22 +57,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="header-table col-md-12">
               <div class="brand">
                 <a href="/">
-                 <h2>Spudooli</h2>
+                  <h2>Spudooli</h2>
                 </a>
               </div>
               <nav id="nav-wrap" class="main-nav">
                 <div id="mobnav-btn"> </div>
                 <ul class="sf-menu">
                   {% for href, id, caption in navigation_bar %}
-                  <li {% if id == active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
-                    </li>
-                    {% endfor %}
-                    <li class="menu-search-bar">
-                      <a id="search-label"><ion-icon name="search-outline" size="small"></ion-icon></a>
-                      <form class="search-bar" id="searchform" method="GET" action="/search">
-                        <input type="text" placeholder="Search..." name="q">
-                      </form>
-                    </li>
+                  <li {% if id==active_page %} class="current" {% endif %}><a href="{{ href|e }}">{{ caption|e }}</a>
+                  </li>
+                  {% endfor %}
+                  <li class="menu-search-bar">
+                    <a id="search-label">
+                      <ion-icon name="search-outline" size="small"></ion-icon>
+                    </a>
+                    <form class="search-bar" id="searchform" method="GET" action="/search">
+                      <input type="text" placeholder="Search..." name="q">
+                    </form>
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -101,19 +102,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <h3>Spudooli</h3>
               </a>
               <p>Maybe they had something else for breakfast, who knows?</p>
-              </div>
+            </div>
           </div>
           <div class="col-md-4">
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">Look at these</h4>
-                <ul>
-                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a></li>
-                  <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter</a></li>
-                  <li class="ion-social-instagram-outline"><a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a> </li> 
-                  <li class="ion-social-youtube-outline"><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
-                  <li class="ion-social-rss-outline"><a href="/rss"> Spudooli on RSS</a></li>
-                  <li class="ion-social-github-outline"><a href="https://github.com/spudooli"> Spudooli on Github</a></li>
-               </ul>
+              <ul>
+                <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli/"> Spudooli on
+                    Twitter</a></li>
+                <li class="ion-social-twitter-outline"> <a href="https://www.twitter.com/spudooli_house/"> Spudooli
+                    House on Twitter</a></li>
+                <li class="ion-social-instagram-outline"><a href="https://www.instagram.com/spudooli"> Spudooli on
+                    Instagram</a> </li>
+                <li class="ion-social-youtube-outline"><a
+                    href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
+                <li class="ion-social-rss-outline"><a href="/rss"> Spudooli on RSS</a></li>
+                <li class="ion-social-github-outline"><a href="https://github.com/spudooli"> Spudooli on Github</a></li>
+              </ul>
             </div>
           </div>
           <div class="col-md-4">
@@ -138,9 +143,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <footer class="site-footer">
           <div class="row">
             <div class="col-md-12">
-              <p>© Copyright {{ now.year }} | <a href="http://www.spudooli.com" target="_blank">Spudooli Investments Ltd</a></p>
-              <p class="main-nav"><small><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="float: right;" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</small></p>
-            
+              <p>© Copyright {{ now.year }} | <a href="http://www.spudooli.com" target="_blank">Spudooli Investments
+                  Ltd</a></p>
+              <p class="main-nav"><small><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
+                      alt="Creative Commons License" style="float: right;"
+                      src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br>This work is licensed under a
+                  <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons
+                    Attribution-ShareAlike 4.0 International License</a>.</small></p>
+
             </div>
             <div class="col-md-6">
               <ul class="footer-nav">
