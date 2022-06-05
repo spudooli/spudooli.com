@@ -138,6 +138,7 @@ def power():
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
+@app.route('/radar.gif')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
