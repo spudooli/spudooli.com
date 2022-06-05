@@ -4,8 +4,8 @@ import time
 import sys
 
 connection = mysql.connector.connect(
-    host="192.168.1.2",
-    user="sammy",
+    host="localhost",
+    user="root",
     password="bobthefish",
     database="spudooli",
 )
@@ -49,5 +49,4 @@ for item in items:
     datetime = time.mktime(item[3].timetuple())
     datetime = str(datetime).split('.')[0]
     postitem = {'id': str(item[0]), 'headline': item[1], 'body': str(item[2]), 'datetime': int(datetime)}
-    print(postitem)
     client.collections['spudooli-website'].documents.upsert(postitem)

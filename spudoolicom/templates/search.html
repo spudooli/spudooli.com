@@ -15,10 +15,10 @@
         {% endblock %}
 
         {% block content %}
-<hr>
           {% for item in searchresults['hits'] %}
 
-          <a href="/photoblog/{{ item['document']['id'] }}">{{ item['document']['headline'] }}</a> - {{ item['highlights'] }}<br>
+          <p><a href="/photoblog/{{ item['document']['id'] }}">{{ item['document']['headline']| replace("\\", "") }}</a>  <br>
+          ... {{ item['highlights'][0]['snippet'] | replace("mark", "strong") | replace("\\", "") | safe}}</p>
             {% endfor %}
 
         <!-- Close divs -->
