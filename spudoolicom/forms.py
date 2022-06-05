@@ -1,6 +1,6 @@
 from spudoolicom import app
 from flask_wtf import FlaskForm  
-from wtforms import validators, ValidationError  
+from wtforms import validators  
 from wtforms import StringField, TextAreaField, SubmitField
 from flask_wtf.csrf import CSRFProtect
 from flask_wtf.recaptcha import RecaptchaField

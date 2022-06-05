@@ -1,5 +1,4 @@
-from email.mime import image
-from spudoolicom import app, db
+from spudoolicom import app
 from flask import render_template
 import glob
 

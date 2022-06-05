@@ -1,7 +1,5 @@
-from turtle import down
 from spudoolicom import app, db, forms
 from flask import render_template, make_response, redirect, request, send_from_directory, flash
-import json
 from datetime import datetime
 import redis
 from werkzeug.security import check_password_hash
