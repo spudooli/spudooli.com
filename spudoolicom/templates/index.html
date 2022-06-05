@@ -91,31 +91,71 @@
                 <div>
                   <div class="counter-title"> Where are we</div>
                   <p><a href="/location"> Where are Dave and Gabba?</a> Where we are right now and where we have been
-                    this year.tc</p>
+                    this year.</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-<hr>
-<div class="container-counter-box">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
-          <div class="counter-number">  </div>
+        <hr>
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
+                  <div class="counter-number">  </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="counter-title">Youtube Channel</div>
+                  <p>Check out our Youtube channel, <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Spudooli Road Trips</a>, 
+                    for some great slow TV</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-md-9">
-        <div>
-          <div class="counter-title">Youtube Channel</div>
-          <p>Check out our Youtube channel, <a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Spudooli Road Trips</a>, 
-            for some great slow TV</p>
+        <hr>
+
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp">
+                  <ion-icon name="play-circle-outline"></ion-icon>
+                  <div class="counter-number"> {{ lastfmcount }} </div>
+                  <div class="counter-title"> <a href="/recently">Songs played</a></div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                  <ion-icon name="logo-foursquare"></ion-icon>
+                  <div class="counter-number"> {{ swarmcount }} </div>
+                  <div class="counter-title"> <a href="/recently">Check Ins</a> </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <ion-icon name="logo-twitter"></ion-icon>
+                  <div class="counter-number">
+                    <div id="current_power">{{ tweetcount }}</div>
+                  </div>
+                  <div class="counter-title"><a href="/recently">Tweets</a></div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
+                  <ion-icon name="thermometer-outline"></ion-icon>
+                  <div class="counter-number"> {{mancaveTemperature | safe}} </div>
+                  <div class="counter-title"><a href="/house/charts/mancave">Man Cave Temperature</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+
+
         <!-- This is the end -->
       </div>
     </div>

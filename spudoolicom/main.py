@@ -22,21 +22,38 @@ def main():
     bankbalance = "$" + bankbalance.split(".")[0]
 
     indoortemp = r.get('indoorTemperature') + "&deg;"
+    mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) id FROM pixelpost_pixelpost")
     imagecount = cursor.fetchone()
     imagecount = imagecount[0]
 
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'LastFM'")
+    lastfmcount = cursor.fetchone()
+    lastfmcount = "{:,}".format(lastfmcount[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'Swarm'")
+    swarmcount = cursor.fetchone()
+    swarmcount = "{:,}".format(swarmcount[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'Twitter'")
+    tweetcount = cursor.fetchone()
+    tweetcount = "{:,}".format(tweetcount[0])
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body FROM pixelpost_pixelpost order by id DESC LIMIT 1")
     latestpost = cursor.fetchone()
 
+
+
     cursor.close()
 
     return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp,
-                            latestpost=latestpost) 
+                            latestpost=latestpost, lastfmcount=lastfmcount, swarmcount=swarmcount, tweetcount=tweetcount, mancaveTemperature = mancaveTemperature) 
 
 # Handle old URLs - Make a redirect to the new place
 
