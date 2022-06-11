@@ -104,8 +104,8 @@ def amp():
 
 @app.route("/hook/github", methods=['POST'])
 def github():
-    if not verifySignature():
-        return 'signature verification failed'
+    # if not verifySignature():
+    #     return 'signature verification failed'
     data = request.get_json()
     repo = data['repository']['name']
     commitMessage = data['head_commit']['message']
@@ -121,6 +121,6 @@ def github():
     cur.close()
     return "OK"
 
-def verifySignature():
-    signature = "sha256="+hmac.new(bytes(config.API_SECRET , 'utf-8'), msg = request.data, digestmod = hashlib.sha256).hexdigest().lower()
-    return hmac.compare_digest(signature, request.headers['X-Hub-Signature-256'])
+# def verifySignature():
+#     signature = "sha256="+hmac.new(bytes(config.API_SECRET , 'utf-8'), msg = request.data, digestmod = hashlib.sha256).hexdigest().lower()
+#     return hmac.compare_digest(signature, request.headers['X-Hub-Signature-256'])
