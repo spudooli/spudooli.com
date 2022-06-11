@@ -1,6 +1,7 @@
 from http.client import OK
 from spudoolicom import app, db, config
 from flask import request
+import json
 from datetime import datetime
 import paho.mqtt.client as paho
 
@@ -102,6 +103,8 @@ def amp():
 
 @app.route("/hook/github", methods=['POST'])
 def github():
+    if request.headers.get('X-GitHub-Event') == "ping":
+        return json.dumps({'msg': 'Hi!'})
     data = request.get_json()
     repo = data['repository']['name']
     commitMessage = data['head_commit']['message']
