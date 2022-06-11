@@ -1,6 +1,9 @@
-from spudoolicom import app
+from http.client import OK
+from spudoolicom import app, db
 from flask import request
+from datetime import datetime
 import paho.mqtt.client as paho
+import json
 
 broker = "192.168.1.2"
 port = 1883
@@ -96,3 +99,23 @@ def amp():
             client1.publish("house/av/zone3", "off")   
 
     return 'it works'
+
+
+@app.route("/hook/github", methods=['POST'])
+def github():
+    data = request.get_json()
+    repo = data['repository']['name']
+    commitMessage = data['head_commit']['message']
+    name = f"{repo} - {commitMessage}"
+    commitURL = data['head_commit']['url']
+    externalid = data['head_commit']['id']
+    pushdate = datetime.now()
+    cur = db.mysql.connection.cursor()
+    cur.execute(
+        "INSERT INTO recently (external_id, event_date, name, url, type) VALUES (%s, %s, %s, %s, %s)",
+        (externalid, pushdate, name, commitURL, "Github"))
+    db.mysql.connection.commit()
+    cur.close()
+
+
+    return "OK"

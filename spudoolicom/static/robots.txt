@@ -24,3 +24,9 @@ Disallow: /
 
 User-agent: ZoominfoBot
 Disallow: /
+
+User-agent: barkrowler
+Disallow: /
+
+User-agent: adsbot
+ Disallow: / 
