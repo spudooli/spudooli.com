@@ -1,9 +1,10 @@
 from http.client import OK
-from spudoolicom import app, db
+from spudoolicom import app, db, config
 from flask import request
 from datetime import datetime
 import paho.mqtt.client as paho
-import json
+import hmac
+import hashlib
 
 broker = "192.168.1.2"
 port = 1883
@@ -103,6 +104,8 @@ def amp():
 
 @app.route("/hook/github", methods=['POST'])
 def github():
+    if not verifySignature():
+        return 'signature verification failed'
     data = request.get_json()
     repo = data['repository']['name']
     commitMessage = data['head_commit']['message']
@@ -116,6 +119,8 @@ def github():
         (externalid, pushdate, name, commitURL, "Github"))
     db.mysql.connection.commit()
     cur.close()
-
-
     return "OK"
+
+def verifySignature():
+    signature = "sha256="+hmac.new(bytes(config.API_SECRET , 'utf-8'), msg = request.data, digestmod = hashlib.sha256).hexdigest().lower()
+    return hmac.compare_digest(signature, request.headers['X-Hub-Signature-256'])

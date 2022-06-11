@@ -18,7 +18,7 @@
         <div class="title-un-icon">
             <ion-icon name="calendar-outline"></ion-icon>
         </div>
-        <p class="title-un-des">This is where we went, what we listened to, tweeted and spent on this day<br>
+        <p class="title-un-des">This is where we went, what we listened to, tweeted, coded and spent on this day<br>
             <a href="{{ url_for('recently', recentlydate=prevdate) }}">
                 <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious Day </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  {% if nextdate == "today" %} {% else %}<a href="/recently"> Today </a> &nbsp
                 &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="{{ url_for('recently', recentlydate=nextdate) }}"> Next Day&nbsp &nbsp<ion-icon name="return-down-forward-outline" size="small"></ion-icon></a>{% endif %}
