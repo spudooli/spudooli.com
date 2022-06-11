@@ -1,5 +1,6 @@
 from flask import Flask
 from datetime import datetime
+import logging
 
 app = Flask(__name__, static_folder='static')
 
@@ -8,6 +9,9 @@ app.register_blueprint(auth.bp)
 
 app.config.from_pyfile('config.py')
 
+handler = logging.FileHandler('/tmp/spudoolicom.log')  
+handler.setLevel(logging.ERROR)  
+app.logger.addHandler(handler)  
 
 @app.context_processor
 def inject_now():

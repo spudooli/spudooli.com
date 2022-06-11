@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash
 from spudoolicom.auth import login_required
 from flask_wtf.csrf import CSRFProtect, CSRFError
 
+
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
 
@@ -13,10 +14,7 @@ r = redis.StrictRedis('localhost', 6379, charset="utf-8",
 @app.route('/')
 def main():
 
-    # Return the power usage
     power = r.get('power')
-
-    # return the bank balance
 
     bankbalance = r.get('bankbalance')
     bankbalance = "$" + bankbalance.split(".")[0]
@@ -55,9 +53,8 @@ def main():
     return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp,
                             latestpost=latestpost, lastfmcount=lastfmcount, swarmcount=swarmcount, tweetcount=tweetcount, mancaveTemperature = mancaveTemperature) 
 
+
 # Handle old URLs - Make a redirect to the new place
-
-
 @app.route('/index.php')
 def redirectthings():
     args = request.args
@@ -72,7 +69,6 @@ def redirectthings():
 
 @app.route('/rss')
 def rss():
-    # Get latest 10 posts for RSS feed
     cursor = db.mysql.connection.cursor()
     cursor.execute(
         "SELECT id, headline, body, datetime, image FROM pixelpost_pixelpost ORDER BY id DESC LIMIT 10")
@@ -86,7 +82,6 @@ def rss():
 
 @app.route('/status')
 def spudoolistatus():
-    # Get latest topics from the database for the status page
     cursor = db.mysql.connection.cursor()
     cursor.execute(
         "SELECT topic, statusdatetime, downtime FROM status ORDER BY topic ASC")
