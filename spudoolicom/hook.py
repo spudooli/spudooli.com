@@ -105,6 +105,8 @@ def amp():
 def github():
     if request.headers.get('X-GitHub-Event') == "ping":
         return json.dumps({'msg': 'Hi!'})
+    if request.headers.get('X-GitHub-Event') != "push":
+        return json.dumps({'msg': "wrong event type"})
     data = request.get_json()
     repo = data['repository']['name']
     commitMessage = data['head_commit']['message']
