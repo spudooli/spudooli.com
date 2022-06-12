@@ -5,11 +5,11 @@ import redis
 from werkzeug.security import check_password_hash
 from spudoolicom.auth import login_required
 from flask_wtf.csrf import CSRFProtect, CSRFError
+import logging
 
 
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
-
 
 @app.route('/')
 def main():
@@ -144,5 +144,7 @@ def page_not_found(e):
 
 
 @app.errorhandler(500)
-def page_not_found(e):
+def internal_error(e):
+    logging.exception(e)
+    app.logger.exception(e)
     return render_template('500.html'), 500
