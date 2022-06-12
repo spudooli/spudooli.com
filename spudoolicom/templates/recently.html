@@ -40,6 +40,17 @@
               </div>
               <div class="col-md-9">
                 <div>
+
+                  {% for item in budgetdata %}
+                  <div class="col-md-3">
+                      &nbsp; 
+                  </div>
+                  <div class="col-md-9"> 
+                     <div class="leftborderbank"><strong>{{ item[2] | replace("-", "$") }}</strong> - {{ item[3] }}<br><small><small>{{ item[1] }}</small> </small></div>
+                  </div>         
+                  {% endfor %}
+
+
                   {% for dat in data %}
                     <div class="col-md-3">
                         {{ dat[0].strftime('%-H:%M')}} 
@@ -59,8 +70,7 @@
                     </div>
                     <div class="col-md-9"> 
                         <div class="leftborderblog"><a href="/photoblog/{{ blogpost[2] }}">{{ blogpost[1]}} </a><br><small> <small></small></small> </div>
-                      
-                    </div>   
+                                          </div>   
                     {% endif %} 
                     {% if bankbalance %}
                     <div class="col-md-3">

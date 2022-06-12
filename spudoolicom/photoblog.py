@@ -38,9 +38,7 @@ def post(id):
     cursor.execute("SELECT id, headline, image, body, datetime, googlemap, alt_text FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
     cursor.close()
-
     if post is None:
-        print("None")
         abort(404)
 
     # Get Exif
@@ -112,7 +110,6 @@ def post(id):
         nextimage = "nopost"
   
     # Get the comments for the post
-
     cursor.execute("SELECT id, parent_id, datetime, message, name, url FROM pixelpost_comments where parent_id = %s and publish = 'yes' order by id ASC", (id,))
     comments = cursor.fetchall()
     cursor.close()

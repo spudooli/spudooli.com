@@ -38,6 +38,11 @@ def recently(recentlydate):
     cur.close() 
 
     cur = db.mysql.connection.cursor()
+    cur.execute("SELECT date, category, amount, party FROM budget where date = %s and category in ('Hardware', 'Petrol', 'Supermarket', 'Electricity')", (recentlydate,) )
+    budgetdata = cur.fetchall()
+    cur.close() 
+
+    cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
     dateend = f'{recentlydate} 23:59:59'
     cur.execute("SELECT date, amount FROM bankbalance where date > %s and date < %s order by date ASC" , (datestart, dateend) )
@@ -52,6 +57,4 @@ def recently(recentlydate):
     cur.close() 
 
     return render_template('recently.html', data = data, recentlydate = recentlydate, prevdate = prevdate, nextdate = nextdate, 
-                          humandate = humandate, bankbalance = bankbalance,  blogpost = blogpost)
-
-                          
+                          humandate = humandate, bankbalance = bankbalance,  blogpost = blogpost, budgetdata = budgetdata)
