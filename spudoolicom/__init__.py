@@ -6,10 +6,13 @@ from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__, static_folder='static')
 
+
 from . import auth
 app.register_blueprint(auth.bp)
 
+
 app.config.from_pyfile('config.py')
+
 
 @app.context_processor
 def inject_now():
@@ -26,6 +29,7 @@ if not app.debug:
 
     app.logger.setLevel(logging.WARNING)
     app.logger.info('spudoolicom')
+
 
 import spudoolicom.main
 import spudoolicom.db

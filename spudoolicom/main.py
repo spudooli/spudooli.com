@@ -11,6 +11,7 @@ import logging
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
 
+
 @app.route('/')
 def main():
 
@@ -45,8 +46,6 @@ def main():
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body FROM pixelpost_pixelpost order by id DESC LIMIT 1")
     latestpost = cursor.fetchone()
-
-
 
     cursor.close()
 
@@ -124,6 +123,7 @@ def contactus():
             return redirect("/contactus")
 
     return render_template('contactus.html', contactform=contactform)
+
 
 @app.route("/power")
 def power():

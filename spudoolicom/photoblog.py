@@ -1,5 +1,5 @@
 from spudoolicom import app, db, forms, config
-from flask import render_template, request, flash, redirect
+from flask import render_template, request, flash, redirect, abort
 import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
@@ -38,6 +38,10 @@ def post(id):
     cursor.execute("SELECT id, headline, image, body, datetime, googlemap, alt_text FROM pixelpost_pixelpost where id = %s", (id,))
     post = cursor.fetchone()
     cursor.close()
+
+    if post is None:
+        print("None")
+        abort(404)
 
     # Get Exif
     cursor = db.mysql.connection.cursor()
