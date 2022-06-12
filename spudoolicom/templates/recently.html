@@ -5,8 +5,8 @@
 {% block ogtitle %}On this day... {{ humandate }} {% endblock %}
 {% block ogdescription %}This is where we went, what we listened to, tweeted and spent on {{ humandate }}{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
-{% block ogurl %}https://www.spudooli.com{{ url_for('recently') }}{% endblock %}
-
+{% block ogurl %}https://www.spudooli.com{{ url_for('recently') }}/{{ recentlydate }}{% endblock %}
+{% block canonical %}<link rel="canonical" href="https://www.spudooli.com{{ url_for('recently') }}/{{ recentlydate }}" />{% endblock %}
 
 {% block header %}
 
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-9"> 
                         <div class="leftborderblog"><a href="/photoblog/{{ blogpost[2] }}">{{ blogpost[1]}} </a><br><small> <small></small></small> </div>
-                                          </div>   
+                    </div>   
                     {% endif %} 
                     {% if bankbalance %}
                     <div class="col-md-3">
