@@ -184,14 +184,14 @@ body {
     background-color: #fff;
   }
   
-  h2 {
+  h1 {
     font-size: 64px;
     line-height: 1.3125em;
     letter-spacing: 1px;
     font-weight: 700;
   }
   
-  h1 {
+  h2 {
     font-size: 40px;
     line-height: 1.2em;
     letter-spacing: 1px;
@@ -4841,7 +4841,7 @@ body {
   }
   
   .footer-area-container a {
-    color: #a2a2a2;
+    color: #000;
     word-wrap: break-word;
   }
   
@@ -4865,13 +4865,8 @@ body {
     border-bottom: 1px solid #444;
   }
   
-  .footer-area-container .fa {
-    color: #fefefe;
-    margin-right: 6px;
-  }
-  
   .footer-area-container a {
-    color: #a2a2a2;
+    color: #000;
     word-wrap: break-word;
   }
   

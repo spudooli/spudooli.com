@@ -44,7 +44,7 @@ def main():
     tweetcount = "{:,}".format(tweetcount[0])
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, headline, image, body FROM pixelpost_pixelpost order by id DESC LIMIT 1")
+    cursor.execute("SELECT id, headline, image, body, alt_text FROM pixelpost_pixelpost order by id DESC LIMIT 1")
     latestpost = cursor.fetchone()
 
     cursor.close()

@@ -1,32 +1,7 @@
  (function($) {
-   "use strict"; // Start of use strict
+   "use strict"; 
 
-   /* ---------------------------------------------
-    Scripts initialization
-    --------------------------------------------- */
-
-   $(window).load(function() {
-
-    //  /******** Page loader *******/
-    //  $(".page-loader div").fadeOut();
-    //  $(".page-loader").delay(200).fadeOut("slow");
-
-
-     /******** fractionSlider *******/
-
-    //  $('.fr-slider').fractionSlider({
-    //    'fullWidth': true,
-    //    'slideTransition': 'fade',
-    //    'slideTransitionSpeed': 650,
-    //    'slideEndAnimation': false,
-    //    'controls': false,
-    //    'pager': true,
-    //    'speedOut': 2600,
-    //    'timeout': 6000,
-    //    'responsive': true,
-    //    'increase': true,
-    //    'dimensions': '1170 , 600',
-    //  });
+    $(window).on('load', function(){
 
      var viewportWidth = $(window).width();
      var colWidth = $(".fraction-slider").width();
@@ -40,18 +15,6 @@
        "margin-left": "-" + marginslidebg + "px",
      });
 
-    //  $(window).resize(function() {
-    //    /******** fractionSlider bg image resize *******/
-    //    $(".slide-bg").css({
-    //      "width": viewportWidth,
-    //      "max-width": viewportWidth,
-    //      "margin-left": "-" + marginslidebg + "px",
-    //    });
-
-    //  });
-
-     
-    
    });
 
 
