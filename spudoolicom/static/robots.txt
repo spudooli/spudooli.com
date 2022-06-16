@@ -30,3 +30,9 @@ Disallow: /
 
 User-agent: adsbot
  Disallow: / 
+
+User-agent: DataForSEOBot
+ Disallow: /
+
+ User-agent: BLEXBot
+    Disallow: /

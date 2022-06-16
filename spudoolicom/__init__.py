@@ -20,7 +20,7 @@ def inject_now():
 
 
 if not app.debug:
-    file_handler = RotatingFileHandler('/tmp/spud.log', maxBytes=10240,
+    file_handler = RotatingFileHandler('/tmp/spud.log', maxBytes=100240,
                                        backupCount=10)
     file_handler.setFormatter(logging.Formatter(
         '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
