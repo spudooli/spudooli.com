@@ -1,6 +1,5 @@
 from spudoolicom import app, db, forms, config
 from flask import render_template, request, flash
-from datetime import datetime
 import typesense
 
 

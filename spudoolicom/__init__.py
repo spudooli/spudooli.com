@@ -46,3 +46,4 @@ import spudoolicom.forms
 import spudoolicom.search
 import spudoolicom.recently
 import spudoolicom.auth
+import spudoolicom.weather
