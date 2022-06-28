@@ -53,7 +53,7 @@
             "url": "https://www.spudooli.com/static/images/91334637_fdd4a5962f_q.jpg"
           }
           },
-          "description": "{{ post[3]|truncate(55)}}",
+          "description": "{{ post[3] | replace('"', '\"' | replace '\n', '') | truncate(55)}}",
           "articleBody": "{{ post[3] | replace('"', '\"' | replace '\n', '')}}"
           }
           </script>
