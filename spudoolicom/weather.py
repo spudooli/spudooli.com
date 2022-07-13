@@ -73,7 +73,7 @@ def weather():
     if pressuredirection == "down":
         pressuredirectionicon= "<ion-icon name='arrow-down-outline'></ion-icon>"
     if pressuredirection == "downslowly-nogoodcoming":
-        pressuredirectionicon= "ion-icon name='arrow-down-outline'></ion-icon>"
+        pressuredirectionicon= "<ion-icon name='arrow-down-outline'></ion-icon>"
     if pressuredirection == "stable":
         pressuredirectionicon= "<ion-icon name='arrow-forward-outline'></ion-icon>"
 

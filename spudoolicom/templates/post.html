@@ -5,10 +5,13 @@
 {% block ogtitle %}{{ post[1] | replace('\\', '') }} - The Spudooli Photoblog{% endblock %}
 {% block ogdescription %}{{ post[3]|truncate(55)}}{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/photoblog/{{ post[2] }}{% endblock %}
-{% block ogurl %}{% if id %} https://www.spudooli.com{{ url_for('post', id=id) }}{% else %} https://www.spudooli.com/photoblog {% endif %}{% endblock %}
+{% block ogurl %}{% if id %} https://www.spudooli.com{{ url_for('post', id=id) }}{% else %}
+https://www.spudooli.com/photoblog {% endif %}{% endblock %}
 
-{% block canonical %}{% if id %} <link rel="canonical" href="https://www.spudooli.com{{ url_for('post', id=id)}}" />
-    {% else %} <link rel="canonical" href="https://www.spudooli.com/photoblog" /> {% endif %}{% endblock %}
+{% block canonical %}{% if id %}
+<link rel="canonical" href="https://www.spudooli.com{{ url_for('post', id=id)}}" />
+{% else %}
+<link rel="canonical" href="https://www.spudooli.com/photoblog" /> {% endif %}{% endblock %}
 
 {% block header %}
 <div class="container-page">
@@ -18,8 +21,11 @@
         <h1 class="title-un">{% block title %}{{ post[1] | replace('\\', '') }}{% endblock %}</h1>
         <div class="image-nav-un-icon">
           <a href="{{ url_for('post', id=previousimage) }}">
-            <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog/archive"> Browse archive </a> &nbsp
-              &nbsp &nbsp &nbsp &nbsp &nbsp {% if  nextimage == 'nopost' %} {% else %}<a href="{{ url_for('post', id=nextimage) }}"> Next &nbsp &nbsp<ion-icon name="return-down-forward-outline" size="small"></ion-icon></a>{% endif %}
+            <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious
+          </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog/archive"> Browse archive </a> &nbsp
+          &nbsp &nbsp &nbsp &nbsp &nbsp {% if nextimage == 'nopost' %} {% else %}<a
+            href="{{ url_for('post', id=nextimage) }}"> Next &nbsp &nbsp<ion-icon name="return-down-forward-outline"
+              size="small"></ion-icon></a>{% endif %}
         </div>
         {% endblock %}
 
@@ -46,15 +52,15 @@
           "name": "Dave Cooper"
           },
           "publisher": {
-          "@type": "Organization",
-          "name": "The Book of Spudooli",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.spudooli.com/static/images/91334637_fdd4a5962f_q.jpg"
-          }
+            "@type": "Organization",
+            "name": "The Book of Spudooli",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.spudooli.com/static/images/91334637_fdd4a5962f_q.jpg"
+            }
           },
-          "description": "{{ post[3] | replace('"', '\"' | replace '\n', '') | truncate(55) }}",
-          "articleBody": "{{ post[3] | replace('"', '\"' | replace '\n', '') }}"
+          "description": "{{ post[3] | replace('"', '\'') | replace('\n', '') | truncate(55) }}",
+          "articleBody": "{{ post[3] | replace('"', '\'') | replace('\n', '') }}"
           }
           </script>
         <script language='javascript' type='text/javascript'>
@@ -66,7 +72,7 @@
 
         </script>
         <p>
-          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}"class="chartcenter">
+          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}" class="chartcenter">
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
         <div class="single-photoblogpost">
@@ -91,7 +97,8 @@
                   <div>
                     <div class="counter-title"> Post Meta</div>
                     <p> </p>
-                    <p><strong>Posted:</strong> <a href="/recently/{{ post[4].strftime('%Y-%-m-%-d') }}">{{ post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</a></p>
+                    <p><strong>Posted:</strong> <a href="/recently/{{ post[4].strftime('%Y-%m-%d') }}">{{
+                        post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</a></p>
                     <p><strong>Captured:</strong> {{ captured }}</p>
                     <p class="container-title"><a href='#addcomment'
                         onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
@@ -151,10 +158,10 @@
         </div>
 
 
-                <!-- This is the end -->
+        <!-- This is the end -->
+      </div>
     </div>
   </div>
-  </div>
-  </div>
+</div>
 
-        {% endblock %}
+{% endblock %}
