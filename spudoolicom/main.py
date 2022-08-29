@@ -103,6 +103,7 @@ def spudoolistatus():
 @app.route('/about')
 def about():
     return render_template('about.html')
+    
 
 @app.route('/contactus', methods=['GET', 'POST'])
 def contactus():

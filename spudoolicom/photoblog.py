@@ -123,13 +123,16 @@ def post(id):
             commenturl = request.form["commenturl"]
             commentemail = request.form["commentemail"]
             commentdate = datetime.now()
-            cur = db.mysql.connection.cursor()
-            cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                       (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
-            db.mysql.connection.commit()
-            cur.close()
+            if "thesis" in commenturl:
+                flash("We got your comment, we'll consider publishing it in due course")
+            else:
+                cur = db.mysql.connection.cursor()
+                cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                        (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
+                db.mysql.connection.commit()
+                cur.close()
 
-            flash("We got your comment, we'll consider publishing it in due course")
+                flash("We got your comment, we'll consider publishing it in due course")
 
     return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
                             exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
