@@ -1,3 +1,4 @@
+from operator import contains
 from spudoolicom import app, db, forms
 from flask import render_template, make_response, redirect, request, send_from_directory, flash
 from datetime import datetime
@@ -112,15 +113,19 @@ def contactus():
             contactusname = request.form["contactusname"]
             contactusemail = request.form["contactusemail"]
             contactusdate = datetime.now()
-            cur = db.mysql.connection.cursor()
-            cur.execute("INSERT INTO contactus (contactusmessage, contactusname, contactusemail, contactdate) VALUES (%s, %s, %s, %s)",
-                       (contactusmessage, contactusname, contactusemail, contactusdate))
-            db.mysql.connection.commit()
-            cur.close()
+            if "ericjones" in contactusemail:
+                flash("Please, just stop, Eric, your message has been deleted", "success")
+                return redirect("/contactus")
+            else:
+                cur = db.mysql.connection.cursor()
+                cur.execute("INSERT INTO contactus (contactusmessage, contactusname, contactusemail, contactdate) VALUES (%s, %s, %s, %s)",
+                        (contactusmessage, contactusname, contactusemail, contactusdate))
+                db.mysql.connection.commit()
+                cur.close()
 
-            flash("We got your message, we'll carefully consider our reply.", "success")
+                flash("We got your message, we'll carefully consider our reply.", "success")
 
-            return redirect("/contactus")
+                return redirect("/contactus")
 
     return render_template('contactus.html', contactform=contactform)
 
