@@ -14,7 +14,7 @@
                   <description><![CDATA[<img src="https://www.spudooli.com/static/photoblog/{{ post[4] }}" id="rssfeed"><br><br><p>{{ post[2] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') |safe }}
                   <br><p>You can <a href="https://www.spudooli.com{{ url_for('post', id=post[0]) }}">comment on this post</a>.</p>
                   <br><strong>Some other things...</strong><br>
-                  <a href="https://www.spudooli.com/recently">Recently...</a> | <a href="https://www.spudooli.com/house">Our House</a>
+                 <a href="https://www.spudooli.com">The Book of Spudooli</a> | <a href="https://www.spudooli.com/recently">Recently...</a> | <a href="https://www.spudooli.com/house">Our House</a>
                   </p>]]></description>
                 </item>
             {% endfor %}

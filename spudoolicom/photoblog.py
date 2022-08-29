@@ -125,6 +125,8 @@ def post(id):
             commentdate = datetime.now()
             if "thesis" in commenturl:
                 flash("We got your comment, we'll consider publishing it in due course")
+            elif id == "110":
+                flash("We got your comment, we'll consider publishing it in due course")
             else:
                 cur = db.mysql.connection.cursor()
                 cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
