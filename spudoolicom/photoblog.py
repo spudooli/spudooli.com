@@ -124,13 +124,19 @@ def post(id):
             commentemail = request.form["commentemail"]
             commentdate = datetime.now()
             if "thesis" in commenturl:
-                flash("We got your comment, we'll consider publishing it in due course")
+                flash("Sod off spammer")
             elif id == "110" or id == "66" or id == "348":
-                flash("We got your comment, we'll consider publishing it in due course")
+                flash("Sod off spammer")
             else:
                 cur = db.mysql.connection.cursor()
+                cur.execute("select email from approved_commenter where email = %s", (commentemail,))
+                approved = cursor.fetchone()
+                if approved == None:
+                    publishcomment = "no"
+                else:
+                    publishcomment = "yes"
                 cur.execute("INSERT INTO pixelpost_comments (parent_id, message, name, url, email, datetime, publish) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                        (id, commentmessage, commentname, commenturl, commentemail, commentdate, "no"))
+                        (id, commentmessage, commentname, commenturl, commentemail, commentdate, publishcomment))
                 db.mysql.connection.commit()
                 cur.close()
 
