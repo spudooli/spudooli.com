@@ -141,6 +141,7 @@ def post(id):
                 cur.close()
 
                 flash("We got your comment, we'll consider publishing it in due course")
+                return redirect('/photoblog/<id>', code=301)
 
     return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
                             exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
