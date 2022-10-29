@@ -127,6 +127,8 @@ def post(id):
                 flash("Sod off spammer")
             elif id == "110" or id == "66" or id == "348":
                 flash("Sod off spammer")
+            elif "euroopera" in commenturl:
+                flash("Sod off spammer")
             else:
                 cur = db.mysql.connection.cursor()
                 cur.execute("select email from approved_commenter where email = %s", (commentemail,))
@@ -141,7 +143,7 @@ def post(id):
                 cur.close()
 
                 flash("We got your comment, we'll consider publishing it in due course")
-                return redirect('/photoblog/<id>', code=301)
+                return redirect('/photoblog/' + id, code=301)
 
     return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
                             exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
