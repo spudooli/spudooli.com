@@ -4316,3 +4316,11 @@ ion-icon {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.leftbordermastodon {
+  border-left-style: solid;
+  border-left-color: rgb(43, 144, 217);
+  border-width: 2px;
+  padding: 10px;
+  margin-bottom: 5px;
+}
