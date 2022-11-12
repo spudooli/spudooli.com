@@ -9,7 +9,7 @@ client = typesense.Client({
     'port': '8108',      # For Typesense Cloud use 443
     'protocol': 'http'   # For Typesense Cloud use https
   }],
-  'api_key': "NfIrs3e3cS8H6hctV0eGsAmFaCQc181QtlAwdMZHIiiMNt6I",
+  'api_key': "tfjKoog1wB4vacKRHdNI81JC2RmEFpBrMEDJvFKM2pHII8qF",
   'connection_timeout_seconds': 2
 })
 
