@@ -25,6 +25,13 @@ def money():
     caltex = "{:,}".format(caltex[0])
     cur.close()  
 
+     # Get Gull petrol purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `category` LIKE 'petrol' AND `party` LIKE '%gull%'")
+    gull = cur.fetchone()
+    gull = "{:,}".format(gull[0])
+    cur.close()  
+
      # Get BP petrol purchases
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `category` LIKE 'petrol' AND `party` LIKE '%bp%'")
@@ -125,6 +132,6 @@ def money():
                           totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, 
                           paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
                           bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
-                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation)
+                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, gull = gull)
 
                           
