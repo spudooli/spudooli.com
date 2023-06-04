@@ -16,6 +16,7 @@ class photoblogComment(FlaskForm):
     recaptcha = RecaptchaField()  
     commentsubmit = SubmitField("Submit")
 
+
 class contact_us(FlaskForm):  
     csrf = CSRFProtect()
     csrf.init_app(app)

@@ -41,7 +41,7 @@ def money():
 
     # Get all months spent on petrol
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'Petrol' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'Petrol' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth order by thismonth asc")
     data = cur.fetchall()
     labels = [row[0] for row in data]
     values = [str(row[1]).replace("-","") for row in data]
@@ -91,7 +91,7 @@ def money():
 
     # Get all months spend for The Warehouse
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'The Warehouse' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category = 'The Warehouse' then amount else 0 end) as warehouse FROM budget GROUP BY thismonth order by thismonth asc")
     data = cur.fetchall()
     warehouselabels = [row[0] for row in data]
     warehousevalues = [str(row[1]).replace("-","") for row in data]
@@ -113,7 +113,7 @@ def money():
 
     # Get all months spend for Hardware
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category LIKE '%Hardware%' then amount else 0 end) as hardware FROM budget GROUP BY thismonth")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when category LIKE '%Hardware%' then amount else 0 end) as hardware FROM budget GROUP BY thismonth order by thismonth asc")
     data = cur.fetchall()
     hardwarelabels = [row[0] for row in data]
     hardwarevalues = [str(row[1]).replace("-","") for row in data]
