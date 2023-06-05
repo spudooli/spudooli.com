@@ -111,7 +111,7 @@ def money():
     hardware = "{:,}".format(hardware[0])
     cur.close()
 
-         # Get Bunnings Censtellation purchases
+         # Get Bunnings Constellation purchases
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) id FROM  `budget` WHERE  `party` LIKE  '%9470%'")
     bunningsconstellation = cur.fetchone()

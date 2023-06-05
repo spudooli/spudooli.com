@@ -39,9 +39,9 @@ def recently(recentlydate):
     cur.close()
 
     cur = db.mysql.connection.cursor()
-    #cur.execute("SELECT date, category, amount, party FROM budget where date = %s and category in ('Hardware', 'Petrol', 'Supermarket', 'Electricity', 'Coffee', 'Sky TV', 'Investments', 'Beer and Wine', 'Phone and Internet', 'Lunch', 'Garden Centre', 'Car Repairs and Parts', 'Hobbies', 'Insurance', 'Dairy and Small Grocery', 'Takeaways', 'Doctor', 'Clothing'  )", (recentlydate,) )
-    cur.execute(
-        "SELECT date, category, amount, party FROM budget where date = %s", (recentlydate,))
+    cur.execute("SELECT date, category, amount, party FROM budget where date = %s and category in ('Hardware', 'Petrol', 'Supermarket', 'Electricity', 'Coffee', 'Sky TV', 'Investments', 'Beer and Wine', 'Phone and Internet', 'Lunch', 'Garden Centre', 'Car Repairs and Parts', 'Hobbies', 'Insurance', 'Dairy and Small Grocery', 'Takeaways', 'Doctor', 'Clothing'  )", (recentlydate,) )
+    # cur.execute(
+    #     "SELECT date, category, amount, party FROM budget where date = %s", (recentlydate,))
     budgetdata = cur.fetchall()
     cur.close()
 
