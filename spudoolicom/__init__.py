@@ -46,5 +46,7 @@ import spudoolicom.forms
 import spudoolicom.search
 import spudoolicom.recently
 import spudoolicom.previously
+#import spudoolicom.philosotainment
+import spudoolicom.projects
 import spudoolicom.auth
 import spudoolicom.weather
