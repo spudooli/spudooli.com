@@ -114,8 +114,8 @@ def contactus():
             contactusname = request.form["contactusname"]
             contactusemail = request.form["contactusemail"]
             contactusdate = datetime.now()
-            if "ericjones" in contactusemail:
-                flash("Please, just stop, Eric, your message has been deleted", "success")
+            if "Mok" in contactusemail or "ericjones" in contactusemail:
+                flash("Please, just stop, Mike, Eric, your message has been deleted", "success")
                 return redirect("/contactus")
             else:
                 cur = db.mysql.connection.cursor()

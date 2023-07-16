@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% set active_page = "projects" %}
+
+{% block metadescription %}SI had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right{% endblock %}
+{% block ogtitle %} Too Much Queen on Auskland Radio {% endblock %}
+{% block ogdescription %}Auckland radio stations play too much Queen, Elton John and Rolling Stones{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}Too Much Queen on Auckland Radio - Projects{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="radio-outline"></ion-icon>
+        </div>
+          <p class="title-un-des">I had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.<br>
+            
+       </div></p>
+        
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <ion-icon name="radio-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ queenpercentage }}% </div>
+                    <div class="counter-title"><a href="/projects/too-much-queen">of all songs played are Queen</a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Too much Queen</div>
+                    <p>Queen are good, but are they so good they should command {{ queenpercentage }}% of all songs played on Boomer/GenX radio (GoldFM, The Sound, Coast FM, Radio Hauraki) in Auckland. The answer it a resounding bloody no.</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Artist Playcount</div>
+                    <p>
+                        {% for thing in top20artists  %}
+                        <ul>
+                          <li>{{ thing.playcount }} - {{ thing.artist }}</li>
+                       </ul>
+                       {% endfor %}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
