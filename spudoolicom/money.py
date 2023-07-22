@@ -1,8 +1,26 @@
 from flask import render_template
 from spudoolicom import app, db
+from datetime import datetime
+
 
 @app.route('/money')
 def money():
+    
+    # get number of transactions from the database
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) id FROM  `budget`")
+    numTransactions = cur.fetchone()
+    numTransactions = "{:,}".format(numTransactions[0])
+    cur.close()
+
+    # Get the date of the last transaction
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT date FROM  `budget` order by date desc limit 1")
+    lastTransaction = cur.fetchone()
+    lastTransaction = lastTransaction[0]
+    cur.close()
+    date_obj = datetime.strptime(str(lastTransaction), "%Y-%m-%d")
+    lastTransaction = date_obj.strftime("%d/%m/%Y")
 
      # Get all petrol purchases
     cur = db.mysql.connection.cursor()
@@ -27,7 +45,7 @@ def money():
 
      # Get Gull petrol purchases
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `category` LIKE 'petrol' AND `party` LIKE '%gull%'")
+    cur.execute("SELECT sum(amount) amount FROM `budget` WHERE `category` LIKE 'petrol' AND `party` LIKE 'gull%'")
     gull = cur.fetchone()
     gull = "{:,}".format(gull[0])
     cur.close()  
@@ -128,8 +146,8 @@ def money():
 
     
     
-    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, 
-                          totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, 
+    return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, numTransactions = numTransactions,
+                          totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, lastTransaction = lastTransaction,
                           paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
                           bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
                           hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, gull = gull)
