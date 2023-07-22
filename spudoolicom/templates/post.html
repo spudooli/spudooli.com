@@ -22,7 +22,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
         <div class="image-nav-un-icon">
           <a href="{{ url_for('post', id=previousimage) }}">
             <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious
-          </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp - <a href="/photoblog/archive"> Browse archive </a> &nbsp
+          </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="/photoblog/archive"> Browse archive </a> &nbsp
           &nbsp &nbsp &nbsp &nbsp &nbsp {% if nextimage == 'nopost' %} {% else %}<a
             href="{{ url_for('post', id=nextimage) }}"> Next &nbsp &nbsp<ion-icon name="return-down-forward-outline"
               size="small"></ion-icon></a>{% endif %}
