@@ -1,60 +1,60 @@
-/* Inter-300 - latin */
+/* raleway-300 - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 300;
   src: local(''),
-       url('/static/fonts/Inter-Regular.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/Inter-Regular.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* Inter-regular - latin */
+/* raleway-regular - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 400;
   src: local(''),
-       url('/static/fonts/Inter-Regular.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/Inter-Regular.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* Inter-500 - latin */
+/* raleway-500 - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 500;
   src: local(''),
-       url('/static/fonts/Inter-Medium.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/Inter-Medium.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* Inter-600 - latin */
+/* raleway-600 - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 600;
   src: local(''),
-       url('/static/fonts/Inter-SemiBold.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/Inter-SemiBold.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-600.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* Inter-700 - latin */
+/* raleway-700 - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
   src: local(''),
-       url('/static/fonts/Inter-Bold.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/IInter-Bold.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* Inter-800 - latin */
+/* raleway-800 - latin */
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Raleway';
   font-style: normal;
   font-weight: 800;
   src: local(''),
-       url('/static/fonts/Inter-ExtraBold.ttf') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('/static/fonts/Inter-ExtraBold.ttf') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('/static/fonts/raleway-v27-latin-800.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('/static/fonts/raleway-v27-latin-800.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Raleway', sans-serif;
     font-size: 16px;
     line-height: 24px;
     color: #000000;
@@ -245,7 +245,7 @@ body {
   }
   
   h2 {
-    font-size: 50px;
+    font-size: 40px;
     line-height: 1.2em;
     letter-spacing: 1px;
     font-weight: 700;
@@ -793,7 +793,7 @@ body {
     position: relative;
     font-size: 16px;
     color: #595959;
-    font-family: Inter, sans-serif;
+    font-family: Raleway, sans-serif;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -1931,7 +1931,7 @@ body {
     line-height: 60px;
     color: rgb(0, 0, 0);
     display: block;
-    font-family: "Inter", sans-serif;
+    font-family: "Oswald", sans-serif;
     letter-spacing: 2px;
   }
   
