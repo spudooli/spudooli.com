@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="title-un">{% block title %}Webcams{% endblock %}</h1>
+        <h1 class="title-un">{% block title %}Webcams - {{ camera }} {% endblock %}</h1>
         <div class="title-un-icon">
             <ion-icon name="videocam-outline"></ion-icon>
         </div>
@@ -15,9 +15,21 @@
         {% endblock %}
 
         {% block content %}
-        If it's too dark to see anything, you can turn some <div class="star" onclick="benchleds('on')">lights on</div> or  <div class="star" onclick="benchleds('off')">lights off</div>
+
+        
+        {% if camera == "kitchen" %}
+
+        <p>If it's too dark to see anything, you can turn some <div class="star" onclick="benchleds('on')">lights on</div> or  <div class="star" onclick="benchleds('off')">lights off</p></div>
 
           <img class="chartcenter" src="https://www.spudooli.com/kitchenstream" />
+        {% endif %}
+
+        {% if camera == "mancave" %}
+
+        <p><input id="mancaveledscolour" type="color" value="#ff0000" /></p>
+        <button onclick="mancavepcleds(document.getElementById('mancaveledscolour').value)">Change the LEDs</button>
+        <img class="chartcenter" src="https://www.spudooli.com/mancavestream" />
+        {% endif %}
 
 
 

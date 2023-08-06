@@ -92,7 +92,7 @@ let t, e; const n = new Set, o = document.createElement("link"), i = o.relList &
 function benchleds(a) {
   benchledsstate = arguments[0];
 
-  // Mark the post as Starred
+  // Change the kitchen led state
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "/webcam/benchleds", true);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -100,3 +100,17 @@ function benchleds(a) {
     onoroff: benchledsstate
   }));
 };
+
+
+function mancavepcleds(a) {
+  mancavepcledscolour = arguments[0];
+
+  // Change the mancave led state
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/webcam/mancaveleds", true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    mancaveleds: mancavepcledscolour
+  }));
+};
+

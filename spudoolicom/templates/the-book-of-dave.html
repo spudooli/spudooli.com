@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% set active_page = "projects" %}
+
+{% block metadescription %}I've said a bunch of dumb things and sometimes said some things that will be remembered across the ages, compiled into a book and used as a guide to life for millennia.
+ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
+{% block ogtitle %} Too Much Queen on Auskland Radio {% endblock %}
+{% block ogdescription %}This is the Book of Daves{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}The Book of Dave{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="book-outline"></ion-icon>
+        </div>
+          <p class="title-un-des">I've said a bunch of dumb things and sometimes said some things that will be remembered across the ages, compiled into a book and used as a guide to 
+            life for millennia. This is them, graze upon them. <br>These are The (newer) Book Of Dave<br>
+            
+       </div></p>
+        
+        {% endblock %}
+
+        {% block content %}
+      
+  
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

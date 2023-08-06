@@ -40,9 +40,9 @@ def main():
     swarmcount = "{:,}".format(swarmcount[0])
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(id) id FROM recently where type = 'Twitter'")
-    tweetcount = cursor.fetchone()
-    tweetcount = "{:,}".format(tweetcount[0])
+    cursor.execute("SELECT count(id) id FROM recently where type = 'mastodon'")
+    mastodoncount = cursor.fetchone()
+    mastodoncount = "{:,}".format(mastodoncount[0])
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, image, body, alt_text FROM pixelpost_pixelpost order by id DESC LIMIT 1")
@@ -51,7 +51,7 @@ def main():
     cursor.close()
 
     return render_template('/index.html', imagecount=imagecount, bankbalance=bankbalance, power=power, indoortemp=indoortemp,
-                            latestpost=latestpost, lastfmcount=lastfmcount, swarmcount=swarmcount, tweetcount=tweetcount, mancaveTemperature = mancaveTemperature) 
+                            latestpost=latestpost, lastfmcount=lastfmcount, swarmcount=swarmcount, mastodoncount=mastodoncount, mancaveTemperature = mancaveTemperature) 
 
 
 # Handle old URLs - Make a redirect to the new place

@@ -31,12 +31,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="The Book of Spudooli" />
   <meta property="og:locale" content="en_NZ" />
-  
+
   {% block canonical %}{% endblock %}
 
   <title>{% block title %}{% endblock %} - Spudooli</title>
 
-  <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='bootstrap-min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='animate-min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
@@ -109,14 +108,22 @@
             <div class="footer-widget widget_nav_menu">
               <h4 class="footer-widget-title">Look at these</h4>
               <ul>
-                <li class="ion-social-twitter-outline" style="margin-bottom: 10px;"> <a href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a></li>
-                <li class="ion-social-twitter-outline" style="margin-bottom: 10px;"> <a href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter (Deprecated)</a></li>
-                <li class="ion-social-instagram-outline" style="margin-bottom: 10px;"><a href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a> </li>
-                <li class="ion-social-youtube-outline" style="margin-bottom: 10px;"><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
-                <li class="ion-social-rss-outline" style="margin-bottom: 10px;"><a href="/rss"> Spudooli on RSS</a></li>
-                <li class="ion-social-github-outline" style="margin-bottom: 10px;"><a href="https://github.com/spudooli"> Spudooli on Github</a></li>
-                <li class="ion-social-mastodon" style="margin-bottom: 10px;"><a rel="me" href="https://mastodon.nz/@spudooli">Spudooli on Mastodon</a></li>
-                <li class="ion-logo-mastodon" style="margin-bottom: 10px;"><a href="https://botsin.space/@spudooli_house">Spudooli House on Mastodon</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-mastodon" style="font-size: 16px;"></ion-icon><a
+                    rel="me" href="https://mastodon.nz/@spudooli"> Spudooli on Mastodon</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-mastodon" style="font-size: 16px;"></ion-icon><a
+                    href="https://botsin.space/@spudooli_house"> Spudooli House on Mastodon</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-instagram" style="font-size: 16px;"></ion-icon><a
+                    href="https://www.instagram.com/spudooli"> Spudooli on Instagram</a> </li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-youtube" style="font-size: 16px;"></ion-icon><a
+                    href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw"> Spudooli on YouTube</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-rss" style="font-size: 16px;"></ion-icon><a
+                    href="/rss"> Spudooli on RSS</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-github" style="font-size: 16px;"></ion-icon><a
+                    href="https://github.com/spudooli"> Spudooli on Github</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-twitter" style="font-size: 16px;"></ion-icon> <a
+                    href="https://www.twitter.com/spudooli/"> Spudooli on Twitter</a></li>
+                <li style="margin-bottom: 10px;"><ion-icon name="logo-twitter" style="font-size: 16px;"></ion-icon> <a
+                    href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter (Deprecated)</a></li>
               </ul>
             </div>
           </div>
@@ -127,7 +134,7 @@
                 <li class="menu-item"><a href="/about"> About Us </a></li>
                 <li class="menu-item"><a href="/contactus"> Press inquiries</a></li>
                 <li class="menu-item"><a href="/contactus"> Contact Us</a></li>
-                <li class="menu-item"><a href="/status"> Systems Status </a></li>
+                <li class="menu-item"><a href="/status"> System's Status </a></li>
               </ul>
             </div>
           </div>
@@ -142,7 +149,8 @@
         <footer class="site-footer">
           <div class="row">
             <div class="col-md-12">
-              <p>This is Another Spudooli Project<br>© Copyright {{ now.year }} | <a href="http://www.spudooli.com" target="_blank">Spudooli Investments
+              <p>This is Another Spudooli Project<br>© Copyright {{ now.year }} | <a href="http://www.spudooli.com"
+                  target="_blank">Spudooli Investments
                   Ltd</a></p>
               <p class="main-nav"><small><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img
                       alt="Creative Commons License" style="float: right;"
@@ -171,11 +179,8 @@
   <script src="/static/js/superfish.js"></script>
   <script src="/static/js/wow.js"></script>
   <script src="/static/js/main.js"></script>
-  <!-- <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
-
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 </body>
 
