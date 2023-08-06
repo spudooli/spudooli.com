@@ -10,7 +10,7 @@
         <div class="title-un-icon">
             <ion-icon name="videocam-outline"></ion-icon>
         </div>
-        <p class="title-un-des"></p>
+        <p class="title-un-des"><a href="/webcam/camera/kitchen">Kitchen Webcam</a> | <a href="/webcam/camera/mancave">Man Cave Server</a></p>
 
         {% endblock %}
 
@@ -19,15 +19,16 @@
         
         {% if camera == "kitchen" %}
 
-        <p>If it's too dark to see anything, you can turn some <div class="star" onclick="benchleds('on')">lights on</div> or  <div class="star" onclick="benchleds('off')">lights off</p></div>
+        <p>If it's too dark to see anything, you can turn some <div class="ledspointer" onclick="benchleds('on')">lights on</div> or  <div class="ledspointer" onclick="benchleds('off')">lights off</p></div>
 
           <img class="chartcenter" src="https://www.spudooli.com/kitchenstream" />
         {% endif %}
 
         {% if camera == "mancave" %}
 
-        <p><input id="mancaveledscolour" type="color" value="#ff0000" /></p>
-        <button onclick="mancavepcleds(document.getElementById('mancaveledscolour').value)">Change the LEDs</button>
+        <p>It's not working yet, because security, and me not knowing how to give enough permissions to the thing. But some time, soon, change the LEDs on the server.</p>
+        <p>Select a colour: <input id="mancaveledscolour" type="color" value="#ff0000" /></p>
+        <p><button onclick="mancavepcleds(document.getElementById('mancaveledscolour').value)">Change the LEDs</button></p>
         <img class="chartcenter" src="https://www.spudooli.com/mancavestream" />
         {% endif %}
 

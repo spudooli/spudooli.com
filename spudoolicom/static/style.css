@@ -4310,3 +4310,12 @@ ion-icon {
   padding: 10px;
   margin-bottom: 5px;
 }
+
+.ledspointer {
+  cursor: pointer;
+  color: #195ddd;
+}
+
+.ledspointer:hover {
+  text-decoration: underline;
+}
