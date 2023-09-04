@@ -21,6 +21,8 @@ def house():
     fridgedoortoday = r.get("fridgeDoorCounter")
     barometer = r.get("indoorPressure")
     barometer = barometer[0:-2]
+    i3range = r.get("i3rangeremaining")
+    i3battery = r.get("i3batteryremaining")
 
     waterTemp = r.get('spatemperature')
     if waterTemp == 0:
@@ -39,5 +41,5 @@ def house():
     return render_template('house.html', waterTemp = waterTemp, barometer = barometer, fridgedoortoday = fridgedoortoday, 
                           kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, 
                           shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, 
-                          indoortemp = indoortemp, outdoortemp = outdoortemp, outdoorhumidity = outdoorhumidity, mancavehumidity = mancavehumidity)
+                          indoortemp = indoortemp, outdoortemp = outdoortemp, outdoorhumidity = outdoorhumidity, mancavehumidity = mancavehumidity, i3range = i3range, i3battery = i3battery)
     
