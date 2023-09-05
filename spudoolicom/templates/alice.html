@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}Where is Alice?{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="airplane-outline"></ion-icon>
+                </div>
+                <p class="title-un-des"></p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">{{ alicepingcount }}</div> </div>
+                            <div class="counter-title">Pings</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">ALICE</div>
+                            <p>
+                                {{ alicelocation | safe }}
+
+                            </p>
+                            <p></p>
+
+                            <p><img src="/static/gis/alice.png"> </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+
+                    </div>
+                </div>
+
+                <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

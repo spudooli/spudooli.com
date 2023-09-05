@@ -48,3 +48,4 @@ import spudoolicom.recently
 import spudoolicom.projects
 import spudoolicom.auth
 import spudoolicom.weather
+import spudoolicom.alice
