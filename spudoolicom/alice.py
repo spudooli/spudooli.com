@@ -1,5 +1,22 @@
 from spudoolicom import app, db
 from flask import render_template
+import pytz
+from datetime import datetime
+import os
+import platform
+
+def get_creation_time(file_path):
+        stat = os.stat(file_path)
+        try:
+            return stat.st_birthtime
+        except AttributeError:
+            return stat.st_mtime
+
+def list_files_by_creation_date(directory):
+    files = os.listdir(directory)
+    files = [os.path.join(directory, file) for file in files]
+    files.sort(key=get_creation_time)
+    return files
 
 @app.route('/alice')
 def alicelocation():
@@ -9,13 +26,24 @@ def alicelocation():
     cursor.close()
     aliceupdated = str(alicelocation[1])
     alicelatlon = str(alicelocation[3]) + "," + str(alicelocation[4])
-    alicelocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + alicelatlon + "&zoom=12&size=1000x1000&markers=color:0xD0E700%7Clabel:A%7C" + alicelatlon + "&sensor=false&key=AIzaSyCyuhLhlvQCW7dZBaA5-HLzDP6Sau-qmvA&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceupdated + "</p>"
+    alicelocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + alicelatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:A%7C" + alicelatlon + "&sensor=false&key=AIzaSyCyuhLhlvQCW7dZBaA5-HLzDP6Sau-qmvA&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceupdated + "</p>"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `track` where who = 5")
     alicepingcount = cursor.fetchone()[0]
     cursor.close()
 
-    return render_template('alice.html', alicelocation = alicelocation, alicepingcount = alicepingcount)
+    image_dir = '/var/www/spudooli/spudoolicom/static/images/alice'
+    files_by_creation_date = list_files_by_creation_date(image_dir)
+
+    image_files = [f for f in files_by_creation_date]  
+
+    target_timezone = pytz.timezone('Europe/Prague')
+    local_time = datetime.now()
+    alice_time = local_time.astimezone(target_timezone)
+    alice_formatted_datetime_str = alice_time.strftime("%d/%m/%Y %H:%M:%S")
+
+
+    return render_template('alice.html', alicelocation = alicelocation, alicepingcount = alicepingcount, image_files = image_files, alice_formatted_datetime_str = alice_formatted_datetime_str)
     
 

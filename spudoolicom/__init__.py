@@ -49,3 +49,4 @@ import spudoolicom.projects
 import spudoolicom.auth
 import spudoolicom.weather
 import spudoolicom.alice
+import spudoolicom.bmwi3

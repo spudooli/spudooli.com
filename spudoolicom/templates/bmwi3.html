@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}What is our EV doing?{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="car-outline"></ion-icon>
+                </div>
+		<p class="title-un-des">There is so much data to be had off the car and the charger, who am I to do nothing with it all? <br> Data since 20 September 2023</p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp">
+                            <ion-icon name="battery-charging-outline"></ion-icon>
+                            <div class="counter-number"> {{ "{:,}".format(totalkwh) }} </div>
+                            <div class="counter-title">Total kW/h Charged</div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                            <ion-icon name="cash-outline"></ion-icon>
+                            <div class="counter-number"> ${{ totalcost }} </div>
+                            <div class="counter-title">Total Charge Cost </div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                            <ion-icon name="navigate-outline"></ion-icon>
+                            <div class="counter-number"> {{ i3traveled }} </div>
+                            <div class="counter-title"> Distance Traveled</a></div>
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
+                            <ion-icon name="pizza-outline"></ion-icon>
+                            <div class="counter-number"> {{ costperkm }} </div>
+                            <div class="counter-title">Cents per km</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power"></div> </div>
+                            <div class="counter-title">Pings</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Something yet</div>
+                            <p>
+                               
+
+                            </p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">1,850</div> </div>
+                            <div class="counter-title">km Distance</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Something Yet</div>
+    
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

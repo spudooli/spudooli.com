@@ -10,7 +10,7 @@
                 <div class="title-un-icon">
                     <ion-icon name="airplane-outline"></ion-icon>
                 </div>
-                <p class="title-un-des"></p>
+		<p class="title-un-des">Time where Alice is right now - {{ alice_formatted_datetime_str }} </p>
 
                 {% endblock %}
 
@@ -28,14 +28,39 @@
                         </div>
                         <div class="col-md-9">
                           <div>
-                            <div class="counter-title">ALICE</div>
+                            <div class="counter-title">ALICE location now</div>
                             <p>
                                 {{ alicelocation | safe }}
 
                             </p>
-                            <p></p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                            <p><img src="/static/gis/alice.png"> </p>
+
+
+                  <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">3,293</div> </div>
+                            <div class="counter-title">km travelled</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Touring Europe</div>
+    
+
+                            <p ><img src="/static/gis/alice.png"> </p>
+                                          <p class="counter-title"><small>&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>
+                                &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a>
+                                &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>
+                                &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a></small></p>
                           </div>
                         </div>
                       </div>
@@ -44,6 +69,20 @@
 
                 <div class="container-counter-box">
                     <div class="container">
+                      <div class="photo-gallery">
+                        <!-- Thumbnail images -->
+                        {% for image_file in image_files %}
+                        <div class="thumbnail">
+                          <img src="{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}" alt="{{ image_file }}" onclick="openModal('{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}')">
+                        </div>
+                        
+                        <!-- Modal container -->
+                        <div id="modal" class="modal">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                            <img id="modal-image" class="modal-content" src="{{ url_for('static', filename='images/alice/' + image_file) }}">
+                        </div>
+                        {% endfor %}
+                    </div>
 
                     </div>
                 </div>
@@ -53,5 +92,28 @@
         </div>
     </div>
 </div>
+
+<script>
+
+function openModal(imageSrc) {
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modal-image');
+  modalImage.src = imageSrc;
+  modal.style.display = 'block';
+}
+
+// Close the modal
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
+}
+
+// Close the modal when clicking outside the modal content
+window.onclick = function (event) {
+  const modal = document.getElementById('modal');
+  if (event.target === modal) {
+      modal.style.display = 'none';
+  }
+};</script>
 
 {% endblock %}
