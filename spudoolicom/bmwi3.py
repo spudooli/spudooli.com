@@ -22,6 +22,10 @@ def i3():
 
     costperkm = round(int(totalcost) / int(i3traveled) * 100, 2)
 
-    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm)
+    # Count the number of lines in the file
+    with open('/var/www/scripts/i3-location.txt', 'r') as f:
+        i3pings = len(f.readlines())
+
+    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings)
     
 
