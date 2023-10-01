@@ -9,6 +9,7 @@ import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from spudoolicom.auth import login_required
+import requests
 
 @app.route("/admin/create", methods=("GET", "POST"))
 @login_required
@@ -90,6 +91,28 @@ def publishcomment(id):
         return redirect(url_for("admincomments"))
 
 
+@app.route('/admin/bookmark/create', methods=['GET', 'POST'])
+def create_bookmark():
+    if request.method == 'POST':
+        # Get the bookmark URL and tags from the form data
+        bookmarkurl = request.form['url']
+        bookmarktags = request.form['tags']
+
+        # Use Requests to get the URL title tag
+        response = requests.get(bookmarkurl)
+        title = response.text.split('<title>')[1].split('</title>')[0]
+
+        # Insert the bookmark into the MySQL table
+        cursor = db.mysql.connection.cursor()
+        sql = "INSERT INTO bookmarks (url, title, tags) VALUES (%s, %s, %s)"
+        val = (bookmarkurl, title, bookmarktags)
+        cursor.execute(sql, val)
+        db.mysql.connection.commit()
+        cursor.close()
+        flash('Stored bookmark "{}"'.format(title))
+        return redirect(url_for("create_bookmark"))
+    else:
+        return render_template('admin-bookmarks.html')
 
 
 # @app.route("/admin/<int:id>/update", methods=("GET", "POST"))

@@ -16,16 +16,9 @@
 
   <title>{% block title %}{% endblock %} - Spudooli</title>
 
-  <!-- Google Fonts -->
-  <!-- <link href='https://fonts.googleapis.com/css?family=Raleway:400,800,500,600,300,700' rel='stylesheet' type='text/css'> -->
-  <!-- ionicons Fonts for icons -->
- <link href="{{ url_for('static', filename='ionicons.min.css') }}" rel="stylesheet">
-  <!-- bootstrap -->
-  <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet">
-  <!-- Styles CSS-->
-  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
-  <!-- Animate CSS-->
+  <link href="{{ url_for('static', filename='bootstrap-min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', filename='animate-min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 </head>
@@ -141,7 +134,7 @@
     <!-- End Footer -->
   </div>
   <!-- End inner-container -->
-  <script src="/static/js/jquery.min.js"></script>
+  <!-- <script src="/static/js/jquery.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
   <script src="/static/js/superfish.js"></script>
   <script src="/static/js/jquery.easing.js"></script>
@@ -151,7 +144,15 @@
   <script src="/static/js/jquery-ui-1.10.4.custom.min.js"></script>
   <script src="/static/js/main.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script> -->
+  <!-- End inner-container -->
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/superfish.js"></script>
+  <script src="/static/js/wow.js"></script>
+  <script src="/static/js/main.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
