@@ -92,6 +92,7 @@ def publishcomment(id):
 
 
 @app.route('/admin/bookmark/create', methods=['GET', 'POST'])
+@login_required
 def create_bookmark():
     if request.method == 'POST':
         # Get the bookmark URL and tags from the form data
@@ -99,7 +100,9 @@ def create_bookmark():
         bookmarktags = request.form['tags']
 
         # Use Requests to get the URL title tag
-        response = requests.get(bookmarkurl)
+        url = bookmarkurl
+        headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'}
+        response = requests.get(url, headers=headers)
         title = response.text.split('<title>')[1].split('</title>')[0]
 
         # Insert the bookmark into the MySQL table

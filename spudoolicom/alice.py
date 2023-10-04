@@ -38,7 +38,7 @@ def alicelocation():
 
     image_files = [f for f in files_by_creation_date]  
 
-    target_timezone = pytz.timezone('Europe/Prague')
+    target_timezone = pytz.timezone('Europe/Paris')
     local_time = datetime.now()
     alice_time = local_time.astimezone(target_timezone)
     alice_formatted_datetime_str = alice_time.strftime("%d/%m/%Y %H:%M:%S")

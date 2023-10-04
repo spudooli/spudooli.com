@@ -14,6 +14,15 @@ def gettop20artists():
     cursor.close()
     return artists20
 
+def getbookmarkcount():
+    #get the count of bookmarks
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM bookmarks")
+    bookmarkcount = cur.fetchone()
+    bookmarkcount = "{:,}".format(bookmarkcount[0])
+    cur.close()
+
+    return bookmarkcount
 
 @app.route('/projects', strict_slashes=False)
 def projects():
@@ -31,13 +40,13 @@ def projects():
     numTweetsToots = "{:,}".format(numTweetsToots[0])
     cur.close()
 
-    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots)
+    bookmarkcount = getbookmarkcount()
+
+    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount)
 
 
 @app.route('/projects/the-book-of-dave', strict_slashes=False)
 def thebookofdave():
-
-
 
     return render_template('the-book-of-dave.html', )
 
@@ -62,3 +71,15 @@ def toomuchqueen():
     top20artists = gettop20artists()
 
     return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, totalsongs = totalsongs)
+
+
+@app.route('/projects/bookmarks')
+def bookmarks():
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT * FROM bookmarks")
+    bookmarks = cur.fetchall()
+    cur.close()
+
+    bookmarkcount = getbookmarkcount()
+
+    return render_template('bookmarks.html', bookmarks = bookmarks, bookmarkcount = bookmarkcount)
