@@ -26,6 +26,14 @@ def i3():
     with open('/var/www/scripts/i3-location.txt', 'r') as f:
         i3pings = len(f.readlines())
 
-    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings)
+    # Get all months spent on petrol
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM chargedate) thismonth, sum(cost) as warehouse FROM i3charging GROUP BY thismonth order by thismonth asc")
+    data = cur.fetchall()
+    chargelabels = [row[0] for row in data]
+    chargevalues = [str(row[1]).replace("-","") for row in data]
+    cur.close()  
+
+    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues)
     
 

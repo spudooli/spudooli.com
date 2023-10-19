@@ -66,6 +66,9 @@
                             <div class="counter-title">Location</div>
                             <p>Every 15 minutes, we ping the car to get data off it. Some of that data is its current location. Let's see where it spends all its time</p>
                               <p ><img src="/static/gis/i3.png"> </p>
+                              <small>&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>
+                                &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>
+                                &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a></small>
 
                             
                             </div>
@@ -75,26 +78,48 @@
                   </div>
 
 
-
                   <div class="container-counter-box">
                     <div class="container">
                       <div class="row">
                         <div class="col-md-3">
-                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
-                            <ion-icon name="flower-outline"></ion-icon>
-                            <div class="counter-number"><div id="current_power">1,850</div> </div>
-                            <div class="counter-title">km Distance</div>
+                          <div class="counter-box wow fadeInUp">
+                            <ion-icon name="car-outline"></ion-icon>
+                            <div class="counter-number"> </div>
+                            <div class="counter-title"> </div>
                           </div>
                         </div>
                         <div class="col-md-9">
                           <div>
-                            <div class="counter-title">Something Yet</div>
-    
+                            <div class="counter-title">Charge cost by month</div>
+                                  <p>How much does it cost to chare the car every month</p>
+                                  <canvas id="myChart" width="1000" height="400"></canvas>
+                                  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                                  <script>
+                                    var ctx = document.getElementById("myChart");
+                                    var myChart = new Chart(ctx, {
+                                      type: 'bar',
+                                      data: {
+                                        labels: {{ chargelabels | safe}},
+                                    datasets: [
+                                      {
+                                        label: "$ Spend on Charging the EV by Month",
+                                        backgroundColor: '#000',
+                                        borderColor: '#000',
+                                        data: {{ chargevalues | safe }},
+                                       }
+                                    ]}});
+                                  </script>
+                  
+                  
                           </div>
                         </div>
                       </div>
+                  
                     </div>
                   </div>
+
+
+
 
 
                 <!-- Close divs -->
