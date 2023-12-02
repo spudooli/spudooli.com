@@ -22,6 +22,9 @@ def i3():
 
     costperkm = round(int(totalcost) / int(i3traveled) * 100, 2)
 
+    i3range = r.get("i3rangeremaining")
+    i3battery = r.get("i3batteryremaining")
+
     # Count the number of lines in the file
     with open('/var/www/scripts/i3-location.txt', 'r') as f:
         i3pings = len(f.readlines())
@@ -34,6 +37,6 @@ def i3():
     chargevalues = [str(row[1]).replace("-","") for row in data]
     cur.close()  
 
-    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues)
+    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues, i3range = i3range, i3battery = i3battery)
     
 

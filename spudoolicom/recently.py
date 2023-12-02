@@ -34,7 +34,7 @@ def recently(recentlydate):
     cur = db.mysql.connection.cursor()
     datestart = f'{recentlydate} 00:00:00'
     dateend = f'{recentlydate} 23:59:59'
-    cur.execute("SELECT event_date, name, type, address, artist, album, external_id, url FROM recently where event_date > %s and event_date < %s order by event_date ASC", (datestart, dateend))
+    cur.execute("SELECT event_date, name, type, address, artist, album, external_id, url, item_image FROM recently where event_date > %s and event_date < %s order by event_date ASC", (datestart, dateend))
     data = cur.fetchall()
     cur.close()
 

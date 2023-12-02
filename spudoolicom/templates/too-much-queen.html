@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% set active_page = "projects" %}
 
-{% block metadescription %}SI had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right{% endblock %}
+{% block metadescription %}I had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right{% endblock %}
 {% block ogtitle %} Too Much Queen on Auskland Radio {% endblock %}
 {% block ogdescription %}Auckland radio stations play too much Queen, Elton John and Rolling Stones{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
@@ -62,6 +62,33 @@
                         {% for thing in top20artists  %}
                         <ul>
                           <li>{{ thing.playcount }} - {{ thing.artist }}</li>
+                       </ul>
+                       {% endfor %}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Top 20 Songs Playcount</div>
+                    <p>
+
+                        {% for thing in top20songs  %}
+                        <ul>
+                          <li>{{ thing.playcount }} - {{ thing.artist }} - {{ thing.song_name }}</li>
                        </ul>
                        {% endfor %}</p>
                     </p>

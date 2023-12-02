@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}Spudpic{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="airplane-outline"></ion-icon>
+                </div>
+		<p class="title-un-des">Spudpic was our own homegrown TwitPic from 2009 till sometime 2014ish</p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">{{ alicepingcount }}</div> </div>
+                            <div class="counter-title">Pings</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Spudpics</div>
+                            <p>During the early days of Twitter, there was no way to post images with your tweets. So someone invented TwitPic. 
+                                Of course, I wasn't one much to enjoy publishing my content for someone else's enrichment, so coded my own solution. </p>
+                                <p>I had an email address that I could send an email to. Any image that was attached was stripped out and stored on the server.
+                                    The subject line was parsed and then via the Twitter API, the image URL was posted to Twitter with the subject line as the tweet. It worked bloody briliantly.
+                                </p>
+                                <p>These are the images posted via Spudpic. Keep in mind the phone camera's that existed in 2009 to about 2011 when Twitter finally allowed images with Tweets which explains why
+                                    quality and size is so poor.
+                                </p>
+                                <div class="photo-gallery">
+                                    <!-- Thumbnail images -->
+                                    {% for image_file in image_files %}
+                                    <div class="thumbnail">
+                                      <img src="{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}" alt="{{ image_file }}" onclick="openModal('{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}')">
+                                    </div>
+                                    
+                                    <!-- Modal container -->
+                                    <div id="modal" class="modal">
+                                        <span class="close" onclick="closeModal()">&times;</span>
+                                        <img id="modal-image" class="modal-content" src="{{ url_for('static', filename='images/alice/' + image_file) }}">
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                            </p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+               <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function openModal(imageSrc) {
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modal-image');
+  modalImage.src = imageSrc;
+  modal.style.display = 'block';
+}
+
+// Close the modal
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
+}
+
+// Close the modal when clicking outside the modal content
+window.onclick = function (event) {
+  const modal = document.getElementById('modal');
+  if (event.target === modal) {
+      modal.style.display = 'none';
+  }
+};</script>
+
+{% endblock %}
