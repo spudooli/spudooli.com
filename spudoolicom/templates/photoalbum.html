@@ -39,19 +39,19 @@
                   <div>
                     <div class="counter-title">Choose a photo album</div>
 
-                    {% for parent_albumID, album_name in photoalbums | groupby("parent_albumID")  %}
-                <br>
-                {% if parent_albumID != 0 %}
-                {{ parent_albumID}} 
-                <br>
-                {% for thing in album_name  %}
-                
-                <ul>
-                  <li><a href="/photos/album/{{thing.albumID }}">{{ thing.album_name }}</a> - {{ thing.album_desc }}</li>
-               </ul>
-               {% endfor %}
-                {% endif %}
-               {% endfor %}
+                    <div class="photo-gallery">
+                        <!-- Thumbnail images -->
+                        {% for photos in albumphoto %}
+                        <div >
+                          <img src="{{ url_for('static', filename='photos/tn_' + photos.image_url)|replace("/static//var/www/spudooli/spudoolicom", "") }}" alt="{{ description }}" onclick="openModal('{{ url_for('static', filename='photos/' + photos.image_url)|replace("/static//var/www/spudooli/spudoolicom", "") }}')">
+                        </div>
+                        
+                        <!-- Modal container -->
+                        <div id="modal" class="modal">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                        </div>
+                        {% endfor %}
+                    </div>
                     
                   </div>
                 </div>
@@ -92,5 +92,27 @@
   </div>
 </div>
 
+<script>
+
+    function openModal(imageSrc) {
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modal-image');
+      modalImage.src = imageSrc;
+      modal.style.display = 'block';
+    }
+    
+    // Close the modal
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+    
+    // Close the modal when clicking outside the modal content
+    window.onclick = function (event) {
+      const modal = document.getElementById('modal');
+      if (event.target === modal) {
+          modal.style.display = 'none';
+      }
+    };</script>
 
 {% endblock %}

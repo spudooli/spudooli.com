@@ -34,7 +34,6 @@ def getbookmarkcount():
     bookmarkcount = cur.fetchone()
     bookmarkcount = "{:,}".format(bookmarkcount[0])
     cur.close()
-
     return bookmarkcount
 
 def get_creation_time(file_path):

@@ -30,23 +30,27 @@ def photos(albumid):
         return redirect('/photos', code=301)
     
     # If something nefarious in the URL, redirect to a page 
-    x = re.search('[1-9]', str(albumid))
-    if x:
-        return redirect('/photos', code=301)
+    # x = re.search('[1-9]', str(albumid))
+    # if x:
+    #     return redirect('/photos', code=301)
     
     # Get the album
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT albumID, album_name,	album_descr, parent_albumID FROM images where albumID = %s", (albumid,))
+    cursor.execute("SELECT albumID, album_name,	album_descr, parent_albumID FROM albums where albumID = %s", (albumid,))
     album = cursor.fetchone()
     cursor.close()
 
     # Get the photos
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT imageID, image_name, image_descr, albumID FROM images where albumID = %s", (albumid,))   
+    cursor.execute("SELECT imageID, image_url, description, albumID FROM images where albumID = %s", (albumid,))   
     photos = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    albumphoto = [dict(zip(column_names, row))
+            for row in photos]
     cursor.close()
 
-    return render_template('photoalbum.html', album = album, photos = photos)
+    return render_template('photoalbum.html', album = album, albumphoto = albumphoto)
     
     
     
