@@ -4,6 +4,7 @@ import exifread
 from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
 import re
+import os
 
 csrf = CSRFProtect()
 csrf.init_app(app)
@@ -80,6 +81,18 @@ def post(id):
 
     exifhtml = f'{imagemodel} - {exposuretime} sec, f{fstop} at {focallength}mm'
 
+    #check of there is a large image version of imagename[1] in the directory and if so, set image+exists to true
+    if os.path.isfile("/var/www/spudooli/spudoolicom/static/photoblog/embiggen/embiggen_" + imagename[1]):
+        print(imagename[1])
+        imageexists = True  
+        print("image exists")
+    else:
+        imageexists = False
+        print(imagename[1])
+
+        print("image does not exist")
+
+
     # If there is lat and lon in the database, display a map on the post
     if post[5]:
         latlon = post[5]
@@ -147,7 +160,7 @@ def post(id):
 
     return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
                             exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
-                            nextimage = nextimage, form = form)
+                            nextimage = nextimage, form = form, imageexists = imageexists)
 
 @app.errorhandler(CSRFError)
 def handle_csrf_error(e):
