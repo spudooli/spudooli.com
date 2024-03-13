@@ -1,0 +1,70 @@
+
+{% extends 'adminbase.html' %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}Checkins{% endblock %}</h1>
+        <div class="title-un-icon">
+          <ion-icon name="pulse-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">Tell us where you are            </p>
+
+{% endblock %}
+
+{% block content %}
+
+<p>Checkin Search</p>
+<input name="search-box" class="search-box"  id="name" value="{{ request.form['name'] }}" >
+
+<div class="search-results"></div>
+
+<p>Previous Checkins</p> 
+<div id="comments">
+    <ul>
+      {% for venue in venues %}
+      <li><strong>{{ venue[0] }} </strong><br />
+        {{ venue[1] }} 
+        
+        <form action="{{ url_for('checkin') }}" method="post">
+            <input name="name" class="form-control"  id="name" value="{{ request.form['name'] }}" type="hidden">
+            <input name="name" class="form-control"  id="name" value="{{ request.form['address'] }}" type="hidden">
+            <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
+          </form>
+
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p>Add a new checkin location</p>
+    <form action="{{ url_for('checkin') }}" method="post">
+        <label for="name" >Venue Name</label>
+        <input name="name" class="form-control"  id="name" value="{{ request.form['name'] }}">
+        <label for="address" >Venue Address</label>
+        <input name="name" class="form-control"  id="name" value="{{ request.form['address'] }}">
+        <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
+      </form>
+  </div>
+
+          <!-- Close divs -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>$('#search-box').on('input', function() {
+    $.get('/admin/checkin-search', {q: $(this).val()}, function(data) {
+        // Update your search results here
+        // For example, you can create a dropdown list with the results
+        var dropdown = $('#search-results');
+        dropdown.empty();
+        for (var i = 0; i < data.length; i++) {
+            dropdown.append('<li>' + data[i] + '</li>');
+        }
+    });
+});</script>
+{% endblock %}
+
+

@@ -10,6 +10,9 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from spudoolicom.auth import login_required
 import requests
+import random
+import string
+
 
 @app.route("/admin/create", methods=("GET", "POST"))
 @login_required
@@ -47,6 +50,7 @@ def create():
 
     return render_template("admin-create.html")
 
+
 @app.route('/admin/posts')
 @login_required
 def adminposts():
@@ -66,6 +70,7 @@ def admincomments():
         cursor.close()
         return render_template("admin-comments.html", admincomments = admincomments)
 
+
 @app.route('/admin/comments/delete/<int:id>', methods=("GET", "POST"))
 @login_required
 def deletecomment(id):
@@ -77,6 +82,7 @@ def deletecomment(id):
         cursor.close()
 
         return redirect(url_for("admincomments"))
+    
 
 @app.route('/admin/comments/publish/<int:id>', methods=("GET", "POST"))
 @login_required
@@ -116,6 +122,49 @@ def create_bookmark():
         return redirect(url_for("create_bookmark"))
     else:
         return render_template('admin-bookmarks.html')
+    
+
+app.route('/admin/checkin', methods=['GET', 'POST'])
+@login_required
+def checkin():
+    if request.method == 'POST':
+        checkinVenue = request.form['venue']
+        checkinAddress = request.form['address']
+        checkinDatetime = datetime.now()
+        checkinId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) 
+
+        cursor = db.mysql.connection.cursor()
+        mysql_insert_query = "INSERT ignore INTO recently (external_id, event_date, name, type, address) VALUES (%s, %s, %s, %s, %s)"
+        record = (checkinId, checkinDatetime, checkinVenue, "Swarm", checkinAddress)
+        cursor.execute(mysql_insert_query, record)
+        db.mysql.connection.commit()
+        cursor.close()
+
+        flash('Stored checkin "{}"'.format(checkinVenue))
+
+        return redirect(url_for("checkin"))
+
+
+    if request.method == 'GET':
+        # query the last 30 checkins from the recently table to display on the page
+        cursor = db.mysql.connection.cursor()
+        cursor.execute('SELECT name, address, type FROM ( SELECT id, name, address, type  FROM recently  WHERE type = "Swarm"  ORDER BY id DESC LIMIT 60) subquery GROUP BY name, address, type')
+        venues = cursor.fetchall()
+        cursor.close()
+
+        return render_template('admin-checkins.html', venues=venues)
+    
+
+@app.route('/admin/checkin-search', methods=['GET'])
+@login_required
+def checkinsearch():
+    search_term = request.args.get('q', '')
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT name FROM recently WHERE name LIKE %s LIMIT 10", (f'%{search_term}%',))
+    results = cursor.fetchall()
+    cursor.close()
+    return jsonify(results)
+
 
 
 # @app.route("/admin/<int:id>/update", methods=("GET", "POST"))
