@@ -17,9 +17,9 @@
 {% block content %}
 
 <p>Checkin Search</p>
-<input name="search-box" class="search-box"  id="name" value="{{ request.form['name'] }}" >
+<input name="search-box" id="search-box"  id="name" value="{{ request.form['name'] }}" >
 
-<div class="search-results"></div>
+<div id="search-results"></div>
 
 <p>Previous Checkins</p> 
 <div id="comments">
@@ -28,9 +28,9 @@
       <li><strong>{{ venue[0] }} </strong><br />
         {{ venue[1] }} 
         
-        <form action="{{ url_for('checkin') }}" method="post">
-            <input name="name" class="form-control"  id="name" value="{{ request.form['name'] }}" type="hidden">
-            <input name="name" class="form-control"  id="name" value="{{ request.form['address'] }}" type="hidden">
+        <form action="{{ url_for('create_checkin') }}" method="post">
+            <input name="venue" class="form-control"  id="venue" value="{{ venue[0] }}" type="hidden">
+            <input name="address" class="form-control"  id="address" value="{{ venue[1] }}" type="hidden">
             <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
           </form>
 
@@ -39,12 +39,12 @@
     </ul>
 
     <p>Add a new checkin location</p>
-    <form action="{{ url_for('checkin') }}" method="post">
+    <form action="{{ url_for('create_checkin') }}" method="post">
         <label for="name" >Venue Name</label>
-        <input name="name" class="form-control"  id="name" value="{{ request.form['name'] }}">
+        <input name="venue" class="form-control"  id="venue" value="{{ request.form['venue'] }}">
         <label for="address" >Venue Address</label>
-        <input name="name" class="form-control"  id="name" value="{{ request.form['address'] }}">
-        <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
+        <input name="address" class="form-control"  id="address" value="{{ request.form['address'] }}">
+        <input class="danger" type="submit" value="Checkin Here " >
       </form>
   </div>
 
@@ -54,7 +54,10 @@
     </div>
   </div>
 
-<script>$('#search-box').on('input', function() {
+  <script src="/static/js/jquery-3.7.1.min.js"></script>
+<script>
+
+$('#search-box').on('input', function() {
     $.get('/admin/checkin-search', {q: $(this).val()}, function(data) {
         // Update your search results here
         // For example, you can create a dropdown list with the results
@@ -65,6 +68,9 @@
         }
     });
 });</script>
+
+
+
 {% endblock %}
 
 

@@ -124,12 +124,13 @@ def create_bookmark():
         return render_template('admin-bookmarks.html')
     
 
-app.route('/admin/checkin', methods=['GET', 'POST'])
+@app.route('/admin/checkin', methods=['GET', 'POST'])
 @login_required
-def checkin():
+def create_checkin():
     if request.method == 'POST':
         checkinVenue = request.form['venue']
         checkinAddress = request.form['address']
+        print(f"checkinVenue: {checkinVenue} checkinAddress: {checkinAddress}")
         checkinDatetime = datetime.now()
         checkinId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) 
 
@@ -142,8 +143,7 @@ def checkin():
 
         flash('Stored checkin "{}"'.format(checkinVenue))
 
-        return redirect(url_for("checkin"))
-
+        return redirect(url_for("create_checkin"))
 
     if request.method == 'GET':
         # query the last 30 checkins from the recently table to display on the page
@@ -152,18 +152,20 @@ def checkin():
         venues = cursor.fetchall()
         cursor.close()
 
-        return render_template('admin-checkins.html', venues=venues)
+    return render_template('admin-checkins.html', venues=venues)
     
 
 @app.route('/admin/checkin-search', methods=['GET'])
 @login_required
-def checkinsearch():
+def checkin_search():
     search_term = request.args.get('q', '')
+    print(f"search_term: {search_term}")
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT name FROM recently WHERE name LIKE %s LIMIT 10", (f'%{search_term}%',))
+    cursor.execute("SELECT name, address FROM recently WHERE name LIKE %s and type = 'swarm' GROUP by name, address LIMIT 10", (f'%{search_term}%',))
     results = cursor.fetchall()
     cursor.close()
-    return jsonify(results)
+    print(f"results: {results}")
+    return results
 
 
 
