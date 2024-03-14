@@ -48,7 +48,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user[0]
-            return redirect(url_for('create'))
+            return redirect(url_for('create_checkin'))
 
         flash(error)
 
