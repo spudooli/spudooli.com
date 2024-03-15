@@ -141,7 +141,13 @@ def create_checkin():
         db.mysql.connection.commit()
         cursor.close()
 
-        flash('Stored checkin "{}"'.format(checkinVenue))
+        # Get the count of checkins for the venue
+        cursor = db.mysql.connection.cursor()
+        cursor.execute('SELECT count(*) as count FROM recently WHERE name = %s and address = %s', (checkinVenue, checkinAddress))
+        checkinCount = cursor.fetchone()
+        cursor.close()
+
+        flash('Stored checkin to "{}" - You have checked in here {} times'.format(checkinVenue, checkinCount['count']))
 
         return redirect(url_for("create_checkin"))
 
