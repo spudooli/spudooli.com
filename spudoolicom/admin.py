@@ -12,7 +12,7 @@ from spudoolicom.auth import login_required
 import requests
 import random
 import string
-
+from flask import jsonify
 
 @app.route("/admin/create", methods=("GET", "POST"))
 @login_required
@@ -147,7 +147,7 @@ def create_checkin():
         checkinCount = cursor.fetchone()
         cursor.close()
 
-        flash('Stored checkin to "{}" - You have checked in here {} times'.format(checkinVenue, checkinCount['count']))
+        flash('Stored checkin to "{}" - You have checked in here {} times'.format(checkinVenue, checkinCount))
 
         return redirect(url_for("create_checkin"))
 
@@ -170,8 +170,19 @@ def checkin_search():
     cursor.execute("SELECT name, address FROM recently WHERE name LIKE %s and type = 'swarm' GROUP by name, address LIMIT 10", (f'%{search_term}%',))
     results = cursor.fetchall()
     cursor.close()
+    rows = []
+
     print(f"results: {results}")
-    return results
+    html = f"<div id='comments'><ul>"
+    for row in results:
+        html += f"<li><strong>{row[0]}</strong><br />"
+        html += f"{row[1]}"
+        html += f"<form action='/admin/checkin' method='post' style='text-align: right; color: #195ddd'>"
+        html += f"<input name='venue' class='form-control' id='venue' value='{row[0]}' type='hidden'>"
+        html += f"<input name='address' class='form-control'  id='address' value='{row[1]}' type='hidden'>"
+        html += f"<input type='submit' value='Checkin Here '  style='border: none; background: none; padding: 0;' ></form></li>"
+    html += f"</ul>"
+    return jsonify(html)
 
 
 
