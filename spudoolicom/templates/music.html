@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% set active_page = "projects" %}
+
+{% block metadescription %}This is the music I listen to. {% endblock %}
+{% block ogtitle %} I listen to music {% endblock %}
+{% block ogdescription %}This is the music I listen to.{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}I Listen to Music - Projects{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="musical-notes-outline"></ion-icon>
+        </div>
+          <p class="title-un-des">I have a relationship with music, possibly related to whatever is going on in my brain, where I thrash a particular song or small number of songs and then don't lkisten at all for  
+            months and months. LastFM asks me to set an obsession. I think I've obessed over a very small number of songs. This is them.<br />
+       </div></p>
+        
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <ion-icon name="disc-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ lastfmcount }} </div>
+                    <div class="counter-title">Tracks played</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Tracks played all time is a difficult number</div>
+                    <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number of tracks than I have in my database from their API. I wil go with the data I have</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <ion-icon name="mic-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ artistcount }} </div>
+                    <div class="counter-title">Unique Artists</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">A number of Artists have been played</div>
+                    <p> I bet the distribution of artists is skewed to a very small number that I have played a lot and a large numebr I have played once. Will eventually find a way to figure that out.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Top 30 Artists</div>
+                    <p>
+                        {% for thing in top30artists  %}
+                        <ul class="too-much-queen-list">
+                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }}</li>
+                       </ul>
+                       {% endfor %}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <ion-icon name="mic-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ rollercoaster }} </div>
+                    <div class="counter-title">Life is a Rollercoaster</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">The number of times I have played Life is a Rollercoaster by Ronan Keating</div>
+                    <p> Everyone is allowed a guilty pleasure that you don't admit to everyone. Mine is this. But only played <strong>{{ rollercoaster }}</strong> times since records began in 2006</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">Top 30 Songs</div>
+                    <p>
+                        {% for thing in top30songsplayed  %}
+                        <ul class="too-much-queen-list">
+                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.name }}, {{thing.artist }}</li>
+                       </ul>
+                       {% endfor %}</p>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

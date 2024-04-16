@@ -2,6 +2,7 @@ from flask import render_template, redirect
 from spudoolicom import app, db
 from datetime import date
 import os
+import random
 
 def gettop20artists():
     # Get the top 20 artists
@@ -49,11 +50,22 @@ def list_files_by_creation_date(directory):
     files.sort(key=get_creation_time)
     return files
 
+def get_the_verse(verse):
+    # Get the verse
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT verse from the_book_of_dave where verse = %s", (verse,))
+    verse = cursor.fetchall()
+    column_names = [col[0] for col in verse]
+    verse = [dict(zip(column_names, row))
+                for row in verse]
+    cursor.close()
+    return verse
+
 @app.route('/projects', strict_slashes=False)
 def projects():
     # Songs by Queen count
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'")
+    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'and artist not like 'Bling Queen'")
     results = cur.fetchone()
     queenplaycount = results[0]
     cur.close()  
@@ -67,13 +79,28 @@ def projects():
 
     bookmarkcount = getbookmarkcount()
 
-    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount)
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'LastFM'")
+    lastfmcount = cursor.fetchone()
+    lastfmcount = "{:,}".format(lastfmcount[0])
+
+    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount, lastfmcount = lastfmcount)
 
 
-@app.route('/projects/the-book-of-dave', strict_slashes=False)
-def thebookofdave():
+@app.route('/projects/the-book-of-dave/<verse>', strict_slashes=False)
+def thebookofdave(verse):
+    # If the verse  is not in the URL then select a random verse from an array
+    if verse is None:
+        verses = ["martini", "daughter", "wine", "wife", "pants"]
+        get_the_verse(random.choice(verses))
 
-    return render_template('the-book-of-dave.html', )
+
+    
+
+
+
+
+    return render_template('the-book-of-dave.html', verse = verse)
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
@@ -84,7 +111,7 @@ def toomuchqueen():
     results = cur.fetchone()
     queenplaycount = results[0]
     cur.close()  
-
+    
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen")
     results = cur.fetchone()
@@ -96,7 +123,73 @@ def toomuchqueen():
     top20artists = gettop20artists()
     top20songs = gettop20songs()
 
-    return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, totalsongs = totalsongs, top20songs = top20songs)
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM too_much_queen where station = 'hauraki'")
+    results = cur.fetchone()
+    haurakisongcount = results[0]
+    cur.close()  
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM too_much_queen where station = 'thesound'")
+    results = cur.fetchone()
+    thesoundsongcount = results[0]
+    cur.close() 
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM too_much_queen where station = 'thecoast'")
+    results = cur.fetchone()
+    thecoastsongcount = results[0]
+    cur.close()  
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM too_much_queen where station = 'goldfm'")
+    results = cur.fetchone()
+    goldfmsongcount = results[0]
+    cur.close()  
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM too_much_queen")
+    results = cur.fetchone()
+    totalsongcount = results[0]
+    cur.close()    
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'hauraki' group by song_name, artist order by playcount desc limit 20")
+    hsongs20 = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    haurakisongs20 = [dict(zip(column_names, row))
+                for row in hsongs20]
+    cursor.close()
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'thesound' group by song_name, artist order by playcount desc limit 20")
+    tssongs20 = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    hthesoundsongs20 = [dict(zip(column_names, row))
+                for row in tssongs20]
+    cursor.close()
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(distinct artist) FROM too_much_queen")
+    results = cur.fetchone()
+    distinctartists = results[0]
+    cur.close()    
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count( distinct artist) as artistplaycount, station from too_much_queen  group by station")
+    artistsstation = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    artistsbystation = [dict(zip(column_names, row))
+                for row in artistsstation]
+    cursor.close()
+
+    return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, 
+                           totalsongs = totalsongs, top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount, 
+                           thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20, 
+                           thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists)
 
 
 @app.route('/projects/bookmarks')
@@ -120,3 +213,41 @@ def spudpic():
     image_files = [f for f in files_by_creation_date]  
 
     return render_template('spudpic.html', image_files = image_files)
+
+
+@app.route('/projects/music')
+def music():
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'LastFM'")
+    lastfmcount = cursor.fetchone()
+    lastfmcount = "{:,}".format(lastfmcount[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(DISTINCT artist) FROM recently where type = 'LastFM'")
+    artistcount = cursor.fetchone()
+    artistcount = "{:,}".format(artistcount[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(artist) as playcount, artist from recently where type = 'LastFM' group by artist ORDER BY playcount DESC LIMIT 30")
+    top30 = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    top30artists = [dict(zip(column_names, row))
+                for row in top30]
+    
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) FROM `recently` WHERE `name` LIKE '%Life Is a Rollercoaster%'")
+    rollercoaster = cursor.fetchone()
+    rollercoaster = "{:,}".format(rollercoaster[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(name) as playcount, name, artist from recently where type = 'LastFM' group by name, artist ORDER BY playcount DESC LIMIT 30")
+    top30songs = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    top30songsplayed = [dict(zip(column_names, row))
+                for row in top30songs]
+
+
+    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, top30songsplayed = top30songsplayed)

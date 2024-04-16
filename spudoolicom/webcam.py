@@ -23,7 +23,7 @@ def webcamindex():
 
 @app.route('/webcam/camera/<camera>', strict_slashes=False)
 def webcam(camera):
-    if camera == "kitchen" or camera == "mancave":
+    if camera == "kitchen" or camera == "mancave" or camera == "driveway":
         print(camera)
     else:
         return redirect('/webcam/camera/kitchen', code=301)

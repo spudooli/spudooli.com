@@ -4389,3 +4389,8 @@ ion-icon {
   color: #fff;
   cursor: pointer;
 }
+
+.too-much-queen-list {
+  list-style-type: none;
+  
+}
