@@ -80,7 +80,7 @@
                   <div>
                     <div class="counter-title">Top 30 Artists</div>
                     
-                      <table class="table table-sm">
+                      <table class="table table-condensed">
                         {% for thing in top30artists  %}
                         <tr>
                           <td>{{ "{:,}".format(thing.playcount) }}</td><td>{{ thing.artist }}</td>
