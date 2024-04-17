@@ -79,12 +79,13 @@
                 <div class="col-md-9">
                   <div>
                     <div class="counter-title">Top 30 Artists</div>
-                    <p>
+                    
+                      <table class="table table-sm">
                         {% for thing in top30artists  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }}</li>
-                       </ul>
-                       {% endfor %}</p>
+                        <tr>
+                          <td>{{ "{:,}".format(thing.playcount) }}</td><td>{{ thing.artist }}</td>
+                        </tr>
+                       {% endfor %}</table>
                     </p>
                   </div>
                 </div>
