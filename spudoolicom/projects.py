@@ -248,6 +248,11 @@ def music():
     column_names = [col[0] for col in desc]
     top30songsplayed = [dict(zip(column_names, row))
                 for row in top30songs]
+    
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) FROM `recently` WHERE `artist` LIKE '%Public Image%'")
+    publicimage = cursor.fetchone()
+    publicimage = "{:,}".format(publicimage[0])
 
-
-    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, top30songsplayed = top30songsplayed)
+    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, 
+                           top30songsplayed = top30songsplayed, publicimage = publicimage)

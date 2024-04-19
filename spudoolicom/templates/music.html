@@ -29,7 +29,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                     <ion-icon name="disc-outline"></ion-icon>
                     <div class="counter-number"><div id="current_power"></div>{{ lastfmcount }} </div>
                     <div class="counter-title">Tracks played</div>
@@ -38,7 +38,7 @@
                 <div class="col-md-9">
                   <div>
                     <div class="counter-title">Tracks played all time is a difficult number</div>
-                    <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number of tracks than I have in my database from their API. I wil go with the data I have</p>
+                    <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number of tracks than I have in my database from their API. I will go with the data I have</p>
                   </div>
                 </div>
               </div>
@@ -50,7 +50,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <div class="counter-box wow fadeInUp" data-wow-delay="1s">
                     <ion-icon name="mic-outline"></ion-icon>
                     <div class="counter-number"><div id="current_power"></div>{{ artistcount }} </div>
                     <div class="counter-title">Unique Artists</div>
@@ -71,21 +71,28 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1">
                     <div class="counter-number"> </div>
                     <div class="counter-title"></a></div>
                   </div>
                 </div>
                 <div class="col-md-9">
                   <div>
-                    <div class="counter-title">Top 30 Artists</div>
+                    <div class="counter-title">Top 30 Artists by Scrobble Count</div>
                     
-                      <table class="table table-condensed">
-                        {% for thing in top30artists  %}
+                      <table class="table table-condensed table-hover">
+                        <thead>
+                          <tr>
+                            <th>Artist</th>
+                            <th>Scrobbles</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for thing in top30artists  %}
                         <tr>
-                          <td>{{ "{:,}".format(thing.playcount) }}</td><td>{{ thing.artist }}</td>
+                          <td width="75%">{{ thing.artist }}</td><td >{{ "{:,}".format(thing.playcount) }}</td>
                         </tr>
-                       {% endfor %}</table>
+                       {% endfor %}</tbody></table>
                     </p>
                   </div>
                 </div>
@@ -98,7 +105,7 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                     <ion-icon name="mic-outline"></ion-icon>
                     <div class="counter-number"><div id="current_power"></div>{{ rollercoaster }} </div>
                     <div class="counter-title">Life is a Rollercoaster</div>
@@ -118,26 +125,61 @@
             <div class="container">
               <div class="row">
                 <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                     <div class="counter-number"> </div>
                     <div class="counter-title"></a></div>
                   </div>
                 </div>
                 <div class="col-md-9">
                   <div>
-                    <div class="counter-title">Top 30 Songs</div>
-                    <p>
+                    <div class="counter-title">Top 30 Songs by Scrobble Count</div>
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                          <tr>
+                            <th>Song</th>
+                            <th>Scrobbles</th>
+                          </tr>
+                        </thead>
+                        <tbody>
                         {% for thing in top30songsplayed  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.name }}, {{thing.artist }}</li>
-                       </ul>
-                       {% endfor %}</p>
+                        <tr>
+                        <td  width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td><td>{{ "{:,}".format(thing.playcount) }}</td>
+                        </tr>
+                       {% endfor %}</tbody></table>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                    <ion-icon name="mic-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ publicimage }} </div>
+                    <div class="counter-title">Public Image Ltd Scrobbles</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="counter-title">I played Public Image Ltd all weekend once</div>
+                    <p> I like a very small part of a single song by Public Image Ltd. Their song Rise is a little catchy in parts and garbage, in my view, for the rest of it. 
+                        I don't care much for any of their other work, it's not my bag </p>
+                    <p> Some how, one weekend, I played Rise to get my fix of the bit that I quite like and then appear to have left Spotify playing their entire back catalogue
+                        after changing the amp source to something else. Thus rocketing them to my 5th most listened to artist even though I hate all but about 3 minutes of their entire work.
+                    <p>Anger is an energy!</p>
+                    </p>    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         <!-- Close divs -->
       </div>
     </div>

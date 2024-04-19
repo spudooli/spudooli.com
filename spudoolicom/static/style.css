@@ -1947,6 +1947,11 @@ body {
     text-transform: uppercase;
   }
   
+  .spudooli-section-title {
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
   
   /*=================================================
   9 - Alert box  

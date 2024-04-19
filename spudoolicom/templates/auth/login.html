@@ -1,15 +1,39 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h2>{% block title %}Log In{% endblock %}</h2S>
+<h2>{% block title %}{% endblock %}</h2>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="username">Username</label>
-    <input name="username" id="username" required><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required><br>
-    <input type="submit" value="Log In">
-  </form>
+<div class="container-counter-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="counter-box wow fadeInUp" data-wow-delay=".1">
+          <div class="counter-number"> </div>
+          <div class="spudooli-section-title">Log In</div>
+        </div>
+      </div>
+      <div class="col-md-9">
+
+        <form method="post">
+          <div class="form-group">
+            <label class="col-sm-2" for="username">Username</label>
+            <input class="form-control form-control-sm" name="username" id="username" required>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2" for="password">Password</label>
+            <input class="form-control form-control-sm" type="password" name="password" id="password" required>
+          </div>
+        <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Log In">
+      </div>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
 {% endblock %}
