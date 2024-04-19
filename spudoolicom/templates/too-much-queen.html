@@ -57,12 +57,19 @@
                 <div class="col-md-9">
                   <div>
                     <div class="counter-title">Artist Playcount</div>
-                    <p>
+                    <table class="table table-condensed table-hover">
+                      <thead>
+                        <tr>
+                          <th>Play Count</th>
+                          <th>Track</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         {% for thing in top20artists  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }}</li>
-                       </ul>
-                       {% endfor %}</p>
+                        <tr>
+                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td> {{ thing.artist }}</td>
+                          </tr>
+                          {% endfor %}</tbody></table>
                     </p>
                   </div>
                 </div>
@@ -138,13 +145,19 @@
                 <div class="col-md-9">
                   <div>
                     <div class="spudooli-section-title">Top 20 Songs Playcount for all radio stations</div>
-                    <p>
-
+                    <table class="table table-condensed table-hover">
+                      <thead>
+                        <tr>
+                          <th>Play Count</th>
+                          <th>Track</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         {% for thing in top20songs  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }} - {{ thing.song_name }}</li>
-                       </ul>
-                       {% endfor %}</p>
+                        <tr>
+                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                          </tr>
+                          {% endfor %}</tbody></table>
                     </p>
                   </div>
                 </div>
@@ -164,13 +177,19 @@
                 <div class="col-md-9">
                   <div>
                     <div class="spudooli-section-title">Radio Hauraki Top 20 Songs Playcount</div>
-                    <p>
-
+                    <table class="table table-condensed table-hover">
+                      <thead>
+                        <tr>
+                          <th>Play Count</th>
+                          <th>Track</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         {% for thing in haurakisongs20  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }} - {{ thing.song_name }}</li>
-                       </ul>
-                       {% endfor %}</p>
+                        <tr>
+                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                          </tr>
+                          {% endfor %}</tbody></table>
                     </p>
                   </div>
                 </div>
@@ -191,14 +210,20 @@
                 <div class="col-md-9">
                   <div>
                     <div class="spudooli-section-title">The Sound Top 20 Songs Playcount</div>
-                    <p>
-
+                    <table class="table table-condensed table-hover">
+                      <thead>
+                        <tr>
+                          <th>Play Count</th>
+                          <th>Track</th>
+                        </tr>
+                      </thead>
+                      <tbody>
                         {% for thing in thesoundsongs20  %}
-                        <ul class="too-much-queen-list">
-                          <li>{{ "{:,}".format(thing.playcount) }} - {{ thing.artist }} - {{ thing.song_name }}</li>
-                       </ul>
-                       {% endfor %}</p>
-                    </p>
+                        <tr>
+                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                          </tr>
+                          {% endfor %}</tbody></table>
+
                   </div>
                 </div>
               </div>
