@@ -17,37 +17,42 @@
 {% block content %}
 
               <p>Checkin Search</p>
+              <div class="form-group">
               <input name="search-box" id="search-box" value="{{ request.form['name'] }}" >
-
+            </div>
               <div id="search-results"></div>
 
-              <p>Previous Checkins</p> 
-              <div id="comments">
-                  <ul>
-                    {% for venue in venues %}
-                    <li><strong>{{ venue[0] }} </strong><br />
-                      {{ venue[1] }} 
-                      
-                      <form action="{{ url_for('create_checkin') }}" method="post" style="text-align: right; color: #195ddd">
-                          <input name="venue" class="form-control"  id="venue" value="{{ venue[0] }}" type="hidden">
-                          <input name="address" class="form-control"  id="address" value="{{ venue[1] }}" type="hidden">
-                          <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
-                        </form>
 
-                    </li>
-                    {% endfor %}
-                  </ul>
+              <div class="col-md-9">
+                <p>Previous Checkins</p> 
+                <div id="comments">
+                    <ul>
+                      {% for venue in venues %}
+                      <li><strong>{{ venue[0] }} </strong><br />
+                        {{ venue[1] }} 
+                        
+                        <form action="{{ url_for('create_checkin') }}" method="post" style="text-align: right; color: #195ddd">
+                            <input name="venue" class="form-control"  id="venue" value="{{ venue[0] }}" type="hidden">
+                            <input name="address" class="form-control"  id="address" value="{{ venue[1] }}" type="hidden">
+                            <input class="danger" type="submit" value="Checkin Here "  style="border: none; background: none; padding: 0;" >
+                          </form>
 
-                  <p>Add a new checkin location</p>
-                  <form action="{{ url_for('create_checkin') }}" method="post">
-                      <label for="name" >Venue Name</label>
-                      <input name="venue" class="form-control"  id="venue" value="{{ request.form['venue'] }}">
-                      <label for="address" >Venue Address</label>
-                      <input name="address" class="form-control"  id="address" value="{{ request.form['address'] }}">
-                      <input class="danger" type="submit" value="Checkin Here " >
-                    </form>
+                      </li>
+                      {% endfor %}
+                    </ul>
+
+                    <p>Add a new checkin location</p>
+                    <form action="{{ url_for('create_checkin') }}" method="post">
+                      <div class="form-group">
+                        <label for="name" >Venue Name</label>
+                        <input name="venue" class="form-control"  id="venue" value="{{ request.form['venue'] }}">
+                        <label for="address" >Venue Address</label>
+                        <input name="address" class="form-control"  id="address" value="{{ request.form['address'] }}">
+                        <input class="danger" type="submit" value="Checkin Here " >
+                      </form>
+                    </div>
+                  </div>
                 </div>
-
           <!-- Close divs -->
         </div>
       </div>

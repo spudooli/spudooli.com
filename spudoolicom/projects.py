@@ -61,6 +61,14 @@ def get_the_verse(verse):
     cursor.close()
     return verse
 
+def catcount():
+    # Get the count of cats
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM cats ")
+    catcount = cursor.fetchone()
+    catcount = "{:,}".format(catcount[0])
+    return catcount
+
 @app.route('/projects', strict_slashes=False)
 def projects():
     # Songs by Queen count
@@ -78,13 +86,14 @@ def projects():
     cur.close()
 
     bookmarkcount = getbookmarkcount()
+    catscount = catcount()
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) id FROM recently where type = 'LastFM'")
     lastfmcount = cursor.fetchone()
     lastfmcount = "{:,}".format(lastfmcount[0])
 
-    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount, lastfmcount = lastfmcount)
+    return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount, lastfmcount = lastfmcount, catscount = catscount)
 
 
 @app.route('/projects/the-book-of-dave/<verse>', strict_slashes=False)
@@ -206,7 +215,6 @@ def bookmarks():
 
 @app.route('/projects/spudpic')
 def spudpic():
-
     image_dir = '/var/www/spudooli/spudoolicom/static/images/spudpic/'
     files_by_creation_date = list_files_by_creation_date(image_dir)
 
@@ -256,3 +264,18 @@ def music():
 
     return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, 
                            top30songsplayed = top30songsplayed, publicimage = publicimage)
+
+
+@app.route('/projects/cats')
+def cats():
+    catscount = catcount()
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT id, cateventid, created_at FROM cats order by id desc limit 3")
+    last3cats = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    latest3cats = [dict(zip(column_names, row))
+                for row in last3cats]
+
+    return render_template('cats.html', catscount = catscount, latest3cats = latest3cats)

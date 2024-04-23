@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% set active_page = "projects" %}
+
+{% block metadescription %}The count of cats that have sat on our driveway and the last 3 images of them doing so {% endblock %}
+{% block ogtitle %}Cats sitting on our driveway{% endblock %}
+{% block ogdescription %}Contact us{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('cats') }}{% endblock %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}Adding cats to the internet - Projects{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="paw-outline"></ion-icon>
+                </div>
+		<p class="title-un-des">These cats tracked since April 2024 </p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                            <ion-icon name="paw-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">{{ catcount }}</div> </div>
+                            <div class="counter-title">Number of times cats have sat on the drive</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="spudooli-section-title">Cats</div>
+                                <p>This is the last 3 images of the cats that have patrolled our driveway.
+                                </p>
+
+                                    {% for cats in latest3cats %}
+
+                                      <img src="/static/cats/{{cats.cateventid}}.jpg">
+                                      <div class="align-right"> {{ cats.created_at }}</div>
+                                    
+                                    {% endfor %}
+
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+               <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
