@@ -271,7 +271,7 @@ def cats():
     catscount = catcount()
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT id, cateventid, created_at FROM cats order by id desc limit 3")
+    cursor.execute("SELECT id, cateventid, created_at FROM cats order by id desc limit 5")
     last3cats = cursor.fetchall()
     desc = cursor.description
     column_names = [col[0] for col in desc]

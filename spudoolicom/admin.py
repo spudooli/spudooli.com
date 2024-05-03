@@ -130,7 +130,6 @@ def create_checkin():
     if request.method == 'POST':
         checkinVenue = request.form['venue']
         checkinAddress = request.form['address']
-        print(f"checkinVenue: {checkinVenue} checkinAddress: {checkinAddress}")
         checkinDatetime = datetime.now()
         checkinId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) 
 
@@ -165,56 +164,18 @@ def create_checkin():
 @login_required
 def checkin_search():
     search_term = request.args.get('q', '')
-    print(f"search_term: {search_term}")
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT name, address FROM recently WHERE name LIKE %s and type = 'swarm' GROUP by name, address LIMIT 10", (f'%{search_term}%',))
     results = cursor.fetchall()
     cursor.close()
     rows = []
-
-    print(f"results: {results}")
     html = f"<div id='comments'><ul>"
     for row in results:
         html += f"<li><strong>{row[0]}</strong><br />"
         html += f"{row[1]}"
         html += f"<form action='/admin/checkin' method='post' style='text-align: right; color: #195ddd'>"
-        html += f"<input name='venue' class='form-control' id='venue' value='{row[0]}' type='hidden'>"
+        html += f'''<input name='venue' class='form-control' id='venue' value="{row[0]}" type='hidden'>'''
         html += f"<input name='address' class='form-control'  id='address' value='{row[1]}' type='hidden'>"
         html += f"<input type='submit' value='Checkin Here '  style='border: none; background: none; padding: 0;' ></form></li>"
     html += f"</ul>"
     return jsonify(html)
-
-
-
-# @app.route("/admin/<int:id>/update", methods=("GET", "POST"))
-# def update(id):
-#     """Update a post if the current user is the author."""
-#     post = get_post(id)
-
-#     if request.method == "POST":
-#         title = request.form["title"]
-#         body = request.form["body"]
-#         error = None
-
-#         if not title:
-#             error = "Title is required."
-
-#         if error is not None:
-#             flash(error)
-#         else:
-#             db = get_db()
-#             db.execute(
-#                 "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
-#             )
-#             db.commit()
-#             return redirect(url_for("photoblog.index"))
-
-#    return render_template("photoblog/update.html", post=post)
-
-# @app.route('/admin/delete/<int:id>', methods=('POST',))
-# def delete(id):
-#     cur = db.mysql.connection.cursor()
-#     cur.execute('DELETE FROM pixelpost_pixelpost WHERE id = ?', (id))
-#     db.mysql.connection.commit()
-#     cur.close()
-#     return redirect(url_for('photoblog'))

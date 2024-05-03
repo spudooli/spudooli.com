@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% set active_page = "projects" %}
 
-{% block metadescription %}The count of cats that have sat on our driveway and the last 3 images of them doing so {% endblock %}
+{% block metadescription %}The count of cats that have sat on our driveway and the last 5 images of them doing so {% endblock %}
 {% block ogtitle %}Cats sitting on our driveway{% endblock %}
 {% block ogdescription %}Contact us{% endblock %}
-{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/recently/cc8425c7f9eff007.png{% endblock %}
 {% block ogurl %}https://www.spudooli.com{{ url_for('cats') }}{% endblock %}
 
 {% block header %}
@@ -28,19 +28,19 @@
                         <div class="col-md-3">
                           <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                             <ion-icon name="paw-outline"></ion-icon>
-                            <div class="counter-number"><div id="current_power">{{ catcount }}</div> </div>
+                            <div class="counter-number"><div id="current_power">{{ catscount }}</div> </div>
                             <div class="counter-title">Number of times cats have sat on the drive</div>
                           </div>
                         </div>
                         <div class="col-md-9">
                           <div>
                             <div class="spudooli-section-title">Cats</div>
-                                <p>This is the last 3 images of the cats that have patrolled our driveway.
+                                <p>This is the last 5 images of the cats that have patrolled our driveway.
                                 </p>
 
                                     {% for cats in latest3cats %}
 
-                                      <img src="/static/cats/{{cats.cateventid}}.jpg">
+                                      <img src="/static/images/cats/{{cats.cateventid}}.jpg">
                                       <div class="align-right"> {{ cats.created_at }}</div>
                                     
                                     {% endfor %}
