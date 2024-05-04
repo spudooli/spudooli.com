@@ -62,8 +62,8 @@ def mancaveleds():
 
     if mancaveleds:
         try:
-           os.system("liquidctl --match Corsair set sync color clear && liquidctl --match Corsair set sync color fixed 'rgb" + str(mancaveleds) + "'")
-           os.system("liquidctl --match Gigabyte set sync color fixed 'rgb" + str(mancaveleds) + "'")
+           os.system("/usr/local/bin/liquidctl --match Corsair set sync color clear && liquidctl --match Corsair set sync color fixed 'rgb" + str(mancaveleds) + "'")
+           os.system("/usr/local/bin/liquidctl --match Gigabyte set sync color fixed 'rgb" + str(mancaveleds) + "'")
         except:
             pass
     

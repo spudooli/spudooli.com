@@ -13,7 +13,7 @@
 <div class="container-page">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-lg-12">
         <h1 class="title-un">{% block title %}On this day {{ humandate }} {% endblock %}</h1>
         <div class="title-un-icon">
             <ion-icon name="calendar-outline"></ion-icon>
@@ -32,26 +32,30 @@
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-lg-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <div class="counter-number">  </div>
                   <div class="counter-title"> </div>
                 </div>
               </div>
-              <div class="col-md-9">
-                <div>
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-3"></div>
+                  <div class="col-lg-9">
 
                   {% for item in budgetdata %}
-                  <div class="col-md-3">
-                      &nbsp; 
+                  <div class="row">
+                    <div class="col-3">
+                        &nbsp; 
+                    </div>
+                    <div class="col-lg-9"> 
+                      <div class="leftborderbank"><strong>{{ item[2] | replace("-", "$") }}</strong> - {{ item[3] }}<br><small><small>{{ item[1] }}</small> </small></div>
+                    </div>
                   </div>
-                  <div class="col-md-9"> 
-                     <div class="leftborderbank"><strong>{{ item[2] | replace("-", "$") }}</strong> - {{ item[3] }}<br><small><small>{{ item[1] }}</small> </small></div>
-                  </div>         
                   {% endfor %}
-
-
+                               
                   {% for dat in data %}
+                  <div class="row">
                     <div class="col-md-3">
                         {{ dat[0].strftime('%-H:%M')}} 
                     </div>
@@ -62,27 +66,33 @@
                         {% elif dat[2] == "Twitter" %}<div class="leftbordertweets">{{ dat[1] }} <br> <small><small><a href="https://twitter.com/Spudooli/status/{{ dat[6] }}">@spudooli</a></small> </small></div>
                         {% elif dat[2] == "Mastodon" %}<div class="leftbordermastodon">{{ dat[1] | safe}} {% if dat[8] %} <img src="/static/images/recently/{{dat[8]}}">{% endif %} <small><small><a href="{{ dat[7] }}">@spudooli@mastodon.nz</a></small> </small></div>
                         {% endif %} 
-                    </div>         
+                    </div>
+                  </div>         
                     {% endfor %}
 
                     {% if blogpost %}
-                    <div class="col-md-3">
+                    <div class="row">
+                    <div class="col-lg-3">
                         {{ blogpost[0].strftime('%-H:%M')}} 
                     </div>
-                    <div class="col-md-9"> 
+                    <div class="col-lg-9"> 
                         <div class="leftborderblog"><a href="/photoblog/{{ blogpost[2] }}">{{ blogpost[1]}} </a><br><small> <small></small></small> </div>
                     </div>   
                     {% endif %} 
+
                     {% if bankbalance %}
-                    <div class="col-md-3">
-                        {{ bankbalance[0].strftime('%-H:%M')}} 
-                    </div>
-                    <div class="col-md-9"> 
+                    <div class="row">
+                      <div class="col-lg-3">
+                          {{ bankbalance[0].strftime('%-H:%M')}} 
+                      </div>
+                      <div class="col-lg-9"> 
                         <div class="leftborderbank"><strong>${{ bankbalance[1]}} </strong><br><small> <small>End of day bank balance</small></small> </div>
-                        
-                    </div>  
-                    {% endif %}      
-                </div>
+                      </div>  
+                    </div>
+                    {% endif %}    
+                    
+                    </div>
+
               </div>
             </div>
           </div>
