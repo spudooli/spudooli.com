@@ -382,7 +382,6 @@ body {
   }
   
   .header-inner.header-scroll-up {
-    -webkit-backface-visibility: hidden;
     -webkit-transition: -webkit-transform .4s ease-in-out;
     -moz-transition: -moz-transform .4s ease-in-out;
     transition: transform .4s ease-in-out;
@@ -741,12 +740,7 @@ body {
   }
   
   
-  /*** Header style four ****/
-  
-  .header-four {}
-  
-  
-  /*** Brand logo ***/
+ /*** Brand logo ***/
   
   .brand {
     width: 200px;
@@ -825,7 +819,7 @@ body {
     display: none;
     min-width: 12em;
     /* allow long menu items to determine submenu width */
-    *width: 12em;
+    width: 12em;
     /* no auto sub width for IE7, see white-space comment below */
     top: 118%;
     left: 0;
@@ -891,7 +885,7 @@ body {
   
   .sf-arrows .sf-with-ul {
     padding-right: 2.5em;
-    *padding-right: 1em;
+    padding-right: 1em;
     /* no CSS arrows for IE7 (lack pseudo-elements) */
   }
   
@@ -1284,7 +1278,7 @@ body {
   4 - Heading or Title
   =================================================*/
   
-  .main-title {}
+
   
   .main-title h4 {
     color: #a67c52;
@@ -1708,7 +1702,6 @@ body {
   .service-box-sb .service-info {
     margin-top: 4px;
     overflow: hidden;
-    *
   }
   
   .service-box-sb .service-info h4 {
@@ -1992,7 +1985,6 @@ body {
   button.close {
     cursor: pointer;
     border: 0;
-    -webkit-appearance: none;
   }
   
   .alert-dismissable .close {
@@ -3117,7 +3109,6 @@ body {
     display: block;
     float: left;
     width: 33.33333%;
-    vertical-align: middle;
     white-space: nowrap;
   }
   

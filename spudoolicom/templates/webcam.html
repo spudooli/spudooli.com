@@ -19,17 +19,17 @@
         
         {% if camera == "kitchen" %}
         <p>If it's too dark to see anything, you can turn some <div class="ledspointer" onclick="benchleds('on')">lights on</div> or  <div class="ledspointer" onclick="benchleds('off')">lights off</p></div>
-        <img class="chartcenter" src="https://www.spudooli.com/kitchenstream" />
+        <img class="chartcenter img-fluid" src="https://www.spudooli.com/kitchenstream" />
         {% endif %}
 
         {% if camera == "mancave" %}
         <p>Select a colour: <input id="mancaveledscolour" type="color" value="#ff0000" /></p>
         <p><button onclick="mancavepcleds(document.getElementById('mancaveledscolour').value)">Change the LEDs</button></p>
-        <img class="chartcenter" src="https://www.spudooli.com/mancavestream" />
+        <img class="chartcenter img-fluid" src="https://www.spudooli.com/mancavestream" />
         {% endif %}
 
         {% if camera == "driveway" %}
-        <img class="chartcenter" src="https://www.spudooli.com/driveway" />
+        <img class="chartcenter img-fluid" src="https://www.spudooli.com/driveway" />
         {% endif %}
 
         <!-- Close divs -->

@@ -98,7 +98,7 @@ def post(id):
         latlon = post[5]
         photolat = str(latlon.split(",")[0].replace("(", ""))
         photolon = str(latlon.split(",")[1].replace(" ","").replace(")",""))
-        maprequest = "<a href='https://www.google.co.nz/maps/@" + photolat + "," + photolon + ",16.0z'><img src='https://maps.googleapis.com/maps/api/staticmap?center=" + photolat + "," + photolon + "&zoom=15&size=350x300&markers=color:0xD0E700%7Clabel:X%7C" + photolat + "," + photolon +  "&sensor=false&key=" + config.googlemapsapikey + "&visual_refresh=true&maptype=terrain' alt='Map of the photo location'></a>"
+        maprequest = "<a href='https://www.google.co.nz/maps/@" + photolat + "," + photolon + ",16.0z'><img src='https://maps.googleapis.com/maps/api/staticmap?center=" + photolat + "," + photolon + "&zoom=15&size=350x300&markers=color:0xD0E700%7Clabel:X%7C" + photolat + "," + photolon +  "&sensor=false&key=" + config.googlemapsapikey + "&visual_refresh=true&maptype=terrain' class='img-fluid' alt='Map of the photo location'></a>"
     else:
         maprequest = ""
 
