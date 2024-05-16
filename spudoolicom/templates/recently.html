@@ -64,7 +64,7 @@
                         {% elif dat[2] == "Swarm" %}<div class="leftborderswarm"><strong>{{ dat[1] }} </strong><br><small> <small>{{ dat[3]}}</small></small> </div>
                         {% elif dat[2] == "Github" %}<div class="leftbordergithub">{{ dat[1] }} <br> <small><small><a href="{{ dat[7] }}"> {{ dat[6]|truncate(12) }}</a></small> </small> </div>
                         {% elif dat[2] == "Twitter" %}<div class="leftbordertweets">{{ dat[1] }} <br> <small><small><a href="https://twitter.com/Spudooli/status/{{ dat[6] }}">@spudooli</a></small> </small></div>
-                        {% elif dat[2] == "Mastodon" %}<div class="leftbordermastodon">{{ dat[1] | safe}} {% if dat[8] %} <img src="/static/images/recently/{{dat[8]}}">{% endif %} <small><small><a href="{{ dat[7] }}">@spudooli@mastodon.nz</a></small> </small></div>
+                        {% elif dat[2] == "Mastodon" %}<div class="leftbordermastodon">{{ dat[1] | safe}} {% if dat[8] %} <img class="img-fluid" src="/static/images/recently/{{dat[8]}}">{% endif %} <small><small><a href="{{ dat[7] }}">@spudooli@mastodon.nz</a></small> </small></div>
                         {% endif %} 
                     </div>
                   </div>         

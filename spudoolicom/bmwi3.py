@@ -38,5 +38,3 @@ def i3():
     cur.close()  
 
     return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues, i3range = i3range, i3battery = i3battery)
-    
-
