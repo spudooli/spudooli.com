@@ -4390,3 +4390,8 @@ ion-icon {
   list-style-type: none;
   
 }
+
+#top-bar {
+  height: 5px;
+  background-color: #195ddd; 
+}

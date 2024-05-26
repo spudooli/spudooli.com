@@ -105,6 +105,11 @@ def about():
     return render_template('about.html')
     
 
+@app.route('/now')
+def now():
+    return render_template('now.html')
+    
+
 @app.route('/contactus', methods=['GET', 'POST'])
 def contactus():
     contactform = forms.contact_us()

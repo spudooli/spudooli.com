@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block metadescription %}What we are doing now{% endblock %}
+{% block ogtitle %}Now{% endblock %}
+{% block ogdescription %}What we are doing now{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com{{ url_for('about') }}{% endblock %}
+
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}What we are doing now{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="body-outline"></ion-icon>
+        </div>
+        <p class="title-un-des">Updated May 2024 - 
+	This is a now page, it's to tell you what we are up to now. If you have your own site, you <a href="https://nownownow.com/about">should make one</a>, too.</p>
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                  <div class="counter-number">  </div>
+                  <div class="counter-title"> </div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="spudooli-section-title">Learning 3D printing</div>
+		  <p>My <a href="https://mastodon.nz/@spudooli/111842472031189163">father died on January 30th 2024</a>. I've spent the last 3 months winding up his estate. It's still not done, just need to visit the bank with a bunch of forms completed and then the job is done </p>
+		  <p>I inherited some of his things that I could actually fit into our lives. Some handtools, some tool cabinets he had made, a TV and an ampliier and a record player</p>
+		  <p>I restored <a href="https://mastodon.nz/@spudooli/112227855155482471">the amp enough to make it work again</a>. After sitting in the attic for 25 years it needed some love. And <a href="https://mastodon.nz/@spudooli/112222594719615864">contact cleaner sprayed into all the switches and pots</a> more than love I guess</p>
+		  <p>The record player has been sent off for <a href="https://www.turntableguy.co.nz/">restoration by someone</a> that knows what they are doing</p>
+		  <p>Playing with those devices precipitated me <a href="https://mastodon.nz/@spudooli/112448955098137435">getting out my CD player</a> which I haven't touched in 25 years.</p>
+		  <p>Of which <a href="https://mastodon.nz/@spudooli/112449603514054863">the cog that drives</a> the CD drawer open failed</p>
+		  <p>Which precipitated <a href="https://mastodon.nz/@spudooli/112453048134717809">finding a solution</a> - so we've just purhcased a 3d printer. It arrives in a couple of weeks</p>
+		  <p>Now I'm learning 3d design and 3d printing</p>
+
+		  <div class="spudooli-section-title pt-3">Painting the house</div>
+		  <p>We've been in our house now for 14 years</p>
+		  <p>The previous owners painted the house right before they sold it. And they did a terrible job of it, for the most part</p>
+		  <p>I should have repainted the house years ago but I've been putting it off, not wanting to learn how to paint a house</p>
+		  <p>But <a href="https://mastodon.nz/@spudooli/112109351310767301">I've now started</a>. Doing one wall a weekend, when the weather is fine. Going to pay someone to do the high parts though</p>
+		  <p>It's no where near as fun as I thought it was not goig to be. I find myself looking forward to crappy weather in the weekends now.</p>
+		  <div class="spudooli-section-title pt-3">Coding The Book of Dave and photos</div>
+		  <p>I'm made so many starts on both of these coding projects, but because I don't actually really know how I want the putput to be, coding it is tough</p>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
