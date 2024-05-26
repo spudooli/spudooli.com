@@ -71,16 +71,16 @@
                         </div>
                         <div class="col-md-3">
                           <div class="counter-box wow fadeInUp" data-wow-delay="1s">
-                            <ion-icon name=""></ion-icon>
-                            <div class="counter-number">  </div>
-                            <div class="counter-title"><a href=""></a> </div>
+                            <ion-icon name="speedometer-outline"></ion-icon>
+                            <div class="counter-number"> {{ ruckmsleft | safe }} </div>
+                            <div class="counter-title">RUC km left</div>
                           </div>
                         </div>
                         <div class="col-md-3">
                           <div class="counter-box wow fadeInUp" data-wow-delay="1.1s">
-                            <ion-icon name=""></ion-icon>
-                            <div class="counter-number"> </div>
-                            <div class="counter-title"><a href=""></a> </div>
+                            <ion-icon name="battery-charging-outline"></ion-icon>
+                            <div class="counter-number"> {{ charging }} </div>
+                            <div class="counter-title"> {{ i3chargecompletiontime_formatted_time }} </div>
                           </div>
                         </div>
                       </div>

@@ -1,6 +1,8 @@
 from spudoolicom import app, db
 from flask import render_template
 from datetime import datetime
+import pytz
+
 
 import redis
 
@@ -20,10 +22,26 @@ def i3():
 
     i3traveled = int(r.get('i3mileage')) - int(46683)
 
+    ruckmsleft = format(60525 - int(r.get('i3mileage')), ',')
+
     costperkm = round(int(totalcost) / int(i3traveled) * 100, 2)
 
     i3range = r.get("i3rangeremaining")
     i3battery = r.get("i3batteryremaining")
+
+    i3chargingstatus = r.get('i3chargingstatus')
+    if i3chargingstatus == "CHARGING":
+        charging = " CHARGING"
+        i3chargecompletiontime = r.get('i3chargecompletiontime')
+        dete = datetime.fromisoformat(i3chargecompletiontime)
+        # Set the timezone to NZ
+        nz_tz = pytz.timezone('Pacific/Auckland')
+        dt_nz = dete.astimezone(nz_tz)
+        # Print the NZ timezone time
+        i3chargecompletiontime_formatted_time = dt_nz.strftime('%Y-%m-%d %H:%M')
+    else:
+        charging = ""
+        i3chargecompletiontime = "" 
 
     # Count the number of lines in the file
     with open('/var/www/scripts/i3-location.txt', 'r') as f:
@@ -37,4 +55,6 @@ def i3():
     chargevalues = [str(row[1]).replace("-","") for row in data]
     cur.close()  
 
-    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues, i3range = i3range, i3battery = i3battery)
+    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, 
+                           i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues, i3range = i3range, 
+                           i3battery = i3battery, ruckmsleft = ruckmsleft, charging = charging, i3chargecompletiontime_formatted_time = i3chargecompletiontime_formatted_time)
