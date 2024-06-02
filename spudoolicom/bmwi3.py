@@ -41,7 +41,7 @@ def i3():
         i3chargecompletiontime_formatted_time = dt_nz.strftime('%Y-%m-%d %H:%M')
     else:
         charging = ""
-        i3chargecompletiontime = "" 
+        i3chargecompletiontime_formatted_time = "" 
 
     # Count the number of lines in the file
     with open('/var/www/scripts/i3-location.txt', 'r') as f:

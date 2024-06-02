@@ -804,7 +804,7 @@ body {
   }
   
   .main-nav .sf-menu li.current a {
-    color: #8a8f6a;
+    color: #195ddd;
     font-weight: 600;
   }
   
@@ -842,7 +842,7 @@ body {
   
   .main-nav .sf-menu a:hover,
   .main-nav .sf-menu .sub-menu .sfHover a {
-    color: #8a8f6a;
+    color: #195ddd;
     text-decoration: underline;
   }
   
@@ -4392,6 +4392,6 @@ ion-icon {
 }
 
 #top-bar {
-  height: 5px;
+  height: 3px;
   background-color: #195ddd; 
 }
