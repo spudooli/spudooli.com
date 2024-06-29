@@ -1,0 +1,6 @@
+/* the humans responsible */
+
+This website developed entirely by Dave while standing on the shoulders and various other body parts of an extremely large number of people tha contributed open source code.
+
+https://www.spudooli.com/about
+

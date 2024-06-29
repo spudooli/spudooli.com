@@ -165,7 +165,7 @@ def create_checkin():
 def checkin_search():
     search_term = request.args.get('q', '')
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT name, address FROM recently WHERE name LIKE %s and type = 'swarm' GROUP by name, address LIMIT 10", (f'%{search_term}%',))
+    cursor.execute("SELECT name, address FROM recently WHERE name LIKE %s and type = 'swarm' GROUP by name, address ORDER BY MAX(event_date) DESC LIMIT 10", (f'%{search_term}%',))
     results = cursor.fetchall()
     cursor.close()
     rows = []

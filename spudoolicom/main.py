@@ -143,6 +143,7 @@ def power():
 
 
 @app.route('/robots.txt')
+@app.route('/humans.txt')
 @app.route('/sitemap.xml')
 @app.route('/radar.gif')
 def static_from_root():
