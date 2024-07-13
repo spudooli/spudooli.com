@@ -236,6 +236,38 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="spudooli-section-title">Coast FM Top 20 Songs Playcount</div>
+                    <table class="table table-condensed table-hover">
+                      <thead>
+                        <tr>
+                          <th>Play Count</th>
+                          <th>Track</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for thing in thecoastsongs20  %}
+                        <tr>
+                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                          </tr>
+                          {% endfor %}</tbody></table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
                     <ion-icon name="radio-outline"></ion-icon>
                     <div class="counter-number"><div id="current_power"></div>{{ "{:,}".format(distinctartists) }} </div>
                     <div class="counter-title">Total unique Artists played </div>

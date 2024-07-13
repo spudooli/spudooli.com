@@ -72,7 +72,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
 
         </script>
         <p>
-          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}" class="chartcenter">
+          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}" class="chartcenter img-fluid">
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
 
@@ -83,7 +83,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
           </div>
           <div id="modal" class="modal">
             <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modal-image" class="modal-content" src="/static/photoblog/embiggen/embiggen_{{ post[2] }}')">
+            <img id="modal-image" class="modal-content" src="/static/photoblog/embiggen/embiggen_{{ post[2] }}">
           </div>
 
           <script>

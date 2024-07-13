@@ -18,43 +18,59 @@
 
                 <div class="container-counter-box">
                     <div class="container">
-                        <div class="row">
+                        <div class="row mb-5">
                             <div class="col-md-6">
-                                <div class="counter-title"> Where is Dave?</div>
+                                <div class="spudooli-section-title">Where is Dave right now?</div>
                                 <div class="counter-number"> {{ davelocation | safe}} </div>
 
                             </div>
                             <div class="col-md-6">
-                                <div class="counter-title"> Where is Gabba</div>
+                                <div class="spudooli-section-title">Where is Gabba right now?</div>
                                 <div class="counter-number"> {{ gabbalocation | safe }} </div>
 
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="counter-title"> Dave's travels 2023</div>
-                                <div class="counter-number"> <img src="/static/gis/dave.png"> </div>
 
-                            </div>
+                        <div class="row mb-5">
                             <div class="col-md-6">
-                                <div class="counter-title"> Gabba's travels 2023</div>
-                                <div class="counter-number"> <img src="/static/gis/gabba.png"> </div>
+
+                                <div class="spudooli-section-title">Dave in Auckland 2024</div>
+                                <div class="counter-number"> <img src="/static/gis/dave.png"> </div>
+                            </div>
+                                <div class="col-md-6">
+                                    <div class="spudooli-section-title">Gabba in Auckland 2024</div>
+                                    <div class="counter-number"> <img src="/static/gis/gabba-auckland.png"> </div>
 
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="spudooli-section-title">Dave's travels 2024</div>
+                                <div class="counter-number"> <img src="/static/gis/dave-auckland.png"> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="spudooli-section-title">Gabba's travels 2024</div>
+                                <div class="counter-number"> <img src="/static/gis/gabba.png"> </div>
+                            </div>
+                        </div>
+                    
                     </div>
                 </div>
-
-                <div class="container-counter-box">
-                    <div class="container">
-
-                    </div>
-                </div>
-
-                <!-- Close divs -->
             </div>
+
+            <div class="container-counter-box">
+                <div class="container">
+                    <small>&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>
+                        &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>
+                        &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a></small>
+                </div>
+            </div>
+
+            <!-- Close divs -->
         </div>
     </div>
+</div>
 </div>
 
 {% endblock %}

@@ -1,0 +1,4 @@
+Contact: https://www.spudooli.com/contactus
+Expires: 2032-11-17T01:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.spudooli.com/.well-known/security.txt
