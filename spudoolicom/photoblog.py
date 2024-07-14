@@ -95,13 +95,9 @@ def post(id):
     if os.path.isfile("/var/www/spudooli/spudoolicom/static/photoblog/embiggen/embiggen_" + imagename[1]):
         print(imagename[1])
         imageexists = True  
-        print("image exists")
     else:
         imageexists = False
         print(imagename[1])
-
-        print("image does not exist")
-
 
     # If there is lat and lon in the database, display a map on the post
     if post[5]:
@@ -121,7 +117,7 @@ def post(id):
         previousimage = cursor.fetchone()
         previousimage = previousimage[0]
 
-
+    cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id FROM pixelpost_pixelpost order by id DESC LIMIT 1")
     latestpost = cursor.fetchone()
     latestpost = latestpost[0]
