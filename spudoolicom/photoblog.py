@@ -19,6 +19,16 @@ def photoblog():
     cursor.close()
     return render_template('photoblog.html', posts = posts)
 
+
+@app.route('/photoblog-map')
+def photoblogmap():
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT id, headline, googlemap FROM pixelpost_pixelpost where googlemap like '%.%'")
+    markers = cursor.fetchall()
+    cursor.close()
+    return render_template('photoblog-map.html', markers = markers)
+
+
 @app.route('/photoblog', strict_slashes=False, defaults={'id': None} )
 @app.route('/photoblog/<id>', methods=('GET', 'POST'))
 def post(id):

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% set active_page = "photoblog" %}
+{% block metadescription %}The maps showing where I've taken our photos{% endblock %}
+{% block ogtitle %}The Photoblog Map of Spudooli{% endblock %}
+{% block ogdescription %}The photoblog archive, all the photos on one page{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+{% block ogurl %}https://www.spudooli.com/photoblog/archive{% endblock %}
+
+{% block header %}
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}The Photoblog Map{% endblock %}</h1>
+        <div class="title-un-icon"><ion-icon name="map-outline"></ion-icon></div>
+        <p class="title-un-des">Where on earth have I taken these photos?</p>
+
+        {% endblock %}
+
+        {% block content %}
+
+        <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                    <ion-icon name="pin-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power">{{ alicepingcount }}</div> </div>
+                    <div class="counter-title">Markers</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+
+                    <div class="spudooli-section-title">Map</div>
+                    <link rel="stylesheet" href="/static/leaflet.css" />
+                    <script type="text/javascript" src="/static/js/leaflet.js"></script>
+                    <div id="map"></div>
+                    <script type="text/javascript">
+                        // Initialize a map centered at (53, 12) at zoom level 5
+                        var map = L.map('map').setView([-39, 175], 5);
+
+                        {% for marker in markers %}
+                            var marker = L.marker({{ marker[2]|replace("(", "[")|replace(")","]")}},{ title: '{{marker[1]}}', riseOnHover: true})
+                            .bindPopup(`<a href="/photoblog/{{ marker[0]}}" target="_blank" rel="noopener noreferrer">{{marker[1]}}</a>`)
+                            .addTo(map);
+                        {% endfor %}
+    
+                        // Style URL format in XYZ PNG format; see our documentation for more options
+                        L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+                            maxZoom: 20,
+                            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
+                        }).addTo(map);
+                    </script>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+               
+        <!-- Close divs -->
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
