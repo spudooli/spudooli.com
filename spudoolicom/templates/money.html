@@ -351,7 +351,69 @@
                                 <!-- End Containter Contents  -->
                                 <!-- End Page Containter  -->
 
+<!-- Page Containter header  -->
+ 
+<div class="container-about">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title-un">KFC</h3>
+                <div class="title-un-icon">
+                    <ion-icon name="egg-outline"></ion-icon>
+                </div>
+                <p class="title-un-des"></p>
+                <!-- End Page Containter header  -->
+                <!-- Containter contents  -->
+                <div class="container-counter-box">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                    <ion-icon name="egg-outline"></ion-icon>
+                                    <div class="counter-number">{{ kfctotal | replace('-', '$') }}</div>
+                                    <div class="counter-title">Total Spend at KFC</div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div>
+                                    <div class="spudooli-section-title">Avoiding the post KFC purchase regret</div>
+                                    <p>KFC isn't our favourite, apparently, having only purchased there <strong>21</strong> times in the last 28 years and only once in the last 8.
 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-counter-box">
+                    <div class="container">
+
+                        <canvas id="mykfcChart" width="1000" height="400"></canvas>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                        <script>
+                            var ctx = document.getElementById("mykfcChart");
+                            var myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: {{ kfclabels | safe }},
+                                
+                                datasets: [
+                                    {
+                                    label: "$ Spend at all KFC by Month",
+                                    backgroundColor: '#000',
+                                    borderColor: '#000',
+                                    data: {{ kfcvalues | safe }},
+                            }
+    
+                            ]
+                        }
+                    });
+                        </script>
+                    </div>
+                </div>
+                <!-- End Containter Contents  -->
+                <!-- End Page Containter  -->
 
 
                             </div>

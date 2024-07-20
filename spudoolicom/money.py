@@ -144,12 +144,26 @@ def money():
     hardwarevalues = [str(row[1]).replace("-","") for row in data]
     cur.close() 
 
-    
+    # Get KFC purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT SUM( amount ) amount FROM  `budget` WHERE  `party` LIKE  '%kfc%'")
+    kfctotal = cur.fetchone()
+    kfctotal = "{:,}".format(kfctotal[0])
+    cur.close()
+
+    # Get all months spend for KFC
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when party LIKE '%kfc%' then amount else 0 end) as kfc FROM budget GROUP BY thismonth order by thismonth asc")
+    kfcdata = cur.fetchall()
+    kfclabels = [row[0] for row in data]
+    kfcvalues = [str(row[1]).replace("-","") for row in kfcdata]
+    cur.close() 
     
     return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, numTransactions = numTransactions,
                           totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, lastTransaction = lastTransaction,
                           paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
                           bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
-                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, gull = gull)
+                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, 
+                          gull = gull, kfctotal = kfctotal, kfclabels = kfclabels, kfcvalues = kfcvalues)
 
                           
