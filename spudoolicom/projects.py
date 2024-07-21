@@ -101,7 +101,7 @@ def projects():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'and artist not like 'Bling Queen'")
     results = cur.fetchone()
-    queenplaycount = results[0]
+    queenplaycount = "{:,}".format(results[0])
     cur.close()  
 
     # get to total tweets and toots from the database
