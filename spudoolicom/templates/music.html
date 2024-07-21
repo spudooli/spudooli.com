@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-md-9">
                   <div>
-                    <div class="spudooli-section-title">Top 30 Artists by Scrobble Count</div>
+                    <div class="spudooli-section-title">Top 40 Artists by Scrobble Count</div>
                     
                       <table class="table table-condensed table-hover">
                         <thead>
@@ -88,7 +88,7 @@
                           </tr>
                           </thead>
                           <tbody>
-                          {% for thing in top30artists  %}
+                          {% for thing in top40artists  %}
                         <tr>
                           <td width="75%">{{ thing.artist }}</td><td >{{ "{:,}".format(thing.playcount) }}</td>
                         </tr>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-md-9">
                   <div>
-                    <div class="spudooli-section-title">Top 30 Songs by Scrobble Count</div>
+                    <div class="spudooli-section-title">Top 40 Songs by Scrobble Count</div>
                     <table class="table table-condensed table-hover">
                         <thead>
                           <tr>
@@ -141,7 +141,7 @@
                           </tr>
                         </thead>
                         <tbody>
-                        {% for thing in top30songsplayed  %}
+                        {% for thing in top40songsplayed  %}
                         <tr>
                         <td  width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td><td>{{ "{:,}".format(thing.playcount) }}</td>
                         </tr>
@@ -220,7 +220,7 @@
                               
                               datasets: [
                                   {
-                                  label: "$ Spend at all KFC by Month",
+                                  label: "$ Tracks played by Month",
                                   backgroundColor: '#000',
                                   borderColor: '#000',
                                   data: {{ playsbymonthvalues | safe }},

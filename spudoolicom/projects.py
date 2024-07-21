@@ -272,12 +272,12 @@ def music():
     artistcount = "{:,}".format(artistcount[0])
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(artist) as playcount, artist from recently where type = 'LastFM' group by artist ORDER BY playcount DESC LIMIT 30")
-    top30 = cursor.fetchall()
+    cursor.execute("SELECT count(artist) as playcount, artist from recently where type = 'LastFM' group by artist ORDER BY playcount DESC LIMIT 40")
+    top40 = cursor.fetchall()
     desc = cursor.description
     column_names = [col[0] for col in desc]
-    top30artists = [dict(zip(column_names, row))
-                for row in top30]
+    top40artists = [dict(zip(column_names, row))
+                for row in top40]
     
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `recently` WHERE `name` LIKE '%Life Is a Rollercoaster%'")
@@ -285,12 +285,12 @@ def music():
     rollercoaster = "{:,}".format(rollercoaster[0])
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(name) as playcount, name, artist from recently where type = 'LastFM' group by name, artist ORDER BY playcount DESC LIMIT 30")
-    top30songs = cursor.fetchall()
+    cursor.execute("SELECT count(name) as playcount, name, artist from recently where type = 'LastFM' group by name, artist ORDER BY playcount DESC LIMIT 40")
+    top40songs = cursor.fetchall()
     desc = cursor.description
     column_names = [col[0] for col in desc]
-    top30songsplayed = [dict(zip(column_names, row))
-                for row in top30songs]
+    top40songsplayed = [dict(zip(column_names, row))
+                for row in top40songs]
     
     # Get all months spend for KFC
     cur = db.mysql.connection.cursor()
@@ -306,8 +306,8 @@ def music():
     publicimage = cursor.fetchone()
     publicimage = "{:,}".format(publicimage[0])
 
-    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, 
-                           top30songsplayed = top30songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, playsbymonthvalues = playsbymonthvalues)
+    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top40artists = top40artists, rollercoaster = rollercoaster, 
+                           top40songsplayed = top40songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, playsbymonthvalues = playsbymonthvalues)
 
 
 @app.route('/projects/cats')
