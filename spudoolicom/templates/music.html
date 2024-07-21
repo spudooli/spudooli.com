@@ -179,11 +179,67 @@
             </div>
           </div>
 
-        <!-- Close divs -->
+
+    <!-- Page Containter header  -->
+ 
+
+              <div class="container-counter-box">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                  <ion-icon name="play-outline"></ion-icon>
+                                  <div class="counter-number"></div>
+                                  <div class="counter-title"></div>
+                              </div>
+                          </div>
+                          <div class="col-md-9">
+                              <div>
+                                  <div class="spudooli-section-title">My on and off pattern of listening to music</div>
+                                  <p>I suspect this is a product of me playing a relatively small set of artists, but it's clearly visible that I play music and then not for a period of time.
+                                    I don't know what happened in 2015 but for almost the whole year music was not a part of my life. And the pandemic years showed that I was at home a lot more and so listened to more music.
+
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="container-counter-box">
+                  <div class="container">
+
+                      <canvas id="mymusicplaysChart" width="1000" height="400"></canvas>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                      <script>
+                          var ctx = document.getElementById("mymusicplaysChart");
+                          var myChart = new Chart(ctx, {
+                              type: 'bar',
+                              data: {
+                                  labels: {{ playsbymonthlabels | safe }},
+                              
+                              datasets: [
+                                  {
+                                  label: "$ Spend at all KFC by Month",
+                                  backgroundColor: '#000',
+                                  borderColor: '#000',
+                                  data: {{ playsbymonthvalues | safe }},
+                          }
+  
+                          ]
+                      }
+                  });
+                      </script>
+                  </div>
+              </div>
+              <!-- End Containter Contents  -->
+              <!-- End Page Containter  -->
+
+
+        <!-- This is the end -->
       </div>
     </div>
-  </div>
-</div>
-
+    </div>
+    </div>
 
 {% endblock %}

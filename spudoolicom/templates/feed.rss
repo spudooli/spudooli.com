@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>spudooli.com</title>
@@ -10,7 +10,7 @@
                   <title>{{ post[1] }}</title>
                   <link>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</link>
                   <guid>https://www.spudooli.com{{ url_for('post', id=post[0]) }}</guid>
-                  <pubDate>{{ post[3].strftime('%a, %d %b %Y %T') }} NZST</pubDate>
+                  <pubDate>{{ post[3].strftime('%a, %d %b %Y %T') }} GMT</pubDate>
                   <description><![CDATA[<img src="https://www.spudooli.com/static/photoblog/{{ post[4] }}" id="rssfeed"><br><br><p>{{ post[2] | replace('\n', '<br />') | replace('\\', '') | replace('â€™', '\'') |safe }}
                   <br><p>You can <a href="https://www.spudooli.com{{ url_for('post', id=post[0]) }}">comment on this post</a>.</p>
                   <br><strong>Some other things...</strong><br>

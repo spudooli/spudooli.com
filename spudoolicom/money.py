@@ -155,7 +155,7 @@ def money():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when party LIKE '%kfc%' then amount else 0 end) as kfc FROM budget GROUP BY thismonth order by thismonth asc")
     kfcdata = cur.fetchall()
-    kfclabels = [row[0] for row in data]
+    kfclabels = [row[0] for row in kfcdata]
     kfcvalues = [str(row[1]).replace("-","") for row in kfcdata]
     cur.close() 
     

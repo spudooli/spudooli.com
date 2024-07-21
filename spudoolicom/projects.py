@@ -69,6 +69,32 @@ def catcount():
     catcount = "{:,}".format(catcount[0])
     return catcount
 
+musicquery = """SELECT 
+                DATE_FORMAT(months.month, '%Y-%m') AS this_month,
+                COUNT(CASE WHEN r.artist IS NOT NULL THEN r.id ELSE NULL END) AS music
+                FROM (
+                SELECT 
+                    LAST_DAY(DATE_ADD('2008-09-01', INTERVAL seq MONTH)) + INTERVAL 1 DAY - INTERVAL 1 MONTH AS month
+                FROM (
+                    SELECT 
+                        @seq := @seq + 1 AS seq
+                    FROM 
+                        (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) a,
+                        (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) b,
+                        (SELECT 0 UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) c,
+                        (SELECT @seq := -1) seq_init
+                ) seqs
+                WHERE 
+                    LAST_DAY(DATE_ADD('2008-09-01', INTERVAL seq MONTH)) + INTERVAL 1 DAY - INTERVAL 1 MONTH <= LAST_DAY(CURRENT_DATE)
+                ) months
+                LEFT JOIN 
+                    recently r ON DATE_FORMAT(r.event_date, '%Y-%m') = DATE_FORMAT(months.month, '%Y-%m')
+                    AND r.type = 'lastfm'
+                GROUP BY 
+                    this_month
+                ORDER BY 
+                    this_month ASC;"""
+
 @app.route('/projects', strict_slashes=False)
 def projects():
     # Songs by Queen count
@@ -266,13 +292,22 @@ def music():
     top30songsplayed = [dict(zip(column_names, row))
                 for row in top30songs]
     
+    # Get all months spend for KFC
+    cur = db.mysql.connection.cursor()
+    cur.execute(musicquery)
+    playsbymonth = cur.fetchall()
+    playsbymonthlabels = [row[0] for row in playsbymonth]
+    playsbymonthvalues = [str(row[1]).replace("-","") for row in playsbymonth]
+    cur.close() 
+
+
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `recently` WHERE `artist` LIKE '%Public Image%'")
     publicimage = cursor.fetchone()
     publicimage = "{:,}".format(publicimage[0])
 
     return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top30artists = top30artists, rollercoaster = rollercoaster, 
-                           top30songsplayed = top30songsplayed, publicimage = publicimage)
+                           top30songsplayed = top30songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, playsbymonthvalues = playsbymonthvalues)
 
 
 @app.route('/projects/cats')

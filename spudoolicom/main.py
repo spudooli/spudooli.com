@@ -143,10 +143,12 @@ def power():
 
 
 @app.route('/robots.txt')
+@app.route('/rss.xsl')
 @app.route('/humans.txt')
 @app.route('/.well-known/security.txt')
 @app.route('/sitemap.xml')
 @app.route('/radar.gif')
+@app.route('/favicon.ico')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
