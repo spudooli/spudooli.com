@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% set active_page = "projects" %}
+
+{% block metadescription %}This is the places I have checked in to. {% endblock %}
+{% block ogtitle %} I check in to places {% endblock %}
+{% block ogdescription %}This is the places I have checked in to.{% endblock %}
+{% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
+
+{% block header %}
+
+<div class="container-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="title-un">{% block title %}I Check In to Places - Projects{% endblock %}</h1>
+        <div class="title-un-icon">
+            <ion-icon name="walk-outline"></ion-icon>
+        </div>
+          <p class="title-un-des">In 2009 Foursquare arrived and for a bit was the cool thing on the internet. Then in 2014 it changed to Swarm. And then in March 2024 they revoked my API access. So I replaced 
+            them completetly with my own solution in about 80 lines of Python code.<br />
+            This is where I've been since 2009. 
+       </div></p>
+        
+        {% endblock %}
+
+        {% block content %}
+      
+       
+        <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                    <ion-icon name="walk-outline"></ion-icon>
+                    <div class="counter-number"><div id="current_power"></div>{{ swarmcount }} </div>
+                    <div class="counter-title">Total Checkins</div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="spudooli-section-title">Tracks played all time is a difficult number</div>
+                    <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number of tracks than I have in my database from their API. I will go with the data I have</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                    <div class="counter-number"> </div>
+                    <div class="counter-title"></a></div>
+                  </div>
+                </div>
+                <div class="col-md-9">
+                  <div>
+                    <div class="spudooli-section-title">Top 40 Places I've checked into</div>
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                          <tr>
+                            <th>Place</th>
+                            <th>Checkin Count</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           
+                        {% for checkin in topcheckinsplaces  %}
+                        <tr>
+                        <td  width="75%"><strong>{{ checkin.name }}</strong>, {{checkin.address }}</td><td>{{ "{:,}".format(checkin.checkincount) }}</td>
+                        </tr>
+                       {% endfor %}</tbody></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+      
+              <div class="container-counter-box">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-3">
+                              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                  <ion-icon name="checkmark-outline"></ion-icon>
+                                  <div class="counter-number"></div>
+                                  <div class="counter-title"></div>
+                              </div>
+                          </div>
+                          <div class="col-md-9">
+                              <div>
+                                  <div class="spudooli-section-title">Total checkins by Month</div>
+                                  
+                                  <p>Note the dramatic drop in places I visited in April 2020 and then again through the middle of 2021 due to the COVID-19 pandemic in New Zealand</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="container-counter-box">
+                  <div class="container">
+
+                      <canvas id="placesChart" width="1000" height="400"></canvas>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                      <script>
+                          var ctx = document.getElementById("placesChart");
+                          var myChart = new Chart(ctx, {
+                              type: 'bar',
+                              data: {
+                                  labels: {{ placesbymonthlabels | safe }},
+                              
+                              datasets: [
+                                  {
+                                  label: "Checkins by Month",
+                                  backgroundColor: '#195ddd',
+                                  borderColor: '#000',
+                                  data: {{ placesbymonthvalues | safe }},
+                          }
+  
+                          ]
+                      }
+                  });
+                      </script>
+                  </div>
+              </div>
+              <!-- End Containter Contents  -->
+              <!-- End Page Containter  -->
+
+
+        <!-- This is the end -->
+      </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
