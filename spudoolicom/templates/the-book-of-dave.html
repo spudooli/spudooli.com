@@ -17,16 +17,48 @@
         <div class="title-un-icon">
             <ion-icon name="book-outline"></ion-icon>
         </div>
-          <p class="title-un-des">I've said a bunch of dumb things and sometimes said some things that will be remembered across the ages, compiled into a book and used as a guide to 
-            life for millennia. This is them, graze upon them. <br>These are The (newer) Book Of Dave<br>
+          <p class="title-un-des">I've said a bunch of dumb things and sometimes said some things that will be remembered across the ages, to the end of time and will be compiled into a book and used as a guide to 
+            life for millennia. This is them, graze upon them. <br>This is The (newer) Book Of Dave<br>
           </p>
        </div>
               
         {% endblock %}
 
         {% block content %}
+
+        {{  randomverses }}
       
-       {{ verse}}
+       <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <div class="counter-number">  </div>
+                <div class="counter-title"> </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-3"></div>
+                <div class="col-lg-9">
+
+                  {% for vers in verse %}
+                  <div class="row">
+                    <div class="col-md-3">
+                      {{ vers.event_date.strftime('%d %B %Y %-H:%M') }}
+                    </div>
+                    <div class="col-md-9"> 
+                      {% if vers.type == "Twitter" %}<div class="leftbordertweets">{{ vers.name }} <br>{% if vers.item_image %} <img class="img-fluid" src="/static/images/recently/{{vers.item_image}}">{% endif %}<br> <small><small><a href="https://twitter.com/Spudooli/status/{{ vers.external_id }}">@spudooli</a></small> </small></div>
+                      {% elif vers.type == "Mastodon" %}<div class="leftbordermastodon">{{ vers.name | safe}}  <br>{% if vers.item_image %} <img class="img-fluid" src="/static/images/recently/{{vers.item_image}}">{% endif %}<br><small><small><a href="{{ vers.url }}">@spudooli@mastodon.nz</a></small> </small></div>
+                      {% endif %} 
+                    </div>
+                  </div>         
+                    {% endfor %}
+
+                  </div>
+                </div>
+              </div>
+            </div>
 
         <!-- Close divs -->
       </div>

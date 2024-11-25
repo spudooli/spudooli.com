@@ -51,13 +51,11 @@ def list_files_by_creation_date(directory):
     return files
 
 def get_the_verse(verse):
-    # Get the verse
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT verse from the_book_of_dave where verse = %s", (verse,))
-    verse = cursor.fetchall()
-    column_names = [col[0] for col in verse]
-    verse = [dict(zip(column_names, row))
-                for row in verse]
+    cursor.execute("SELECT event_date, name, type, address, artist, album, external_id, url, item_image from recently WHERE name LIKE %s  AND type IN ('twitter', 'mastodon') ORDER by event_date ASC", (f'%{verse}%',))
+    verse_data = cursor.fetchall()
+    column_names = [col[0] for col in cursor.description]
+    verse = [dict(zip(column_names, row)) for row in verse_data]
     cursor.close()
     return verse
 
@@ -153,25 +151,26 @@ def projects():
     return render_template('projects.html', queenplaycount = queenplaycount, numTweetsToots = numTweetsToots, bookmarkcount = bookmarkcount, lastfmcount = lastfmcount, catscount = catscount, swarmcount = swarmcount)
 
 
-@app.route('/projects/the-book-of-dave/<verse>', strict_slashes=False)
+@app.route('/projects/the-book-of-dave', strict_slashes=False, defaults={'verse': None} )
+@app.route('/projects/the-book-of-dave/<verse>')
 def thebookofdave(verse):
-    # If the verse  is not in the URL then select a random verse from an array
+    randomverses = ["martini", "daughter", "wine", "wife", "pants", "cat"]
+    arandomverse = random.choice(randomverses)
     if verse is None:
-        verses = ["martini", "daughter", "wine", "wife", "pants"]
-        get_the_verse(random.choice(verses))
-
+        verse = get_the_verse(arandomverse)
+    else:
+        verse = get_the_verse(verse)
 
     
 
 
 
 
-    return render_template('the-book-of-dave.html', verse = verse)
+    return render_template('the-book-of-dave.html', verse = verse, randomverses = randomverses, arandomverse = arandomverse)
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
 def toomuchqueen():
-
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'")
     results = cur.fetchone()
@@ -261,10 +260,19 @@ def toomuchqueen():
                 for row in artistsstation]
     cursor.close()
 
+      # Get all months spend for KFC
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen WHERE artist = 'Queen' GROUP BY thismonth ORDER BY thismonth ASC")
+    queenplaysbymonth = cur.fetchall()
+    queenplaysbymonthlabels = [row[0] for row in queenplaysbymonth]
+    queenplaysbymonthvalues = [str(row[1]).replace("-","") for row in queenplaysbymonth]
+    cur.close() 
+
     return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, 
                            totalsongs = totalsongs, top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount, 
                            thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20, 
-                           thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20)
+                           thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20,
+                           queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues)
 
 
 @app.route('/projects/bookmarks')

@@ -39,11 +39,42 @@
                   <div>
                     <div class="spudooli-section-title">Too much Queen</div>
                     <p>Queen are good, but are they so good they should command {{ queenpercentage }}% of all songs played on Boomer/GenX radio (GoldFM, The Sound, Coast FM, Radio Hauraki) in Auckland. The answer it a resounding bloody no.</p>
+                 
+             
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+          <div class="container-counter-box">
+            <div class="container">
+
+                <canvas id="myqueenChart" width="1000" height="400"></canvas>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                <script>
+                    var ctx = document.getElementById("myqueenChart");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: {{ queenplaysbymonthlabels | safe }},
+                        
+                        datasets: [
+                            {
+                            label: "Songs played by Queen per Month",
+                            backgroundColor: '#195ddd',
+                            borderColor: '#000',
+                            data: {{ queenplaysbymonthvalues | safe }},
+                    }
+
+                    ]
+                }
+            });
+                </script>
+            </div>
+        </div>
+
 
           <div class="container-counter-box">
             <div class="container">

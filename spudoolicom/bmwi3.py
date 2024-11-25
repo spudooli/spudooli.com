@@ -22,7 +22,7 @@ def i3():
 
     i3traveled = int(r.get('i3mileage')) - int(46683)
 
-    ruckmsleft = format(60525 - int(r.get('i3mileage')), ',')
+    ruckmsleft = format(65525 - int(r.get('i3mileage')), ',')
 
     costperkm = round(int(totalcost) / int(i3traveled) * 100, 2)
 

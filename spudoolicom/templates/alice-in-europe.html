@@ -10,7 +10,7 @@
                 <div class="title-un-icon">
                     <ion-icon name="airplane-outline"></ion-icon>
                 </div>
-		<p class="title-un-des">Time where Alice is right now - {{ alice_uk_formatted_datetime_str }} </p>
+		<p class="title-un-des">Time where Alice is right now - {{ alice_formatted_datetime_str }} </p>
 
                 {% endblock %}
 
@@ -22,7 +22,7 @@
                         <div class="col-md-3">
                           <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
                             <ion-icon name="flower-outline"></ion-icon>
-                            <div class="counter-number"><div id="current_power">{{ aliceukpingcount }}</div> </div>
+                            <div class="counter-number"><div id="current_power">{{ alicepingcount }}</div> </div>
                             <div class="counter-title">Pings</div>
                           </div>
                         </div>
@@ -30,7 +30,7 @@
                           <div>
                             <div class="counter-title">ALICE location now</div>
                             <p>
-                                {{ aliceuklocation | safe }}
+                                {{ alicelocation | safe }}
 
                             </p>
                             </div>
@@ -45,16 +45,16 @@
                         <div class="col-md-3">
                           <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
                             <ion-icon name="flower-outline"></ion-icon>
-                            <div class="counter-number"><div id="current_power"></div> </div>
-                            <div class="counter-title"></div>
+                            <div class="counter-number"><div id="current_power">5,305</div> </div>
+                            <div class="counter-title">km travelled</div>
                           </div>
                         </div>
                         <div class="col-md-9">
                           <div>
-                            <div class="counter-title">Alice in London and other places</div>
+                            <div class="counter-title">Touring Europe</div>
     
 
-                            <p ><img src="/static/gis/alice-uk.png"> </p>
+                            <p ><img src="/static/gis/alice.png"> </p>
                                           <p class="counter-title"><small>&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>
                                 &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a>
                                 &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>
@@ -71,7 +71,7 @@
                         <!-- Thumbnail images -->
                         {% for image_file in image_files %}
                         <div class="thumbnail">
-                          <img src="{{ url_for('static', filename=image_file)|replace("/static/var/www/spudooli/spudoolicom", "") }}" alt="{{ image_file }}" onclick="openModal('{{ url_for('static', filename=image_file)|replace("/static/var/www/spudooli/spudoolicom", "") }}')">
+                          <img src="{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}" alt="{{ image_file }}" onclick="openModal('{{ url_for('static', filename=image_file)|replace("/static//var/www/spudooli/spudoolicom", "") }}')">
                         </div>
                         
                         <!-- Modal container -->
