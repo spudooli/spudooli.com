@@ -66,7 +66,7 @@ def aliceuk():
 
     image_files = [f for f in files_by_creation_date]  
 
-    target_timezone = pytz.timezone('Europe/London')
+    target_timezone = pytz.timezone('Europe/Copenhagen')
     local_time = datetime.now()
     alice_uk_time = local_time.astimezone(target_timezone)
     alice_uk_formatted_datetime_str = alice_uk_time.strftime("%d/%m/%Y %H:%M:%S")

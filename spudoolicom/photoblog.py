@@ -69,7 +69,6 @@ def post(id):
         imagemodel = ""
     if "EXIF FNumber" in tags:
         fstopthing = str(tags["EXIF FNumber"])
-        print(fstopthing)
         if "/" in fstopthing:
             fstop1 = str(fstopthing.split("/")[0] )
             fstop2 = str(fstopthing.split("/")[1])
@@ -93,11 +92,9 @@ def post(id):
 
     #check of there is a large image version of imagename[1] in the directory and if so, set image+exists to true
     if os.path.isfile("/var/www/spudooli/spudoolicom/static/photoblog/embiggen/embiggen_" + imagename[1]):
-        print(imagename[1])
         imageexists = True  
     else:
         imageexists = False
-        print(imagename[1])
 
     # If there is lat and lon in the database, display a map on the post
     if post[5]:

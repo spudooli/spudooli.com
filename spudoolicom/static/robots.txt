@@ -66,3 +66,6 @@ Disallow: /
 
 User-agent: dotbot
 Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /

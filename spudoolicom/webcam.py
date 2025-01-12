@@ -37,14 +37,14 @@ def benchleds():
     benchleds = request_data['onoroff']
 
     if benchleds == "on":
-        print("Setting colour to: " + benchleds)
+        #print("Setting colour to: " + benchleds)
         try:
             dotherequeststhing("http://192.168.1.142/benchleds-on")
         except:
             pass
     
     elif benchleds == "off":
-        print("Setting colour to: " + benchleds)
+        #print("Setting colour to: " + benchleds)
         try:
             dotherequeststhing("http://192.168.1.142/benchleds-off")
         except:
@@ -58,7 +58,7 @@ def mancaveleds():
     mancaveleds = request_data['mancaveleds']
 
     mancaveleds = hex_to_rgb(mancaveleds)
-    print(str(mancaveleds))
+    #print(str(mancaveleds))
 
     if mancaveleds:
         try:

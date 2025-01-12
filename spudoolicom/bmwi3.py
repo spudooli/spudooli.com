@@ -37,7 +37,6 @@ def i3():
         # Set the timezone to NZ
         nz_tz = pytz.timezone('Pacific/Auckland')
         dt_nz = dete.astimezone(nz_tz)
-        # Print the NZ timezone time
         i3chargecompletiontime_formatted_time = dt_nz.strftime('%Y-%m-%d %H:%M')
     else:
         charging = ""
