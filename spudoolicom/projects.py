@@ -172,7 +172,7 @@ def thebookofdave(verse):
 @app.route('/projects/too-much-queen', strict_slashes=False)
 def toomuchqueen():
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'")
+    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Bling Queen' and artist not like 'Queens of the Stone Age'")
     results = cur.fetchone()
     queenplaycount = results[0]
     cur.close()  

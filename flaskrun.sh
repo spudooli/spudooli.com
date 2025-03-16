@@ -1,1 +1,1 @@
-flask --app spudoolicom --debug run --port 5001
+flask --app spudoolicom --debug run --port 5002

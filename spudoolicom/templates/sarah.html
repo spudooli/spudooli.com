@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% set active_page = "house" %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}Where is Sarah and Carmela?{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="airplane-outline"></ion-icon>
+                </div>
+		<p class="title-un-des">Time where Sarah and Carmela are right now - {{ sarah_formatted_datetime_str }} </p>
+
+                {% endblock %}
+
+                {% block content %}
+
+                <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power">{{ sarahjapanpingcount }}</div> </div>
+                            <div class="counter-title">Pings</div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Sarah and Carmela location now</div>
+                            <p>
+                                {{ sarahjapanlocation | safe }}
+
+                            </p>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="container-counter-box">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                            <ion-icon name="flower-outline"></ion-icon>
+                            <div class="counter-number"><div id="current_power"></div> </div>
+                            <div class="counter-title"></div>
+                          </div>
+                        </div>
+                        <div class="col-md-9">
+                          <div>
+                            <div class="counter-title">Sarah and Carmela in Japan and other places</div>
+    
+
+                            <p ><img src="/static/gis/sarah.png" class='img-fluid'> </p>
+                                          <p class="counter-title"><small>&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a>
+                                &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a>
+                                &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a>
+                                &copy; <a href="https://www.openstreetmap.org/about/" target="_blank">OpenStreetMap contributors</a></small></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                <!-- Close divs -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function openModal(imageSrc) {
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modal-image');
+  modalImage.src = imageSrc;
+  modal.style.display = 'block';
+}
+
+// Close the modal
+function closeModal() {
+  const modal = document.getElementById('modal');
+  modal.style.display = 'none';
+}
+
+// Close the modal when clicking outside the modal content
+window.onclick = function (event) {
+  const modal = document.getElementById('modal');
+  if (event.target === modal) {
+      modal.style.display = 'none';
+  }
+};</script>
+
+{% endblock %}
