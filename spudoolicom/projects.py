@@ -3,6 +3,15 @@ from spudoolicom import app, db
 from datetime import date
 import os
 import random
+from datetime import datetime
+
+
+# Get the current year
+current_year = datetime.now().year
+
+# Create the date string for January 1st of the current year
+year_start_date = f"{current_year}-01-01 00:00:01"
+
 
 def gettop20artists():
     # Get the top 20 artists
@@ -331,7 +340,35 @@ def music():
     top40songsplayed = [dict(zip(column_names, row))
                 for row in top40songs]
     
-    # Get all months spend for KFC
+    ###### Stats for this year ######
+    
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(name) as playcount, name, artist from recently where type = 'LastFM' and event_date > %s group by name, artist ORDER BY playcount DESC LIMIT 40", (year_start_date,))
+    top40songsyear = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    top40songsplayedyear = [dict(zip(column_names, row))
+                for row in top40songsyear]\
+                
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(artist) as playcount, artist from recently where type = 'LastFM' and event_date > %s group by artist ORDER BY playcount DESC LIMIT 40", (year_start_date,))
+    top40_year = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    top40artistsyear = [dict(zip(column_names, row))
+                for row in top40_year]
+    
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) id FROM recently where type = 'LastFM' and event_date > %s", (year_start_date,))
+    lastfmcountyear = cursor.fetchone()
+    lastfmcountyear = "{:,}".format(lastfmcountyear[0])
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(DISTINCT artist) FROM recently where type = 'LastFM' and event_date > %s", (year_start_date,))
+    artistcountyear = cursor.fetchone()
+    artistcountyear = "{:,}".format(artistcountyear[0])
+    
+    # Get all months music by month
     cur = db.mysql.connection.cursor()
     cur.execute(musicquery)
     playsbymonth = cur.fetchall()
@@ -346,7 +383,9 @@ def music():
     publicimage = "{:,}".format(publicimage[0])
 
     return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top40artists = top40artists, rollercoaster = rollercoaster, 
-                           top40songsplayed = top40songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, playsbymonthvalues = playsbymonthvalues)
+                           top40songsplayed = top40songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, 
+                           playsbymonthvalues = playsbymonthvalues, top40songsplayedyear = top40songsplayedyear, top40artistsyear = top40artistsyear, 
+                           lastfmcountyear = lastfmcountyear, artistcountyear = artistcountyear)
 
 
 @app.route('/projects/cats')

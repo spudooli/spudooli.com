@@ -19,7 +19,7 @@ def track(who):
       if who == "alice":
          whonumber = "6"
       if who == "sarah":
-         whonumber = "7"
+         whonumber = "8"
       request_data = request.get_json()
       type = request_data['_type']
       if type == "location":

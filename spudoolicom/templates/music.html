@@ -225,16 +225,79 @@
                                   backgroundColor: '#195ddd',
                                   borderColor: '#000',
                                   data: {{ playsbymonthvalues | safe }},
-                          }
-  
-                          ]
-                      }
-                  });
+                                }
+        
+                                ]
+                            }
+                        });
                       </script>
                   </div>
               </div>
               <!-- End Containter Contents  -->
               <!-- End Page Containter  -->
+              <div class="container-counter-box">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                        <div class="counter-number"><div id="current_power"></div>{{ lastfmcountyear }} </div>
+                        <div class="counter-title">Tracks played - {{ now.year }}</div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div>
+                        <div class="spudooli-section-title">Top 40 Songs by Scrobble Count - {{ now.year }}</div>
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                              <tr>
+                                <th>Song</th>
+                                <th>Scrobbles</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {% for thing in top40songsplayedyear  %}
+                            <tr>
+                            <td  width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td><td>{{ "{:,}".format(thing.playcount) }}</td>
+                            </tr>
+                           {% endfor %}</tbody></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="container-counter-box">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="counter-box wow fadeInUp" data-wow-delay=".1">
+                        <div class="counter-number"><div id="current_power"></div>{{ artistcountyear }} </div>
+                        <div class="counter-title">Unique Artists - {{ now.year }}</div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div>
+                        <div class="spudooli-section-title">Top 40 Artists by Scrobble Count - {{ now.year }}</div>
+                        
+                          <table class="table table-condensed table-hover">
+                            <thead>
+                              <tr>
+                                <th>Artist</th>
+                                <th>Scrobbles</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for thing in top40artistsyear  %}
+                            <tr>
+                              <td width="75%">{{ thing.artist }}</td><td >{{ "{:,}".format(thing.playcount) }}</td>
+                            </tr>
+                           {% endfor %}</tbody></table>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
         <!-- This is the end -->
