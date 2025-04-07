@@ -21,13 +21,23 @@
             life for millennia. This is them, graze upon them. <br>This is The (newer) Book Of Dave<br>
           </p>
        </div>
+
+       <div class="col-lg-12">
+        <!-- Search form -->
+        <div class="row mb-4">
+          <div class="col-lg-6 offset-lg-3">
+            <form action="/the-book-of-dave/search" method="GET" class="d-flex">
+              <input type="text" name="query" class="form-control" placeholder="Search The Book of Dave..." aria-label="Search">
+              <button class="btn btn-primary ms-2" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
               
         {% endblock %}
 
         {% block content %}
 
-        {{  randomverses }}
-      
+     
        <div class="container-counter-box">
         <div class="container">
           <div class="row">
