@@ -162,11 +162,7 @@ def projects():
 
 @app.route('/projects/the-book-of-dave', strict_slashes=False, defaults={'verse': None} )
 @app.route('/projects/the-book-of-dave/<verse>')
-@app.route('/the-book-of-dave/search', methods=['GET'])
 def thebookofdave(verse):
-    query = request.args.get('query', '')
-
-    if not query:
         randomverses = ["martini", "daughter", "wine", "wife", "pants", "cat"]
         arandomverse = random.choice(randomverses)
         if verse is None:
@@ -175,6 +171,14 @@ def thebookofdave(verse):
             verse = get_the_verse(verse)
 
         return render_template('the-book-of-dave.html', verse = verse, randomverses = randomverses, arandomverse = arandomverse)
+
+
+@app.route('/projects/the-book-of-dave/search', methods=['GET'])
+def thebookofdavesearch():
+        query = request.args.get('query', '')
+        if query:
+            verse = get_the_verse(query)
+            return render_template('the-book-of-dave.html', verse = verse, query = query)
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
