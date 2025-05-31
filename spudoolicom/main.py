@@ -143,18 +143,12 @@ def power():
 
 @app.route("/cloudservices/giovanni/ipaddress", methods=['GET'])
 def ipservices():
-# Get the User-Agent string
     user_agent = request.headers.get('User-Agent')
-
-    # Check if the User-Agent matches "blah"
     if user_agent == "PingerFromGiovannisHome":
         try:
-            # Read the last 10 lines of the file
-            with open('/tmp/cloudservices.txt', 'r') as file:
+            with open('/tmp/cloudservices.log', 'r') as file:
                 lines = file.readlines()
-                last_10_lines = ''.join(lines[-10:])  # Get the last 10 lines
-
-            # Return the lines as plain text
+                last_10_lines = ''.join(lines[-10:])  
             return last_10_lines, 200, {'Content-Type': 'text/plain'}
         except FileNotFoundError:
             return "File not found.", 404
