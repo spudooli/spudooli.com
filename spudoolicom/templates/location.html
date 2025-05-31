@@ -21,12 +21,12 @@
                         <div class="row mb-5">
                             <div class="col-md-6">
                                 <div class="spudooli-section-title">Where is Dave right now?</div>
-                                <div class="counter-number"> {{ davelocation | safe}} </div>
+                                <div class="counter-number"><img src='/static/gis/location/dave_map_{{ davemap }}.png' class="mapgrayscale"><p class='stat_measure' id='current_date' ><br> {{ daveupdated}} </div>
 
                             </div>
                             <div class="col-md-6">
                                 <div class="spudooli-section-title">Where is Gabba right now?</div>
-                                <div class="counter-number"> {{ gabbalocation | safe }} </div>
+                                <div class="counter-number"> <img src='/static/gis/location/gabba_map_{{ gabbamap }}.png' class="mapgrayscale"><p class='stat_measure' id='current_date' >Updated: </p> <br> {{ gabbaupdated }} </div>
 
                             </div>
                         </div>

@@ -121,3 +121,18 @@ def github():
     db.mysql.connection.commit()
     cur.close()
     return "OK"
+
+@app.route("/hook/cloudservices/giovanni", methods=['GET'])
+def cloudservices():
+    if request.headers.get('X-Forwarded-For'):
+        requester_ip = request.headers.get('X-Forwarded-For').split(',')[0].strip()
+    else:
+        requester_ip = request.remote_addr    
+    request_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    user_agent = request.headers.get('User-Agent')
+    if user_agent == "PingerFromGiovannisHome":
+        with open('/tmp/cloudservices.log', 'a') as log_file:
+            log_file.write(f"Request from IP: {requester_ip} at {request_time}\n")
+        return "Logged successfully"
+    else:
+        return "Unauthorized User-Agent", 403    
