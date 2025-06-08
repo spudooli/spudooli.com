@@ -141,6 +141,7 @@ def power():
     power = r.get('power')
     return power
 
+
 @app.route("/cloudservices/giovanni/ipaddress", methods=['GET'])
 def ipservices():
     user_agent = request.headers.get('User-Agent')
