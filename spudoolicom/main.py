@@ -166,6 +166,7 @@ def ipservices():
 @app.route('/sitemap.xml')
 @app.route('/radar.gif')
 @app.route('/favicon.ico')
+@app.route('/manifest.json')
 def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 

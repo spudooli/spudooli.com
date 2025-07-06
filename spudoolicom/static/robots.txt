@@ -38,34 +38,34 @@ User-agent: DataForSEOBot
     Disallow: /
 
 User-agent: PetalBot
-Disallow: /
+    Disallow: /
 
 User-agent: anthropic-ai
-Disallow: /
+    Disallow: /
 
 User-agent: Claude-Web
-Disallow: /
+    Disallow: /
 
 User-agent: CCbot
-Disallow: /
+    Disallow: /
 
 User-agent: FacebookBot
-Disallow: /
+    Disallow: /
 
 User-agent: Google-Extended
-Disallow: /
+    Disallow: /
 
 User-agent: GPTBot
-Disallow: /
+    Disallow: /
 
 User-agent: PiplBot
-Disallow: /
+    Disallow: /
 
 User-agent: Bytespider
-Disallow: /
+    Disallow: /
 
 User-agent: dotbot
-Disallow: /
+    Disallow: /
 
 User-agent: meta-externalagent
-Disallow: /
+    Disallow: /
