@@ -146,7 +146,7 @@ def create_checkin():
         checkinCount = cursor.fetchone()
         cursor.close()
 
-        flash('Stored checkin to "{}" - You have checked in here {} times'.format(checkinVenue, checkinCount))
+        flash('Stored checkin to "{}" - You have checked in here {} times'.format(checkinVenue, checkinCount[0]))
 
         return redirect(url_for("create_checkin"))
 

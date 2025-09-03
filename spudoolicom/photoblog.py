@@ -148,7 +148,7 @@ def post(id):
             else:
                 cur = db.mysql.connection.cursor()
                 cur.execute("select email from approved_commenter where email = %s", (commentemail,))
-                approved = cursor.fetchone()
+                approved = cur.fetchone()
                 if approved == None:
                     publishcomment = "no"
                 else:
