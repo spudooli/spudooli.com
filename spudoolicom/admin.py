@@ -179,3 +179,57 @@ def checkin_search():
         html += f"<input type='submit' value='Checkin Here '  style='border: none; background: none; padding: 0;' ></form></li>"
     html += f"</ul>"
     return jsonify(html)
+
+
+@app.route('/admin/dinner', methods=['GET', 'POST'])
+@login_required
+def create_dinner():
+    if request.method == 'POST':
+        dinner = request.form['dinner']
+        dinnerDatetime = datetime.now()
+        dinnerId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+
+        cursor = db.mysql.connection.cursor()
+        mysql_insert_query = "INSERT ignore INTO recently (external_id, event_date, name, type) VALUES (%s, %s, %s, %s)"
+        record = (dinnerId, dinnerDatetime, dinner, "Dinner")
+        cursor.execute(mysql_insert_query, record)
+        db.mysql.connection.commit()
+        cursor.close()
+
+        # Get the count of checkins for the venue
+        cursor = db.mysql.connection.cursor()
+        cursor.execute('SELECT count(*) as count FROM recently WHERE name = %s and type = %s', (dinner, "Dinner"))
+        dinnerCount = cursor.fetchone()
+        cursor.close()
+
+        flash('Stored dinner to "{}" - You have eaten this dinner {} times'.format(dinner, dinnerCount[0]))
+
+        return redirect(url_for("create_dinner"))
+
+    if request.method == 'GET':
+        # query the last 30 dinners from the recently table to display on the page
+        cursor = db.mysql.connection.cursor()
+        cursor.execute('SELECT name, type FROM ( SELECT id, name, type  FROM recently  WHERE type = "Dinner"  ORDER BY id DESC LIMIT 60) subquery GROUP BY name, type')
+        dinners = cursor.fetchall()
+        cursor.close()
+
+    return render_template('admin-dinner.html', dinners=dinners)
+    
+
+@app.route('/admin/dinner-search', methods=['GET'])
+@login_required
+def dinner_search():
+    search_term = request.args.get('q', '')
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT name FROM recently WHERE name LIKE %s and type = 'Dinner' GROUP by name  ORDER BY MAX(event_date) DESC LIMIT 10", (f'%{search_term}%',))
+    results = cursor.fetchall()
+    cursor.close()
+    rows = []
+    html = f"<div id='comments'><ul>"
+    for row in results:
+        html += f"<li><strong>{row[0]}</strong><br />"
+        html += f"<form action='/admin/dinner' method='post' style='text-align: right; color: #195ddd'>"
+        html += f'''<input name='dinner' class='form-control' id='dinner' value="{row[0]}" type='hidden'>'''
+        html += f"<input type='submit' value='Eaten this Dinner again'  style='border: none; background: none; padding: 0;' ></form></li>"
+    html += f"</ul>"
+    return jsonify(html)

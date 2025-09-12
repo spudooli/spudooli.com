@@ -1,0 +1,78 @@
+
+{% extends 'adminbase.html' %}
+
+{% block header %}
+<div class="container-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="title-un">{% block title %}Dinner{% endblock %}</h1>
+                <div class="title-un-icon">
+                    <ion-icon name="fast-food-outline"></ion-icon>
+                </div>
+                <p class="title-un-des">Tell us what we had for dinner </p>
+
+                {% endblock %}
+
+                {% block content %}
+                <div id="comments">
+                    <p>Dinner Search</p>
+                    <div class="form-group">
+                        <input name="search-box" id="search-box" value="{{ request.form['name'] }}">
+                    </div>
+                    <div id="search-results"></div>
+
+
+                    <div class="col-md-9">
+                        <p>Previous Dinners</p>
+
+                        <ul>
+                            {% for dinner in dinners %}
+                            <li><strong>{{ dinner[0] }} </strong><br />
+                                {{ dinner[1] }}
+
+                                <form action="{{ url_for('create_dinner') }}" method="post"
+                                    style="text-align: right; color: #195ddd">
+                                    <input name="dinner" class="form-control" id="dinner" value="{{ dinner[0]|safe }}"
+                                        type="hidden">
+                                    <input class="danger" type="submit" value="Eaten this dinner again"
+                                        style="border: none; background: none; padding: 0;">
+                                </form>
+
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <p>Add a new dinner</p>
+                        <form action="{{ url_for('create_dinner') }}" method="post">
+                            <div class="form-group">
+                                <label for="name">Dinner Name</label>
+                                <input name="dinner" class="form-control" id="dinner"
+                                    value="{{ request.form['dinner'] }}">
+                            </div>
+                                <input class="danger" type="submit" value="Dinner Here ">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Close divs -->
+        </div>
+    </div>
+</div>
+  <script src="/static/js/jquery-3.7.1.min.js"></script>
+<script>
+
+$('#search-box').on('input', function() {
+    $.get('/admin/dinner-search', {q: $(this).val()}, function(data) {
+        // Update your search results here
+        // For example, you can create a dropdown list with the results
+
+        $('#search-results').html(data);
+    });
+});</script>
+
+
+
+{% endblock %}
+
+
