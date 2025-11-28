@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% set active_page = "house" %}
 
-{% block metadescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block metadescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{%
+endblock %}
 {% block ogtitle %}The House of Spudooli{% endblock %}
-{% block ogdescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{% endblock %}
+{% block ogdescription %}The temperatures, humidity, power usage, hectopascals, and fridge door numbers at our house{%
+endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
 {% block ogurl %}https://www.spudooli.com{{ url_for('house') }}{% endblock %}
 
@@ -18,7 +20,8 @@
         <div class="title-un-icon">
           <ion-icon name="home-outline"></ion-icon>
         </div>
-        <p class="title-un-des">The house, where we reveal our data. And in the Fediverse at <a rel="me" href="https://botsin.space/@spudooli_house">spudooli_house</a></p>
+        <p class="title-un-des">The house, where we reveal our data. And in the Fediverse at <a rel="me"
+            href="https://botsin.space/@spudooli_house">spudooli_house</a></p>
 
         {% endblock %}
 
@@ -150,7 +153,7 @@
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name=""></ion-icon>
-                  <div class="counter-number">  </div>
+                  <div class="counter-number"> </div>
                   <div class="counter-title"><a href=""></a> </div>
                 </div>
               </div>
@@ -173,17 +176,21 @@
               <div class="col-md-3">
                 <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="flash-outline"></ion-icon>
-                  <div class="counter-number"><div id="current_power"></div> </div>
+                  <div class="counter-number">
+                    <div id="current_power"></div>
+                  </div>
                   <div class="counter-title"><a href="/house/charts/power">Power W/h</a></div>
                 </div>
               </div>
               <div class="col-md-9">
                 <div>
                   <div class="spudooli-section-title">POWER</div>
-                  <p>We measure our power usage at the main power board and at the hot water cylinder with an update every 6 seconds or thereabouts.
+                  <p>We measure our power usage at the main power board and at the hot water cylinder with an update
+                    every 6 seconds or thereabouts.
                     Look over there to the left, it's about to change again!
                   </p>
-                  <p>TODO: Import some data from Mercury's website to give context to our <a href="/house/charts/power">charts</a></p>
+                  <p>TODO: Import some data from Mercury's website to give context to our <a
+                      href="/house/charts/power">charts</a></p>
                 </div>
               </div>
             </div>
@@ -203,8 +210,8 @@
               <div class="col-md-9">
                 <div>
                   <div class="spudooli-section-title">fridge Door Open Count </div>
-                  <p>From some time March 2005 to about March 2007 and then from August 2009 to about the end 
-                    of 2009 and then from March 2022 we tracked the fridge door being opened. For the days we 
+                  <p>From some time March 2005 to about March 2007 and then from August 2009 to about the end
+                    of 2009 and then from March 2022 we tracked the fridge door being opened. For the days we
                     have data, the average number of times the frige door is opened a day is around 49 times a day.</p>
                   <p>The fridge door has been opened <strong>{{ fridgedoortoday }}</strong> times today </p>
                 </div>
@@ -218,15 +225,16 @@
     </div>
   </div>
 </div>
-<script src="/static/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
   function power() {
-    $.get('power', function (data) {
-      $('#current_power').text(data);
-    });
+    fetch('power')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('current_power').textContent = data;
+      });
   }
 
-  $(document).ready(function () {
+  document.addEventListener('DOMContentLoaded', function () {
     setInterval(power, 6000);
   });
 
@@ -234,7 +242,7 @@
     power();
   }
 
-window.onload = start;
+  window.onload = start;
 </script>
 
 {% endblock %}

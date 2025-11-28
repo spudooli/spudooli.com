@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block metadescription %}This is our place on the internet. A place of experimentation, a place of data, photos, and other things that tickle my berries{% endblock %}
+{% block metadescription %}This is our place on the internet. A place of experimentation, a place of data, photos, and
+other things that tickle my berries{% endblock %}
 {% block ogtitle %}The Book of Spudooli{% endblock %}
-{% block ogdescription %}This is our place on the internet. A place of experimentation, a place of data, photos, and other things that tickle my berries{% endblock %}
+{% block ogdescription %}This is our place on the internet. A place of experimentation, a place of data, photos, and
+other things that tickle my berries{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
 {% block ogurl %}https://www.spudooli.com{{ url_for('main') }}{% endblock %}
 
@@ -15,7 +17,8 @@
         <div class="title-un-icon">
           <ion-icon name="sunny-outline"></ion-icon>
         </div>
-        <p class="title-un-des">This is our place on the internet. <br />A place of experimentation, a place of data, photos, and other things that tickle my berries.</p>
+        <p class="title-un-des">This is our place on the internet. <br />A place of experimentation, a place of data,
+          photos, and other things that tickle my berries.</p>
 
         {% endblock %}
 
@@ -39,7 +42,7 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="flash-outline"></ion-icon>
                   <div class="counter-number">
                     <div id="current_power"></div>
@@ -48,7 +51,7 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{indoortemp | safe}} </div>
                   <div class="counter-title"><a href="/house/charts/indoor">Inside Temperature</a></div>
@@ -63,8 +66,9 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                  <div class="counter-number"> <img src="/static/photoblog/thumbs/thumb_{{ latestpost[2] }}" class="img-fluid" alt="{{ latestpost[4] }}" width="287"> </div>
+                <div class="counter-box">
+                  <div class="counter-number"> <img src="/static/photoblog/thumbs/thumb_{{ latestpost[2] }}"
+                      class="img-fluid" alt="{{ latestpost[4] }}" width="287"> </div>
                 </div>
               </div>
               <div class="col-md-9">
@@ -82,14 +86,17 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
-                  <div class="counter-number"> <img src="/static/staticmap.png" class="img-fluid" alt="A static Google map showing a location on Auckland's North Shore" width="287" alt="small map of the Auckland area we are likely to be in"> </div>
+                <div class="counter-box">
+                  <div class="counter-number"> <img src="/static/staticmap.png" class="img-fluid"
+                      alt="A static Google map showing a location on Auckland's North Shore" width="287"
+                      alt="small map of the Auckland area we are likely to be in"> </div>
                 </div>
               </div>
               <div class="col-md-9">
                 <div>
                   <div class="spudooli-section-title"> Where are we</div>
-                  <p><a href="/location"> Where are Dave and Gabba?</a> </p><p>Where we are right now and where we have been
+                  <p><a href="/location"> Where are Dave and Gabba?</a> </p>
+                  <p>Where we are right now and where we have been
                     this year.</p>
                 </div>
               </div>
@@ -101,14 +108,16 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
-                  <div class="counter-number">  <img src="/static/spudooli-road-trips.png" class="img-fluid" width="287" alt="Youtube video thumbnail"></div>
+                <div class="counter-box">
+                  <div class="counter-number"> <img src="/static/spudooli-road-trips.png" class="img-fluid" width="287"
+                      alt="Youtube video thumbnail"></div>
                 </div>
               </div>
               <div class="col-md-9">
                 <div>
                   <div class="spudooli-section-title">Youtube Channel</div>
-                  <p><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Spudooli Road Trips</a> </p><p>Check out our Youtube channel for some great slow TV</p>
+                  <p><a href="https://www.youtube.com/channel/UCO1EjsF0MfG6q63V7c8zqpw">Spudooli Road Trips</a> </p>
+                  <p>Check out our Youtube channel for some great slow TV</p>
                 </div>
               </div>
             </div>
@@ -119,8 +128,9 @@
           <div class="container">
             <div class="row">
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                  <div class="counter-number"> <img src="https://www.spudooli.com/static/isobars.jpeg" class="img-fluid" width="287"  alt="isobars map"> </div>
+                <div class="counter-box">
+                  <div class="counter-number"> <img src="https://www.spudooli.com/static/isobars.jpeg" class="img-fluid"
+                      width="287" alt="isobars map"> </div>
                 </div>
               </div>
               <div class="col-md-9">
@@ -151,7 +161,7 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="logo-mastodon"></ion-icon>
                   <div class="counter-number">
                     <div id="current_power">{{ mastodoncount }}</div>
@@ -160,7 +170,7 @@
                 </div>
               </div>
               <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
                   <ion-icon name="thermometer-outline"></ion-icon>
                   <div class="counter-number"> {{mancaveTemperature | safe}} </div>
                   <div class="counter-title"><a href="/house/charts/mancave">Man Cave Temperature</a></div>
@@ -179,15 +189,16 @@
 
 
 
-<script src="/static/js/jquery-3.7.1.min.js" type="text/javascript"></script>
 <script>
   function power() {
-    $.get('power', function (data) {
-      $('#current_power').text(data);
-    });
+    fetch('power')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('current_power').textContent = data;
+      });
   }
 
-  $(document).ready(function () {
+  document.addEventListener('DOMContentLoaded', function () {
     setInterval(power, 6000);
   });
 
