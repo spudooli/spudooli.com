@@ -1,16 +1,23 @@
 from operator import contains
 from spudoolicom import app, db, forms
-from flask import render_template, make_response, redirect, request, send_from_directory, flash
+from flask import render_template, make_response, redirect, request, send_from_directory, flash, g
 from datetime import datetime
 import redis
 from werkzeug.security import check_password_hash
 from spudoolicom.auth import login_required
 from flask_wtf.csrf import CSRFProtect, CSRFError
 import logging
+import json
 
 
 r = redis.StrictRedis('localhost', 6379, charset="utf-8",
                       decode_responses=True)
+
+import secrets
+
+@app.before_request
+def set_nonce():
+    g.csp_nonce = secrets.token_urlsafe(16)
 
 
 @app.route('/')
@@ -157,6 +164,15 @@ def ipservices():
             return f"An error occurred: {e}", 500
     else:
         return "Unauthorized User-Agent", 403
+
+
+@app.route('/csp-report-to/', methods=['POST'])
+def csp_report():
+    report = request.get_json(force=True, silent=True)
+    if report:
+        with open('/tmp/csp_reports.log', 'a') as f:
+            f.write(json.dumps(report) + '\n')
+    return '', 200
 
 
 @app.route('/robots.txt')

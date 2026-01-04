@@ -6,16 +6,12 @@ from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__, static_folder='static')
 
-
 from . import auth
 app.register_blueprint(auth.bp)
 
-
 app.config.from_pyfile('config.py')
 
-@app.before_request
-def set_nonce():
-    g.csp_nonce = request.environ.get("REQUEST_ID")
+
 
 @app.context_processor
 def inject_now():
@@ -23,10 +19,8 @@ def inject_now():
 
 
 if not app.debug:
-    file_handler = RotatingFileHandler('/tmp/spud.log', maxBytes=100240,
-                                       backupCount=10)
-    file_handler.setFormatter(logging.Formatter(
-        '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
+    file_handler = RotatingFileHandler('/tmp/spud.log', maxBytes=100240, backupCount=10)
+    file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
     file_handler.setLevel(logging.WARNING)
     app.logger.addHandler(file_handler)
 

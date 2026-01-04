@@ -14,82 +14,84 @@
       <div class="col-md-12">
         <h1 class="title-un">{% block title %}Spudooli Photo Albums{% endblock %}</h1>
         <div class="title-un-icon">
-            <ion-icon name="images-outline"></ion-icon>
+          <ion-icon name="images-outline"></ion-icon>
         </div>
-          <p class="title-un-des"><Our photos, right here on the web to make it easier to share thembr>
-            
-       </div></p>
-        
-        {% endblock %}
+        <p class="title-un-des">Our photos, right here on the web to make it easier to share them<br>
 
-        {% block content %}
-      
-       
-        <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="images-outline"></ion-icon>
-                    <div class="counter-number"> {{ photocount }} </div>
-                    <div class="counter-title">Total Photos</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="counter-title">Choose a photo album</div>
+      </div>
+      </p>
 
-                    {% for parent_albumID, album_name in photoalbums | groupby("parent_albumID")  %}
+      {% endblock %}
+
+      {% block content %}
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="images-outline"></ion-icon>
+                <div class="counter-number"> {{ photocount }} </div>
+                <div class="counter-title">Total Photos</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="counter-title">Choose a photo album</div>
+
+                {% for parent_albumID, album_name in photoalbums | groupby("parent_albumID") %}
                 <br>
                 {% if parent_albumID != 0 %}
-                {{ parent_albumID}} 
+                {{ parent_albumID}}
                 <br>
-                {% for thing in album_name  %}
-                
+                {% for thing in album_name %}
+
                 <ul>
-                  <li><a href="/photos/album/{{thing.albumID }}">{{ thing.album_name }}</a> - {{ thing.album_desc }}</li>
-               </ul>
-               {% endfor %}
+                  <li><a href="/photos/album/{{thing.albumID }}">{{ thing.album_name }}</a> - {{ thing.album_desc }}
+                  </li>
+                </ul>
+                {% endfor %}
                 {% endif %}
-               {% endfor %}
-                    
-                  </div>
-                </div>
+                {% endfor %}
+
               </div>
             </div>
           </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="counter-title">Artist Playcount</div>
-                    <p>
-                        {% for thing in top20artists  %}
-                        <ul>
-                          <li>{{ thing.playcount }} - {{ thing.artist }}</li>
-                       </ul>
-                       {% endfor %}</p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-        <!-- Close divs -->
+        </div>
       </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="counter-title">Artist Playcount</div>
+                <p>
+                  {% for thing in top20artists %}
+                <ul>
+                  <li>{{ thing.playcount }} - {{ thing.artist }}</li>
+                </ul>
+                {% endfor %}</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Close divs -->
     </div>
   </div>
+</div>
 </div>
 
 
