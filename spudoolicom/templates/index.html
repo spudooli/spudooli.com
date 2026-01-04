@@ -189,7 +189,7 @@ other things that tickle my berries{% endblock %}
 
 
 
-<script>
+<script nonce="{{ csp_nonce }}">
   function power() {
     fetch('power')
       .then(response => response.text())

@@ -14,256 +14,296 @@
       <div class="col-md-12">
         <h1 class="title-un">{% block title %}Projects{% endblock %}</h1>
         <div class="title-un-icon">
-            <ion-icon name="construct-outline"></ion-icon>
+          <ion-icon name="construct-outline"></ion-icon>
         </div>
-          <p class="title-un-des">Every now and then a thought occurs to me and I go off hunting that data to support my hypothesis and usually cherry pick the data to prove I'm right. Because!<br>
-            
-       </div></p>
-        
-        {% endblock %}
+        <p class="title-un-des">Every now and then a thought occurs to me and I go off hunting that data to support my
+          hypothesis and usually cherry pick the data to prove I'm right. Because!<br>
 
-        {% block content %}
-      
-
-
-        <div class="container-counter-box">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                  <ion-icon name="book-outline"></ion-icon>
-                  <div class="counter-number"><div id="current_power"></div>{{ numTweetsToots }} </div>
-                  <div class="counter-title"><a href="/projects/the-book-of-dave">Tweets/Toots</a></div>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <div>
-                  <div class="spudooli-section-title">The Book of Dave</div>
-                  <p>I've said a bunch of dumb things and sometimes said some things that will be remembered across the ages, compiled into a book and used as a guide to life for millennia. This is them, graze upon them. These are The (newer) Book Of Dave  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       
-        <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                    <ion-icon name="radio-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ queenplaycount }} </div>
-                    <div class="counter-title"><a href="/projects/too-much-queen">Songs by Queen</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Too much Queen and Rolling Stones</div>
-                    <p>I'm Gen X, I listen to the music of the best decades, 80s, 70s, some small portion of the 90s and 60's. That means The Sound, Coast Fm and Gold FM and some Hauraki.
-                      I had started to form an opinion that <a href="/projects/too-much-queen">Auckland radio stations play too much Queen</a>, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.</p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                    <ion-icon name="bookmark-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ bookmarkcount }} </div>
-                    <div class="counter-title"><a href="/projects/bookmarks">Bookmarks</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Bookmarks</div>
-                    <p>For a long time, there was delicio.us, where I stored <a href="/projects/bookmarks">bookmarks for things that I'd need</a> at some later date. Then that disappeared. 
-                      So here is another thing that I've moved in house.</p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                    <ion-icon name="disc-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> {{ lastfmcount }}</div>
-                    <div class="counter-title"><a href="/projects/music">Music Played</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Music</div>
-                    <p>I listen to music. This is <a href="/projects/music">what I listen to</a>.</p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                    <ion-icon name="flower-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> {{ catscount }}</div>
-                    <div class="counter-title"><a href="/projects/cats">Total cats recorded</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Cats on the driveway</div>
-                    <p>Our <a href="/projects/cats">cats like to patrol the driveway</a>. This is us keeping track of that along with the last 3 images of them.</p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
-                    <ion-icon name="checkmark-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> {{ swarmcount }}</div>
-                    <div class="counter-title"><a href="/projects/checkins">Total checkins</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">I check in to almost everywhere I go</div>
-                    <p>I know where I was on January 30th 2010 at 16:46:25 - Countdown Supermarket in Sunnynook, because I <a href="/projects/checkins">check in where I go</a>. </p>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
-                    <ion-icon name="newspaper-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> </div>
-                    <div class="counter-title"><a href="https://news.spudooli.com">Spudooli News</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Spudooli News</div>
-                    <p>I stopped consuming the news. It was just too much. I was a news junkie. I thought he who is not informed, is a dummy. But then the news became too much and I'd had enough. So 
-                      I made my own news site where I could control where and what I could consume. <a href="https://news.spudooli.com">Spudooli News is good enough news</a> for me.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".6s">
-                    <ion-icon name="logo-rss"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> </div>
-                    <div class="counter-title"><a href="https://reader.spudooli.com/about">Spudooli Reader</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Spudooli Reader</div>
-                    <p> I coded my own <a href="https://reader.spudooli.com/about">RSS Feed Reader</a> in a weekend and am much happier for it..
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
-                    <ion-icon name="image-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> </div>
-                    <div class="counter-title"><a href="/projects/spudpic">Spudpic</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Spudpic</div>
-                    <p>During the early days of Twitter, there was no way to post images with your tweets. So someone invented <a href="https://en.wikipedia.org/wiki/TwitPic">TwitPic</a>. 
-                    Of course, I wasn't one much to enjoy publishing my content for someone else's enrichment, so coded my own solution - <a href="/projects/spudpic">Spudpic</a>.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".8s">
-                    <ion-icon name="bluetooth-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> </div>
-                    <div class="counter-title"><a href="/house/charts/power">Bluetooth Devices</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Bluetooth is everywhere/</div>
-                    <p>In the late 2000s, we used to live across the road from a primary school, which meant 2 school drop off's and piskup's a day. I noticed a new trend in Bluetooth</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="card-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div> </div>
-                    <div class="counter-title"><a href="/house/charts/power">Bank Balance</a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Our bank balance</div>
-                    <p>Online privacy. If you give it away, you are in control, no one can take it. With no context, does telling you our bank balance mean anything?</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-        <!-- Close divs -->
       </div>
+      </p>
+
+      {% endblock %}
+
+      {% block content %}
+
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="book-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ numTweetsToots }}
+                </div>
+                <div class="counter-title"><a href="/projects/the-book-of-dave">Tweets/Toots</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">The Book of Dave</div>
+                <p>I've said a bunch of dumb things and sometimes said some things that will be remembered across the
+                  ages, compiled into a book and used as a guide to life for millennia. This is them, graze upon them.
+                  These are The (newer) Book Of Dave </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="radio-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ queenplaycount }}
+                </div>
+                <div class="counter-title"><a href="/projects/too-much-queen">Songs by Queen</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Too much Queen and Rolling Stones</div>
+                <p>I'm Gen X, I listen to the music of the best decades, 80s, 70s, some small portion of the 90s and
+                  60's. That means The Sound, Coast Fm and Gold FM and some Hauraki.
+                  I had started to form an opinion that <a href="/projects/too-much-queen">Auckland radio stations play
+                    too much Queen</a>, Elton John and Rolling Stones. so set out to prove that thinking with data. I
+                  was bloody right.</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="bookmark-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ bookmarkcount }}
+                </div>
+                <div class="counter-title"><a href="/projects/bookmarks">Bookmarks</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Bookmarks</div>
+                <p>For a long time, there was delicio.us, where I stored <a href="/projects/bookmarks">bookmarks for
+                    things that I'd need</a> at some later date. Then that disappeared.
+                  So here is another thing that I've moved in house.</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="disc-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div> {{ lastfmcount }}
+                </div>
+                <div class="counter-title"><a href="/projects/music">Music Played</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Music</div>
+                <p>I listen to music. This is <a href="/projects/music">what I listen to</a>.</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="flower-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div> {{ catscount }}
+                </div>
+                <div class="counter-title"><a href="/projects/cats">Total cats recorded</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Cats on the driveway</div>
+                <p>Our <a href="/projects/cats">cats like to patrol the driveway</a>. This is us keeping track of that
+                  along with the last 3 images of them.</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="checkmark-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div> {{ swarmcount }}
+                </div>
+                <div class="counter-title"><a href="/projects/checkins">Total checkins</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">I check in to almost everywhere I go</div>
+                <p>I know where I was on January 30th 2010 at 16:46:25 - Countdown Supermarket in Sunnynook, because I
+                  <a href="/projects/checkins">check in where I go</a>.
+                </p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="newspaper-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"><a href="https://news.spudooli.com">Spudooli News</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Spudooli News</div>
+                <p>I stopped consuming the news. It was just too much. I was a news junkie. I thought he who is not
+                  informed, is a dummy. But then the news became too much and I'd had enough. So
+                  I made my own news site where I could control where and what I could consume. <a
+                    href="https://news.spudooli.com">Spudooli News is good enough news</a> for me.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="logo-rss"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"><a href="https://reader.spudooli.com/about">Spudooli Reader</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Spudooli Reader</div>
+                <p> I coded my own <a href="https://reader.spudooli.com/about">RSS Feed Reader</a> in a weekend and am
+                  much happier for it..
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="image-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"><a href="/projects/spudpic">Spudpic</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Spudpic</div>
+                <p>During the early days of Twitter, there was no way to post images with your tweets. So someone
+                  invented <a href="https://en.wikipedia.org/wiki/TwitPic">TwitPic</a>.
+                  Of course, I wasn't one much to enjoy publishing my content for someone else's enrichment, so coded my
+                  own solution - <a href="/projects/spudpic">Spudpic</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="bluetooth-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"><a href="/house/charts/power">Bluetooth Devices</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Bluetooth is everywhere/</div>
+                <p>In the late 2000s, we used to live across the road from a primary school, which meant 2 school drop
+                  off's and piskup's a day. I noticed a new trend in Bluetooth</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <ion-icon name="card-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"><a href="/house/charts/power">Bank Balance</a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Our bank balance</div>
+                <p>Online privacy. If you give it away, you are in control, no one can take it. With no context, does
+                  telling you our bank balance mean anything?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Close divs -->
     </div>
   </div>
+</div>
 </div>
 
 

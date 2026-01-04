@@ -225,7 +225,7 @@ endblock %}
     </div>
   </div>
 </div>
-<script>
+<script nonce="{{ csp_nonce }}">
   function power() {
     fetch('power')
       .then(response => response.text())

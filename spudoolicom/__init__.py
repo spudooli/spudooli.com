@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, g, request
 from datetime import datetime
 import logging
 from logging.handlers import RotatingFileHandler
@@ -13,6 +13,9 @@ app.register_blueprint(auth.bp)
 
 app.config.from_pyfile('config.py')
 
+@app.before_request
+def set_nonce():
+    g.csp_nonce = request.environ.get("REQUEST_ID")
 
 @app.context_processor
 def inject_now():
