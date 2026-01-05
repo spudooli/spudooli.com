@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% set active_page = "projects" %}
 
-{% block metadescription %}I had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right{% endblock %}
+{% block metadescription %}I had started to form an opinion that Auckland radio stations play too much Queen, Elton John
+and Rolling Stones. so set out to prove that thinking with data. I was bloody right{% endblock %}
 {% block ogtitle %} Too Much Queen on Auckland Radio {% endblock %}
 {% block ogdescription %}Auckland radio stations play too much Queen, Elton John and Rolling Stones{% endblock %}
 {% block ogimage %}https://www.spudooli.com/static/images/spudooli-og.jpg{% endblock %}
@@ -14,330 +15,344 @@
       <div class="col-md-12">
         <h1 class="title-un">{% block title %}Too Much Queen on Auckland Radio - Projects{% endblock %}</h1>
         <div class="title-un-icon">
-            <ion-icon name="radio-outline"></ion-icon>
+          <ion-icon name="radio-outline"></ion-icon>
         </div>
-          <p class="title-un-des">I had started to form an opinion that Auckland radio stations play too much Queen, Elton John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.<br>
-            Data collected since 24th June 2023
-       </div></p>
-        
-        {% endblock %}
-
-        {% block content %}
-      
-       
-        <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="radio-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ queenpercentage }}% </div>
-                    <div class="counter-title">of all songs played are Queen</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Too much Queen</div>
-                    <p>Queen are good, but are they so good they should command {{ queenpercentage }}% of all songs played on Boomer/GenX radio (GoldFM, The Sound, Coast FM, Radio Hauraki) in Auckland. The answer it a resounding bloody no.</p>
-                 
-             
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-
-                <canvas id="myqueenChart" width="1000" height="400"></canvas>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                <script>
-                    var ctx = document.getElementById("myqueenChart");
-                    var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: {{ queenplaysbymonthlabels | safe }},
-                        
-                        datasets: [
-                            {
-                            label: "Songs played by Queen per Month",
-                            backgroundColor: '#195ddd',
-                            borderColor: '#000',
-                            data: {{ queenplaysbymonthvalues | safe }},
-                    }
-
-                    ]
-                }
-            });
-                </script>
-            </div>
-        </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="counter-title">Artist Playcount</div>
-                    <table class="table table-condensed table-hover">
-                      <thead>
-                        <tr>
-                          <th>Play Count</th>
-                          <th>Track</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for thing in top20artists  %}
-                        <tr>
-                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td> {{ thing.artist }}</td>
-                          </tr>
-                          {% endfor %}</tbody></table>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="radio-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ "{:,}".format(totalsongcount) }} </div>
-                    <div class="counter-title">Total songs played </div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Total Songs played since 24th June 2023</div>
-                    <p>I coded this on 24th June 2023 with only 2 stations, The Sound and Gold FM and then a month later added Hauraki and Coast FM. Even though Coast FM has a month's less data, they are clearly playing more music.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp">
-                    <ion-icon name="musical-notes-outline"></ion-icon>
-                    <div class="counter-number"> {{ "{:,}".format(haurakisongcount) }} </div>
-                    <div class="counter-title">Hauraki Total Song Count</div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                    <ion-icon name="musical-notes-outline"></ion-icon>
-                    <div class="counter-number"> {{ "{:,}".format(thesoundsongcount) }} </div>
-                    <div class="counter-title">The Sound Total Song Count </div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="musical-notes-outline"></ion-icon>
-                    <div class="counter-number"> {{ "{:,}".format(thecoastsongcount) }} </div>
-                    <div class="counter-title"> The Coast Total Song Count</a></div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
-                    <ion-icon name="musical-notes-outline"></ion-icon>
-                    <div class="counter-number"> {{ "{:,}".format(goldfmsongcount) }} </div>
-                    <div class="counter-title">Gold FM Total Song Count</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Top 20 Songs Playcount for all radio stations</div>
-                    <table class="table table-condensed table-hover">
-                      <thead>
-                        <tr>
-                          <th>Play Count</th>
-                          <th>Track</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for thing in top20songs  %}
-                        <tr>
-                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
-                          </tr>
-                          {% endfor %}</tbody></table>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Radio Hauraki Top 20 Songs Playcount</div>
-                    <table class="table table-condensed table-hover">
-                      <thead>
-                        <tr>
-                          <th>Play Count</th>
-                          <th>Track</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for thing in haurakisongs20  %}
-                        <tr>
-                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
-                          </tr>
-                          {% endfor %}</tbody></table>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">The Sound Top 20 Songs Playcount</div>
-                    <table class="table table-condensed table-hover">
-                      <thead>
-                        <tr>
-                          <th>Play Count</th>
-                          <th>Track</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for thing in thesoundsongs20  %}
-                        <tr>
-                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
-                          </tr>
-                          {% endfor %}</tbody></table>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Coast FM Top 20 Songs Playcount</div>
-                    <table class="table table-condensed table-hover">
-                      <thead>
-                        <tr>
-                          <th>Play Count</th>
-                          <th>Track</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {% for thing in thecoastsongs20  %}
-                        <tr>
-                          <td  width="25%">{{ "{:,}".format(thing.playcount) }}</td><td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
-                          </tr>
-                          {% endfor %}</tbody></table>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                    <ion-icon name="radio-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ "{:,}".format(distinctartists) }} </div>
-                    <div class="counter-title">Total unique Artists played </div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Distinct Artists</div>
-                    <p>Over the years I have spent way too many hours messing with ID3 tags of my own music collections to get them perfect. They are still not. Radio stations ID3 tags are worse than mine. This is the total artists they have played</p>
-                    <p>And below is distinct artists by radio station. I'm willing to bet that at any one time all of them have advertised they have the most variety in music, clearly not the case</p>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                {% for thing in artistsbystation  %}
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp">
-                    <ion-icon name="musical-notes-outline"></ion-icon>
-                    <div class="counter-number"> {{ "{:,}".format(thing.artistplaycount) }} </div>
-                    <div class="counter-title">Unique artists played by {{ thing.station }}</div>
-                  </div>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div>
-
-        <!-- Close divs -->
+        <p class="title-un-des">I had started to form an opinion that Auckland radio stations play too much Queen, Elton
+          John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.<br>
+          Data collected since 24th June 2023
       </div>
+      </p>
+
+      {% endblock %}
+
+      {% block content %}
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="radio-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ queenpercentage }}%
+                </div>
+                <div class="counter-title">of all songs played are Queen</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Too much Queen</div>
+                <p>Queen are good, but are they so good they should command {{ queenpercentage }}% of all songs played
+                  on Boomer/GenX radio (GoldFM, The Sound, Coast FM, Radio Hauraki) in Auckland. The answer it a
+                  resounding bloody no.</p>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+
+          <canvas id="myqueenChart" width="1000" height="400" data-labels='{{ queenplaysbymonthlabels | tojson }}'
+            data-values='{{ queenplaysbymonthvalues | tojson }}'></canvas>
+
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="counter-title">Artist Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top20artists %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="radio-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ "{:,}".format(totalsongcount) }}
+                </div>
+                <div class="counter-title">Total songs played </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Total Songs played since 24th June 2023</div>
+                <p>I coded this on 24th June 2023 with only 2 stations, The Sound and Gold FM and then a month later
+                  added Hauraki and Coast FM. Even though Coast FM has a month's less data, they are clearly playing
+                  more music.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(haurakisongcount) }} </div>
+                <div class="counter-title">Hauraki Total Song Count</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(thesoundsongcount) }} </div>
+                <div class="counter-title">The Sound Total Song Count </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(thecoastsongcount) }} </div>
+                <div class="counter-title"> The Coast Total Song Count</a></div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".3s">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(goldfmsongcount) }} </div>
+                <div class="counter-title">Gold FM Total Song Count</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Top 20 Songs Playcount for all radio stations</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top20songs %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Radio Hauraki Top 20 Songs Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in haurakisongs20 %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">The Sound Top 20 Songs Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in thesoundsongs20 %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Coast FM Top 20 Songs Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in thecoastsongs20 %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="radio-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ "{:,}".format(distinctartists) }}
+                </div>
+                <div class="counter-title">Total unique Artists played </div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Distinct Artists</div>
+                <p>Over the years I have spent way too many hours messing with ID3 tags of my own music collections to
+                  get them perfect. They are still not. Radio stations ID3 tags are worse than mine. This is the total
+                  artists they have played</p>
+                <p>And below is distinct artists by radio station. I'm willing to bet that at any one time all of them
+                  have advertised they have the most variety in music, clearly not the case</p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            {% for thing in artistsbystation %}
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(thing.artistplaycount) }} </div>
+                <div class="counter-title">Unique artists played by {{ thing.station }}</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Close divs -->
     </div>
   </div>
 </div>
+</div>
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="{{ url_for('static', filename='js/queen-charts.js') }}"></script>
 {% endblock %}

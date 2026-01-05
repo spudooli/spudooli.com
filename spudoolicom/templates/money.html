@@ -18,10 +18,12 @@
                     <ion-icon name="home-outline"></ion-icon>
                 </div>
                 <p class="title-un-des">How we've spent quite a lot of money since about 1996. Because we run our house
-                    out of a single bank account, and have done since about 1994, we have a very good history of how we 
+                    out of a single bank account, and have done since about 1994, we have a very good history of how we
                     spend our money.<br>
-                    In the database is <strong>{{ numTransactions }}</strong> transactions, starting <strong>12/2/1996</strong> 
-                    and the latest <strong>{{ lastTransaction }}</strong></p>
+                    In the database is <strong>{{ numTransactions }}</strong> transactions, starting
+                    <strong>12/2/1996</strong>
+                    and the latest <strong>{{ lastTransaction }}</strong>
+                </p>
 
                 {% endblock %}
 
@@ -48,7 +50,8 @@
                                     <p>On first reflection, this seems like a huge amount of money, and it is of course,
                                         but simplistically (not taking into account inflation etc) it's only about
                                         <strong>$4,335</strong> a year or <strong>$360</strong> a month to run 2 cars.
-                                        Bring on EVs!</p>
+                                        Bring on EVs!
+                                    </p>
                                     <p>Z should be sending us a Christmas card every year though</p>
                                     <p>Note the fascinating spend gap for April 2020 when NZ went into lockdown the
                                         first time where our only purchase at a service station was a bottle of milk</p>
@@ -101,42 +104,10 @@
                     </div>
                 </div>
 
-                <div class="container-counter-box">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="counter-box wow fadeInUp">
-                                    <ion-icon name="car-outline"></ion-icon>
-                                    <div class="counter-number"> {{ gull | replace('-', '$')}} </div>
-                                    <div class="counter-title"> Gull</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div class="chartcenter">
-                    <canvas id="myChart" width="1000" height="400"></canvas>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                    <script>
-                        var ctx = document.getElementById("myChart");
-                        var myChart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: {{ labels | safe}},
-                            datasets: [
-                            {
-                                label: "$ Spend on Petrol by Month",
-                                backgroundColor: '#195ddd',
-                                borderColor: '#000',
-                                data: {{ values | safe }},
-                        }
+                    <canvas id="myChart" width="1000" height="400" data-labels='{{ labels | tojson }}'
+                        data-values='{{ values | tojson }}'></canvas>
 
-                        ]
-                    }
-                });
-                    </script>
                 </div>
 
 
@@ -160,14 +131,16 @@
                                                     <ion-icon name="cart-outline"></ion-icon>
                                                     <div class="counter-number">{{ totalSupermarketSpend | replace('-',
                                                         '$') }}</div>
-                                                    <div class="counter-title">Possibly only half our Supermarket spend</div>
+                                                    <div class="counter-title">Possibly only half our Supermarket spend
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
                                                 <div>
                                                     <div class="spudooli-section-title">Supermarkets suck our cash</div>
                                                     <p>Our total supermarket spend is not entirely accurate for various
-                                                        reasons, but it's still interesting to compare where we spend the money.
+                                                        reasons, but it's still interesting to compare where we spend
+                                                        the money.
                                                     </p>
                                                     <p>Despite this data not including every time we've ever been to the
                                                         supermarket, the total visits we do have is
@@ -252,12 +225,16 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <div>
-                                                    <div class="spudooli-section-title">The changing habits of our spend at The Warehouse</div>
+                                                    <div class="spudooli-section-title">The changing habits of our spend
+                                                        at The Warehouse</div>
                                                     <p>At one point it seemed we were in The Warehouse almost every
                                                         weekend and then suddenly it occured to me
-                                                        that it was bloody ages since I was last there. I assume it's because we stopped buying stuff for the kids. 
-                                                        The chart below shows our The Warehouse purchase history $ spend by month. Amusingly the last few years
-                                                        we are shopping at The Warehouse, again for the kids but this time buying stuff for them to move out 
+                                                        that it was bloody ages since I was last there. I assume it's
+                                                        because we stopped buying stuff for the kids.
+                                                        The chart below shows our The Warehouse purchase history $ spend
+                                                        by month. Amusingly the last few years
+                                                        we are shopping at The Warehouse, again for the kids but this
+                                                        time buying stuff for them to move out
                                                         into places of their own.
                                                     </p>
                                                     <p>If I was to guess, our spend at McDonalds would possibly follow a
@@ -271,184 +248,160 @@
                                 <div class="container-counter-box">
                                     <div class="container">
 
-                                        <canvas id="myWarehouseChart" width="1000" height="400"></canvas>
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                                        <script>
-                                            var ctx = document.getElementById("myWarehouseChart");
-                                            var myChart = new Chart(ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: {{ warehouselabels | safe }},
-                                                datasets: [{
-                                                    label: "$ Spend at The Warehouse by Month",
-                                                    backgroundColor: '#195ddd',
-                                                    borderColor: '#000',
-                                                    data: {{ warehousevalues | safe }},
-                                                    }]
-                                                }
-                                    });
-                                        </script>
+                                        <canvas id="myWarehouseChart" width="1000" height="400"
+                                            data-labels='{{ warehouselabels | tojson }}'
+                                            data-values='{{ warehousevalues | tojson }}'></canvas>
+
                                     </div>
                                 </div>
                                 <!-- End Containter Contents  -->
                                 <!-- End Page Containter  -->
-<!-- Page Containter header  -->
- 
-                <div class="container-about">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h3 class="title-un">The Hardware Stores</h3>
-                                <div class="title-un-icon">
-                                    <ion-icon name="hammer-outline"></ion-icon>
-                                </div>
-                                <p class="title-un-des"></p>
-                                <!-- End Page Containter header  -->
-                                <!-- Containter contents  -->
-                                <div class="container-counter-box">
+                                <!-- Page Containter header  -->
+
+                                <div class="container-about">
                                     <div class="container">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                            <div class="col-md-12">
+                                                <h3 class="title-un">The Hardware Stores</h3>
+                                                <div class="title-un-icon">
                                                     <ion-icon name="hammer-outline"></ion-icon>
-                                                    <div class="counter-number">{{ hardware | replace('-', '$') }}</div>
-                                                    <div class="counter-title">Total Spend at Hardware stores</div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div>
-                                                    <div class="spudooli-section-title">We bought a house to spend money at hardware stores</div>
-                                                    <p>We bought our house in January 2010. Which is about exactly when the chart below shows a marked increase
-                                                        in our spending at Hardware stores. Conveniently or not, we live only 800m from a Bunnings. We have 
-                                                        been to Bunnings Constellation <strong>{{ bunningsconstellation }}</strong> times. 
+                                                <p class="title-un-des"></p>
+                                                <!-- End Page Containter header  -->
+                                                <!-- Containter contents  -->
+                                                <div class="container-counter-box">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="counter-box wow fadeInUp"
+                                                                    data-wow-delay=".2s">
+                                                                    <ion-icon name="hammer-outline"></ion-icon>
+                                                                    <div class="counter-number">{{ hardware |
+                                                                        replace('-', '$') }}</div>
+                                                                    <div class="counter-title">Total Spend at Hardware
+                                                                        stores</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <div>
+                                                                    <div class="spudooli-section-title">We bought a
+                                                                        house to spend money at hardware stores</div>
+                                                                    <p>We bought our house in January 2010. Which is
+                                                                        about exactly when the chart below shows a
+                                                                        marked increase
+                                                                        in our spending at Hardware stores. Conveniently
+                                                                        or not, we live only 800m from a Bunnings. We
+                                                                        have
+                                                                        been to Bunnings Constellation <strong>{{
+                                                                            bunningsconstellation }}</strong> times.
 
-                                                    </p>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div class="container-counter-box">
+                                                    <div class="container">
+
+                                                        <canvas id="myhardwareChart" width="1000" height="400"
+                                                            data-labels='{{ hardwarelabels | tojson }}'
+                                                            data-values='{{ hardwarevalues | tojson }}'></canvas>
+
+                                                    </div>
+                                                </div>
+                                                <!-- End Containter Contents  -->
+                                                <!-- End Page Containter  -->
+
+                                                <!-- Page Containter header  -->
+
+                                                <div class="container-about">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <h3 class="title-un">KFC</h3>
+                                                                <div class="title-un-icon">
+                                                                    <ion-icon name="egg-outline"></ion-icon>
+                                                                </div>
+                                                                <p class="title-un-des"></p>
+                                                                <!-- End Page Containter header  -->
+                                                                <!-- Containter contents  -->
+                                                                <div class="container-counter-box">
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-3">
+                                                                                <div class="counter-box wow fadeInUp"
+                                                                                    data-wow-delay=".2s">
+                                                                                    <ion-icon
+                                                                                        name="egg-outline"></ion-icon>
+                                                                                    <div class="counter-number">{{
+                                                                                        kfctotal | replace('-', '$') }}
+                                                                                    </div>
+                                                                                    <div class="counter-title">Total
+                                                                                        Spend at KFC</div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-9">
+                                                                                <div>
+                                                                                    <div class="spudooli-section-title">
+                                                                                        Avoiding the post KFC purchase
+                                                                                        regret</div>
+                                                                                    <p>KFC isn't our favourite,
+                                                                                        apparently, having only
+                                                                                        purchased there
+                                                                                        <strong>21</strong> times in the
+                                                                                        last 28 years and only once in
+                                                                                        the last 8.
+
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="container-counter-box">
+                                                                    <div class="container">
+
+                                                                        <canvas id="mykfcChart" width="1000"
+                                                                            height="400"
+                                                                            data-labels='{{ kfclabels | tojson }}'
+                                                                            data-values='{{ kfcvalues | tojson }}'></canvas>
+
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End Containter Contents  -->
+                                                                <!-- End Page Containter  -->
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Containter  -->
+
+
+
+
+
+
+
+
+
+                                                <!-- Close divs -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="container-counter-box">
-                                    <div class="container">
-
-                                        <canvas id="myhardwareChart" width="1000" height="400"></canvas>
-                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                                        <script>
-                                            var ctx = document.getElementById("myhardwareChart");
-                                            var myChart = new Chart(ctx, {
-                                                type: 'bar',
-                                                data: {
-                                                    labels: {{ hardwarelabels | safe }},
-                                                
-                                                datasets: [
-                                                    {
-                                                    label: "$ Spend at all hardware stores by Month",
-                                                    backgroundColor: '#195ddd',
-                                                    borderColor: '#000',
-                                                    data: {{ hardwarevalues | safe }},
-                                            }
-                    
-                                            ]
-                                        }
-                                    });
-                                        </script>
-                                    </div>
-                                </div>
-                                <!-- End Containter Contents  -->
-                                <!-- End Page Containter  -->
-
-<!-- Page Containter header  -->
- 
-<div class="container-about">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="title-un">KFC</h3>
-                <div class="title-un-icon">
-                    <ion-icon name="egg-outline"></ion-icon>
-                </div>
-                <p class="title-un-des"></p>
-                <!-- End Page Containter header  -->
-                <!-- Containter contents  -->
-                <div class="container-counter-box">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                                    <ion-icon name="egg-outline"></ion-icon>
-                                    <div class="counter-number">{{ kfctotal | replace('-', '$') }}</div>
-                                    <div class="counter-title">Total Spend at KFC</div>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div>
-                                    <div class="spudooli-section-title">Avoiding the post KFC purchase regret</div>
-                                    <p>KFC isn't our favourite, apparently, having only purchased there <strong>21</strong> times in the last 28 years and only once in the last 8.
-
-                                    </p>
-                                </div>
+                                <!-- This is the end -->
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="container-counter-box">
-                    <div class="container">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                <script src="{{ url_for('static', filename='js/money-charts.js') }}"></script>
 
-                        <canvas id="mykfcChart" width="1000" height="400"></canvas>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                        <script>
-                            var ctx = document.getElementById("mykfcChart");
-                            var myChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: {{ kfclabels | safe }},
-                                
-                                datasets: [
-                                    {
-                                    label: "$ Spend at all KFC by Month",
-                                    backgroundColor: '#195ddd',
-                                    borderColor: '#000',
-                                    data: {{ kfcvalues | safe }},
-                            }
-    
-                            ]
-                        }
-                    });
-                        </script>
-                    </div>
-                </div>
-                <!-- End Containter Contents  -->
-                <!-- End Page Containter  -->
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Containter  -->
-
-
-
-
-
-
-
-
-
-                <!-- Close divs -->
-            </div>
-        </div>
-    </div>
-</div>
-
-        <!-- This is the end -->
-    </div>
-</div>
-</div>
-</div>
-
-
-
-{% endblock %}
+                {% endblock %}

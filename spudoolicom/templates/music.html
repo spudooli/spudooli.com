@@ -14,296 +14,316 @@
       <div class="col-md-12">
         <h1 class="title-un">{% block title %}I Listen to Music - Projects{% endblock %}</h1>
         <div class="title-un-icon">
-            <ion-icon name="musical-notes-outline"></ion-icon>
+          <ion-icon name="musical-notes-outline"></ion-icon>
         </div>
-          <p class="title-un-des">I have a relationship with music, possibly related to whatever is going on in my brain, where I thrash a particular song or small number of songs and then don't lkisten at all for  
-            months and months. LastFM asks me to set an obsession. I think I've obessed over a very small number of songs. This is them.<br />
-       </div></p>
-        
-        {% endblock %}
-
-        {% block content %}
-      
-       
-        <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                    <ion-icon name="disc-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ lastfmcount }} </div>
-                    <div class="counter-title">Tracks played</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Tracks played all time is a difficult number</div>
-                    <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number of tracks than I have in my database from their API. I will go with the data I have</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay="1s">
-                    <ion-icon name="mic-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ artistcount }} </div>
-                    <div class="counter-title">Unique Artists</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">A number of Artists have been played</div>
-                    <p> I bet the distribution of artists is skewed to a very small number that I have played a lot and a large numebr I have played once. Will eventually find a way to figure that out.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Top 40 Artists by Scrobble Count</div>
-                    
-                      <table class="table table-condensed table-hover">
-                        <thead>
-                          <tr>
-                            <th>Artist</th>
-                            <th>Scrobbles</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          {% for thing in top40artists  %}
-                        <tr>
-                          <td width="75%">{{ thing.artist }}</td><td >{{ "{:,}".format(thing.playcount) }}</td>
-                        </tr>
-                       {% endfor %}</tbody></table>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                    <ion-icon name="mic-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ rollercoaster }} </div>
-                    <div class="counter-title">Life is a Rollercoaster</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">The number of times I have played Life is a Rollercoaster by Ronan Keating</div>
-                    <p> Everyone is allowed a guilty pleasure that you don't admit to everyone. Mine is this. But only played <strong>{{ rollercoaster }}</strong> times since records began in 2006</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                    <div class="counter-number"> </div>
-                    <div class="counter-title"></a></div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">Top 40 Songs by Scrobble Count</div>
-                    <table class="table table-condensed table-hover">
-                        <thead>
-                          <tr>
-                            <th>Song</th>
-                            <th>Scrobbles</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {% for thing in top40songsplayed  %}
-                        <tr>
-                        <td  width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td><td>{{ "{:,}".format(thing.playcount) }}</td>
-                        </tr>
-                       {% endfor %}</tbody></table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                    <ion-icon name="mic-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power"></div>{{ publicimage }} </div>
-                    <div class="counter-title">Public Image Ltd Scrobbles</div>
-                  </div>
-                </div>
-                <div class="col-md-9">
-                  <div>
-                    <div class="spudooli-section-title">I played Public Image Ltd all weekend once</div>
-                    <p> I like a very small part of a single song by Public Image Ltd. Their song Rise is a little catchy in parts and garbage, in my view, for the rest of it. 
-                        I don't care much for any of their other work, it's not my bag </p>
-                    <p> Some how, one weekend, I played Rise to get my fix of the bit that I quite like and then appear to have left Spotify playing their entire back catalogue
-                        after changing the amp source to something else. Thus rocketing them to my 5th most listened to artist even though I hate all but about 3 minutes of their entire work.
-                    <p>Anger is an energy!</p>
-                    </p>    
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-    <!-- Page Containter header  -->
- 
-
-              <div class="container-counter-box">
-                  <div class="container">
-                      <div class="row">
-                          <div class="col-md-3">
-                              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
-                                  <ion-icon name="play-outline"></ion-icon>
-                                  <div class="counter-number"></div>
-                                  <div class="counter-title"></div>
-                              </div>
-                          </div>
-                          <div class="col-md-9">
-                              <div>
-                                  <div class="spudooli-section-title">My on and off pattern of listening to music</div>
-                                  <p>I suspect this is a product of me playing a relatively small set of artists, but it's clearly visible that I play music and then not for a period of time.
-                                    I don't know what happened in 2015 but for almost the whole year music was not a part of my life. And the pandemic years showed that I was at home a lot more and so listened to more music.
-
-                                  </p>
-                                  <p>The big peak in July 2021 was the above mentioned Public Image Ltd thing.</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="container-counter-box">
-                  <div class="container">
-
-                      <canvas id="mymusicplaysChart" width="1000" height="400"></canvas>
-                      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                      <script>
-                          var ctx = document.getElementById("mymusicplaysChart");
-                          var myChart = new Chart(ctx, {
-                              type: 'bar',
-                              data: {
-                                  labels: {{ playsbymonthlabels | safe }},
-                              
-                              datasets: [
-                                  {
-                                  label: "Tracks played count by Month",
-                                  backgroundColor: '#195ddd',
-                                  borderColor: '#000',
-                                  data: {{ playsbymonthvalues | safe }},
-                                }
-        
-                                ]
-                            }
-                        });
-                      </script>
-                  </div>
-              </div>
-              <!-- End Containter Contents  -->
-              <!-- End Page Containter  -->
-              <div class="container-counter-box">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
-                        <div class="counter-number"><div id="current_power"></div>{{ lastfmcountyear }} </div>
-                        <div class="counter-title">Tracks played - {{ now.year }}</div>
-                      </div>
-                    </div>
-                    <div class="col-md-9">
-                      <div>
-                        <div class="spudooli-section-title">Top 40 Songs by Scrobble Count - {{ now.year }}</div>
-                        <table class="table table-condensed table-hover">
-                            <thead>
-                              <tr>
-                                <th>Song</th>
-                                <th>Scrobbles</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            {% for thing in top40songsplayedyear  %}
-                            <tr>
-                            <td  width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td><td>{{ "{:,}".format(thing.playcount) }}</td>
-                            </tr>
-                           {% endfor %}</tbody></table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="container-counter-box">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <div class="counter-box wow fadeInUp" data-wow-delay=".1">
-                        <div class="counter-number"><div id="current_power"></div>{{ artistcountyear }} </div>
-                        <div class="counter-title">Unique Artists - {{ now.year }}</div>
-                      </div>
-                    </div>
-                    <div class="col-md-9">
-                      <div>
-                        <div class="spudooli-section-title">Top 40 Artists by Scrobble Count - {{ now.year }}</div>
-                        
-                          <table class="table table-condensed table-hover">
-                            <thead>
-                              <tr>
-                                <th>Artist</th>
-                                <th>Scrobbles</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              {% for thing in top40artistsyear  %}
-                            <tr>
-                              <td width="75%">{{ thing.artist }}</td><td >{{ "{:,}".format(thing.playcount) }}</td>
-                            </tr>
-                           {% endfor %}</tbody></table>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-        <!-- This is the end -->
+        <p class="title-un-des">I have a relationship with music, possibly related to whatever is going on in my brain,
+          where I thrash a particular song or small number of songs and then don't lkisten at all for
+          months and months. LastFM asks me to set an obsession. I think I've obessed over a very small number of songs.
+          This is them.<br />
       </div>
-    </div>
-    </div>
-    </div>
+      </p>
 
+      {% endblock %}
+
+      {% block content %}
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <ion-icon name="disc-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ lastfmcount }}
+                </div>
+                <div class="counter-title">Tracks played</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Tracks played all time is a difficult number</div>
+                <p>LastFM reports <a href="https://www.last.fm/user/spudooli"> I have scrobbled</a> a different number
+                  of tracks than I have in my database from their API. I will go with the data I have</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay="1s">
+                <ion-icon name="mic-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ artistcount }}
+                </div>
+                <div class="counter-title">Unique Artists</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">A number of Artists have been played</div>
+                <p> I bet the distribution of artists is skewed to a very small number that I have played a lot and a
+                  large numebr I have played once. Will eventually find a way to figure that out.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Top 40 Artists by Scrobble Count</div>
+
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Artist</th>
+                      <th>Scrobbles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top40artists %}
+                    <tr>
+                      <td width="75%">{{ thing.artist }}</td>
+                      <td>{{ "{:,}".format(thing.playcount) }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <ion-icon name="mic-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ rollercoaster }}
+                </div>
+                <div class="counter-title">Life is a Rollercoaster</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">The number of times I have played Life is a Rollercoaster by Ronan
+                  Keating</div>
+                <p> Everyone is allowed a guilty pleasure that you don't admit to everyone. Mine is this. But only
+                  played <strong>{{ rollercoaster }}</strong> times since records began in 2006</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></a></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Top 40 Songs by Scrobble Count</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Song</th>
+                      <th>Scrobbles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top40songsplayed %}
+                    <tr>
+                      <td width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td>
+                      <td>{{ "{:,}".format(thing.playcount) }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <ion-icon name="mic-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ publicimage }}
+                </div>
+                <div class="counter-title">Public Image Ltd Scrobbles</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">I played Public Image Ltd all weekend once</div>
+                <p> I like a very small part of a single song by Public Image Ltd. Their song Rise is a little catchy in
+                  parts and garbage, in my view, for the rest of it.
+                  I don't care much for any of their other work, it's not my bag </p>
+                <p> Some how, one weekend, I played Rise to get my fix of the bit that I quite like and then appear to
+                  have left Spotify playing their entire back catalogue
+                  after changing the amp source to something else. Thus rocketing them to my 5th most listened to artist
+                  even though I hate all but about 3 minutes of their entire work.
+                <p>Anger is an energy!</p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Page Containter header  -->
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <ion-icon name="play-outline"></ion-icon>
+                <div class="counter-number"></div>
+                <div class="counter-title"></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">My on and off pattern of listening to music</div>
+                <p>I suspect this is a product of me playing a relatively small set of artists, but it's clearly visible
+                  that I play music and then not for a period of time.
+                  I don't know what happened in 2015 but for almost the whole year music was not a part of my life. And
+                  the pandemic years showed that I was at home a lot more and so listened to more music.
+
+                </p>
+                <p>The big peak in July 2021 was the above mentioned Public Image Ltd thing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+
+          <canvas id="mymusicplaysChart" width="1000" height="400" data-labels='{{ playsbymonthlabels | tojson }}'
+            data-values='{{ playsbymonthvalues | tojson }}'></canvas>
+
+        </div>
+      </div>
+      <!-- End Containter Contents  -->
+      <!-- End Page Containter  -->
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ lastfmcountyear }}
+                </div>
+                <div class="counter-title">Tracks played - {{ now.year }}</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Top 40 Songs by Scrobble Count - {{ now.year }}</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Song</th>
+                      <th>Scrobbles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top40songsplayedyear %}
+                    <tr>
+                      <td width="75%"><strong>{{ thing.name }}</strong>, {{thing.artist }}</td>
+                      <td>{{ "{:,}".format(thing.playcount) }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".1">
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ artistcountyear }}
+                </div>
+                <div class="counter-title">Unique Artists - {{ now.year }}</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Top 40 Artists by Scrobble Count - {{ now.year }}</div>
+
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Artist</th>
+                      <th>Scrobbles</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in top40artistsyear %}
+                    <tr>
+                      <td width="75%">{{ thing.artist }}</td>
+                      <td>{{ "{:,}".format(thing.playcount) }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- This is the end -->
+    </div>
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="{{ url_for('static', filename='js/music-charts.js') }}"></script>
 {% endblock %}
