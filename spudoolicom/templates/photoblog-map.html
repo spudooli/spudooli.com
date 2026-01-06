@@ -20,49 +20,52 @@
         {% block content %}
 
         <div class="container-counter-box">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
-                    <ion-icon name="pin-outline"></ion-icon>
-                    <div class="counter-number"><div id="current_power">{{ alicepingcount }}</div> </div>
-                    <div class="counter-title">Markers</div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box wow fadeInUp" data-wow-delay=".5s">
+                  <ion-icon name="pin-outline"></ion-icon>
+                  <div class="counter-number">
+                    <div id="current_power">{{ alicepingcount }}</div>
                   </div>
+                  <div class="counter-title">Markers</div>
                 </div>
-                <div class="col-md-9">
+              </div>
+              <div class="col-md-9">
 
-                    <div class="spudooli-section-title">Map</div>
-                    <link rel="stylesheet" href="/static/leaflet.css" />
-                    <script type="text/javascript" src="/static/js/leaflet.js"></script>
-                    <div id="map"></div>
-                    <script type="text/javascript">
-                        var map = L.map('map').setView([-39, 175], 6);
+                <div class="spudooli-section-title">Map</div>
+                <link rel="stylesheet" href="/static/leaflet.css" />
 
+                <div id="map"></div>
+                <script id="map-data" type="application/json">
+                    [
                         {% for marker in markers %}
-                            var marker = L.marker({{ marker[2]|replace("(", "[")|replace(")","]")}},{ title: '{{marker[1]}}', riseOnHover: true})
-                            .bindPopup(`<a href="/photoblog/{{ marker[0]}}" target="_blank" rel="noopener noreferrer">{{marker[1]}}</a>`)
-                            .addTo(map);
+                            {
+                                "id": "{{ marker[0] }}",
+                                "title": "{{ marker[1] | replace('\\', '') | safe }}",
+                                "coords": {{ marker[2]|replace("(", "[")|replace(")", "]") }}
+                            }{% if not loop.last %},{% endif %}
                         {% endfor %}
-    
-                        // Style URL format in XYZ PNG format; see our documentation for more options
-                        L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
-                            maxZoom: 20,
-                            attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
-                        }).addTo(map);
+                    ]
                     </script>
 
 
-                </div>
               </div>
             </div>
           </div>
+        </div>
 
 
-               
+
         <!-- Close divs -->
       </div>
     </div>
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/photoblog-map.js') }}"></script>
 {% endblock %}
