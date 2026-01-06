@@ -8,23 +8,27 @@
       <div class="col-md-12">
         <h1 class="title-un">{% block title %}Webcams - {{ camera }} {% endblock %}</h1>
         <div class="title-un-icon">
-            <ion-icon name="videocam-outline"></ion-icon>
+          <ion-icon name="videocam-outline"></ion-icon>
         </div>
-        <p class="title-un-des"><a href="/webcam/camera/kitchen">Kitchen Webcam</a> | <a href="/webcam/camera/mancave">Man Cave Server</a> | <a href="/webcam/camera/driveway">Driveway</a></p>
+        <p class="title-un-des"><a href="/webcam/camera/kitchen">Kitchen Webcam</a> | <a
+            href="/webcam/camera/mancave">Man Cave Server</a> | <a href="/webcam/camera/driveway">Driveway</a></p>
 
         {% endblock %}
 
         {% block content %}
 
-        
+
         {% if camera == "kitchen" %}
-        <p>If it's too dark to see anything, you can turn some <div class="ledspointer" onclick="benchleds('on')">lights on</div> or  <div class="ledspointer" onclick="benchleds('off')">lights off</p></div>
+        <p>If it's too dark to see anything, you can turn some
+        <div class="ledspointer" id="btn-benchleds-on">lights on</div> or <div class="ledspointer"
+          id="btn-benchleds-off">lights off</p>
+        </div>
         <img class="chartcenter img-fluid" src="https://www.spudooli.com/kitchenstream" />
         {% endif %}
 
         {% if camera == "mancave" %}
         <p>Select a colour: <input id="mancaveledscolour" type="color" value="#ff0000" /></p>
-        <p><button onclick="mancavepcleds(document.getElementById('mancaveledscolour').value)">Change the LEDs</button></p>
+        <p><button id="btn-mancaveleds">Change the LEDs</button></p>
         <img class="chartcenter img-fluid" src="https://www.spudooli.com/mancavestream" />
         {% endif %}
 
@@ -39,4 +43,8 @@
   </div>
 </div>
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/webcam-controls.js') }}"></script>
 {% endblock %}

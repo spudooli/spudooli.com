@@ -13,7 +13,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="alternate" type="application/rss+xml" title="The Book of Spudooli in RSS" href="https://www.spudooli.com/rss" />
+  <link rel="alternate" type="application/rss+xml" title="The Book of Spudooli in RSS"
+    href="https://www.spudooli.com/rss" />
   <meta name="description" content="{% block metadescription %}{% endblock %}" />
   <meta property="og:title" content="{% block ogtitle %}{% endblock %}" />
   <meta property="og:description" content="{% block ogdescription %}{% endblock %}" />
@@ -24,7 +25,7 @@
   <meta property="og:locale" content="en_NZ" />
   <meta name="fediverse:creator" content="@spudooli@mastodon.nz">
   <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+
   {% block canonical %}{% endblock %}
 
   <title>{% block title %}{% endblock %} - Spudooli</title>
@@ -111,11 +112,11 @@
                 <li style="margin-bottom: 10px;"><ion-icon name="logo-github" style="font-size: 16px;"></ion-icon><a
                     href="https://github.com/spudooli"> Spudooli on Github</a></li>
                 <li style="margin-bottom: 10px;"><ion-icon name="logo-twitter" style="font-size: 16px;"></ion-icon> <a
-                    href="https://www.twitter.com/spudooli/"> Spudooli on Twitter  (Deprecated)</a></li>
+                    href="https://www.twitter.com/spudooli/"> Spudooli on Twitter (Deprecated)</a></li>
                 <li style="margin-bottom: 10px;"><ion-icon name="logo-twitter" style="font-size: 16px;"></ion-icon> <a
                     href="https://www.twitter.com/spudooli_house/"> Spudooli House on Twitter (Deprecated)</a></li>
                 <li style="margin-bottom: 10px;"><ion-icon name="logo-instagram" style="font-size: 16px;"></ion-icon><a
-                    href="https://www.instagram.com/spudooli"> Spudooli on Instagram  (Deprecated)</a> </li>
+                    href="https://www.instagram.com/spudooli"> Spudooli on Instagram (Deprecated)</a> </li>
               </ul>
             </div>
           </div>
@@ -145,9 +146,9 @@
               <p>This is Another Spudooli Project<br>© Copyright {{ now.year }} | <a href="http://www.spudooli.com"
                   target="_blank">Spudooli Investments
                   Ltd</a></p>
-              <p style="float: right;"><small><a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img
-                      alt="Creative Commons License" style="float: right;"
-                      src="/static/images/80x15.png" /></a><br>This work is licensed under a
+              <p style="float: right;"><small><a rel="license"
+                    href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License"
+                      style="float: right;" src="/static/images/80x15.png" /></a><br>This work is licensed under a
                   <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons
                     Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</small></p>
 
@@ -172,8 +173,12 @@
   <script src="/static/js/superfish.js"></script>
   <script src="/static/js/wow.js"></script>
   <script src="/static/js/main.js"></script>
-  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.min.js"></script>
+  <script type="module"
+    src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.min.js"></script>
   <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.min.js"></script>
+
+  {% block scripts %}
+  {% endblock %}
 
 </body>
 
