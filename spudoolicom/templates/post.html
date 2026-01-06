@@ -22,7 +22,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
         <div class="image-nav-un-icon">
           <a href="{{ url_for('post', id=previousimage) }}">
             <ion-icon name="return-down-back-outline" size="small"></ion-icon> &nbsp &nbspPrevious
-          </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  <a href="/photoblog/archive"> Browse archive </a> &nbsp
+          </a> &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <a href="/photoblog/archive"> Browse archive </a> &nbsp
           &nbsp &nbsp &nbsp &nbsp &nbsp <a href="/photoblog-map"> Browse by map </a> &nbsp
           &nbsp &nbsp &nbsp &nbsp &nbsp{% if nextimage == 'nopost' %} {% else %}<a
             href="{{ url_for('post', id=nextimage) }}"> Next &nbsp &nbsp<ion-icon name="return-down-forward-outline"
@@ -64,51 +64,25 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
           "articleBody": "{{ post[3] | replace('"', '\'') | replace('\n', '') }}"
           }
           </script>
-        <script language='javascript' type='text/javascript'>
 
-          function flip(rid) {
-            current = (document.getElementById(rid).style.display == 'none') ? 'block' : 'none';
-            document.getElementById(rid).style.display = current;
-          }
-
-        </script>
         <p>
-          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}" class="chartcenter img-fluid">
+          <img id="photoblog-image" src="/static/photoblog/{{ post[2] }}" alt="{{ post[6] }}"
+            class="chartcenter img-fluid">
         </p>
         <p id="iso-info">{{ exifhtml }}</p>
 
         {% if imageexists %}
-            <!-- This is the embiggen image but only if there is a large image though -->
-            <div class="embiggen-photoblog-image">
-            <p onclick="openModal('/static/photoblog/embiggen/embiggen_{{ post[2] }}')">Embiggen the image</p>
-          </div>
-          <div id="modal" class="modal">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <img id="modal-image" class="modal-content" src="/static/photoblog/embiggen/embiggen_{{ post[2] }}">
-          </div>
+        <!-- This is the embiggen image but only if there is a large image though -->
+        <div class="embiggen-photoblog-image">
+          <p id="btn-open-modal" data-image-src="/static/photoblog/embiggen/embiggen_{{ post[2] }}">Embiggen the image
+          </p>
+        </div>
+        <div id="modal" class="modal">
+          <span class="close" id="btn-close-modal">&times;</span>
+          <img id="modal-image" class="modal-content" src="/static/photoblog/embiggen/embiggen_{{ post[2] }}">
+        </div>
 
-          <script>
-            function openModal(imageSrc) {
-              const modal = document.getElementById('modal');
-              const modalImage = document.getElementById('modal-image');
-              modalImage.src = imageSrc;
-              modal.style.display = 'block';
-            }
-            
-            // Close the modal
-            function closeModal() {
-              const modal = document.getElementById('modal');
-              modal.style.display = 'none';
-            }
-            
-            // Close the modal when clicking outside the modal content
-            window.onclick = function (event) {
-              const modal = document.getElementById('modal');
-              if (event.target === modal) {
-                  modal.style.display = 'none';
-              }
-            };
-        </script>
+
         {% endif %}
 
         <div class="single-photoblogpost">
@@ -136,8 +110,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
                     <p><strong>Posted:</strong> <a href="/recently/{{ post[4].strftime('%Y-%m-%d') }}">{{
                         post[4].strftime('%A, %-d %B, %Y %-H:%M') }}</a></p>
                     <p><strong>Captured:</strong> {{ captured }}</p>
-                    <p class="container-title"><a href='#addcomment'
-                        onclick="flip('add-comment'); gotocomments(); return false;">Add your own comment</a></p>
+                    <p class="container-title"><a href='#addcomment' id="link-add-comment">Add your own comment</a></p>
                   </div>
                 </div>
               </div>
@@ -166,12 +139,7 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
         </div>
 
         <div id="add-comment">
-          <script type='text/javascript'>
-            function gotocomments() {
-              document.location = '#addcomment';
-            }
-          </script>
-          <script language='javascript' type='text/javascript'>flip('add-comment');</script>
+
           <a name="addcomment"></a>
           <p>All commments are held for moderated before publication so your words will not appear until we are ready.
           </p>
@@ -201,4 +169,8 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
 </div>
 
 
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/post-controls.js') }}"></script>
 {% endblock %}
