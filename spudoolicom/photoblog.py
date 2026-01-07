@@ -25,10 +25,8 @@ def photoblogmap():
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT id, headline, googlemap FROM pixelpost_pixelpost where googlemap like '%.%'")
     markers = cursor.fetchall()
-    cursor.close()
 
     # Count the number of markers
-    cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT COUNT(*) FROM pixelpost_pixelpost where googlemap like '%.%'")
     mapmarkercount = cursor.fetchone()
     mapmarkercount = mapmarkercount[0]
