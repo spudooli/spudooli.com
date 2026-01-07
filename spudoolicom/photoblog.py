@@ -26,7 +26,15 @@ def photoblogmap():
     cursor.execute("SELECT id, headline, googlemap FROM pixelpost_pixelpost where googlemap like '%.%'")
     markers = cursor.fetchall()
     cursor.close()
-    return render_template('photoblog-map.html', markers = markers)
+
+    # Count the number of markers
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM pixelpost_pixelpost where googlemap like '%.%'")
+    mapmarkercount = cursor.fetchone()
+    mapmarkercount = mapmarkercount[0]
+    cursor.close()
+
+    return render_template('photoblog-map.html', markers = markers, mapmarkercount = mapmarkercount)
 
 
 @app.route('/photoblog', strict_slashes=False, defaults={'id': None} )
