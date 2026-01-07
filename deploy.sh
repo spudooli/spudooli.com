@@ -20,6 +20,10 @@ cp -r /home/dave/Sites/spudooli.com/spudoolicom/static/js/* /var/www/spudooli/sp
 echo "Deploying the templates..."
 cp -r /home/dave/Sites/spudooli.com/spudoolicom/templates/* /var/www/spudooli/spudoolicom/templates/
 
+echo "Minify the CSS and Javascript..."
+python3 -m rcssmin < /home/dave/Sites/spudooli.com/spudoolicom/static/style.css > /var/www/spudooli/spudoolicom/static/style.css
+python3 -m rcssmin < /home/dave/Sites/spudooli.com/spudoolicom/static/leaflet.css > /var/www/spudooli/spudoolicom/static/leaflet.css
+python3 -m rjsmin < /home/dave/Sites/spudooli.com/spudoolicom/static/js/superfish.js > /var/www/spudooli/spudoolicom/static/js/superfish.js
 
 echo "Clearing the cache..."
 rm -rf /var/www/spudooli/spudoolicom/__pycache__

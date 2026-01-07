@@ -9,8 +9,8 @@ app = Flask(__name__, static_folder='static')
 from . import auth
 app.register_blueprint(auth.bp)
 
-app.config.from_pyfile('config.py')
 
+app.config.from_pyfile('config.py')
 
 
 @app.context_processor
