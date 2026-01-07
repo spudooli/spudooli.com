@@ -91,8 +91,12 @@ def post(id):
         focallength = ""
 
     if "EXIF DateTimeOriginal" in tags:
-        # TODO: fix this date to be a human friendly date
-        captured = tags["EXIF DateTimeOriginal"]
+        captured_str = str(tags["EXIF DateTimeOriginal"])
+        try:
+            captured_dt = datetime.strptime(captured_str, '%Y:%m:%d %H:%M:%S')
+            captured = captured_dt.strftime('%A, %d %B, %Y %H:%M')
+        except ValueError:
+            captured = captured_str
     else:
         captured = ""
 
