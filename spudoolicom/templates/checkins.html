@@ -32,7 +32,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-3">
-              <div class="counter-box wow fadeInUp" data-wow-delay=".1s">
+              <div class="counter-box wow">
                 <ion-icon name="walk-outline"></ion-icon>
                 <div class="counter-number">
                   <div id="current_power"></div>{{ swarmcount }}
@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-9">
               <div>
-                <div class="spudooli-section-title">I've checked in lots of places</div>
+                <div class="spudooli-section-title">I've checked in this many times</div>
                 <p>Lots of places</p>
               </div>
             </div>
@@ -50,6 +50,27 @@
         </div>
       </div>
 
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow">
+                <ion-icon name="walk-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>{{ uniquecheckins }}
+                </div>
+                <div class="counter-title">Unique Places</div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">I've checked in to this many unique places</div>
+                <p>{{ uniquecheckins }} unique places</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="container-counter-box">
         <div class="container">

@@ -421,6 +421,12 @@ def checkins():
     topcheckinsplaces = [dict(zip(column_names, row))
                 for row in topcheckins]
 
+    # Count of unique locations checked in to
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(DISTINCT name, IFNULL(address, '')) as checkincount FROM recently where type = 'swarm'")
+    uniquecheckins = cursor.fetchone()
+    uniquecheckins = "{:,}".format(uniquecheckins[0])
+
     cur = db.mysql.connection.cursor()
     cur.execute(checkinquery)
     placesbymonth = cur.fetchall()
@@ -428,4 +434,4 @@ def checkins():
     placesbymonthvalues = [str(row[1]).replace("-","") for row in placesbymonth]
     cur.close() 
 
-    return render_template('checkins.html', swarmcount = swarmcount, topcheckinsplaces = topcheckinsplaces, placesbymonthlabels = placesbymonthlabels, placesbymonthvalues = placesbymonthvalues)
+    return render_template('checkins.html', swarmcount = swarmcount, topcheckinsplaces = topcheckinsplaces, placesbymonthlabels = placesbymonthlabels, placesbymonthvalues = placesbymonthvalues, uniquecheckins = uniquecheckins)
