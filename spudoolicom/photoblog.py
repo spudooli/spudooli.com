@@ -116,7 +116,7 @@ def post(id):
         if os.path.isfile(local_map_path):
             map_src = "/static/images/photoblogmaps/" + str(id) + ".png"
         else:
-            map_src = "https://maps.googleapis.com/maps/api/staticmap?center=" + photolat + "," + photolon + "&zoom=15&size=350x300&markers=color:0xD0E700%7Clabel:X%7C" + photolat + "," + photolon +  "&sensor=false&key=" + config.googlemapsapikey + "&visual_refresh=true&maptype=terrain"
+            map_src = ""
 
         maprequest = "<a href='https://www.google.co.nz/maps/@" + photolat + "," + photolon + ",16.0z'><img src='" + map_src + "' class='img-fluid' alt='Map of the photo location'></a>"
     else:
