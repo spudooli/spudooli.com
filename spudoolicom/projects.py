@@ -274,7 +274,7 @@ def toomuchqueen():
 
       # Get all months spend for KFC
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen WHERE artist = 'Queen' GROUP BY thismonth ORDER BY thismonth ASC")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Bling Queen' and artist not like 'Queens of the Stone Age' GROUP BY thismonth ORDER BY thismonth ASC")
     queenplaysbymonth = cur.fetchall()
     queenplaysbymonthlabels = [row[0] for row in queenplaysbymonth]
     queenplaysbymonthvalues = [str(row[1]).replace("-","") for row in queenplaysbymonth]
@@ -344,7 +344,6 @@ def music():
                 for row in top40songs]
     
     ###### Stats for this year ######
-    
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(name) as playcount, name, artist from recently where type = 'LastFM' and event_date > %s group by name, artist ORDER BY playcount DESC LIMIT 40", (year_start_date,))
     top40songsyear = cursor.fetchall()
