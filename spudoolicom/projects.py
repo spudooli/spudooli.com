@@ -189,47 +189,37 @@ def toomuchqueen():
     queenplaycount = results[0]
     cur.close()  
     
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen")
-    results = cur.fetchone()
-    totalsongs = results[0]
-    cur.close() 
-
-    queenpercentage = round((queenplaycount / totalsongs) * 100, 2)
-
     top20artists = gettop20artists()
     top20songs = gettop20songs()
 
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where station = 'hauraki'")
-    results = cur.fetchone()
-    haurakisongcount = results[0]
-    cur.close()  
+    haurakisongcount = 0
+    thesoundsongcount = 0
+    thecoastsongcount = 0
+    goldfmsongcount = 0
 
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where station = 'thesound'")
-    results = cur.fetchone()
-    thesoundsongcount = results[0]
-    cur.close() 
+    cur.execute("SELECT station, COUNT(*) FROM too_much_queen GROUP BY station")
+    station_counts = cur.fetchall()
+    cur.close()
 
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where station = 'thecoast'")
-    results = cur.fetchone()
-    thecoastsongcount = results[0]
-    cur.close()  
-
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where station = 'goldfm'")
-    results = cur.fetchone()
-    goldfmsongcount = results[0]
-    cur.close()  
+    for station, count in station_counts:
+        if station == 'hauraki':
+            haurakisongcount = count
+        elif station == 'thesound':
+            thesoundsongcount = count
+        elif station == 'thecoast':
+            thecoastsongcount = count
+        elif station == 'goldfm':
+            goldfmsongcount = count
 
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen")
     results = cur.fetchone()
     totalsongcount = results[0]
-    cur.close()    
+    cur.close()
 
+    queenpercentage = round((queenplaycount / totalsongcount) * 100, 2)
+    
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'hauraki' group by song_name, artist order by playcount desc limit 20")
     hsongs20 = cursor.fetchall()
@@ -281,7 +271,7 @@ def toomuchqueen():
     cur.close() 
 
     return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, 
-                           totalsongs = totalsongs, top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount, 
+                           top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount, 
                            thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20, 
                            thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20,
                            queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues)
