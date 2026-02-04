@@ -1374,6 +1374,7 @@ span.description {
   text-align: center;
   display: block;
   font-size: 30px;
+  min-height: 30px;
   position: relative;
   opacity: .8;
 }

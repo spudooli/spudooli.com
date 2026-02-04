@@ -2,8 +2,6 @@ from flask import Flask, g, request
 from datetime import datetime
 import logging
 from logging.handlers import RotatingFileHandler
-
-
 from flask_caching import Cache
 
 app = Flask(__name__, static_folder='static')
