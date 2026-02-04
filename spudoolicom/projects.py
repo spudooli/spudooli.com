@@ -1,5 +1,5 @@
 from flask import render_template, redirect, request
-from spudoolicom import app, db
+from spudoolicom import app, db, cache
 from datetime import date
 import os
 import random
@@ -182,6 +182,7 @@ def thebookofdavesearch():
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
+@cache.cached(timeout=7200)
 def toomuchqueen():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Bling Queen' and artist not like 'Queens of the Stone Age'")

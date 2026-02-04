@@ -4,7 +4,10 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 
+from flask_caching import Cache
+
 app = Flask(__name__, static_folder='static')
+cache = Cache(app, config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
 
 from . import auth
 app.register_blueprint(auth.bp)
