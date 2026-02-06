@@ -1,7 +1,6 @@
 from spudoolicom import app, db, forms, config
-from flask import render_template, request, flash, redirect, abort
+from flask import render_template, redirect
 from datetime import datetime
-import re
 
 @app.route('/photos', strict_slashes=False)
 def albums():

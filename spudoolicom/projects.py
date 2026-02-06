@@ -132,7 +132,7 @@ checkinquery = """SELECT
 def projects():
     # Songs by Queen count
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Queens of the Stone Age'and artist not like 'Bling Queen'")
+    cur.execute("SELECT count(id) FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael'")
     results = cur.fetchone()
     queenplaycount = "{:,}".format(results[0])
     cur.close()  
@@ -185,7 +185,7 @@ def thebookofdavesearch():
 @cache.cached(timeout=7200)
 def toomuchqueen():
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Bling Queen' and artist not like 'Queens of the Stone Age'")
+    cur.execute("SELECT count(id) FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael'")
     results = cur.fetchone()
     queenplaycount = results[0]
     cur.close()  
@@ -265,7 +265,7 @@ def toomuchqueen():
 
       # Get all months spend for KFC
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen where artist like '%Queen%' and artist not like 'Queensryche' and artist not like 'Bling Queen' and artist not like 'Queens of the Stone Age' GROUP BY thismonth ORDER BY thismonth ASC")
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael' GROUP BY thismonth ORDER BY thismonth ASC")
     queenplaysbymonth = cur.fetchall()
     queenplaysbymonthlabels = [row[0] for row in queenplaysbymonth]
     queenplaysbymonthvalues = [str(row[1]).replace("-","") for row in queenplaysbymonth]
