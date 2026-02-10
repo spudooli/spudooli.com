@@ -8,7 +8,6 @@ from datetime import datetime
 
 # Get the current year
 current_year = datetime.now().year
-
 # Create the date string for January 1st of the current year
 year_start_date = f"{current_year}-01-01 00:00:01"
 
