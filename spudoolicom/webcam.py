@@ -28,7 +28,7 @@ def webcam(camera):
         print(camera)
         #log to /tmp/webcam.txt whenever a user visits this page
         with open("/tmp/webcam.txt", "a") as f:
-            f.write(f"{datetime.now()}: {camera}\n")
+            f.write(f"{datetime.now()}: {request.headers.get('X-Forwarded-For', request.remote_addr)} - {camera}\n")
     else:
         return redirect('/webcam/camera/kitchen', code=301)
     
