@@ -10,8 +10,8 @@ import paho.mqtt.client as paho
 broker = "192.168.1.2"
 port = 1883
 
-def on_connect(client, userdata, flags, rc):
-   print("Connected With Result Code "+rc)
+def on_connect(client, userdata, flags, reason_code, properties):
+   print("Connected With Result Code "+str(reason_code))
 
 def get_random_string(length):
     # choose from all lowercase letter
@@ -41,13 +41,13 @@ def track(who):
          else:
             alt = 0
          latlon = str(lat) + ":" + str(lon)
-         client1 = paho.Client("websiteTracker")
+         client1 = paho.Client(paho.CallbackAPIVersion.VERSION2, "websiteTracker")
          client1.connect(broker, port)
          client1.publish("house/location/" + who, latlon)
 
          if who == "dave" or who == "gabba":
             # Download and save static map image
-            www_map_url = f"http://localhost:8080/styles/OSM%20OpenMapTiles/static/{lon},{lat},16/550x300.png?marker={lon},{lat}|marker-icon.png|scale:0.75"
+            www_map_url = f"http://localhost:8080/styles/osm-bright/static/{lon},{lat},16/550x300.png?marker={lon},{lat}|marker-icon.png|scale:0.75"
             try:
                response = requests.get(www_map_url)
                response.raise_for_status() # Raise an exception for bad status codes
@@ -57,7 +57,7 @@ def track(who):
             except requests.exceptions.RequestException as e:
                print(f"Error downloading map image: {e}")
 
-            dashboard_map_url = f"http://localhost:8080/styles/OSM%20OpenMapTiles/static/{lon},{lat},16/350x300.png?marker={lon},{lat}|marker-icon.png|scale:0.75"
+            dashboard_map_url = f"http://localhost:8080/styles/osm-bright/static/{lon},{lat},16/350x300.png?marker={lon},{lat}|marker-icon.png|scale:0.75"
             try:
                response = requests.get(dashboard_map_url)
                response.raise_for_status() # Raise an exception for bad status codes
