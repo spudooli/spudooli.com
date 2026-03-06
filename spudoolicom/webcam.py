@@ -27,8 +27,8 @@ def webcam(camera):
     if camera == "kitchen" or camera == "mancave" or camera == "driveway":
         print(camera)
         #log to /tmp/webcam.txt whenever a user visits this page
-        with open("/tmp/webcam.txt", "a") as f:
-            f.write(f"{datetime.now()}: {request.headers.get('X-Forwarded-For', request.remote_addr)} - {camera}\n")
+        #with open("/tmp/webcam.txt", "a") as f:
+            #f.write(f"{datetime.now()}: {request.headers.get('X-Forwarded-For', request.remote_addr)} - {camera}\n")
     else:
         return redirect('/webcam/camera/kitchen', code=301)
     

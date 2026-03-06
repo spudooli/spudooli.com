@@ -14,50 +14,56 @@
         {% endblock %}
 
         {% block content %}
-        <div id="comments">
-          <div class="counter-title">Checkin Search</div>
-          <div class="form-group" style="margin-bottom: 30px;">
-            <input name="search-box" id="search-box" value="{{ request.form['name'] }}">
-          </div>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
 
-          <div id="search-results"></div>
+              <div class="mb-4">
+                <p class="fw-semibold mb-2">Search previous checkins</p>
+                <input name="search-box" id="search-box" class="form-control form-control-lg" placeholder="Start typing a venue...">
+              </div>
 
+              <div id="search-results" class="mb-4"></div>
 
-          <div class="col-md-9">
-            <div class="counter-title">Previous Checkins</div>
+              <div class="mb-4">
+                <p class="fw-semibold mb-2">Previous checkins</p>
+                <ul class="list-unstyled">
+                  {% for venue in venues %}
+                  <li class="mb-2">
+                    <strong>{{ venue[0] }}</strong><br>
+                    {{ venue[1] }}
+                    <form action="{{ url_for('create_checkin') }}" method="post">
+                      <input name="venue" value="{{ venue[0]|safe }}" type="hidden">
+                      <input name="address" value="{{ venue[1] }}" type="hidden">
+                      <button type="submit" class="btn btn-link p-0">Checkin here</button>
+                    </form>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
 
-            <ul>
-              {% for venue in venues %}
-              <li><strong>{{ venue[0] }} </strong><br />
-                {{ venue[1] }}
+              <p class="fw-semibold mb-2">Add a new checkin location</p>
+              <form action="{{ url_for('create_checkin') }}" method="post">
+                <div class="mb-3">
+                  <label for="venue" class="form-label fw-semibold">Venue name</label>
+                  <input name="venue" class="form-control" id="venue" value="{{ request.form['venue'] }}">
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label fw-semibold">Venue address</label>
+                  <input name="address" class="form-control" id="address" value="{{ request.form['address'] }}">
+                </div>
+                <div class="mb-4">
+                  <input type="submit" class="btn btn-primary btn-lg" value="Checkin here">
+                </div>
+              </form>
 
-                <form action="{{ url_for('create_checkin') }}" method="post" style="text-align: right; color: #195ddd">
-                  <input name="venue" class="form-control" id="venue" value="{{ venue[0]|safe }}" type="hidden">
-                  <input name="address" class="form-control" id="address" value="{{ venue[1] }}" type="hidden">
-                  <input class="danger" type="submit" value="Checkin Here "
-                    style="border: none; background: none; padding: 0;">
-                </form>
-
-              </li>
-              {% endfor %}
-            </ul>
-
-            <div class="counter-title">Add a new checkin location</div>
-            <form action="{{ url_for('create_checkin') }}" method="post">
-              <div class="form-group">
-                <label for="name">Venue Name</label>
-                <input name="venue" class="form-control" id="venue" value="{{ request.form['venue'] }}"><br />
-                <label for="address">Venue Address</label>
-                <input name="address" class="form-control" id="address" value="{{ request.form['address'] }}"><br />
-                <input class="danger" type="submit" value="Checkin Here ">
-            </form>
+            </div>
           </div>
         </div>
+        <!-- Close divs -->
       </div>
-      <!-- Close divs -->
     </div>
   </div>
-</div>
 </div>
 
 <script src="/static/js/jquery-3.7.1.min.js"></script>

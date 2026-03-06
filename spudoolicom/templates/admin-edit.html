@@ -6,11 +6,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="title-un">{% block title %}New Post{% endblock %}</h1>
+        <h1 class="title-un">{% block title %}Edit Post{% endblock %}</h1>
         <div class="title-un-icon">
           <ion-icon name="pulse-outline"></ion-icon>
         </div>
-        <p class="title-un-des">Make a new blog post, why don't you?           </p>
+        <p class="title-un-des">Editing post #{{ post[0] }} &mdash; <a href="/photoblog/{{ post[0] }}">View post</a></p>
 
 {% endblock %}
 
@@ -22,32 +22,33 @@
 
           <div class="mb-3">
             <label for="title" class="form-label fw-semibold">Title</label>
-            <input name="title" class="form-control form-control-lg" id="title" value="{{ request.form['title'] }}" required>
+            <input name="title" class="form-control form-control-lg" id="title" value="{{ post[1] }}" required>
           </div>
 
           <div class="mb-3">
             <label for="body" class="form-label fw-semibold">Body</label>
-            <textarea name="body" class="form-control" id="body" style="height:400px;">{{ request.form['body'] }}</textarea>
+            <textarea name="body" class="form-control" id="body" style="height:400px;">{{ body_for_form }}</textarea>
           </div>
 
           <div class="mb-3">
             <label for="file" class="form-label fw-semibold">Image</label>
             <input type="file" class="form-control" name="file" id="file">
+            <div class="form-text">Leave blank to keep the existing image: <code>{{ post[3] }}</code></div>
           </div>
 
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="photolatlon" class="form-label fw-semibold">Photo location (lat, lon)</label>
-              <input class="form-control" name="photolatlon" id="photolatlon" value="{{ request.form['photolatlon'] }}" placeholder="e.g. -36.8485, 174.7633">
+              <input class="form-control" name="photolatlon" id="photolatlon" value="{{ post[4] }}" placeholder="e.g. -36.8485, 174.7633">
             </div>
             <div class="col-md-6">
               <label for="alttext" class="form-label fw-semibold">Alt text for image</label>
-              <input class="form-control" name="alttext" id="alttext" value="{{ request.form['alttext'] }}">
+              <input class="form-control" name="alttext" id="alttext" value="{{ post[5] }}">
             </div>
           </div>
 
           <div class="mb-4">
-            <input type="submit" class="btn btn-primary btn-lg" value="Save">
+            <input type="submit" class="btn btn-primary btn-lg" value="Save Changes">
           </div>
 
         </form>
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  
+
 {% endblock %}
 
 

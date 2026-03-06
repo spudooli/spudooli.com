@@ -15,22 +15,29 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post" enctype="multipart/form-data">
-    <div class="form-group">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="post" enctype="multipart/form-data">
 
-    <label for="URL" >URL</label>
-    <input name="url" class="form-control"  id="url" value="{{ request.form['url'] }}" required>
+          <div class="mb-3">
+            <label for="url" class="form-label fw-semibold">URL</label>
+            <input name="url" class="form-control form-control-lg" id="url" value="{{ request.form['url'] }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="tags" class="form-label fw-semibold">Tags</label>
+            <input class="form-control" name="tags" id="tags" value="{{ request.form['tags'] }}" placeholder="comma separated" required>
+          </div>
+
+          <div class="mb-4">
+            <input type="submit" class="btn btn-primary btn-lg" value="Save">
+          </div>
+
+        </form>
+      </div>
     </div>
-    
-  <div class="form-group">
-    <label for="tags">Tags, comma separated</label>
-   <input class="form-control"  name="tags" id="tags" value="{{ request.form['tags'] }}" required>
-    </div>
-
-
-    <input type="submit" class="btn btn-primary" value="Save">
   </div>
-  </form>
 
           <!-- Close divs -->
         </div>
