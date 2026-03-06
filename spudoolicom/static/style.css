@@ -2731,14 +2731,12 @@ input[type="submit"] {
 .blog-posts-g .post-img {
   position: relative;
   background: #fff;
-  overflow: hidden;
-  height: 200px;
 }
 
 .blog-posts-g .post-img img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 
 .blog-posts-g .post-img:hover img {
