@@ -1,9 +1,8 @@
 from flask import render_template, redirect, request
 from spudoolicom import app, db, cache
-from datetime import date
+from datetime import date, datetime, timedelta
 import os
 import random
-from datetime import datetime
 
 
 # Get the current year
@@ -421,6 +420,53 @@ def checkins():
     placesbymonth = cur.fetchall()
     placesbymonthlabels = [row[0] for row in placesbymonth]
     placesbymonthvalues = [str(row[1]).replace("-","") for row in placesbymonth]
-    cur.close() 
+    cur.close()
 
-    return render_template('checkins.html', swarmcount = swarmcount, topcheckinsplaces = topcheckinsplaces, placesbymonthlabels = placesbymonthlabels, placesbymonthvalues = placesbymonthvalues, uniquecheckins = uniquecheckins)
+    # Build GitHub-style activity heatmap for last 52 weeks
+    today = date.today()
+    days_since_sunday = (today.weekday() + 1) % 7
+    current_week_sunday = today - timedelta(days=days_since_sunday)
+    heatmap_start = current_week_sunday - timedelta(weeks=51)
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("""
+        SELECT DATE(event_date) as checkin_date, COUNT(*) as cnt
+        FROM recently
+        WHERE type = 'swarm'
+        AND event_date >= %s
+        GROUP BY DATE(event_date)
+    """, (heatmap_start,))
+    daily_rows = cursor.fetchall()
+    checkins_by_day = {str(row[0]): row[1] for row in daily_rows}
+
+    def count_to_level(n):
+        if n == 0: return 0
+        if n == 1: return 1
+        if n <= 3: return 2
+        if n <= 6: return 3
+        return 4
+
+    checkins_weeks = []
+    week_month_labels = []
+    for week_idx in range(52):
+        week_start = heatmap_start + timedelta(weeks=week_idx)
+        if week_idx == 0:
+            week_month_labels.append(week_start.strftime('%b'))
+        else:
+            prev_start = heatmap_start + timedelta(weeks=week_idx - 1)
+            week_month_labels.append(week_start.strftime('%b') if week_start.month != prev_start.month else '')
+        week = []
+        for day_offset in range(7):
+            d = week_start + timedelta(days=day_offset)
+            date_str = d.strftime('%Y-%m-%d')
+            count = checkins_by_day.get(date_str, 0)
+            is_future = d > today
+            week.append({
+                'date': date_str,
+                'count': count,
+                'level': 0 if is_future else count_to_level(count),
+                'future': is_future,
+            })
+        checkins_weeks.append(week)
+
+    return render_template('checkins.html', swarmcount = swarmcount, topcheckinsplaces = topcheckinsplaces, placesbymonthlabels = placesbymonthlabels, placesbymonthvalues = placesbymonthvalues, uniquecheckins = uniquecheckins, checkins_weeks = checkins_weeks, week_month_labels = week_month_labels)

@@ -2751,6 +2751,7 @@ input[type="submit"] {
   .blog-posts-g li:nth-child(3n+1) {
     clear: none;
   }
+
   .blog-posts-g li:nth-child(2n+1) {
     clear: left;
   }
@@ -4564,4 +4565,105 @@ ion-icon {
 
 .mapgrayscale {
   filter: grayscale(60%);
+}
+
+/* GitHub-style checkin activity heatmap */
+.checkin-heatmap {
+  margin: 12px 0 20px 0;
+  overflow-x: auto;
+}
+
+.heatmap-wrap {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.heatmap-day-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 16px;
+  /* align with cells below month labels */
+  flex-shrink: 0;
+}
+
+.heatmap-day-labels div {
+  height: 15px;
+  width: 28px;
+  font-size: 14px;
+  color: #888;
+  line-height: 15px;
+  text-align: right;
+  padding-right: 4px;
+}
+
+.heatmap-columns-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heatmap-months {
+  display: flex;
+  gap: 2px;
+}
+
+.heatmap-month-cell {
+  width: 15px;
+  font-size: 14px;
+  color: #666;
+  white-space: nowrap;
+  overflow: visible;
+  line-height: 15px;
+}
+
+.heatmap-weeks {
+  display: flex;
+  gap: 2px;
+}
+
+.heatmap-week {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heatmap-cell {
+  width: 15px;
+  height: 15px;
+  border-radius: 2px;
+}
+
+.heatmap-cell.level-0 {
+  background-color: #ebedf0;
+}
+
+.heatmap-cell.level-1 {
+  background-color: #c5d6f6;
+}
+
+.heatmap-cell.level-2 {
+  background-color: #8caeee;
+}
+
+.heatmap-cell.level-3 {
+  background-color: #5285e5;
+}
+
+.heatmap-cell.level-4 {
+  background-color: #195ddd;
+}
+
+.heatmap-cell.future {
+  background-color: #f0f0f0;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  font-size: 14px;
+  color: #666;
 }
