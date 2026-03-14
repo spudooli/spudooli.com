@@ -5,7 +5,7 @@ from datetime import datetime
 import redis
 from werkzeug.security import check_password_hash
 from spudoolicom.auth import login_required
-from flask_wtf.csrf import CSRFProtect, CSRFError
+from flask_wtf.csrf import CSRFError
 import logging
 import json
 

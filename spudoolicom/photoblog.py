@@ -1,14 +1,11 @@
-from spudoolicom import app, db, forms, config
+from spudoolicom import app, db, forms, config, csrf
 from flask import render_template, request, flash, redirect, abort
 import exifread
 from datetime import datetime
-from flask_wtf.csrf import CSRFProtect, CSRFError
+from flask_wtf.csrf import CSRFError
 import re
 import os
 import requests
-
-csrf = CSRFProtect()
-csrf.init_app(app)
 
 @app.route('/photoblog/archive')
 def photoblog():
