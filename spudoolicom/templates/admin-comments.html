@@ -20,8 +20,8 @@
       {% for admincomment in admincomments %}
       <li>On Post <a href="/photoblog/{{ admincomment[1]}}">{{ admincomment[1]}}</a>  - {{ admincomment[3] | replace('\\', '') |replace('<br />', '') |replace('&#039;', '\'') |replace('&quot;',
         '"') }}<br>
-        {% if admincomment[5] != "" %}
-        <a href="{{ admincomment[5] }}">{{ admincomment[4] }}</a>
+        {% if admincomment[5] | safe_url %}
+        <a href="{{ admincomment[5] | safe_url }}">{{ admincomment[4] }}</a>
         {% else %}
         {{ admincomment[4] }}
         {% endif %}

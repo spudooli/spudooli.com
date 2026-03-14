@@ -18,6 +18,14 @@ def inject_now():
     return {'now': datetime.utcnow()}
 
 
+@app.template_filter('safe_url')
+def safe_url_filter(url):
+    """Return url only if it uses http/https, otherwise empty string."""
+    if url and (url.startswith('http://') or url.startswith('https://')):
+        return url
+    return ''
+
+
 if not app.debug:
     file_handler = RotatingFileHandler('/tmp/spud.log', maxBytes=100240, backupCount=10)
     file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
