@@ -243,6 +243,68 @@
       </div>
       <!-- End Containter Contents  -->
       <!-- End Page Containter  -->
+
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow">
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Music played per day — last 12 months</div>
+                <div class="checkin-heatmap">
+                  <div class="heatmap-wrap">
+                    <div class="heatmap-day-labels">
+                      <div></div>
+                      <div>Mon</div>
+                      <div></div>
+                      <div>Wed</div>
+                      <div></div>
+                      <div>Fri</div>
+                      <div></div>
+                    </div>
+                    <div class="heatmap-columns-wrap">
+                      <div class="heatmap-months">
+                        {% for label in music_week_month_labels %}
+                        <div class="heatmap-month-cell">{{ label }}</div>
+                        {% endfor %}
+                      </div>
+                      <div class="heatmap-weeks">
+                        {% for week in music_weeks %}
+                        <div class="heatmap-week">
+                          {% for day in week %}
+                          <div class="heatmap-cell level-{{ day.level }}{% if day.future %} future{% endif %}"
+                            title="{{ day.date }}: {{ day.count }} track{{ 's' if day.count != 1 else '' }}"></div>
+                          {% endfor %}
+                        </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="heatmap-legend">
+                    <span>Less</span>
+                    <div class="heatmap-cell level-0"></div>
+                    <div class="heatmap-cell level-1"></div>
+                    <div class="heatmap-cell level-2"></div>
+                    <div class="heatmap-cell level-3"></div>
+                    <div class="heatmap-cell level-4"></div>
+                    <span>More</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <div class="container-counter-box">
         <div class="container">
           <div class="row">

@@ -373,10 +373,58 @@ def music():
     publicimage = cursor.fetchone()
     publicimage = "{:,}".format(publicimage[0])
 
-    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top40artists = top40artists, rollercoaster = rollercoaster, 
-                           top40songsplayed = top40songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels, 
-                           playsbymonthvalues = playsbymonthvalues, top40songsplayedyear = top40songsplayedyear, top40artistsyear = top40artistsyear, 
-                           lastfmcountyear = lastfmcountyear, artistcountyear = artistcountyear)
+    # Build GitHub-style activity heatmap for last 52 weeks
+    today = date.today()
+    days_since_sunday = (today.weekday() + 1) % 7
+    current_week_sunday = today - timedelta(days=days_since_sunday)
+    heatmap_start = current_week_sunday - timedelta(weeks=51)
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("""
+        SELECT DATE(event_date) as play_date, COUNT(*) as cnt
+        FROM recently
+        WHERE type = 'LastFM'
+        AND event_date >= %s
+        GROUP BY DATE(event_date)
+    """, (heatmap_start,))
+    daily_rows = cursor.fetchall()
+    music_by_day = {str(row[0]): row[1] for row in daily_rows}
+
+    def count_to_level(n):
+        if n == 0: return 0
+        if n == 1: return 1
+        if n <= 3: return 2
+        if n <= 6: return 3
+        return 4
+
+    music_weeks = []
+    music_week_month_labels = []
+    for week_idx in range(52):
+        week_start = heatmap_start + timedelta(weeks=week_idx)
+        if week_idx == 0:
+            music_week_month_labels.append(week_start.strftime('%b'))
+        else:
+            prev_start = heatmap_start + timedelta(weeks=week_idx - 1)
+            music_week_month_labels.append(week_start.strftime('%b') if week_start.month != prev_start.month else '')
+        week = []
+        for day_offset in range(7):
+            d = week_start + timedelta(days=day_offset)
+            date_str = d.strftime('%Y-%m-%d')
+            count = music_by_day.get(date_str, 0)
+            is_future = d > today
+            week.append({
+                'date': date_str,
+                'count': count,
+                'level': 0 if is_future else count_to_level(count),
+                'future': is_future,
+            })
+        music_weeks.append(week)
+
+    return render_template('music.html', lastfmcount = lastfmcount, artistcount = artistcount, top40artists = top40artists, rollercoaster = rollercoaster,
+                           top40songsplayed = top40songsplayed, publicimage = publicimage, playsbymonthlabels = playsbymonthlabels,
+                           playsbymonthvalues = playsbymonthvalues, top40songsplayedyear = top40songsplayedyear, top40artistsyear = top40artistsyear,
+                           lastfmcountyear = lastfmcountyear, artistcountyear = artistcountyear,
+                           music_weeks = music_weeks, music_week_month_labels = music_week_month_labels)
 
 
 @app.route('/projects/cats')
