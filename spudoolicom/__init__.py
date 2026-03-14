@@ -3,11 +3,13 @@ from datetime import datetime
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_caching import Cache
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__, static_folder='static')
 app.config.from_pyfile('config.py')
 
 cache = Cache(app, config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': app.config['REDIS_URL']})
+csrf = CSRFProtect(app)
 
 from . import auth
 app.register_blueprint(auth.bp)

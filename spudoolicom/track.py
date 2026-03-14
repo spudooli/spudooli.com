@@ -1,4 +1,4 @@
-from spudoolicom import app, db
+from spudoolicom import app, db, csrf
 from flask import request
 import requests
 import shutil
@@ -20,6 +20,7 @@ def get_random_string(length):
     return result_str
 
 @app.route("/track/<who>", methods=('GET', 'POST'))
+@csrf.exempt
 def track(who):
    mapid = get_random_string(8)
    if request.method == "POST":

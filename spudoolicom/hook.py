@@ -1,5 +1,5 @@
 from http.client import OK
-from spudoolicom import app, db
+from spudoolicom import app, db, csrf
 from flask import request
 import json
 from datetime import datetime
@@ -14,11 +14,13 @@ def on_connect(client, userdata, flags, rc):
 
 
 @app.route("/hook", methods=['POST'])
+@csrf.exempt
 def hook():
     return 'it works'
 
 
 @app.route("/hook/lights", methods=['POST'])
+@csrf.exempt
 def lights():
     client1 = paho.Client("websiteHook")
     client1.connect(broker, port)
@@ -58,6 +60,7 @@ def lights():
     return 'it works'
 
 @app.route("/hook/tv", methods=['POST'])
+@csrf.exempt
 def tv():
     client1 = paho.Client("websiteHook")
     client1.connect(broker, port)
@@ -73,6 +76,7 @@ def tv():
     return 'it works'
 
 @app.route("/hook/amp", methods=['POST'])
+@csrf.exempt
 def amp():
     client1 = paho.Client("websiteHook")
     client1.connect(broker, port)
@@ -102,6 +106,7 @@ def amp():
 
 
 @app.route("/hook/github", methods=['POST'])
+@csrf.exempt
 def github():
     if request.headers.get('X-GitHub-Event') == "ping":
         return json.dumps({'msg': 'Hi!'})
