@@ -26,7 +26,7 @@ def alicelocation():
     cursor.close()
     aliceupdated = str(alicelocation[1])
     alicelatlon = str(alicelocation[3]) + "," + str(alicelocation[4])
-    alicelocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + alicelatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:A%7C" + alicelatlon + "&sensor=false&key=AIzaSyCyuhLhlvQCW7dZBaA5-HLzDP6Sau-qmvA&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceupdated + "</p>"
+    alicelocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + alicelatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:A%7C" + alicelatlon + "&sensor=false&key=" + app.config['GOOGLE_MAPS_TRACKING_API_KEY'] + "&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceupdated + "</p>"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `track` where who = 5")
@@ -54,7 +54,7 @@ def aliceuk():
     cursor.close()
     aliceukupdated = str(aliceuklocation[1])
     aliceuklatlon = str(aliceuklocation[3]) + "," + str(aliceuklocation[4])
-    aliceuklocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + aliceuklatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:A%7C" + aliceuklatlon + "&sensor=false&key=AIzaSyCyuhLhlvQCW7dZBaA5-HLzDP6Sau-qmvA&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceukupdated + "</p>"
+    aliceuklocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + aliceuklatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:A%7C" + aliceuklatlon + "&sensor=false&key=" + app.config['GOOGLE_MAPS_TRACKING_API_KEY'] + "&visual_refresh=true&maptype=terrain'><p>Updated: " + aliceukupdated + "</p>"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `track` where who = 6 and date > '2024-01-01'")

@@ -5,13 +5,12 @@ from logging.handlers import RotatingFileHandler
 from flask_caching import Cache
 
 app = Flask(__name__, static_folder='static')
-cache = Cache(app, config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': 'redis://localhost:6379/0'})
+app.config.from_pyfile('config.py')
+
+cache = Cache(app, config={'CACHE_TYPE': 'RedisCache', 'CACHE_REDIS_URL': app.config['REDIS_URL']})
 
 from . import auth
 app.register_blueprint(auth.bp)
-
-
-app.config.from_pyfile('config.py')
 
 
 @app.context_processor

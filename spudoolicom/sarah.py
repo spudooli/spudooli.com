@@ -21,7 +21,7 @@ def sarahjapan():
     cursor.close()
     sarahjapanupdated = str(sarahjapanlocation[1])
     sarahjapanlatlon = str(sarahjapanlocation[3]) + "," + str(sarahjapanlocation[4])
-    sarahjapanlocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + sarahjapanlatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:SC%7C" + sarahjapanlatlon + "&sensor=false&key=AIzaSyCyuhLhlvQCW7dZBaA5-HLzDP6Sau-qmvA&visual_refresh=true&maptype=terrain'  class='img-fluid' ><p>Updated: " + sarahjapanupdated + "</p>"
+    sarahjapanlocation = "<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + sarahjapanlatlon + "&zoom=12&size=640x640&scale=2&markers=color:0xD0E700%7Clabel:SC%7C" + sarahjapanlatlon + "&sensor=false&key=" + app.config['GOOGLE_MAPS_TRACKING_API_KEY'] + "&visual_refresh=true&maptype=terrain'  class='img-fluid' ><p>Updated: " + sarahjapanupdated + "</p>"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) FROM `track` where who = 7 and date > '2024-01-01'")

@@ -1,12 +1,12 @@
 from http.client import OK
-from spudoolicom import app, db, config
+from spudoolicom import app, db
 from flask import request
 import json
 from datetime import datetime
 import paho.mqtt.client as paho
 
-broker = "192.168.1.2"
-port = 1883
+broker = app.config['MQTT_BROKER']
+port = app.config['MQTT_PORT']
 
 
 def on_connect(client, userdata, flags, rc):

@@ -43,14 +43,14 @@ def benchleds():
     if benchleds == "on":
         #print("Setting colour to: " + benchleds)
         try:
-            dotherequeststhing("http://192.168.1.142/benchleds-on")
+            dotherequeststhing(app.config['BENCHLEDS_HOST'] + "/benchleds-on")
         except:
             pass
     
     elif benchleds == "off":
         #print("Setting colour to: " + benchleds)
         try:
-            dotherequeststhing("http://192.168.1.142/benchleds-off")
+            dotherequeststhing(app.config['BENCHLEDS_HOST'] + "/benchleds-off")
         except:
             pass
 

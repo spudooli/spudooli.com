@@ -2,7 +2,7 @@ from flask import render_template
 from spudoolicom import app, db
 import redis
 
-r = redis.StrictRedis('localhost', 6379, encoding="utf-8", decode_responses=True)
+r = redis.from_url(app.config['REDIS_URL'], encoding="utf-8", decode_responses=True)
 
 
 @app.route('/house')

@@ -7,8 +7,8 @@ import string
 
 import paho.mqtt.client as paho
 
-broker = "192.168.1.2"
-port = 1883
+broker = app.config['MQTT_BROKER']
+port = app.config['MQTT_PORT']
 
 def on_connect(client, userdata, flags, reason_code, properties):
    print("Connected With Result Code "+str(reason_code))
