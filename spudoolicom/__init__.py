@@ -55,5 +55,5 @@ import spudoolicom.auth
 import spudoolicom.weather
 import spudoolicom.alice
 import spudoolicom.sarah
-import spudoolicom.bmwi3
+# import spudoolicom.bmwi3
 import spudoolicom.photos
