@@ -64,12 +64,12 @@ def mancaveleds():
     mancaveleds = hex_to_rgb(mancaveleds)
     #print(str(mancaveleds))
 
-    if mancaveleds:
-        try:
-           os.system("sudo -u dave /usr/local/bin/liquidctl --match Corsair set sync color clear")
-           os.system("sudo -u dave /usr/local/bin/liquidctl --match Corsair set sync color fixed 'rgb" + str(mancaveleds) + "'")
-           os.system("sudo -u dave /usr/local/bin/liquidctl --match Gigabyte set sync color fixed 'rgb" + str(mancaveleds) + "'")
-        except:
-            pass
+    # if mancaveleds:
+    #     try:
+    #        os.system("sudo -u dave /usr/local/bin/liquidctl --match Corsair set sync color clear")
+    #        os.system("sudo -u dave /usr/local/bin/liquidctl --match Corsair set sync color fixed 'rgb" + str(mancaveleds) + "'")
+    #        os.system("sudo -u dave /usr/local/bin/liquidctl --match Gigabyte set sync color fixed 'rgb" + str(mancaveleds) + "'")
+    #     except:
+    #         pass
     
     return "ok"
