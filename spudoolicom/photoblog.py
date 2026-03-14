@@ -5,6 +5,7 @@ from datetime import datetime
 from flask_wtf.csrf import CSRFProtect, CSRFError
 import re
 import os
+import requests
 
 csrf = CSRFProtect()
 csrf.init_app(app)
@@ -107,20 +108,25 @@ def post(id):
         imageexists = False
 
     # If there is lat and lon in the database, display a map on the post
+    photo_lat = None
+    photo_lon = None
+    map_img = None
     if post[5]:
         latlon = post[5]
-        photolat = str(latlon.split(",")[0].replace("(", ""))
-        photolon = str(latlon.split(",")[1].replace(" ","").replace(")",""))
-        # Check if local map exists
+        photo_lat = latlon.split(",")[0].replace("(", "").strip()
+        photo_lon = latlon.split(",")[1].replace(")", "").strip()
         local_map_path = os.path.join(app.static_folder, 'images', 'photoblogmaps', str(id) + ".png")
+        if not os.path.isfile(local_map_path):
+            tile_url = f"http://localhost:8080/styles/osm-bright/static/{photo_lon},{photo_lat},14/550x300.png?marker={photo_lon},{photo_lat}|marker-icon.png"
+            try:
+                resp = requests.get(tile_url, timeout=5)
+                resp.raise_for_status()
+                with open(local_map_path, 'wb') as f:
+                    f.write(resp.content)
+            except requests.exceptions.RequestException:
+                pass
         if os.path.isfile(local_map_path):
-            map_src = "/static/images/photoblogmaps/" + str(id) + ".png"
-        else:
-            map_src = ""
-
-        maprequest = "<a href='https://www.google.co.nz/maps/@" + photolat + "," + photolon + ",16.0z'><img src='" + map_src + "' class='img-fluid' alt='Map of the photo location'></a>"
-    else:
-        maprequest = ""
+            map_img = "/static/images/photoblogmaps/" + str(id) + ".png"
 
     # Get previous and next and latest Ids
     if id == "1":
@@ -178,8 +184,9 @@ def post(id):
                 flash("We got your comment, we'll consider publishing it in due course")
                 return redirect('/photoblog/' + id, code=301)
 
-    return render_template('post.html', post = post, id = id, comments = comments, maprequest = maprequest, 
-                            exifhtml = exifhtml, captured = captured, previousimage = previousimage, 
+    return render_template('post.html', post = post, id = id, comments = comments,
+                            photo_lat = photo_lat, photo_lon = photo_lon, map_img = map_img,
+                            exifhtml = exifhtml, captured = captured, previousimage = previousimage,
                             nextimage = nextimage, form = form, imageexists = imageexists)
 
 @app.errorhandler(CSRFError)

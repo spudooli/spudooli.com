@@ -95,15 +95,18 @@ https://www.spudooli.com/photoblog {% endif %}{% endblock %}
           <div class="container-counter-box">
             <div class="container">
               <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <div class="counter-box">
-                    <div class="counter-number">{% if maprequest != "" %}
-                      {{maprequest | safe}}
+                    <div class="counter-number">{% if map_img %}
+                      <a
+                        href="https://www.openstreetmap.org/?mlat={{ photo_lat }}&amp;mlon={{ photo_lon }}&amp;zoom=14">
+                        <img src="{{ map_img }}" class="img-fluid" alt="Map of the photo location">
+                      </a>
                       {% endif %}
                     </div>
                   </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-6">
                   <div>
                     <div class="counter-title"> Post Meta</div>
                     <p> </p>
