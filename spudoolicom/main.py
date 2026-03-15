@@ -25,10 +25,10 @@ def main():
     power = r.get('power')
 
     bankbalance = r.get('bankbalance')
-    bankbalance = "$" + bankbalance.split(".")[0]
+    bankbalance = "$" + bankbalance.split(".")[0] if bankbalance else "N/A"
 
-    indoortemp = r.get('indoorTemperature') + "&deg;"
-    mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
+    indoortemp = (r.get('indoorTemperature') or "?") + "&deg;"
+    mancaveTemperature = (r.get('mancaveTemperature') or "?") + "&deg;"
 
     cursor = db.mysql.connection.cursor()
     cursor.execute("SELECT count(id) id FROM pixelpost_pixelpost")
@@ -145,7 +145,7 @@ def contactus():
 @app.route("/power")
 def power():
     power = r.get('power')
-    return power
+    return power or ""
 
 
 @app.route("/cloudservices/giovanni/ipaddress", methods=['GET'])

@@ -20,62 +20,59 @@ def weather():
 
     if saturday == "Partly cloudy":
         saturdayicon = "<span class='fs1 climacon cloud sun' aria-hidden='true'></span>"
-    if saturday == "Few showers":
+    elif saturday == "Few showers":
         saturdayicon = "<span class='fs1 climacon showers sun' aria-hidden='true'></span>"
-    if saturday == "Showers":
+    elif saturday == "Showers":
         saturdayicon = "<span class='fs1 climacon showers' aria-hidden='true'></span>"
-    if saturday == "Rain":
+    elif saturday == "Rain":
         saturdayicon = "<span class='fs1 climacon rain' aria-hidden='true'></span>"
-    if saturday == "Fine":
+    elif saturday == "Fine":
         saturdayicon = "<span class='fs1 climacon sun' aria-hidden='true'></span>"
-    if saturday == "Cloudy":
+    elif saturday == "Cloudy":
         saturdayicon = "<span class='fs1 climacon cloud' aria-hidden='true'></span>"
-    if saturday == "Wind rain":
+    elif saturday == "Wind rain":
         saturdayicon = "<span class='fs1 climacon wind cloud' aria-hidden='true'></span>"
-    if saturday == "Drizzle":
+    elif saturday == "Drizzle":
         saturdayicon = "<span class='fs1 climacon drizzle' aria-hidden='true'></span>"
-    if saturday == "Windy":
+    elif saturday == "Windy":
         saturdayicon = "<span class='fs1 climacon wind' aria-hidden='true'></span>"
-    if saturday == "Thunder":
+    elif saturday == "Thunder":
         saturdayicon = "<span class='fs1 climacon lightning' aria-hidden='true'></span>"
+    else:
+        saturdayicon = ""
 
     if sunday == "Partly cloudy":
         sundayicon = "<span class='fs1 climacon cloud sun' aria-hidden='true'></span>"
-    if sunday == "Few showers":
+    elif sunday == "Few showers":
         sundayicon = "<span class='fs1 climacon showers sun' aria-hidden='true'></span>"
-    if sunday == "Showers":
+    elif sunday == "Showers":
         sundayicon = "<span class='fs1 climacon showers' aria-hidden='true'></span>"
-    if sunday == "Rain":
+    elif sunday == "Rain":
         sundayicon = "<span class='fs1 climacon rain' aria-hidden='true'></span>"
-    if sunday == "Fine":
+    elif sunday == "Fine":
         sundayicon = "<span class='fs1 climacon sun' aria-hidden='true'></span>"
-    if sunday == "Cloudy":
+    elif sunday == "Cloudy":
         sundayicon = "<span class='fs1 climacon cloud' aria-hidden='true'></span>"
-    if sunday == "Wind rain":
+    elif sunday == "Wind rain":
         sundayicon = "<span class='fs1 climacon wind cloud' aria-hidden='true'></span>"
-    if sunday == "Drizzle":
+    elif sunday == "Drizzle":
         sundayicon = "<span class='fs1 climacon drizzle' aria-hidden='true'></span>"
-    if sunday == "Windy":
+    elif sunday == "Windy":
         sundayicon = "<span class='fs1 climacon wind' aria-hidden='true'></span>"
-    if sunday == "Thunder":
+    elif sunday == "Thunder":
         sundayicon = "<span class='fs1 climacon lightning' aria-hidden='true'></span>"
-
+    else:
+        sundayicon = ""
 
     pressuredirection = r.get("pressureDirection")
-    if pressuredirection == "up":
-        pressuredirectionicon= "<ion-icon name='arrow-up-outline'></ion-icon>"
-    if pressuredirection == "upslowly":
-        pressuredirectionicon= "<ion-icon name='arrow-up-outline'></ion-icon>"
-    if pressuredirection == "upslowly-goodcoming":
-        pressuredirectionicon= "<ion-icon name='arrow-up-outline'></ion-icon>"
-    if pressuredirection == "downslowly":
-        pressuredirectionicon= "<ion-icon name='arrow-down-outline'></ion-icon>"
-    if pressuredirection == "down":
-        pressuredirectionicon= "<ion-icon name='arrow-down-outline'></ion-icon>"
-    if pressuredirection == "downslowly-nogoodcoming":
-        pressuredirectionicon= "<ion-icon name='arrow-down-outline'></ion-icon>"
-    if pressuredirection == "stable":
-        pressuredirectionicon= "<ion-icon name='arrow-forward-outline'></ion-icon>"
+    if pressuredirection in ("up", "upslowly", "upslowly-goodcoming"):
+        pressuredirectionicon = "<ion-icon name='arrow-up-outline'></ion-icon>"
+    elif pressuredirection in ("down", "downslowly", "downslowly-nogoodcoming"):
+        pressuredirectionicon = "<ion-icon name='arrow-down-outline'></ion-icon>"
+    elif pressuredirection == "stable":
+        pressuredirectionicon = "<ion-icon name='arrow-forward-outline'></ion-icon>"
+    else:
+        pressuredirectionicon = ""
 
     html = todayforecast + "<br>"
     html += "Max: " + todaymax + "&deg;  Min: " + todaymin + "&deg;<br><br>"

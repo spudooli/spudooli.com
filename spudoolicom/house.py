@@ -8,18 +8,18 @@ r = redis.from_url(app.config['REDIS_URL'], encoding="utf-8", decode_responses=T
 @app.route('/house')
 def house():
 
-    indoortemp = r.get('indoorTemperature') + "&deg;"
-    outdoortemp = r.get('outdoorTemperature') + "&deg;"
-    outdoorhumidity = r.get('outsideHumidity') + "%"
-    shedtemp = r.get('gardenshedTemperature') + "&deg;"
-    mancaveTemperature = r.get('mancaveTemperature') + "&deg;"
-    mancavehumidity = r.get("mancaveHumidity") + "%"
-    kitchenTemperature = r.get("kitchenTemperature") + "&deg;"
-    kitchenhumidity = r.get("kitchenHumidity") + "%"
-    centralheating = r.get("heatTemperature") + "&deg;"
-    centralheatinghumidity = r.get("heatHumidity") + "%"
-    fridgedoortoday = r.get("fridgeDoorCounter")
-    barometer = r.get("indoorPressure")
+    indoortemp = (r.get('indoorTemperature') or "?") + "&deg;"
+    outdoortemp = (r.get('outdoorTemperature') or "?") + "&deg;"
+    outdoorhumidity = (r.get('outsideHumidity') or "?") + "%"
+    shedtemp = (r.get('gardenshedTemperature') or "?") + "&deg;"
+    mancaveTemperature = (r.get('mancaveTemperature') or "?") + "&deg;"
+    mancavehumidity = (r.get("mancaveHumidity") or "?") + "%"
+    kitchenTemperature = (r.get("kitchenTemperature") or "?") + "&deg;"
+    kitchenhumidity = (r.get("kitchenHumidity") or "?") + "%"
+    centralheating = (r.get("heatTemperature") or "?") + "&deg;"
+    centralheatinghumidity = (r.get("heatHumidity") or "?") + "%"
+    fridgedoortoday = r.get("fridgeDoorCounter") or "0"
+    barometer = r.get("indoorPressure") or "0hPa"
     barometer = barometer[0:-2]
     i3range = r.get("i3rangeremaining")
     i3battery = r.get("i3batteryremaining")
