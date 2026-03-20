@@ -180,7 +180,7 @@ def thebookofdavesearch():
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
-#@cache.cached(timeout=7200)
+@cache.cached(timeout=7200)
 def toomuchqueen():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael'")
