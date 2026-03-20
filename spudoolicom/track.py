@@ -4,6 +4,10 @@ import requests
 import shutil
 import random
 import string
+import json
+import redis as redis_lib
+
+r_dash = redis_lib.StrictRedis('localhost', 6379, decode_responses=True)
 
 import paho.mqtt.client as paho
 
@@ -67,6 +71,11 @@ def track(who):
                   f.write(response.content)
             except requests.exceptions.RequestException as e:
                print(f"Error downloading map image: {e}")
+
+            if who == "dave":
+               r_dash.publish('location:dave', json.dumps({'who': 'dave'}))
+            elif who == "gabba":
+               r_dash.publish('location:gabba', json.dumps({'who': 'gabba'}))
 
          cur = db.mysql.connection.cursor()
          cur.execute('''INSERT into track (who, latitude, longitude, altitude, mapid) VALUES (%s, %s, %s, %s, %s)''', (str(whonumber), str(lat), str(lon), str(alt), mapid))
