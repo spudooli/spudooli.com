@@ -374,7 +374,17 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
                   artists they have played</p>
                 <p>And below is distinct artists by radio station. I'm willing to bet that at any one time all of them
                   have advertised they have the most variety in music, clearly not the case</p>
-
+                <div class="row">
+                  {% for thing in artistsbystation %}
+                  <div class="col-md-3">
+                    <div class="counter-box">
+                      <ion-icon name="musical-notes-outline"></ion-icon>
+                      <div class="counter-number"> {{ "{:,}".format(thing.artistplaycount) }} </div>
+                      <div class="counter-title">Unique artists played - {{ thing.station }}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
               </div>
             </div>
           </div>
@@ -385,48 +395,38 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
       <div class="container-counter-box">
         <div class="container">
           <div class="row">
-            {% for thing in artistsbystation %}
             <div class="col-md-3">
               <div class="counter-box">
-                <ion-icon name="musical-notes-outline"></ion-icon>
-                <div class="counter-number"> {{ "{:,}".format(thing.artistplaycount) }} </div>
-                <div class="counter-title">Unique artists played by {{ thing.station }}</div>
+                <ion-icon name="radio-outline"></ion-icon>
+                <div class="counter-number">
+                  <div id="current_power"></div>
+                </div>
+                <div class="counter-title"></div>
               </div>
             </div>
-            {% endfor %}
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Average unique artists per month</div>
+                <p>Which station plays the widest variety each month on average?</p>
+                <div class="row">
+                  {% for thing in avguniqueartistsbystation %}
+                  <div class="col-md-3">
+                    <div class="counter-box">
+                      <ion-icon name="musical-notes-outline"></ion-icon>
+                      <div class="counter-number"> {{ "{:,}".format(thing.avg_unique_per_month) }} </div>
+                      <div class="counter-title">{{ thing.station }}</div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Close divs -->
-    </div>
-  </div>
-</div>
-</div>
-
-<div class="container-counter-box">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="spudooli-section-title">Average unique artists per month</div>
-        <p>Which station plays the widest variety each month on average?</p>
-      </div>
-    </div>
-    <div class="row">
-      {% for thing in avguniqueartistsbystation %}
-      <div class="col-md-3">
-        <div class="counter-box">
-          <ion-icon name="musical-notes-outline"></ion-icon>
-          <div class="counter-number"> {{ "{:,}".format(thing.avg_unique_per_month) }} </div>
-          <div class="counter-title">Avg unique artists/month — {{ thing.station }}</div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-<script src="{{ url_for('static', filename='js/queen-charts.js') }}"></script>
-{% endblock %}
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+      <script src="{{ url_for('static', filename='js/queen-charts.js') }}"></script>
+      {% endblock %}

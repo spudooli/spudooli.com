@@ -16,7 +16,7 @@ def recently(recentlydate):
     # If something nefarious in the URL, redirect to today's date
     x = re.search('[a-zA-Z]', recentlydate)
     if x:
-        return redirect('/recently', code=301)
+        return redirect('/recently', code=302)
 
     year = int(recentlydate.split("-")[0])
     month = int(recentlydate.split("-")[1])
