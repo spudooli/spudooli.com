@@ -272,6 +272,25 @@ def toomuchqueen():
                 for row in artistsstation]
     cursor.close()
 
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("""
+        SELECT station, ROUND(AVG(monthly_unique)) as avg_unique_per_month
+        FROM (
+            SELECT station,
+                   DATE_FORMAT(played_date, '%Y-%m') as month,
+                   COUNT(DISTINCT artist) as monthly_unique
+            FROM too_much_queen
+            GROUP BY station, month
+        ) monthly_counts
+        GROUP BY station
+        ORDER BY avg_unique_per_month DESC
+    """)
+    avgstation = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    avguniqueartistsbystation = [dict(zip(column_names, row)) for row in avgstation]
+    cursor.close()
+
       # Get all months spend for KFC
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT EXTRACT(Year_MONTH FROM played_date) thismonth, COUNT(*) AS play_count FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael' GROUP BY thismonth ORDER BY thismonth ASC")
@@ -286,7 +305,8 @@ def toomuchqueen():
                            totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20,
                            thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20,
                            channelxsongs20 = channelxsongs20,
-                           queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues)
+                           queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues,
+                           avguniqueartistsbystation = avguniqueartistsbystation)
 
 
 @app.route('/projects/bookmarks')
