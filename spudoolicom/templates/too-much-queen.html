@@ -19,10 +19,15 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
           <ion-icon name="radio-outline"></ion-icon>
         </div>
         <p class="title-un-des">I had started to form an opinion that Auckland radio stations play too much Queen, Elton
-          John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.<br>
-          Data collected since 24th June 2023
+          John and Rolling Stones. so set out to prove that thinking with data. I was bloody right.
+          <br> Sometime in 2024 I stopped listening to the above stations and moved to Channel X. I reckon I get about 3
+          songs in before I have to mute when
+          plays one of their bloody "Dance Floor Fillers". I reckon they need to add another 1000 artists to their
+          playlists to make the listening bearable. But no ads and no DJs is too good to pass up.<br><br>
+          Data collected since 24th June 2023, Channel X starts 20th March 2026
+        </p>
       </div>
-      </p>
+
 
       {% endblock %}
 
@@ -46,7 +51,11 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
                 <div class="spudooli-section-title">Too much Queen</div>
                 <p>Queen are good, but are they so good they should command {{ queenpercentage }}% of all songs played
                   on Boomer/GenX radio (GoldFM, The Sound, Coast FM, Radio Hauraki) in Auckland. The answer it a
-                  resounding bloody no.</p>
+                  resounding bloody no.
+
+                  <br>No, I don't know what happened June 2024 that Queen played so little that month. I can't see any
+                  data loss</br>
+                </p>
 
 
               </div>
@@ -155,6 +164,13 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
                 <ion-icon name="musical-notes-outline"></ion-icon>
                 <div class="counter-number"> {{ "{:,}".format(goldfmsongcount) }} </div>
                 <div class="counter-title">Gold FM Total Song Count</div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                <ion-icon name="musical-notes-outline"></ion-icon>
+                <div class="counter-number"> {{ "{:,}".format(channelxsongcount) }} </div>
+                <div class="counter-title">Channel X Total Song Count</div>
               </div>
             </div>
           </div>
@@ -289,6 +305,41 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
                   </thead>
                   <tbody>
                     {% for thing in thecoastsongs20 %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
+                <div class="spudooli-section-title">Channel X Top 20 Songs Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in channelxsongs20 %}
                     <tr>
                       <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
                       <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>

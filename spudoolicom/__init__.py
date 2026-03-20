@@ -1,5 +1,5 @@
 from flask import Flask, g, request
-from datetime import datetime
+import datetime
 import logging
 from logging.handlers import RotatingFileHandler
 from flask_caching import Cache
@@ -17,7 +17,7 @@ app.register_blueprint(auth.bp)
 
 @app.context_processor
 def inject_now():
-    return {'now': datetime.utcnow()}
+    return {'now': datetime.datetime.now(datetime.UTC)}
 
 
 @app.template_filter('safe_url')

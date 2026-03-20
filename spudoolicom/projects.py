@@ -195,6 +195,7 @@ def toomuchqueen():
     thesoundsongcount = 0
     thecoastsongcount = 0
     goldfmsongcount = 0
+    channelxsongcount = 0
 
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT station, COUNT(*) FROM too_much_queen GROUP BY station")
@@ -210,6 +211,8 @@ def toomuchqueen():
             thecoastsongcount = count
         elif station == 'goldfm':
             goldfmsongcount = count
+        elif station == 'channelx':
+            channelxsongcount = count
 
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen")
@@ -246,6 +249,14 @@ def toomuchqueen():
                 for row in tcsongs20]
     cursor.close()
 
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'channelx' group by song_name, artist order by playcount desc limit 20")
+    cxsongs20 = cursor.fetchall()
+    desc = cursor.description
+    column_names = [col[0] for col in desc]
+    channelxsongs20 = [dict(zip(column_names, row)) for row in cxsongs20]
+    cursor.close()
+
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(distinct artist) FROM too_much_queen")
     results = cur.fetchone()
@@ -269,10 +280,12 @@ def toomuchqueen():
     queenplaysbymonthvalues = [str(row[1]).replace("-","") for row in queenplaysbymonth]
     cur.close() 
 
-    return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount, 
-                           top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount, 
-                           thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20, 
+    return render_template('too-much-queen.html', top20artists = top20artists, queenpercentage = queenpercentage, queenplaycount = queenplaycount,
+                           top20songs = top20songs, haurakisongcount = haurakisongcount, thesoundsongcount = thesoundsongcount,
+                           thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, channelxsongcount = channelxsongcount,
+                           totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20,
                            thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20,
+                           channelxsongs20 = channelxsongs20,
                            queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues)
 
 
