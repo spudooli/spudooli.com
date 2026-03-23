@@ -3,6 +3,7 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask_wtf.csrf import generate_csrf
 from werkzeug.exceptions import abort
 from spudoolicom import app, db
 import os
@@ -213,11 +214,13 @@ def checkin_search():
     results = cursor.fetchall()
     cursor.close()
     rows = []
+    csrf_token = generate_csrf()
     html = f"<div id='comments'><ul>"
     for row in results:
         html += f"<li><strong>{row[0]}</strong><br />"
         html += f"{row[1]}"
         html += f"<form action='/admin/checkin' method='post' style='text-align: right; color: #195ddd'>"
+        html += f"<input type='hidden' name='csrf_token' value='{csrf_token}'>"
         html += f'''<input name='venue' class='form-control' id='venue' value="{row[0]}" type='hidden'>'''
         html += f"<input name='address' class='form-control'  id='address' value='{row[1]}' type='hidden'>"
         html += f"<input type='submit' value='Checkin Here '  style='border: none; background: none; padding: 0;' ></form></li>"
