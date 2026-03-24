@@ -20,7 +20,7 @@ def i3():
     totalcost = round(float(cursor.fetchone()[0]), 2)
     cursor.close()
 
-    i3traveled = int(r.get('i3mileage')) - int(46683)
+    i3traveled = int(r.get('i3mileage')) - 46683
 
     ruckmsleft = format(75526 - int(r.get('i3mileage')), ',')
 
@@ -54,6 +54,6 @@ def i3():
     chargevalues = [str(row[1]).replace("-","") for row in data]
     cur.close()  
 
-    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = i3traveled, costperkm = costperkm, 
+    return render_template('bmwi3.html', totalkwh = totalkwh, totalcost = totalcost, i3traveled = format(i3traveled, ','), costperkm = costperkm, 
                            i3pings = i3pings, chargelabels = chargelabels, chargevalues = chargevalues, i3range = i3range, 
                            i3battery = i3battery, ruckmsleft = ruckmsleft, charging = charging, i3chargecompletiontime_formatted_time = i3chargecompletiontime_formatted_time)
