@@ -33,8 +33,10 @@
         {% endif %}
 
         {% if camera == "driveway" %}
-        <img class="chartcenter img-fluid" src="https://www.spudooli.com/driveway" />
-
+        <script type="module" src="{{ url_for('static', filename='js/driveway-cam.js') }}"></script>
+        <video-rtc src="wss://www.spudooli.com/driveway/api/ws?src=camera1"
+                   style="width:100%; max-width:1280px; display:block; margin:auto;">
+        </video-rtc>
         {% endif %}
 
         <!-- Close divs -->

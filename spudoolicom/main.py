@@ -1,5 +1,5 @@
 from operator import contains
-from spudoolicom import app, db, forms
+from spudoolicom import app, db, forms, csrf
 from flask import render_template, make_response, redirect, request, send_from_directory, flash, g
 from datetime import datetime
 import redis
@@ -165,6 +165,7 @@ def ipservices():
         return "Unauthorized User-Agent", 403
 
 
+@csrf.exempt
 @app.route('/csp-report-to/', methods=['POST'])
 def csp_report():
     report = request.get_json(force=True, silent=True)
