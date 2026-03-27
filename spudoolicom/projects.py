@@ -180,7 +180,7 @@ def thebookofdavesearch():
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
-@cache.cached(timeout=7200)
+#@cache.cached(timeout=7200)
 def toomuchqueen():
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(id) FROM too_much_queen where artist = 'Queen' or artist = 'Queen & David Bowie' or artist = 'George Michael & Queen' or artist = 'Queen & George Michael'")
@@ -214,48 +214,33 @@ def toomuchqueen():
         elif station == 'channelx':
             channelxsongcount = count
 
-    cur = db.mysql.connection.cursor()
-    cur.execute("SELECT count(id) FROM too_much_queen")
-    results = cur.fetchone()
-    totalsongcount = results[0]
-    cur.close()
+    totalsongcount = sum(count for _, count in station_counts)
 
     queenpercentage = round((queenplaycount / totalsongcount) * 100, 2)
-    
-    cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'hauraki' group by song_name, artist order by playcount desc limit 20")
-    hsongs20 = cursor.fetchall()
-    desc = cursor.description
-    column_names = [col[0] for col in desc]
-    haurakisongs20 = [dict(zip(column_names, row))
-                for row in hsongs20]
-    cursor.close()
 
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'thesound' group by song_name, artist order by playcount desc limit 20")
-    tssongs20 = cursor.fetchall()
+    cursor.execute("""
+        SELECT station, playcount, artist, song_name
+        FROM (
+            SELECT station, COUNT(*) as playcount, artist, song_name,
+                   ROW_NUMBER() OVER (PARTITION BY station ORDER BY COUNT(*) DESC) as rn
+            FROM too_much_queen
+            GROUP BY station, song_name, artist
+        ) ranked
+        WHERE rn <= 20
+        ORDER BY station, playcount DESC
+    """)
+    all_station_songs = cursor.fetchall()
     desc = cursor.description
     column_names = [col[0] for col in desc]
-    hthesoundsongs20 = [dict(zip(column_names, row))
-                for row in tssongs20]
+    all_station_songs = [dict(zip(column_names, row)) for row in all_station_songs]
     cursor.close()
 
-    cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'thecoast' group by song_name, artist order by playcount desc limit 20")
-    tcsongs20 = cursor.fetchall()
-    desc = cursor.description
-    column_names = [col[0] for col in desc]
-    thecoastsongs20 = [dict(zip(column_names, row))
-                for row in tcsongs20]
-    cursor.close()
-
-    cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT count(id) as playcount, artist, song_name from too_much_queen where station = 'channelx' group by song_name, artist order by playcount desc limit 20")
-    cxsongs20 = cursor.fetchall()
-    desc = cursor.description
-    column_names = [col[0] for col in desc]
-    channelxsongs20 = [dict(zip(column_names, row)) for row in cxsongs20]
-    cursor.close()
+    haurakisongs20 = [s for s in all_station_songs if s['station'] == 'hauraki']
+    hthesoundsongs20 = [s for s in all_station_songs if s['station'] == 'thesound']
+    thecoastsongs20 = [s for s in all_station_songs if s['station'] == 'thecoast']
+    goldfmsongs20 = [s for s in all_station_songs if s['station'] == 'goldfm']
+    channelxsongs20 = [s for s in all_station_songs if s['station'] == 'channelx']
 
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT count(distinct artist) FROM too_much_queen")
@@ -304,7 +289,7 @@ def toomuchqueen():
                            thecoastsongcount = thecoastsongcount, goldfmsongcount = goldfmsongcount, channelxsongcount = channelxsongcount,
                            totalsongcount = totalsongcount, haurakisongs20 = haurakisongs20,
                            thesoundsongs20 = hthesoundsongs20, artistsbystation = artistsbystation, distinctartists = distinctartists, thecoastsongs20 = thecoastsongs20,
-                           channelxsongs20 = channelxsongs20,
+                           goldfmsongs20 = goldfmsongs20, channelxsongs20 = channelxsongs20,
                            queenplaysbymonthlabels = queenplaysbymonthlabels, queenplaysbymonthvalues = queenplaysbymonthvalues,
                            avguniqueartistsbystation = avguniqueartistsbystation)
 

@@ -330,6 +330,41 @@ and Rolling Stones. so set out to prove that thinking with data. I was bloody ri
             </div>
             <div class="col-md-9">
               <div>
+                <div class="spudooli-section-title">Gold FM Top 20 Songs Playcount</div>
+                <table class="table table-condensed table-hover">
+                  <thead>
+                    <tr>
+                      <th>Play Count</th>
+                      <th>Track</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for thing in goldfmsongs20 %}
+                    <tr>
+                      <td width="25%">{{ "{:,}".format(thing.playcount) }}</td>
+                      <td><strong>{{ thing.song_name }} </strong> {{ thing.artist }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container-counter-box">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="counter-box">
+                <div class="counter-number"> </div>
+                <div class="counter-title"></div>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div>
                 <div class="spudooli-section-title">Channel X Top 20 Songs Playcount</div>
                 <table class="table table-condensed table-hover">
                   <thead>
