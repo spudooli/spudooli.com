@@ -309,16 +309,31 @@ def toomuchqueen():
                            avguniqueartistsbystation = avguniqueartistsbystation)
 
 
-@app.route('/projects/bookmarks')
-def bookmarks():
+@app.route('/projects/bookmarks', defaults={'tag_filter': None})
+@app.route('/projects/bookmarks/<tag_filter>')
+def bookmarks(tag_filter):
+
     cur = db.mysql.connection.cursor()
-    cur.execute("SELECT * FROM bookmarks")
-    bookmarks = cur.fetchall()
+    cur.execute("SELECT id, url, title, tags FROM bookmarks ORDER BY id DESC")
+    rows = cur.fetchall()
     cur.close()
 
-    bookmarkcount = getbookmarkcount()
+    all_bookmarks = [{'id': r[0], 'url': r[1], 'title': r[2], 'tags': r[3]} for r in rows]
 
-    return render_template('bookmarks.html', bookmarks = bookmarks, bookmarkcount = bookmarkcount)
+    tag_counts = {}
+    for b in all_bookmarks:
+        if b['tags']:
+            for tag in [t.strip() for t in b['tags'].split(',')]:
+                if tag:
+                    tag_counts[tag] = tag_counts.get(tag, 0) + 1
+    popular_tags = sorted(tag for tag, count in tag_counts.items() if count >= 2)
+
+    if tag_filter:
+        displayed = [b for b in all_bookmarks if b['tags'] and tag_filter in [t.strip() for t in b['tags'].split(',')]]
+    else:
+        displayed = all_bookmarks
+
+    return render_template('bookmarks.html', bookmarks=displayed, bookmarkcount=len(all_bookmarks), popular_tags=popular_tags, active_tag=tag_filter)
 
 
 @app.route('/projects/spudpic')

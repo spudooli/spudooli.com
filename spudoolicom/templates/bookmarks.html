@@ -33,24 +33,31 @@ case we need them later.{% endblock %}
               <div class="counter-box">
                 <ion-icon name="bookmark-outline"></ion-icon>
                 <div class="counter-number">
-                  <div id="current_power"></div>{{ bookmarkcount }}
+                  {{ bookmarkcount }}
                 </div>
                 <div class="counter-title">Bookmarks</div>
               </div>
+
+              {% if popular_tags %}
+              <div style="margin-top: 1rem;">
+                <a href="{{ url_for('bookmarks') }}" class="{% if not active_tag %}fw-bold{% endif %}">All</a>
+                {% for tag in popular_tags %}
+                <br><a href="{{ url_for('bookmarks', tag_filter=tag) }}"
+                  class="{% if active_tag == tag %}fw-bold{% endif %}">{{ tag }}</a>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+
             </div>
             <div class="col-md-9">
               <div>
-                <div class="counter-title"></div>
-
                 {% for bookmark in bookmarks %}
-
-                <p><a href="{{ bookmark[1] }}">{{ bookmark[2] | safe }}</a>
+                <p><a href="{{ bookmark.url }}">{{ bookmark.title | safe }}</a>
                   <br>
-                  <small>{{ bookmark[3] }}</small>
+                  <small>{{ bookmark.tags }}</small>
                 </p>
                 {% endfor %}
-
-
               </div>
             </div>
           </div>

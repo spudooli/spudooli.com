@@ -65,6 +65,26 @@ This is a personal "lifelogging" / home automation website (`spudooli.com`). The
 
 `spudoolicom/config.py` sets Flask config keys including `SECRET_KEY`, `UPLOAD_PATH`, Cloudflare Turnstile keys, and `RECAPTCHA_*` settings. MySQL credentials are hardcoded in `db.py`.
 
+## Testing
+
+```bash
+python3 -m pytest tests/
+```
+
+Key fixture notes (important for adding new tests):
+- Use `client` fixture (not `app` — conflicts with pytest-flask)
+- `auth_client` yields `(client, mock_conn)` with `user_id=1` in session
+- Redis, Typesense, and RotatingFileHandler are patched at module level in `conftest.py`
+- `/var/www/` file paths are proxied to mocks; all other paths hit the real filesystem
+
+Known bugs documented as `xfail` in the suite (intentionally not yet fixed):
+- `main.py`: `bankbalance.split('.')[0]` crashes if Redis returns None
+- `house.py`: string concat with Redis None crashes
+- `weather.py`: UnboundLocalError on unrecognised forecast word
+- `recently.py`: date/string comparison always false
+- `auth.py`: `url_for('index')` fails (endpoint is named `main`)
+- `photoblog.py`: unconditional `open()` → FileNotFoundError if image missing
+
 ## Search Index Management
 
 Scripts in `bin/` manage the Typesense index:
