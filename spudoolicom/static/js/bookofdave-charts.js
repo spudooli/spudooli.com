@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById("myChart");
+    const ctx = document.getElementById("mypostsChart");
     if (ctx) {
         try {
             const labels = JSON.parse(ctx.dataset.labels || '[]');
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: "$ Spend on Charging the EV by Month",
+                        label: "Posts per month",
                         backgroundColor: '#195ddd',
                         borderColor: '#000',
                         data: values,
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } catch (error) {
-            console.error('Error initializing BMW i3 chart:', error);
+            console.error('Error initializing Book of Dave chart:', error);
         }
     }
 });

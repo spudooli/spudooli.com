@@ -28,7 +28,7 @@ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
         <!-- Search form -->
         <div class="row mb-4">
           <div class="col-lg-6 offset-lg-3">
-            <form action="/projects//the-book-of-dave/search" method="GET" class="d-flex">
+            <form action="/projects/the-book-of-dave/search" method="GET" class="d-flex">
               <input type="text" name="query" class="form-control" placeholder="Search The Book of Dave..."
                 aria-label="Search">
               <button class="btn btn-primary ms-2" type="submit">Search</button>
@@ -37,15 +37,15 @@ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
         </div>
       </div>
 
-
+      {% if not stats_mode %}
       <div class="col-lg-12">
         <div class="row mb-4">
           <div class="col-lg-6 offset-lg-3">
-            <h3 class="title-un">Everything I know about {% if query %}{{query}} {% endif %} {% if arandomverse
-              %}{{arandomverse}} {% endif %} </h3>
+            <h3 class="title-un">Everything I know about {% if query %}{{query}}{% endif %}</h3>
           </div>
         </div>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -53,6 +53,101 @@ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
 
 {% block content %}
 
+{% if stats_mode %}
+
+<div class="container-counter-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+          <ion-icon name="play-outline"></ion-icon>
+          <div class="counter-number">{{ numTweetsToots }}</div>
+          <div class="counter-title">Total Posts</div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <div class="spudooli-section-title">There clearly was a heyday of Twitter for me</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-counter-box">
+  <div class="container">
+
+    <canvas id="mypostsChart" width="1000" height="400" data-labels='{{ posts_by_month_labels | tojson }}'
+      data-values='{{ posts_by_month_values | tojson }}'></canvas>
+
+  </div>
+</div>
+
+
+<div class="container-counter-box">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="counter-box wow">
+          <div class="counter-number">
+            <div id="current_power"></div>
+          </div>
+          <div class="counter-title"></div>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div>
+          <div class="spudooli-section-title">Posts per day — last 12 months</div>
+          <div class="checkin-heatmap">
+            <div class="heatmap-wrap">
+              <div class="heatmap-day-labels">
+                <div></div>
+                <div>Mon</div>
+                <div></div>
+                <div>Wed</div>
+                <div></div>
+                <div>Fri</div>
+                <div></div>
+              </div>
+              <div class="heatmap-columns-wrap">
+                <div class="heatmap-months">
+                  {% for label in posts_week_month_labels %}
+                  <div class="heatmap-month-cell">{{ label }}</div>
+                  {% endfor %}
+                </div>
+                <div class="heatmap-weeks">
+                  {% for week in posts_weeks %}
+                  <div class="heatmap-week">
+                    {% for day in week %}
+                    <div class="heatmap-cell level-{{ day.level }}{% if day.future %} future{% endif %}"
+                      title="{{ day.date }}: {{ day.count }} post{{ 's' if day.count != 1 else '' }}"></div>
+                    {% endfor %}
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="heatmap-legend">
+              <span>Less</span>
+              <div class="heatmap-cell level-0"></div>
+              <div class="heatmap-cell level-1"></div>
+              <div class="heatmap-cell level-2"></div>
+              <div class="heatmap-cell level-3"></div>
+              <div class="heatmap-cell level-4"></div>
+              <span>More</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="{{ url_for('static', filename='js/bookofdave-charts.js') }}"></script>
+
+{% else %}
 
 <div class="container-counter-box">
   <div class="container">
@@ -68,8 +163,6 @@ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
         <div class="row">
           <div class="col-3"></div>
           <div class="col-lg-9">
-
-
 
             {% for vers in verse %}
             <div class="row">
@@ -99,6 +192,6 @@ This is them, graze upon them. These are The (newer) Book Of Dave{% endblock %}
   </div>
 </div>
 
-
+{% endif %}
 
 {% endblock %}

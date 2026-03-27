@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request
+from flask import render_template, redirect, request, url_for
 from spudoolicom import app, db, cache
 from datetime import date, datetime, timedelta
 import os
@@ -59,7 +59,7 @@ def list_files_by_creation_date(directory):
 
 def get_the_verse(verse):
     cursor = db.mysql.connection.cursor()
-    cursor.execute("SELECT event_date, name, type, address, artist, album, external_id, url, item_image from recently WHERE name LIKE %s  AND type IN ('twitter', 'mastodon') ORDER by event_date ASC", (f'%{verse}%',))
+    cursor.execute("SELECT event_date, name, type, address, artist, album, external_id, url, item_image from recently WHERE name LIKE %s  AND type IN ('Twitter', 'Mastodon') ORDER by event_date ASC", (f'%{verse}%',))
     verse_data = cursor.fetchall()
     column_names = [col[0] for col in cursor.description]
     verse = [dict(zip(column_names, row)) for row in verse_data]
@@ -161,22 +161,93 @@ def projects():
 @app.route('/projects/the-book-of-dave', strict_slashes=False, defaults={'verse': None} )
 @app.route('/projects/the-book-of-dave/<verse>')
 def thebookofdave(verse):
-        randomverses = ["martini", "daughter", "wine", "wife", "pants", "cat"]
-        arandomverse = random.choice(randomverses)
-        if verse is None:
-            verse = get_the_verse(arandomverse)
-        else:
-            verse = get_the_verse(verse)
+    if verse is not None:
+        verse_data = get_the_verse(verse)
+        return render_template('the-book-of-dave.html', verse=verse_data, query=verse)
 
-        return render_template('the-book-of-dave.html', verse = verse, randomverses = randomverses, arandomverse = arandomverse)
+    # Stats mode — build heatmap and monthly chart data
+    today = date.today()
+    days_since_sunday = (today.weekday() + 1) % 7
+    current_week_sunday = today - timedelta(days=days_since_sunday)
+    heatmap_start = current_week_sunday - timedelta(weeks=51)
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("""
+        SELECT DATE(event_date) as post_date, COUNT(*) as cnt
+        FROM recently
+        WHERE type IN ('Twitter', 'Mastodon')
+        AND event_date >= %s
+        GROUP BY DATE(event_date)
+    """, (heatmap_start,))
+    daily_rows = cursor.fetchall()
+    posts_by_day = {str(row[0]): row[1] for row in daily_rows}
+
+    def count_to_level(n):
+        if n == 0: return 0
+        if n == 1: return 1
+        if n <= 3: return 2
+        if n <= 5: return 3
+        return 4
+
+    posts_weeks = []
+    posts_week_month_labels = []
+    for week_idx in range(52):
+        week_start = heatmap_start + timedelta(weeks=week_idx)
+        if week_idx == 0:
+            posts_week_month_labels.append(week_start.strftime('%b'))
+        else:
+            prev_start = heatmap_start + timedelta(weeks=week_idx - 1)
+            posts_week_month_labels.append(week_start.strftime('%b') if week_start.month != prev_start.month else '')
+        week = []
+        for day_offset in range(7):
+            d = week_start + timedelta(days=day_offset)
+            date_str = d.strftime('%Y-%m-%d')
+            count = posts_by_day.get(date_str, 0)
+            is_future = d > today
+            week.append({
+                'date': date_str,
+                'count': count,
+                'level': 0 if is_future else count_to_level(count),
+                'future': is_future,
+            })
+        posts_weeks.append(week)
+
+    cursor = db.mysql.connection.cursor()
+    cursor.execute("""
+        SELECT DATE_FORMAT(event_date, '%Y-%m') as month, COUNT(*) as cnt
+        FROM recently
+        WHERE type IN ('Twitter', 'Mastodon')
+        GROUP BY month
+        ORDER BY month ASC
+    """)
+    monthly_rows = cursor.fetchall()
+    posts_by_month_labels = [row[0] for row in monthly_rows]
+    posts_by_month_values = [row[1] for row in monthly_rows]
+    cursor.close()
+
+    # get to total tweets and toots from the database
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT count(id) FROM recently where type like 'Twitter' or type like 'Mastodon'")
+    numTweetsToots = cur.fetchone()
+    numTweetsToots = "{:,}".format(numTweetsToots[0])
+    cur.close()
+
+    return render_template('the-book-of-dave.html',
+                           stats_mode=True,
+                           posts_weeks=posts_weeks,
+                           posts_week_month_labels=posts_week_month_labels,
+                           posts_by_month_labels=posts_by_month_labels,
+                           posts_by_month_values=posts_by_month_values,
+                           numTweetsToots = numTweetsToots)
 
 
 @app.route('/projects/the-book-of-dave/search', methods=['GET'])
 def thebookofdavesearch():
         query = request.args.get('query', '')
-        if query:
-            verse = get_the_verse(query)
-            return render_template('the-book-of-dave.html', verse = verse, query = query)
+        if not query:
+            return redirect(url_for('thebookofdave'))
+        verse = get_the_verse(query)
+        return render_template('the-book-of-dave.html', verse = verse, query = query)
 
 
 @app.route('/projects/too-much-queen', strict_slashes=False)
