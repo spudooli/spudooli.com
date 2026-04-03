@@ -20,8 +20,7 @@ endblock %}
         <div class="title-un-icon">
           <ion-icon name="home-outline"></ion-icon>
         </div>
-        <p class="title-un-des">The house, where we reveal our data. And in the Fediverse at <a rel="me"
-            href="https://botsin.space/@spudooli_house">spudooli_house</a></p>
+        <p class="title-un-des">The house, where we reveal our data.</p>
 
         {% endblock %}
 
@@ -197,6 +196,7 @@ endblock %}
           </div>
         </div>
 
+
         <div class="container-counter-box">
           <div class="container">
             <div class="row">
@@ -219,6 +219,57 @@ endblock %}
             </div>
           </div>
         </div>
+
+
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box">
+                  <ion-icon name="bulb-outline"></ion-icon>
+                  <div class="counter-number"> </div>
+                  <div class="counter-title"></div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="spudooli-section-title">Lights and plugs</div>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Device</th>
+                        <th>Status</th>
+                        <th>Today</th>
+                        <th>Past 7 Days</th>
+                        <th>Past 30 Days</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for device in tapo_devices %}
+                      <tr>
+                        <td>{{ device.name }}</td>
+                        <td>
+                          {% if device.error %}
+                          <span class="text-danger">Error</span>
+                          {% elif device.on %}
+                          <span class="text-success">On</span>
+                          {% else %}
+                          <span class="text-muted">Off</span>
+                          {% endif %}
+                        </td>
+                        <td>{{ device.today }}</td>
+                        <td>{{ device.past7 }}</td>
+                        <td>{{ device.past30 }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Close divs -->
       </div>

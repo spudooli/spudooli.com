@@ -1,8 +1,62 @@
 from flask import render_template
 from spudoolicom import app, db
 import redis
+import asyncio
+from tapo import ApiClient
 
 r = redis.from_url(app.config['REDIS_URL'], encoding="utf-8", decode_responses=True)
+
+
+def _format_minutes(minutes):
+    if minutes is None:
+        return "-"
+    minutes = int(minutes)
+    if minutes == 0:
+        return "0m"
+    h, m = divmod(minutes, 60)
+    if h and m:
+        return f"{h}h {m}m"
+    if h:
+        return f"{h}h"
+    return f"{m}m"
+
+
+async def _fetch_tapo_device(client, device_cfg):
+    try:
+        device = await client.p100(device_cfg['ip'])
+        info = await device.get_device_info()
+        usage = await device.get_device_usage()
+        info_dict = info.to_dict()
+        usage_dict = usage.to_dict()
+        time_usage = usage_dict.get('time_usage', {})
+        return {
+            'name': device_cfg.get('name') or info_dict.get('nickname', device_cfg['ip']),
+            'ip': device_cfg['ip'],
+            'on': info_dict.get('device_on', False),
+            'today': _format_minutes(time_usage.get('today')),
+            'past7': _format_minutes(time_usage.get('past7')),
+            'past30': _format_minutes(time_usage.get('past30')),
+            'error': None,
+        }
+    except Exception as e:
+        return {
+            'name': device_cfg.get('name') or device_cfg['ip'],
+            'ip': device_cfg['ip'],
+            'on': None,
+            'today': '-',
+            'past7': '-',
+            'past30': '-',
+            'error': str(e),
+        }
+
+
+async def _fetch_all_tapo_devices():
+    devices_cfg = app.config.get('TAPO_DEVICES', [])
+    if not devices_cfg:
+        return []
+    client = ApiClient(app.config['TAPO_USERNAME'], app.config['TAPO_PASSWORD'])
+    results = await asyncio.gather(*[_fetch_tapo_device(client, d) for d in devices_cfg])
+    return list(results)
 
 
 @app.route('/house')
@@ -36,10 +90,13 @@ def house():
     unformattedFridgeDoorCount = fridgeDoorCount[0]
     fridgeDoorCount = int(unformattedFridgeDoorCount) + int(fridgedoortoday)
     fridgeDoorCount = "{:,}".format(fridgeDoorCount)
-    cur.close()            
-    
-    return render_template('house.html', waterTemp = waterTemp, barometer = barometer, fridgedoortoday = fridgedoortoday, 
-                          kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity, 
-                          shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount, 
-                          indoortemp = indoortemp, outdoortemp = outdoortemp, outdoorhumidity = outdoorhumidity, mancavehumidity = mancavehumidity, i3range = i3range, i3battery = i3battery)
+    cur.close()
+
+    tapo_devices = asyncio.run(_fetch_all_tapo_devices())
+
+    return render_template('house.html', waterTemp = waterTemp, barometer = barometer, fridgedoortoday = fridgedoortoday,
+                          kitchenhumidity = kitchenhumidity, kitchenTemperature = kitchenTemperature, centralheatinghumidity = centralheatinghumidity,
+                          shedtemp = shedtemp, centralheating = centralheating, mancaveTemperature = mancaveTemperature, fridgeDoorCount = fridgeDoorCount,
+                          indoortemp = indoortemp, outdoortemp = outdoortemp, outdoorhumidity = outdoorhumidity, mancavehumidity = mancavehumidity, i3range = i3range, i3battery = i3battery,
+                          tapo_devices = tapo_devices)
     
