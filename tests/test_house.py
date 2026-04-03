@@ -5,6 +5,19 @@ Known bug documented:
   r.get('X') + "&deg;" crashes with TypeError when Redis returns None.
 """
 import pytest
+from unittest.mock import patch
+
+_FAKE_TAPO_DEVICES = [
+    {'name': 'Living Room', 'ip': '192.168.1.222', 'on': True,  'today': '2h 0m',  'past7': '14h 0m', 'past30': '60h 0m', 'error': None},
+    {'name': 'Desk Fan',    'ip': '192.168.1.119', 'on': False, 'today': '0m',      'past7': '1h 30m', 'past30': '6h 0m',  'error': None},
+]
+
+
+@pytest.fixture(autouse=True)
+def mock_tapo():
+    """Patch asyncio.run in house module so Tapo devices are never contacted."""
+    with patch('spudoolicom.house.asyncio.run', return_value=_FAKE_TAPO_DEVICES) as m:
+        yield m
 
 
 def _setup_house_cursors(mock_conn):
@@ -60,3 +73,26 @@ def test_house_barometer_short_string(client, mock_db, mock_redis):
     mock_redis.get.return_value = "20"
     rv = client.get("/house")
     assert rv.status_code == 200
+
+
+def test_house_tapo_table_renders_device_names(client, mock_db, mock_redis, mock_tapo):
+    """Tapo device names and on/off state appear in the rendered table."""
+    _, mock_conn = mock_db
+    _setup_house_cursors(mock_conn)
+    rv = client.get("/house")
+    assert rv.status_code == 200
+    assert b"Living Room" in rv.data
+    assert b"Desk Fan" in rv.data
+    assert b"On" in rv.data
+    assert b"Off" in rv.data
+
+
+def test_house_tapo_empty_renders_no_rows(client, mock_db, mock_redis, mock_tapo):
+    """When no Tapo devices are returned the table body is empty."""
+    mock_tapo.return_value = []
+    _, mock_conn = mock_db
+    _setup_house_cursors(mock_conn)
+    rv = client.get("/house")
+    assert rv.status_code == 200
+    assert b"Lights and plugs" in rv.data
+    assert b"Living Room" not in rv.data
