@@ -63,8 +63,18 @@ def post(id):
     cursor.close()
     f = open("/var/www/spudooli/spudoolicom/static/photoblog/" + imagename[1], 'rb')
     tags = exifread.process_file(f, details=False)
+    def ratio_str_to_float(s):
+        if '/' in s:
+            num, den = s.split('/')
+            return int(num) / int(den)
+        return float(s)
+
     if "EXIF ExposureTime" in tags:
-        exposuretime = tags["EXIF ExposureTime"]
+        et_val = ratio_str_to_float(str(tags["EXIF ExposureTime"]))
+        if et_val >= 1:
+            exposuretime = f"{et_val:.1f}"
+        else:
+            exposuretime = f"1/{round(1 / et_val)}"
     else:
         exposuretime = ""
     if "Image Model" in tags:
@@ -72,19 +82,17 @@ def post(id):
     else:
         imagemodel = ""
     if "EXIF FNumber" in tags:
-        fstopthing = str(tags["EXIF FNumber"])
-        if "/" in fstopthing:
-            fstop1 = str(fstopthing.split("/")[0] )
-            fstop2 = str(fstopthing.split("/")[1])
-            fstop = int(fstop1) / int(fstop2)
-        else:
-            fstop = tags["EXIF FNumber"]
+        fstop = f"{ratio_str_to_float(str(tags['EXIF FNumber'])):.1f}"
     else:
         fstop = ""
     if "EXIF FocalLength" in tags:
-        focallength = tags["EXIF FocalLength"]
+        focallength = f"{ratio_str_to_float(str(tags['EXIF FocalLength'])):.1f}"
     else:
         focallength = ""
+    if "EXIF ISOSpeedRatings" in tags:
+        iso = str(tags["EXIF ISOSpeedRatings"])
+    else:
+        iso = ""
 
     if "EXIF DateTimeOriginal" in tags:
         captured_str = str(tags["EXIF DateTimeOriginal"])
@@ -96,7 +104,12 @@ def post(id):
     else:
         captured = ""
 
-    exifhtml = f'{imagemodel} - {exposuretime} sec, f{fstop} at {focallength}mm'
+    exif_parts = [str(imagemodel) if imagemodel else "",
+                  f"{exposuretime} sec" if exposuretime else "",
+                  f"f/{fstop}" if fstop else "",
+                  f"{focallength}mm" if focallength else "",
+                  f"ISO {iso}" if iso else ""]
+    exifhtml = ' - '.join(p for p in exif_parts if p)
 
     #check of there is a large image version of imagename[1] in the directory and if so, set image+exists to true
     if os.path.isfile("/var/www/spudooli/spudoolicom/static/photoblog/embiggen/embiggen_" + imagename[1]):
