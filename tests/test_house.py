@@ -5,7 +5,7 @@ Known bug documented:
   r.get('X') + "&deg;" crashes with TypeError when Redis returns None.
 """
 import pytest
-from unittest.mock import patch
+from unittest.mock import patch, AsyncMock
 
 _FAKE_TAPO_DEVICES = [
     {'name': 'Living Room', 'ip': '192.168.1.222', 'on': True,  'today': '2h 0m',  'past7': '14h 0m', 'past30': '60h 0m', 'error': None},
@@ -15,8 +15,8 @@ _FAKE_TAPO_DEVICES = [
 
 @pytest.fixture(autouse=True)
 def mock_tapo():
-    """Patch asyncio.run in house module so Tapo devices are never contacted."""
-    with patch('spudoolicom.house.asyncio.run', return_value=_FAKE_TAPO_DEVICES) as m:
+    """Patch _fetch_all_tapo_devices so Tapo devices are never contacted."""
+    with patch('spudoolicom.house._fetch_all_tapo_devices', new_callable=AsyncMock, return_value=_FAKE_TAPO_DEVICES) as m:
         yield m
 
 
