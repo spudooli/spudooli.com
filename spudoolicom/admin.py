@@ -7,6 +7,7 @@ from flask_wtf.csrf import generate_csrf
 from werkzeug.exceptions import abort
 from spudoolicom import app, db
 import os
+import subprocess
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from spudoolicom.auth import login_required
@@ -204,6 +205,62 @@ def create_checkin():
 
     return render_template('admin-checkins.html', venues=venues)
     
+
+@app.route('/admin/header', methods=['GET'])
+@login_required
+def admin_header():
+    return render_template('admin-header.html', active_page='header')
+
+
+@app.route('/admin/header/upload', methods=['POST'])
+@login_required
+def admin_header_upload():
+    uploaded_file = request.files.get('file')
+    if not uploaded_file or uploaded_file.filename == '':
+        return jsonify({'error': 'No file provided'}), 400
+    images_dir = os.path.join(app.static_folder, 'images')
+    temp_path = os.path.join(images_dir, 'header_upload_temp.jpg')
+    uploaded_file.save(temp_path)
+    return jsonify({'url': '/static/images/header_upload_temp.jpg'})
+
+
+@app.route('/admin/header/save', methods=['POST'])
+@login_required
+def admin_header_save():
+    data = request.get_json()
+    try:
+        x = int(data['x'])
+        y = int(data['y'])
+        w = int(data['width'])
+        h = int(data['height'])
+    except (KeyError, ValueError, TypeError) as e:
+        return jsonify({'error': 'Invalid crop data'}), 400
+
+    images_dir = os.path.join(app.static_folder, 'images')
+    temp_path = os.path.join(images_dir, 'header_upload_temp.jpg')
+    output_path = os.path.join(images_dir, 'header.jpg')
+
+    if not os.path.exists(temp_path):
+        return jsonify({'error': 'No uploaded image found'}), 400
+
+    try:
+        subprocess.run([
+            'convert',
+            temp_path,
+            '-auto-orient',
+            '-crop', f'{w}x{h}+{x}+{y}',
+            '+repage',
+            '-resize', '1320x180!',
+            '-strip',
+            '-quality', '85',
+            output_path
+        ], check=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        return jsonify({'error': 'Image processing failed'}), 500
+
+    os.remove(temp_path)
+    return jsonify({'ok': True})
+
 
 @app.route('/admin/checkin-search', methods=['GET'])
 @login_required

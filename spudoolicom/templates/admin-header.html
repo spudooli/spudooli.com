@@ -1,0 +1,134 @@
+{% extends 'adminbase.html' %}
+
+{% block title %}Header Image{% endblock %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cropper.min.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+  #cropper-wrap { display: none; }
+  #cropper-image { max-width: 100%; display: block; }
+  .cropper-container { max-width: 100%; }
+  #status-msg { display: none; margin-top: 1rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-top: 2rem; margin-bottom: 2rem;">
+  <h2>Header Image</h2>
+  <p class="text-muted">Crop will be saved at 1320 × 180 px.</p>
+
+  <div id="upload-wrap">
+    <label class="btn btn-primary">
+      Choose image&hellip;
+      <input type="file" id="file-input" accept="image/*" style="display:none">
+    </label>
+    <div id="upload-status" class="mt-2 text-muted"></div>
+  </div>
+
+  <div id="cropper-wrap" style="margin-top: 1.5rem;">
+    <img id="cropper-image" src="" alt="Header preview">
+    <div style="margin-top: 1rem;">
+      <button id="save-btn" class="btn btn-success">Save as header.jpg</button>
+      <button id="reset-btn" class="btn btn-secondary ms-2">Upload different image</button>
+    </div>
+    <div id="status-msg" class="alert" role="alert"></div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/cropper.min.js') }}"></script>
+<script>
+(function () {
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
+  const fileInput = document.getElementById('file-input');
+  const uploadWrap = document.getElementById('upload-wrap');
+  const uploadStatus = document.getElementById('upload-status');
+  const cropperWrap = document.getElementById('cropper-wrap');
+  const cropperImage = document.getElementById('cropper-image');
+  const saveBtn = document.getElementById('save-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  const statusMsg = document.getElementById('status-msg');
+  let cropper = null;
+
+  fileInput.addEventListener('change', async function () {
+    const file = fileInput.files[0];
+    if (!file) return;
+    uploadStatus.textContent = 'Uploading…';
+
+    const fd = new FormData();
+    fd.append('file', file);
+
+    const resp = await fetch('/admin/header/upload', {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrfToken },
+      body: fd
+    });
+    const data = await resp.json();
+
+    if (!resp.ok || data.error) {
+      uploadStatus.textContent = 'Upload failed: ' + (data.error || resp.statusText);
+      return;
+    }
+
+    // Bust cache so the browser loads the newly uploaded temp image
+    cropperImage.src = data.url + '?t=' + Date.now();
+    uploadWrap.style.display = 'none';
+    cropperWrap.style.display = 'block';
+    statusMsg.style.display = 'none';
+
+    if (cropper) {
+      cropper.destroy();
+    }
+    cropper = new Cropper(cropperImage, {
+      aspectRatio: 1320 / 180,
+      viewMode: 1,
+      autoCropArea: 1,
+      movable: true,
+      zoomable: true,
+      rotatable: false,
+      scalable: false
+    });
+  });
+
+  saveBtn.addEventListener('click', async function () {
+    if (!cropper) return;
+    const d = cropper.getData(true); // true = rounded integers
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Saving…';
+
+    const resp = await fetch('/admin/header/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfToken
+      },
+      body: JSON.stringify({ x: d.x, y: d.y, width: d.width, height: d.height })
+    });
+    const result = await resp.json();
+
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'Save as header.jpg';
+    statusMsg.style.display = 'block';
+
+    if (resp.ok && result.ok) {
+      statusMsg.className = 'alert alert-success';
+      statusMsg.textContent = 'Header image saved successfully.';
+    } else {
+      statusMsg.className = 'alert alert-danger';
+      statusMsg.textContent = 'Save failed: ' + (result.error || resp.statusText);
+    }
+  });
+
+  resetBtn.addEventListener('click', function () {
+    if (cropper) {
+      cropper.destroy();
+      cropper = null;
+    }
+    cropperWrap.style.display = 'none';
+    uploadWrap.style.display = 'block';
+    fileInput.value = '';
+    uploadStatus.textContent = '';
+  });
+}());
+</script>
+{% endblock %}
