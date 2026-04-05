@@ -43,16 +43,21 @@
   <div class="inner-container">
     <!-- inner-container -->
     <header class="site-header">
+      <div class="header-image-wrap">
+        <div class="container">
+          <img src="{{ url_for('static', filename='images/header.jpg') }}" alt="" class="header-banner-img">
+          <div class="brand">
+            <a href="/">
+              <h1>Spudooli</h1>
+            </a>
+          </div>
+        </div>
+      </div>
       <div class="header-inner">
         <!-- navigation panel -->
         <div class="container">
           <div class="row">
-            <div class="header-table col-md-12">
-              <div class="brand">
-                <a href="/">
-                  <h1>Spudooli</h1>
-                </a>
-              </div>
+            <div class="col-md-12">
               <nav id="nav-wrap" class="main-nav">
                 <div id="mobnav-btn"> </div>
                 <ul class="sf-menu">
@@ -73,6 +78,7 @@
             </div>
           </div>
           <!-- End navigation panel -->
+
         </div>
       </div>
     </header>

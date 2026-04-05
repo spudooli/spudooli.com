@@ -402,8 +402,41 @@ a:focus {
 
 
 /*=================================================
-  2 - Header 
+  2 - Header
   =================================================*/
+
+.header-image-wrap {
+  background-color: #fff;
+}
+
+.header-image-wrap .container {
+  padding: 0;
+  position: relative;
+}
+
+.header-banner-img {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.header-image-wrap .brand {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  height: 180px;
+  display: flex;
+  padding-top: 20px;
+  background: transparent;
+}
+
+.header-image-wrap .brand h1,
+.header-image-wrap .brand h1 a {
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
 
 .header-inner {
   width: 100%;
@@ -448,6 +481,11 @@ a:focus {
 .header-inner .main-nav {
   display: table-cell;
   vertical-align: middle;
+}
+
+.header-inner .main-nav {
+  display: block;
+  width: 100%;
 }
 
 .header-scroll-fixed.sticky-menu {
@@ -952,7 +990,7 @@ body.overflow-hidden-header-three {
   position: absolute;
   width: 25px;
   height: 20px;
-  top: 45px;
+  top: 20px;
   right: 16px;
   border: 4px solid #777;
   border-width: 4px 0;
