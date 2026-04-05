@@ -180,3 +180,83 @@ def test_bookmark_create_post_stores_bookmark(auth_client):
         )
     assert rv.status_code == 302
     mock_conn.commit.assert_called()
+
+
+# ── /admin/header ─────────────────────────────────────────────────────────────
+
+
+def test_admin_header_get_returns_200(auth_client):
+    c, _ = auth_client
+    rv = c.get("/admin/header")
+    assert rv.status_code == 200
+
+
+def test_admin_header_upload_no_file_returns_400(auth_client):
+    c, _ = auth_client
+    rv = c.post("/admin/header/upload", data={}, content_type="multipart/form-data")
+    assert rv.status_code == 400
+    assert b"No file provided" in rv.data
+
+
+def test_admin_header_upload_saves_file_and_returns_url(auth_client):
+    from io import BytesIO
+    c, _ = auth_client
+    with patch("spudoolicom.admin.open", create=True), \
+         patch("werkzeug.datastructures.file_storage.FileStorage.save") as mock_save:
+        rv = c.post(
+            "/admin/header/upload",
+            data={"file": (BytesIO(b"fake image"), "photo.jpg")},
+            content_type="multipart/form-data",
+        )
+    assert rv.status_code == 200
+    data = rv.get_json()
+    assert data["url"] == "/static/images/header_upload_temp.jpg"
+
+
+def test_admin_header_save_processes_crop(auth_client):
+    c, _ = auth_client
+    with patch("spudoolicom.admin.os.path.exists", return_value=True), \
+         patch("spudoolicom.admin.subprocess.run") as mock_run, \
+         patch("spudoolicom.admin.os.remove") as mock_remove:
+        rv = c.post(
+            "/admin/header/save",
+            json={"x": 10, "y": 20, "width": 800, "height": 109},
+        )
+    assert rv.status_code == 200
+    assert rv.get_json() == {"ok": True}
+    mock_run.assert_called_once()
+    args = mock_run.call_args[0][0]
+    assert args[0] == "convert"
+    assert "800x109+10+20" in args
+    assert "1320x180!" in args
+    mock_remove.assert_called_once()
+
+
+def test_admin_header_save_missing_temp_returns_400(auth_client):
+    c, _ = auth_client
+    with patch("spudoolicom.admin.os.path.exists", return_value=False):
+        rv = c.post(
+            "/admin/header/save",
+            json={"x": 0, "y": 0, "width": 500, "height": 68},
+        )
+    assert rv.status_code == 400
+    assert b"No uploaded image found" in rv.data
+
+
+def test_admin_header_save_imagemagick_failure_returns_500(auth_client):
+    import subprocess as sp
+    c, _ = auth_client
+    with patch("spudoolicom.admin.os.path.exists", return_value=True), \
+         patch("spudoolicom.admin.subprocess.run",
+               side_effect=sp.CalledProcessError(1, "convert")):
+        rv = c.post(
+            "/admin/header/save",
+            json={"x": 0, "y": 0, "width": 500, "height": 68},
+        )
+    assert rv.status_code == 500
+
+
+def test_admin_header_save_invalid_crop_data_returns_400(auth_client):
+    c, _ = auth_client
+    rv = c.post("/admin/header/save", json={"x": "bad", "y": 0})
+    assert rv.status_code == 400
