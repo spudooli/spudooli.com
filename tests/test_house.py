@@ -8,8 +8,9 @@ import pytest
 from unittest.mock import patch, AsyncMock
 
 _FAKE_TAPO_DEVICES = [
-    {'name': 'Living Room', 'ip': '192.168.1.222', 'on': True,  'today': '2h 0m',  'past7': '14h 0m', 'past30': '60h 0m', 'error': None},
-    {'name': 'Desk Fan',    'ip': '192.168.1.119', 'on': False, 'today': '0m',      'past7': '1h 30m', 'past30': '6h 0m',  'error': None},
+    {'name': 'Living Room', 'ip': '192.168.1.222', 'type': 'p100', 'on': True,  'today': '2h 0m', 'past7': '14h 0m', 'past30': '60h 0m', 'energy': None,                                                                    'error': None},
+    {'name': 'Desk Fan',    'ip': '192.168.1.119', 'type': 'p100', 'on': False, 'today': '0m',     'past7': '1h 30m', 'past30': '6h 0m',  'energy': None,                                                                    'error': None},
+    {'name': 'Washing Machine', 'ip': '192.168.1.229', 'type': 'p110', 'on': True, 'today': '1h', 'past7': '5h',    'past30': '20h',     'energy': {'current_power': '2.3 W', 'today_energy': '500 Wh', 'month_energy': '2.50 kWh'}, 'error': None},
 ]
 
 
@@ -85,6 +86,19 @@ def test_house_tapo_table_renders_device_names(client, mock_db, mock_redis, mock
     assert b"Desk Fan" in rv.data
     assert b"On" in rv.data
     assert b"Off" in rv.data
+
+
+def test_house_tapo_p110_energy_section_renders(client, mock_db, mock_redis, mock_tapo):
+    """P110 energy data appears in the Power Monitoring table."""
+    _, mock_conn = mock_db
+    _setup_house_cursors(mock_conn)
+    rv = client.get("/house")
+    assert rv.status_code == 200
+    assert b"Power Monitoring" in rv.data
+    assert b"Washing Machine" in rv.data
+    assert b"2.3 W" in rv.data
+    assert b"500 Wh" in rv.data
+    assert b"2.50 kWh" in rv.data
 
 
 def test_house_tapo_empty_renders_no_rows(client, mock_db, mock_redis, mock_tapo):

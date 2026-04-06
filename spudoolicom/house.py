@@ -21,31 +21,69 @@ def _format_minutes(minutes):
     return f"{m}m"
 
 
+_TAPO_CLIENT_METHODS = {
+    'p100': 'p100',
+    'p110': 'p110',
+    'l530': 'l530',
+}
+
+
+def _format_watts(milliwatts):
+    if milliwatts is None:
+        return '-'
+    return f"{milliwatts / 1000:.1f} W"
+
+
+def _format_wh(wh):
+    if wh is None:
+        return '-'
+    if wh >= 1000:
+        return f"{wh / 1000:.2f} kWh"
+    return f"{wh} Wh"
+
+
 async def _fetch_tapo_device(client, device_cfg):
+    device_type = device_cfg.get('type', 'p100')
     try:
-        device = await client.p100(device_cfg['ip'])
+        method = _TAPO_CLIENT_METHODS.get(device_type, 'p100')
+        device = await getattr(client, method)(device_cfg['ip'])
         info = await device.get_device_info()
         usage = await device.get_device_usage()
         info_dict = info.to_dict()
         usage_dict = usage.to_dict()
         time_usage = usage_dict.get('time_usage', {})
+
+        energy = None
+        if device_type == 'p110':
+            eu = await device.get_energy_usage()
+            eu_dict = eu.to_dict()
+            energy = {
+                'current_power': _format_watts(eu_dict.get('current_power')),
+                'today_energy':  _format_wh(eu_dict.get('today_energy')),
+                'month_energy':  _format_wh(eu_dict.get('month_energy')),
+            }
+
         return {
             'name': device_cfg.get('name') or info_dict.get('nickname', device_cfg['ip']),
             'ip': device_cfg['ip'],
+            'type': device_type,
             'on': info_dict.get('device_on', False),
             'today': _format_minutes(time_usage.get('today')),
             'past7': _format_minutes(time_usage.get('past7')),
             'past30': _format_minutes(time_usage.get('past30')),
+            'energy': energy,
             'error': None,
         }
     except Exception as e:
         return {
             'name': device_cfg.get('name') or device_cfg['ip'],
             'ip': device_cfg['ip'],
+            'type': device_type,
             'on': None,
             'today': '-',
             'past7': '-',
             'past30': '-',
+            'energy': None,
             'error': str(e),
         }
 

@@ -234,14 +234,21 @@ endblock %}
               <div class="col-md-9">
                 <div>
                   <div class="spudooli-section-title">Lights and plugs</div>
-                  <table class="table">
+                  <table class="table table-hover table-condensed" style="table-layout: fixed;">
+                    <colgroup>
+                      <col style="width: 40%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                    </colgroup>
                     <thead>
                       <tr>
                         <th>Device</th>
                         <th>Status</th>
-                        <th>Today</th>
-                        <th>Past 7 Days</th>
-                        <th>Past 30 Days</th>
+                        <th class="text-end">Today</th>
+                        <th class="text-end">Past 7 Days</th>
+                        <th class="text-end">Past 30 Days</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -257,9 +264,72 @@ endblock %}
                           <span class="text-muted">Off</span>
                           {% endif %}
                         </td>
-                        <td>{{ device.today }}</td>
-                        <td>{{ device.past7 }}</td>
-                        <td>{{ device.past30 }}</td>
+                        <td class="text-end">{{ device.today }}</td>
+                        <td class="text-end">{{ device.past7 }}</td>
+                        <td class="text-end">{{ device.past30 }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container-counter-box">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="counter-box">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <div class="counter-number"> </div>
+                  <div class="counter-title"></div>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div>
+                  <div class="spudooli-section-title">Power Monitoring</div>
+                  <table class="table table-hover table-condensed" style="table-layout: fixed;">
+                    <colgroup>
+                      <col style="width: 40%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                      <col style="width: 15%">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th>Device</th>
+                        <th>Status</th>
+                        <th class="text-end">Current Power</th>
+                        <th class="text-end">Today</th>
+                        <th class="text-end">This Month</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for device in tapo_devices if device.type == 'p110' %}
+                      <tr>
+                        <td>{{ device.name }}</td>
+                        <td>
+                          {% if device.error %}
+                          <span class="text-danger">Error</span>
+                          {% elif device.on %}
+                          <span class="text-success">On</span>
+                          {% else %}
+                          <span class="text-muted">Off</span>
+                          {% endif %}
+                        </td>
+                        {% if device.energy %}
+                        <td class="text-end">{{ device.energy.current_power }}</td>
+                        <td class="text-end">{{ device.energy.today_energy }}</td>
+                        <td class="text-end">{{ device.energy.month_energy }}</td>
+                        {% else %}
+                        <td class="text-end">-</td>
+                        <td class="text-end">-</td>
+                        <td class="text-end">-</td>
+                        {% endif %}
                       </tr>
                       {% endfor %}
                     </tbody>
