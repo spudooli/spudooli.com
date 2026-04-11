@@ -17,7 +17,7 @@ def charts(where):
         charts = sorted(glob.glob("spudoolicom/static/charts/kitchen*"))
 
     elif where == "barometer":
-        pageHeading = "Indoor Barometer h/Pa "
+        pageHeading = "Indoor Barometer hPa "
         charts = sorted(glob.glob("spudoolicom/static/charts/barometer*"))
 
     elif where == "mancave":
