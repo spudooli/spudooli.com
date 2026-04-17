@@ -1,6 +1,6 @@
 from flask import render_template
 from spudoolicom import app, db
-from datetime import datetime
+from datetime import datetime, date, timedelta
 
 
 @app.route('/money')
@@ -159,11 +159,52 @@ def money():
     kfcvalues = [str(row[1]).replace("-","") for row in kfcdata]
     cur.close() 
     
+    # Build GitHub-style activity heatmap for petrol purchases — last 52 weeks
+    today = date.today()
+    days_since_sunday = (today.weekday() + 1) % 7
+    current_week_sunday = today - timedelta(days=days_since_sunday)
+    heatmap_start = current_week_sunday - timedelta(weeks=51)
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("""
+        SELECT date
+        FROM budget
+        WHERE category LIKE 'petrol'
+        AND date >= %s
+    """, (heatmap_start,))
+    petrol_rows = cur.fetchall()
+    petrol_days = {str(row[0]) for row in petrol_rows}
+    cur.close()
+
+    petrol_weeks = []
+    petrol_week_month_labels = []
+    for week_idx in range(52):
+        week_start = heatmap_start + timedelta(weeks=week_idx)
+        if week_idx == 0:
+            petrol_week_month_labels.append(week_start.strftime('%b'))
+        else:
+            prev_start = heatmap_start + timedelta(weeks=week_idx - 1)
+            petrol_week_month_labels.append(week_start.strftime('%b') if week_start.month != prev_start.month else '')
+        week = []
+        for day_offset in range(7):
+            d = week_start + timedelta(days=day_offset)
+            date_str = d.strftime('%Y-%m-%d')
+            purchased = date_str in petrol_days
+            is_future = d > today
+            week.append({
+                'date': date_str,
+                'count': 1 if purchased else 0,
+                'level': 0 if (is_future or not purchased) else 4,
+                'future': is_future,
+            })
+        petrol_weeks.append(week)
+
     return render_template('money.html', totalPetrolSpend = totalPetrolSpend, warehouselabels = warehouselabels, numTransactions = numTransactions,
                           totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, lastTransaction = lastTransaction,
                           paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
                           bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
                           hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, 
-                          gull = gull, kfctotal = kfctotal, kfclabels = kfclabels, kfcvalues = kfcvalues)
+                          gull = gull, kfctotal = kfctotal, kfclabels = kfclabels, kfcvalues = kfcvalues,
+                          petrol_weeks = petrol_weeks, petrol_week_month_labels = petrol_week_month_labels)
 
                           

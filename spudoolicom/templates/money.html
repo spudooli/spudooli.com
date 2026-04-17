@@ -56,6 +56,47 @@
                                     <p>Note the fascinating spend gap for April 2020 when NZ went into lockdown the
                                         first time where our only purchase at a service station was a bottle of milk</p>
                                     <p>The gap in late 2004 was when we were briefly livng in Madison, WI, USA.</p>
+
+                                    <p> For the record, the first petrol purchase was on 12/2/1996</p>
+
+                                    <div class="spudooli-section-title">Petrol purchases per day — last 12 months</div>
+                                    <div class="checkin-heatmap">
+                                        <div class="heatmap-wrap">
+                                            <div class="heatmap-day-labels">
+                                                <div></div>
+                                                <div>Mon</div>
+                                                <div></div>
+                                                <div>Wed</div>
+                                                <div></div>
+                                                <div>Fri</div>
+                                                <div></div>
+                                            </div>
+                                            <div class="heatmap-columns-wrap">
+                                                <div class="heatmap-months">
+                                                    {% for label in petrol_week_month_labels %}
+                                                    <div class="heatmap-month-cell">{{ label }}</div>
+                                                    {% endfor %}
+                                                </div>
+                                                <div class="heatmap-weeks">
+                                                    {% for week in petrol_weeks %}
+                                                    <div class="heatmap-week">
+                                                        {% for day in week %}
+                                                        <div class="heatmap-cell level-{{ day.level }}{% if day.future %} future{% endif %}"
+                                                            title="{{ day.date }}{% if day.count %}: petrol purchase{% endif %}">
+                                                        </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="heatmap-legend">
+                                            <span>Less</span>
+                                            <div class="heatmap-cell level-0"></div>
+                                            <div class="heatmap-cell level-4"></div>
+                                            <span>More</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -109,6 +150,8 @@
                         data-values='{{ values | tojson }}'></canvas>
 
                 </div>
+
+
 
 
                 <!-- Page Containter header  -->
