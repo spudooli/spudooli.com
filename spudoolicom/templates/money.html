@@ -331,14 +331,18 @@
                                                                         house to spend money at hardware stores</div>
                                                                     <p>We bought our house in January 2010. Which is
                                                                         about exactly when the chart below shows a
-                                                                        marked increase
-                                                                        in our spending at Hardware stores. Conveniently
-                                                                        or not, we live only 800m from a Bunnings. We
-                                                                        have
-                                                                        been to Bunnings Constellation <strong>{{
+                                                                        marked increase in our spending at Hardware
+                                                                        stores. Conveniently or not, we live only 800m
+                                                                        from a Bunnings. We have been to Bunnings
+                                                                        Constellation <strong>{{
                                                                             bunningsconstellation }}</strong> times.
 
                                                                     </p>
+
+                                                                    <p>Through late 2014 to about mid 2016 we did some
+                                                                        landscaping at home and so for a small period we
+                                                                        spent money at our local Placemakers. When that
+                                                                        project was over, we've barely been back. </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -351,6 +355,16 @@
                                                         <canvas id="myhardwareChart" width="1000" height="400"
                                                             data-labels='{{ hardwarelabels | tojson }}'
                                                             data-values='{{ hardwarevalues | tojson }}'></canvas>
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="container-counter-box">
+                                                    <div class="container">
+
+                                                        <canvas id="myplacemakersChart" width="1000" height="400"
+                                                            data-labels='{{ placemakerslabels | tojson }}'
+                                                            data-values='{{ placemakersvalues | tojson }}'></canvas>
 
                                                     </div>
                                                 </div>
@@ -417,6 +431,54 @@
                                                                 <!-- End Containter Contents  -->
                                                                 <!-- End Page Containter  -->
 
+                                                                <!-- McDonald's and Burger King section -->
+                                                                <div class="container-about">
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                <h3 class="title-un">McDonald's &amp; Burger King</h3>
+                                                                                <div class="title-un-icon">
+                                                                                    <ion-icon name="fast-food-outline"></ion-icon>
+                                                                                </div>
+                                                                                <div class="container-counter-box">
+                                                                                    <div class="container">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="counter-box wow fadeInUp" data-wow-delay=".2s">
+                                                                                                    <ion-icon name="fast-food-outline"></ion-icon>
+                                                                                                    <div class="counter-number">{{ mcdtotal }}</div>
+                                                                                                    <div class="counter-title">McDonald's visits</div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="counter-box wow fadeInUp" data-wow-delay=".4s">
+                                                                                                    <ion-icon name="fast-food-outline"></ion-icon>
+                                                                                                    <div class="counter-number">{{ bktotal }}</div>
+                                                                                                    <div class="counter-title">Burger King visits</div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-6">
+                                                                                                <div>
+                                                                                                    <div class="spudooli-section-title">The kids-growing-up hypothesis</div>
+                                                                                                    <p>The hypothesis: as the kids grew up there was a bulge of McDonald's visits that then disappears. The chart below shows visit counts by month — not dollars spent, just how many times we walked through the door.</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="container-counter-box">
+                                                                                    <div class="container">
+                                                                                        <canvas id="myFastFoodChart" width="1000" height="400"
+                                                                                            data-labels='{{ fastfoodlabels | tojson }}'
+                                                                                            data-mcd='{{ mcdonaldsvalues | tojson }}'
+                                                                                            data-bk='{{ burgerkingvalues | tojson }}'></canvas>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End McDonald's and Burger King section -->
 
                                                             </div>
                                                         </div>

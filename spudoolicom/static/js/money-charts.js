@@ -36,10 +36,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const initFastFoodChart = (canvasId) => {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas) return;
+
+        try {
+            const labels = JSON.parse(canvas.dataset.labels || '[]');
+            const mcdValues = JSON.parse(canvas.dataset.mcd || '[]');
+            const bkValues = JSON.parse(canvas.dataset.bk || '[]');
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "McDonald's visits",
+                            backgroundColor: '#ffc72c',
+                            borderColor: '#000',
+                            data: mcdValues,
+                        },
+                        {
+                            label: 'Burger King visits',
+                            backgroundColor: '#cc0000',
+                            borderColor: '#000',
+                            data: bkValues,
+                        }
+                    ]
+                }
+            });
+        } catch (error) {
+            console.error('Error initializing fast food chart:', error);
+        }
+    };
+
     // Initialize all charts
     initChart("myChart", "$ Spend on Petrol by Month");
     initChart("myWarehouseChart", "$ Spend at The Warehouse by Month");
     initChart("myhardwareChart", "$ Spend at all hardware stores by Month");
+    initChart("myplacemakersChart", "$ Spend at Placemakers by Month");
     initChart("mykfcChart", "$ Spend at all KFC by Month");
+    initFastFoodChart("myFastFoodChart");
 
 });

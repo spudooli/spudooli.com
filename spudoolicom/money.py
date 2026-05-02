@@ -144,6 +144,21 @@ def money():
     hardwarevalues = [str(row[1]).replace("-","") for row in data]
     cur.close() 
 
+    # Get Placemakers purchases
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT SUM( amount ) amount FROM  `budget` WHERE  `party` LIKE  '%placemakers%'")
+    placemakerstotal = cur.fetchone()
+    placemakerstotal = "{:,}".format(placemakerstotal[0])
+    cur.close()
+
+    # Get all months spend for Placemakers
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT EXTRACT(Year_MONTH FROM date) thismonth, SUM(case when party LIKE '%placemakers%' then amount else 0 end) as placemakers FROM budget GROUP BY thismonth order by thismonth asc")
+    data = cur.fetchall()
+    placemakerslabels = [row[0] for row in data]
+    placemakersvalues = [str(row[1]).replace("-","") for row in data]
+    cur.close()
+
     # Get KFC purchases
     cur = db.mysql.connection.cursor()
     cur.execute("SELECT SUM( amount ) amount FROM  `budget` WHERE  `party` LIKE  '%kfc%'")
@@ -159,6 +174,33 @@ def money():
     kfcvalues = [str(row[1]).replace("-","") for row in kfcdata]
     cur.close() 
     
+    # Get McDonald's and Burger King visit counts by month
+    cur = db.mysql.connection.cursor()
+    cur.execute("""
+        SELECT
+            EXTRACT(Year_MONTH FROM date) as thismonth,
+            COUNT(CASE WHEN party LIKE '%mcdonald%' THEN 1 END) as mcd_count,
+            COUNT(CASE WHEN party LIKE '%burger king%' THEN 1 END) as bk_count
+        FROM budget
+        GROUP BY thismonth
+        ORDER BY thismonth ASC
+    """)
+    fastfooddata = cur.fetchall()
+    fastfoodlabels = [row[0] for row in fastfooddata]
+    mcdonaldsvalues = [row[1] for row in fastfooddata]
+    burgerkingvalues = [row[2] for row in fastfooddata]
+    cur.close()
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT COUNT(id) FROM budget WHERE party LIKE '%mcdonald%'")
+    mcdtotal = cur.fetchone()[0]
+    cur.close()
+
+    cur = db.mysql.connection.cursor()
+    cur.execute("SELECT COUNT(id) FROM budget WHERE party LIKE '%burger king%'")
+    bktotal = cur.fetchone()[0]
+    cur.close()
+
     # Build GitHub-style activity heatmap for petrol purchases — last 52 weeks
     today = date.today()
     days_since_sunday = (today.weekday() + 1) % 7
@@ -203,8 +245,11 @@ def money():
                           totalWarehouseSpend = totalWarehouseSpend, warehousevalues = warehousevalues, farro = farro, lastTransaction = lastTransaction,
                           paknsave = paknsave, newworld= newworld, countdown = countdown, shellZ = shellZ, caltex = caltex, 
                           bp = bp, mobil = mobil, labels = labels, values = values, totalSupermarketSpend = totalSupermarketSpend, 
-                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation, 
+                          hardwarelabels = hardwarelabels, hardwarevalues = hardwarevalues, hardware = hardware, bunningsconstellation = bunningsconstellation,
+                          placemakerslabels = placemakerslabels, placemakersvalues = placemakersvalues, placemakerstotal = placemakerstotal,
                           gull = gull, kfctotal = kfctotal, kfclabels = kfclabels, kfcvalues = kfcvalues,
-                          petrol_weeks = petrol_weeks, petrol_week_month_labels = petrol_week_month_labels)
+                          petrol_weeks = petrol_weeks, petrol_week_month_labels = petrol_week_month_labels,
+                          fastfoodlabels = fastfoodlabels, mcdonaldsvalues = mcdonaldsvalues,
+                          burgerkingvalues = burgerkingvalues, mcdtotal = mcdtotal, bktotal = bktotal)
 
                           
